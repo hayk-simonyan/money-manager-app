@@ -1,0 +1,7 @@
+{
+  "name": "money-manager",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
