@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   IonMenu,
   IonHeader,
@@ -7,61 +8,42 @@ import {
   IonContent,
   IonList,
   IonItem,
-  IonRouterOutlet,
+  IonIcon,
+  IonLabel,
+  IonMenuToggle,
 } from '@ionic/react';
+import { desktopOutline } from 'ionicons/icons';
 
-export const MenuExample: React.FC = () => (
-  <>
-    <IonMenu side='start' menuId='first'>
-      <IonHeader>
-        <IonToolbar color='primary'>
-          <IonTitle>Start Menu</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <IonList>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-        </IonList>
-      </IonContent>
-    </IonMenu>
-
-    <IonMenu side='start' menuId='custom' className='my-custom-menu'>
-      <IonHeader>
-        <IonToolbar color='tertiary'>
-          <IonTitle>Custom Menu</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <IonList>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-        </IonList>
-      </IonContent>
-    </IonMenu>
-
-    <IonMenu side='end' type='push'>
-      <IonHeader>
-        <IonToolbar color='danger'>
-          <IonTitle>End Menu</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <IonList>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-        </IonList>
-      </IonContent>
-    </IonMenu>
-    <IonRouterOutlet></IonRouterOutlet>
-  </>
+const Menu: React.FC = () => (
+  <IonMenu contentId='main' side='start' menuId='id'>
+    <IonHeader>
+      <IonToolbar color='primary'>
+        <IonTitle>Start Menu</IonTitle>
+      </IonToolbar>
+    </IonHeader>
+    <IonContent>
+      <IonList>
+        <IonMenuToggle>
+          <IonItem button routerLink='/home' routerDirection='none'>
+            <IonIcon slot='start' icon={desktopOutline} />
+            <IonLabel>Home</IonLabel>
+          </IonItem>
+        </IonMenuToggle>
+        <IonMenuToggle>
+          <IonItem button routerLink='/records' routerDirection='none'>
+            <IonIcon slot='start' icon={desktopOutline} />
+            <IonLabel>Records</IonLabel>
+          </IonItem>
+        </IonMenuToggle>
+        <IonMenuToggle>
+          <IonItem button routerLink='/about' routerDirection='none'>
+            <IonIcon slot='start' icon={desktopOutline} />
+            <IonLabel>About</IonLabel>
+          </IonItem>
+        </IonMenuToggle>
+      </IonList>
+    </IonContent>
+  </IonMenu>
 );
+
+export default Menu;

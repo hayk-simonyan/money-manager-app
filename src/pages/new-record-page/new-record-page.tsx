@@ -7,8 +7,6 @@ import {
   IonLabel,
   IonInput,
   IonCol,
-  IonCard,
-  IonCardContent,
   IonAlert,
   IonPage,
 } from '@ionic/react';
@@ -16,7 +14,7 @@ import {
 import HeaderRecords from '../../components/header-records/header-records';
 import SubmitButton from '../../components/submit-button/submit-button';
 
-const RecordPage: React.FC = () => {
+const NewRecordPage: React.FC = () => {
   const [records, setRecords] = useState<any[]>();
   const [error, setError] = useState<string>();
 
@@ -60,15 +58,10 @@ const RecordPage: React.FC = () => {
             </IonItem>
           </IonCol>
         </IonRow>
-        <IonCard>
-          <IonCardContent>
-            <h2>{records}</h2>
-          </IonCardContent>
-        </IonCard>
       </IonGrid>
       <SubmitButton onClickHandler={addRecordHandler} />
     </IonPage>
   );
 };
 
-export default RecordPage;
+export default NewRecordPage;

@@ -15,7 +15,7 @@ const HeaderRecords: React.FC = () => (
         <IonBackButton defaultHref='/' />
       </IonButtons>
 
-      <IonTitle>Expence | Income</IonTitle>
+      <IonTitle>Records</IonTitle>
     </IonToolbar>
   </IonHeader>
 );

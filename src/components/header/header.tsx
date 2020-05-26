@@ -4,17 +4,16 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonIcon,
-  IonItem,
+  IonButtons,
+  IonMenuButton,
 } from '@ionic/react';
-import { menuOutline } from 'ionicons/icons';
 
 const Header: React.FC = () => (
   <IonHeader>
     <IonToolbar color='primary'>
-      <IonItem color='primary' slot='start' lines='none' button>
-        <IonIcon icon={menuOutline} />
-      </IonItem>
+      <IonButtons slot='start'>
+        <IonMenuButton menu='id' auto-hide='false' />
+      </IonButtons>
       <IonTitle>Money Manager</IonTitle>
     </IonToolbar>
   </IonHeader>

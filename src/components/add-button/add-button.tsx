@@ -11,7 +11,7 @@ const AddButton: React.FC = () => (
       right: '10px',
     }}
   >
-    <IonFabButton routerLink='/records'>
+    <IonFabButton routerLink='/records/new'>
       <IonIcon icon={add} />
     </IonFabButton>
   </IonFab>
