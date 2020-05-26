@@ -1,8 +1,17 @@
 import React from 'react';
 
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import {
+  IonApp,
+  IonRouterOutlet,
+  IonTabs,
+  IonTabBar,
+  IonTabButton,
+  IonIcon,
+  IonLabel,
+} from '@ionic/react';
+import { Route, Redirect } from 'react-router-dom';
 import { IonReactRouter } from '@ionic/react-router';
-import { Route } from 'react-router-dom';
+import { trendingDownOutline, trendingUpOutline } from 'ionicons/icons';
 
 import Homepage from './pages/homepage/homepage';
 import RecordPage from './pages/recordpage/recordpage';
@@ -29,10 +38,23 @@ import './theme/variables.css';
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path='/' component={RecordPage} />
-        <Route exact path='/' component={Homepage} />
-      </IonRouterOutlet>
+      <IonTabs>
+        <IonRouterOutlet>
+          <Route exact path='/' component={Homepage} />
+          <Route exact path='/records' component={RecordPage} />
+          <Redirect to='/' />
+        </IonRouterOutlet>
+        <IonTabBar slot='bottom'>
+          <IonTabButton tab='/' href='/'>
+            <IonIcon icon={trendingDownOutline} />
+            <IonLabel>Expence</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab='/records' href='/records'>
+            <IonIcon icon={trendingUpOutline} />
+            <IonLabel>Income</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
     </IonReactRouter>
   </IonApp>
 );

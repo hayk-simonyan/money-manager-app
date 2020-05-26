@@ -1,24 +1,20 @@
 import React, { useRef, useState } from 'react';
 
 import {
-  IonApp,
   IonGrid,
   IonRow,
   IonItem,
   IonLabel,
   IonInput,
   IonCol,
-  IonFab,
-  IonFabButton,
-  IonIcon,
   IonCard,
   IonCardContent,
   IonAlert,
+  IonPage,
 } from '@ionic/react';
-import { add } from 'ionicons/icons';
 
-import Header from '../../components/header/header';
-import AddButton from '../../components/add-button/add-button';
+import HeaderRecords from '../../components/header-records/header-records';
+import SubmitButton from '../../components/submit-button/submit-button';
 
 const RecordPage: React.FC = () => {
   const [records, setRecords] = useState<any[]>();
@@ -44,47 +40,34 @@ const RecordPage: React.FC = () => {
   };
 
   return (
-    <React.Fragment>
+    <IonPage>
       <IonAlert
         isOpen={!!error}
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <IonApp>
-        <Header />
-        <IonGrid>
-          <IonRow>
-            <IonCol>
-              <IonItem>
-                <IonLabel position='floating'>$</IonLabel>
-                <IonInput ref={dollarInputRef} type='number'></IonInput>
-              </IonItem>
-              <IonItem>
-                <IonLabel position='floating'>Category</IonLabel>
-                <IonInput ref={categoryInputRef}></IonInput>
-              </IonItem>
-            </IonCol>
-          </IonRow>
-          <IonCard>
-            <IonCardContent>
-              <h2>{records}</h2>
-            </IonCardContent>
-          </IonCard>
-        </IonGrid>
-        <AddButton onClickHandler={addRecordHandler} />
-        {/* <IonFab
-        style={{
-          pposition: 'fixed',
-          bottom: '10px',
-          right: '10px',
-        }}
-      >
-        <IonFabButton onClick={addRecordHandler}>
-          <IonIcon icon={add} />
-        </IonFabButton>
-      </IonFab> */}
-      </IonApp>
-    </React.Fragment>
+      <HeaderRecords />
+      <IonGrid>
+        <IonRow>
+          <IonCol>
+            <IonItem>
+              <IonLabel position='floating'>$</IonLabel>
+              <IonInput ref={dollarInputRef} type='number'></IonInput>
+            </IonItem>
+            <IonItem>
+              <IonLabel position='floating'>Category</IonLabel>
+              <IonInput ref={categoryInputRef}></IonInput>
+            </IonItem>
+          </IonCol>
+        </IonRow>
+        <IonCard>
+          <IonCardContent>
+            <h2>{records}</h2>
+          </IonCardContent>
+        </IonCard>
+      </IonGrid>
+      <SubmitButton onClickHandler={addRecordHandler} />
+    </IonPage>
   );
 };
 

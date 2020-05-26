@@ -3,11 +3,7 @@ import React from 'react';
 import { IonFab, IonFabButton, IonIcon } from '@ionic/react';
 import { add } from 'ionicons/icons';
 
-interface AddButtonProps {
-  onClickHandler?: () => void;
-}
-
-const AddButton: React.FC<AddButtonProps> = ({ onClickHandler }) => (
+const AddButton: React.FC = () => (
   <IonFab
     style={{
       pposition: 'fixed',
@@ -15,7 +11,7 @@ const AddButton: React.FC<AddButtonProps> = ({ onClickHandler }) => (
       right: '10px',
     }}
   >
-    <IonFabButton onClick={onClickHandler}>
+    <IonFabButton routerLink='/records'>
       <IonIcon icon={add} />
     </IonFabButton>
   </IonFab>

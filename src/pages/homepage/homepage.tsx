@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { IonApp, IonContent } from '@ionic/react';
+import { IonContent, IonPage } from '@ionic/react';
 
 import Header from '../../components/header/header';
 import AddButton from '../../components/add-button/add-button';
@@ -13,7 +13,7 @@ const Homepage: React.FC = () => {
   const [segment, setSegment] = useState<'main' | 'chart'>('main');
 
   return (
-    <IonApp>
+    <IonPage>
       <Header />
       <IonContent>
         <HomepageControls
@@ -28,9 +28,9 @@ const Homepage: React.FC = () => {
         ) : (
           <Chart />
         )}
-        <AddButton />
       </IonContent>
-    </IonApp>
+      <AddButton />
+    </IonPage>
   );
 };
 
