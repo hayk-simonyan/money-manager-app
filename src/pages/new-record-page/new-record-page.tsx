@@ -18,19 +18,29 @@ const NewRecordPage: React.FC = () => {
   const [records, setRecords] = useState<any[]>();
   const [error, setError] = useState<string>();
 
-  const dollarInputRef = useRef<HTMLIonInputElement>(null);
+  const recordTypeInputRef = useRef<HTMLIonInputElement>(null);
   const categoryInputRef = useRef<HTMLIonInputElement>(null);
+  const amountInputRef = useRef<HTMLIonInputElement>(null);
+  const dateInputRef = useRef<HTMLIonInputElement>(null);
+  const noteInputRef = useRef<HTMLIonInputElement>(null);
 
   const addRecordHandler = () => {
-    const dollar = dollarInputRef.current!.value;
+    const recordType = recordTypeInputRef.current!.value;
     const category = categoryInputRef.current!.value;
+    const amount = amountInputRef.current!.value;
+    const date = dateInputRef.current!.value;
+    const note = noteInputRef.current!.value;
 
-    if (!dollar || !category || +dollar <= 0) {
-      setError('Please enter a valid record');
+    if (!recordType || !category || !amount || date || !note) {
+      setError('Please fill out all inputs');
+      return;
+    }
+    if (+amount <= 0) {
+      setError('Amount cant be less or equal to 0');
       return;
     }
 
-    setRecords([dollar, category]);
+    setRecords([amount, category]);
   };
 
   const clearError = () => {
@@ -49,15 +59,27 @@ const NewRecordPage: React.FC = () => {
         <IonRow>
           <IonCol>
             <IonItem>
-              <IonLabel position='floating'>$</IonLabel>
-              <IonInput ref={dollarInputRef} type='number'></IonInput>
+              <IonLabel position='floating'>Income/Expence</IonLabel>
+              <IonInput ref={recordTypeInputRef} type='text'></IonInput>
             </IonItem>
             <IonItem>
               <IonLabel position='floating'>Category</IonLabel>
-              <IonInput ref={categoryInputRef}></IonInput>
+              <IonInput ref={categoryInputRef} type='number'></IonInput>
+            </IonItem>
+            <IonItem>
+              <IonLabel position='floating'>Amount</IonLabel>
+              <IonInput ref={amountInputRef} type='number'></IonInput>
+            </IonItem>
+            <IonItem>
+              <IonInput ref={dateInputRef} type='date'></IonInput>
+            </IonItem>
+            <IonItem>
+              <IonLabel position='floating'>Note</IonLabel>
+              <IonInput ref={noteInputRef} type='text'></IonInput>
             </IonItem>
           </IonCol>
         </IonRow>
+        <IonRow></IonRow>
       </IonGrid>
       <SubmitButton onClickHandler={addRecordHandler} />
     </IonPage>

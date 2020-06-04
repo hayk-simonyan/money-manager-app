@@ -10,9 +10,9 @@ import {
   IonCardContent,
 } from '@ionic/react';
 import { useParams } from 'react-router-dom';
-import { DUMMY_RECORDS } from '../../data/dummy-records';
+import { DUMMY_RECORDS } from '../../../data/dummy-records';
 
-import HeaderRecords from '../../components/header-records/header-records';
+import HeaderRecords from '../../../components/header-records/header-records';
 
 const RecordPage: React.FC = () => {
   const [error, setError] = useState<string>();

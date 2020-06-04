@@ -1,23 +1,22 @@
 import React from 'react';
 
-import { IonFab, IonButton, IonIcon } from '@ionic/react';
-import { add } from 'ionicons/icons';
+import { IonFab, IonIcon, IonFabButton } from '@ionic/react';
+import { checkmarkOutline } from 'ionicons/icons';
 
 interface SubmitButtonProps {
   onClickHandler?: () => void;
 }
 
 const SubmitButton: React.FC<SubmitButtonProps> = ({ onClickHandler }) => (
-  <IonFab
-    style={{
-      pposition: 'fixed',
-      bottom: '10px',
-      right: '10px',
-    }}
-  >
-    <IonButton color='success' onClick={onClickHandler}>
-      <IonIcon icon={add} />
-    </IonButton>
+  <IonFab horizontal='end' vertical='bottom' slot='fixed'>
+    <IonFabButton
+      type='submit'
+      size='small'
+      color='success'
+      onClick={onClickHandler}
+    >
+      <IonIcon icon={checkmarkOutline} />
+    </IonFabButton>
   </IonFab>
 );
 

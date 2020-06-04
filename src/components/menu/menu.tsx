@@ -12,32 +12,53 @@ import {
   IonLabel,
   IonMenuToggle,
 } from '@ionic/react';
-import { desktopOutline } from 'ionicons/icons';
+import {
+  walletOutline,
+  listOutline,
+  informationCircleOutline,
+} from 'ionicons/icons';
 
 const Menu: React.FC = () => (
   <IonMenu contentId='main' side='start' menuId='id'>
     <IonHeader>
       <IonToolbar color='primary'>
-        <IonTitle>Start Menu</IonTitle>
+        <IonItem color='primary' button>
+          <IonTitle>John Smith</IonTitle>
+        </IonItem>
       </IonToolbar>
     </IonHeader>
     <IonContent>
       <IonList>
         <IonMenuToggle>
-          <IonItem button routerLink='/home' routerDirection='none'>
-            <IonIcon slot='start' icon={desktopOutline} />
+          <IonItem
+            lines='full'
+            button
+            routerLink='/home'
+            routerDirection='none'
+          >
+            <IonIcon slot='start' icon={walletOutline} />
             <IonLabel>Home</IonLabel>
           </IonItem>
         </IonMenuToggle>
         <IonMenuToggle>
-          <IonItem button routerLink='/records' routerDirection='none'>
-            <IonIcon slot='start' icon={desktopOutline} />
+          <IonItem
+            lines='full'
+            button
+            routerLink='/records'
+            routerDirection='none'
+          >
+            <IonIcon slot='start' icon={listOutline} />
             <IonLabel>Records</IonLabel>
           </IonItem>
         </IonMenuToggle>
         <IonMenuToggle>
-          <IonItem button routerLink='/about' routerDirection='none'>
-            <IonIcon slot='start' icon={desktopOutline} />
+          <IonItem
+            lines='full'
+            button
+            routerLink='/about'
+            routerDirection='none'
+          >
+            <IonIcon slot='start' icon={informationCircleOutline} />
             <IonLabel>About</IonLabel>
           </IonItem>
         </IonMenuToggle>
