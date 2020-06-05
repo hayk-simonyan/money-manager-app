@@ -16,13 +16,16 @@ import {
   walletOutline,
   listOutline,
   informationCircleOutline,
+  appsOutline,
+  settingsOutline,
+  exitOutline,
 } from 'ionicons/icons';
 
 const Menu: React.FC = () => (
   <IonMenu contentId='main' side='start' menuId='id'>
     <IonHeader>
       <IonToolbar color='primary'>
-        <IonItem color='primary' button>
+        <IonItem routerLink='/settings' color='primary' button>
           <IonTitle>John Smith</IonTitle>
         </IonItem>
       </IonToolbar>
@@ -49,6 +52,39 @@ const Menu: React.FC = () => (
           >
             <IonIcon slot='start' icon={listOutline} />
             <IonLabel>Records</IonLabel>
+          </IonItem>
+        </IonMenuToggle>
+        <IonMenuToggle>
+          <IonItem
+            lines='full'
+            button
+            routerLink='/categories'
+            routerDirection='none'
+          >
+            <IonIcon slot='start' icon={appsOutline} />
+            <IonLabel>Categories</IonLabel>
+          </IonItem>
+        </IonMenuToggle>
+        <IonMenuToggle>
+          <IonItem
+            lines='full'
+            button
+            routerLink='/settings'
+            routerDirection='none'
+          >
+            <IonIcon slot='start' icon={settingsOutline} />
+            <IonLabel>Settings</IonLabel>
+          </IonItem>
+        </IonMenuToggle>
+        <IonMenuToggle>
+          <IonItem
+            lines='full'
+            button
+            routerLink='/export'
+            routerDirection='none'
+          >
+            <IonIcon slot='start' icon={exitOutline} />
+            <IonLabel>Export</IonLabel>
           </IonItem>
         </IonMenuToggle>
         <IonMenuToggle>
