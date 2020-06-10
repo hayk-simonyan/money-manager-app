@@ -19,26 +19,23 @@ import SubmitButton from '../../components/submit-button/submit-button';
 const NewRecordPage: React.FC = () => {
   const [records, setRecords] = useState<any[]>();
   const [error, setError] = useState<string>();
-  console.log(records);
 
-  const [recordType, setRecordType] = useState<string>('expence');
+  const [type, setType] = useState<string>('expence');
   const [account, setAccount] = useState<string>('cash');
   const [category, setCategory] = useState<string>('');
-  // const recordTypeInputRef = useRef<HTMLIonInputElement>(null);
-  // const categoryInputRef = useRef<HTMLIonInputElement>(null);
-  const amountInputRef = useRef<HTMLIonInputElement>(null);
   const dateInputRef = useRef<HTMLIonInputElement>(null);
+  const amountInputRef = useRef<HTMLIonInputElement>(null);
   const noteInputRef = useRef<HTMLIonInputElement>(null);
 
   const addRecordHandler = () => {
     // const recordType = recordTypeInputRef.current!.value;
     // const category = categoryInputRef.current!.value;
-    const amount = amountInputRef.current!.value;
     const date = dateInputRef.current!.value;
+    const amount = amountInputRef.current!.value;
     const note = noteInputRef.current!.value;
 
-    if (!recordType || !account || !category || !amount || date || !note) {
-      setError('Please fill out all inputs');
+    if (!type || !account || !category || !date || !amount) {
+      setError('Please fill out all required inputs');
       return;
     }
     if (+amount <= 0) {
@@ -67,8 +64,8 @@ const NewRecordPage: React.FC = () => {
             <IonItem>
               <IonLabel>Type</IonLabel>
               <IonSelect
-                value={recordType}
-                onIonChange={(e) => setRecordType(e.detail.value)}
+                value={type}
+                onIonChange={(e) => setType(e.detail.value)}
               >
                 <IonSelectOption value='expence'>Expence</IonSelectOption>
                 <IonSelectOption value='income'>Income</IonSelectOption>
@@ -110,7 +107,7 @@ const NewRecordPage: React.FC = () => {
             <IonItem>
               <IonLabel position='floating'>Amount</IonLabel>
               <IonInput
-                placeholder={recordType === 'expence' ? '-0' : '+0'}
+                // placeholder={type === 'expence' ? '-0' : '+0'}
                 ref={amountInputRef}
                 type='number'
               ></IonInput>

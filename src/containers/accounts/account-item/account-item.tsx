@@ -3,7 +3,7 @@ import React from 'react';
 import { IonCol, IonText, IonCard, IonItem, IonRow } from '@ionic/react';
 
 const AccountItem: React.FC = ({ children }) => (
-  <IonCol>
+  <IonCol size='4'>
     <IonCard>
       <IonItem button>
         <IonRow>

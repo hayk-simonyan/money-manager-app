@@ -1,0 +1,3 @@
+export const POST_ACCOUNT = 'POST_ACCOUNT';
+export const GET_ACCOUNTS = 'GET_ACCOUNTS';
+export const ACCOUNTS_ERROR = 'ACCOUNTS_ERROR';

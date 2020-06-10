@@ -19,6 +19,7 @@ import RecordsPage from './pages/records-page/records-page';
 import RecordPage from './pages/records-page/record-edit/record-edit';
 import AboutPage from './pages/about-page/about-page';
 import Menu from './components/menu/menu';
+import NewAccountPage from './pages/new-account-page/new-account-page';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -46,6 +47,7 @@ const App: React.FC = () => (
       {/* <IonTabs> */}
       <IonRouterOutlet id='main'>
         <Route exact path='/home' component={Homepage} />
+        <Route exact path='/accounts/new' component={NewAccountPage} />
         <Route exact path='/records/new' component={NewRecordPage} />
         <Route exact path='/records/:recordId' component={RecordPage} />
         <Route exact path='/records' component={RecordsPage} />

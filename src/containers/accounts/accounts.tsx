@@ -7,8 +7,10 @@ import {
   IonCardHeader,
   IonCardTitle,
 } from '@ionic/react';
+import { addOutline } from 'ionicons/icons';
 
 import AccountItem from './account-item/account-item';
+import AddAccountButton from './add-account-button/add-account-button';
 
 const Accounts: React.FC = () => (
   <IonCard>
@@ -20,6 +22,8 @@ const Accounts: React.FC = () => (
         <AccountItem children='Cash' />
         <AccountItem children='Savings' />
         <AccountItem children='Cart' />
+        <AccountItem children='Cart' />
+        <AddAccountButton />
       </IonRow>
     </IonGrid>
   </IonCard>
