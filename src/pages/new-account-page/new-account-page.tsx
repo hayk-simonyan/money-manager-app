@@ -16,8 +16,14 @@ import {
 import HeaderRecords from '../../components/header-records/header-records';
 import SubmitButton from '../../components/submit-button/submit-button';
 
-const NewAccountPage: React.FC = () => {
-  const [accounts, setAccounts] = useState<any[]>();
+import { connect } from 'react-redux';
+import { postAccount } from '../../redux/accounts/account.actions';
+
+interface NewAccountPageProps {
+  postAccount: (formData: FormData) => void;
+}
+
+const NewAccountPage: React.FC<NewAccountPageProps> = ({ postAccount }) => {
   const [error, setError] = useState<string>();
 
   const [icon, setIcon] = useState<string>();
@@ -26,14 +32,20 @@ const NewAccountPage: React.FC = () => {
 
   const addAccountHandler = () => {
     const name = nameInputRef.current!.value;
-    const total = totalInputRef.current!.value;
+    let total = totalInputRef.current?.value;
 
-    if (!icon || !name) {
+    if (!icon || !name || name.toString().trim().length === 0) {
       setError('Please set an account icon and name');
       return;
     }
+    if (!total) total = 0;
 
-    setAccounts([name, total]);
+    const formData: FormData = new FormData();
+    formData.append('icon', icon.toString());
+    formData.append('name', name.toString().trim());
+    formData.append('total', total.toString().trim());
+
+    postAccount(formData);
   };
 
   const clearError = () => {
@@ -87,4 +99,8 @@ const NewAccountPage: React.FC = () => {
   );
 };
 
-export default NewAccountPage;
+const mapDispatchToProps = (dispatch: any) => ({
+  postAccount: (formData: FormData) => dispatch(postAccount(formData)),
+});
+
+export default connect(null, mapDispatchToProps)(NewAccountPage);

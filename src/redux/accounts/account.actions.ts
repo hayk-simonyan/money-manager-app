@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { POST_ACCOUNT, GET_ACCOUNTS, ACCOUNTS_ERROR } from './account.types';
 
-export const postAccount = (formData) => async (dispatch) => {
+export const postAccount = (formData: FormData) => async (dispatch: any) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -9,7 +9,11 @@ export const postAccount = (formData) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.post(`/accounts`, formData, config);
+    const res = await axios.post(
+      `http://localhost:5000/accounts`,
+      formData,
+      config
+    );
 
     dispatch({
       type: POST_ACCOUNT,
@@ -23,9 +27,9 @@ export const postAccount = (formData) => async (dispatch) => {
   }
 };
 
-export const getAccounts = () => async (dispatch) => {
+export const getAccounts = () => async (dispatch: any) => {
   try {
-    const res = await axios.get(`/accounts`);
+    const res = await axios.get(`http://localhost:5000/accounts`);
 
     dispatch({
       type: GET_ACCOUNTS,

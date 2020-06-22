@@ -102,7 +102,12 @@ const NewRecordPage: React.FC = () => {
               </IonSelect>
             </IonItem>
             <IonItem>
-              <IonInput ref={dateInputRef} type='date' />
+              <IonInput
+                autocomplete='on'
+                autocorrect='on'
+                ref={dateInputRef}
+                type='date'
+              />
             </IonItem>
             <IonItem>
               <IonLabel position='floating'>Amount</IonLabel>
