@@ -11,6 +11,8 @@ import RecordPage from './pages/records-page/record-edit/record-edit';
 import AboutPage from './pages/about-page/about-page';
 import Menu from './components/menu/menu';
 import NewAccountPage from './pages/new-account-page/new-account-page';
+import SignupPage from './pages/signup-page/signup-page';
+import SigninPage from './pages/signin-page/signin-page';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,20 +34,22 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 const App: React.FC = () => (
-    <IonApp>
-      <IonReactRouter>
-        <Menu />
-        {/* <IonTabs> */}
-        <IonRouterOutlet id='main'>
-          <Route exact path='/home' component={Homepage} />
-          <Route exact path='/accounts/new' component={NewAccountPage} />
-          <Route exact path='/records/new' component={NewRecordPage} />
-          <Route exact path='/records/:recordId' component={RecordPage} />
-          <Route exact path='/records' component={RecordsPage} />
-          <Route exact path='/about' component={AboutPage} />
-          <Redirect to='/home' />
-        </IonRouterOutlet>
-        {/* <IonTabBar slot='bottom'>
+  <IonApp>
+    <IonReactRouter>
+      <Menu />
+      {/* <IonTabs> */}
+      <IonRouterOutlet id='main'>
+        <Route exact path='/home' component={Homepage} />
+        <Route exact path='/accounts/new' component={NewAccountPage} />
+        <Route exact path='/records/new' component={NewRecordPage} />
+        <Route exact path='/records/:recordId' component={RecordPage} />
+        <Route exact path='/records' component={RecordsPage} />
+        <Route exact path='/about' component={AboutPage} />
+        <Route exact path='/signup' component={SignupPage} />
+        <Route exact path='/signin' component={SigninPage} />
+        <Redirect to='/home' />
+      </IonRouterOutlet>
+      {/* <IonTabBar slot='bottom'>
           <IonTabButton tab='home' href='/home'>
             <IonIcon icon={homeOutline} />
             <IonLabel>Home</IonLabel>
@@ -55,9 +59,9 @@ const App: React.FC = () => (
             <IonLabel>Records</IonLabel>
           </IonTabButton>
         </IonTabBar> */}
-        {/* </IonTabs> */}
-      </IonReactRouter>
-    </IonApp>
+      {/* </IonTabs> */}
+    </IonReactRouter>
+  </IonApp>
 );
 
 export default App;

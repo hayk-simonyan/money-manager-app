@@ -56,5 +56,6 @@
     "@types/webpack-env": "^1.15.2",
     "react-scripts": "3.4.1"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "proxy": "http://localhost:5000"
 }
