@@ -9,11 +9,7 @@ export const postAccount = (formData: FormData) => async (dispatch: any) => {
   };
 
   try {
-    const res = await axios.post(
-      `http://localhost:5000/accounts`,
-      formData,
-      config
-    );
+    const res = await axios.post(`/accounts`, formData, config);
 
     dispatch({
       type: POST_ACCOUNT,
@@ -29,7 +25,7 @@ export const postAccount = (formData: FormData) => async (dispatch: any) => {
 
 export const getAccounts = () => async (dispatch: any) => {
   try {
-    const res = await axios.get(`http://localhost:5000/accounts`);
+    const res = await axios.get(`/accounts`);
 
     dispatch({
       type: GET_ACCOUNTS,

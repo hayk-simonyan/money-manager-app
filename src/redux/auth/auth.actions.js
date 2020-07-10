@@ -18,11 +18,9 @@ export const signup = (email, password) => async (dispatch) => {
   };
 
   const body = JSON.stringify({ email, password });
-  console.log(email, password);
 
   try {
-    const res = await axios.post('http://localhost:5000/users', body, config);
-    console.log(res);
+    const res = await axios.post('/users', body, config);
     dispatch({
       type: SIGNUP_SUCCESS,
       payload: res.data,
@@ -46,7 +44,7 @@ export const signin = (email, password) => async (dispatch) => {
   const body = JSON.stringify({ email, password });
 
   try {
-    const res = await axios.post('http://localhost:5000/auth', body, config);
+    const res = await axios.post('/auth', body, config);
 
     dispatch({
       type: SIGNIN_SUCCESS,
@@ -71,7 +69,7 @@ export const loadUser = () => async (dispatch) => {
   }
 
   try {
-    const res = await axios.get('http://localhost:5000/auth');
+    const res = await axios.get('/auth');
 
     dispatch({
       type: USER_LOADED,

@@ -10,16 +10,24 @@ import {
   IonPage,
   IonButton,
 } from '@ionic/react';
+import { connect } from 'react-redux';
 
 import Header from '../../components/header/header';
-import { connect } from 'react-redux';
 import { signup } from '../../redux/auth/auth.actions';
+import { Redirect } from 'react-router-dom';
 
 interface Props {
   signup: (email: string, password: string) => void;
+  auth: {
+    isAuthenticated: any;
+    loading: boolean;
+  };
 }
 
-const SignupPage: React.FC<Props> = ({ signup }) => {
+const SignupPage: React.FC<Props> = ({
+  signup,
+  auth: { isAuthenticated, loading },
+}) => {
   const [error, setError] = useState<string>();
 
   // const nameInputRef = useRef<HTMLIonInputElement>(null);
@@ -42,8 +50,6 @@ const SignupPage: React.FC<Props> = ({ signup }) => {
       return;
     }
 
-    console.log(email, password);
-
     signup(email.toString().trim(), password.toString());
   };
 
@@ -51,7 +57,9 @@ const SignupPage: React.FC<Props> = ({ signup }) => {
     setError('');
   };
 
-  return (
+  return isAuthenticated ? (
+    <Redirect to='/' />
+  ) : (
     <IonPage>
       <IonAlert
         isOpen={!!error}
@@ -76,9 +84,15 @@ const SignupPage: React.FC<Props> = ({ signup }) => {
             </IonItem>
           </IonCol>
         </IonRow>
-        <IonButton onClick={signUpHandler} expand='block'>
+        <IonButton onClick={signUpHandler} expand='block' color='success'>
           Sign Up
         </IonButton>
+        <IonItem lines='none'>
+          <IonLabel>Have an account? </IonLabel>
+          <IonButton color='light' routerLink='/signin' expand='block'>
+            Sign In
+          </IonButton>
+        </IonItem>
       </IonGrid>
     </IonPage>
   );
@@ -89,4 +103,8 @@ const mapDispatchToProps = (dispatch: any) => ({
     dispatch(signup(email, password)),
 });
 
-export default connect(null, mapDispatchToProps)(SignupPage);
+const mapStateToProps = (state: any) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupPage);

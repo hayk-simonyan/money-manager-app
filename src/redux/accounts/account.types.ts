@@ -1,3 +1,5 @@
 export const POST_ACCOUNT = 'POST_ACCOUNT';
 export const GET_ACCOUNTS = 'GET_ACCOUNTS';
+export const PUT_ACCOUNT = 'PUT_ACCOUNT';
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 export const ACCOUNTS_ERROR = 'ACCOUNTS_ERROR';

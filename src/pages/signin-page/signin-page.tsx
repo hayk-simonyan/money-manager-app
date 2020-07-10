@@ -15,13 +15,21 @@ import {
 import Header from '../../components/header/header';
 
 import { connect } from 'react-redux';
-// import { postSignIn } from '../../redux/accounts/account.actions';
+import { signin } from '../../redux/auth/auth.actions';
+import { Redirect } from 'react-router-dom';
 
-interface SigninPageProps {
-  postSignIn: (formData: FormData) => void;
+interface Props {
+  signin: (email: string, password: string) => void;
+  auth: {
+    isAuthenticated: any;
+    loading: boolean;
+  };
 }
 
-const SigninPage: React.FC<SigninPageProps> = ({ postSignIn }) => {
+const SigninPage: React.FC<Props> = ({
+  signin,
+  auth: { isAuthenticated, loading },
+}) => {
   const [error, setError] = useState<string>();
 
   const emailInputRef = useRef<HTMLIonInputElement>(null);
@@ -41,18 +49,16 @@ const SigninPage: React.FC<SigninPageProps> = ({ postSignIn }) => {
       return;
     }
 
-    const formData: FormData = new FormData();
-    formData.append('email', email.toString().trim());
-    formData.append('password', password.toString());
-
-    postSignIn(formData);
+    signin(email.toString().trim(), password.toString());
   };
 
   const clearError = () => {
     setError('');
   };
 
-  return (
+  return isAuthenticated ? (
+    <Redirect to='/' />
+  ) : (
     <IonPage>
       <IonAlert
         isOpen={!!error}
@@ -76,13 +82,24 @@ const SigninPage: React.FC<SigninPageProps> = ({ postSignIn }) => {
         <IonButton onClick={signInHandler} expand='block'>
           Sign In
         </IonButton>
+        <IonItem lines='none'>
+          <IonLabel>Create account? </IonLabel>
+          <IonButton color='success' routerLink='/signup' expand='block'>
+            Sign Up
+          </IonButton>
+        </IonItem>
       </IonGrid>
     </IonPage>
   );
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  //   postSignIn: (formData: FormData) => dispatch(postSignIn(formData)),
+  signin: (email: string, password: string) =>
+    dispatch(signin(email, password)),
 });
 
-export default connect(null, mapDispatchToProps)(SigninPage);
+const mapStateToProps = (state: any) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SigninPage);

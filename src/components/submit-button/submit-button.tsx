@@ -3,11 +3,11 @@ import React from 'react';
 import { IonFab, IonIcon, IonFabButton } from '@ionic/react';
 import { checkmarkOutline } from 'ionicons/icons';
 
-interface SubmitButtonProps {
+interface Props {
   onClickHandler?: () => void;
 }
 
-const SubmitButton: React.FC<SubmitButtonProps> = ({ onClickHandler }) => (
+const SubmitButton: React.FC<Props> = ({ onClickHandler }) => (
   <IonFab horizontal='end' vertical='bottom' slot='fixed'>
     <IonFabButton
       type='submit'

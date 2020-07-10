@@ -19,9 +19,23 @@ import {
   appsOutline,
   settingsOutline,
   exitOutline,
+  logOutOutline,
 } from 'ionicons/icons';
+import { connect } from 'react-redux';
+import { logout } from '../../redux/auth/auth.actions';
 
-const Menu: React.FC = () => (
+interface Props {
+  logout: () => void;
+  auth: {
+    isAuthenticated: any;
+    loading: boolean;
+  };
+}
+
+const Menu: React.FC<Props> = ({
+  logout,
+  auth: { isAuthenticated, loading },
+}) => (
   <IonMenu contentId='main' side='start' menuId='id'>
     <IonHeader>
       <IonToolbar color='primary'>
@@ -33,12 +47,7 @@ const Menu: React.FC = () => (
     <IonContent>
       <IonList>
         <IonMenuToggle>
-          <IonItem
-            lines='full'
-            button
-            routerLink='/home'
-            routerDirection='none'
-          >
+          <IonItem lines='full' button routerLink='/' routerDirection='none'>
             <IonIcon slot='start' icon={walletOutline} />
             <IonLabel>Home</IonLabel>
           </IonItem>
@@ -98,9 +107,31 @@ const Menu: React.FC = () => (
             <IonLabel>About</IonLabel>
           </IonItem>
         </IonMenuToggle>
+        {isAuthenticated && (
+          <IonMenuToggle>
+            <IonItem
+              onClick={logout}
+              lines='full'
+              button
+              routerLink='/signin'
+              routerDirection='none'
+            >
+              <IonIcon slot='start' icon={logOutOutline} />
+              <IonLabel>Logout</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+        )}
       </IonList>
     </IonContent>
   </IonMenu>
 );
 
-export default Menu;
+const mapDispatchToProps = (dispatch: any) => ({
+  logout: () => dispatch(logout()),
+});
+
+const mapStateToProps = (state: any) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);
