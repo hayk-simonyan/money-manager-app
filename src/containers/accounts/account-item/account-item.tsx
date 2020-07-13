@@ -2,13 +2,19 @@ import React from 'react';
 
 import { IonCol, IonText, IonCard, IonItem, IonRow } from '@ionic/react';
 
-const AccountItem: React.FC = ({ children }) => (
+interface Props {
+  icon: string;
+  name: string;
+  total: number;
+}
+
+const AccountItem: React.FC<Props> = ({ icon, name, total }) => (
   <IonCol size='4'>
     <IonCard>
       <IonItem button>
         <IonRow>
-          <IonText color='primary'>{children}</IonText>
-          <IonText>50650</IonText>
+          <IonText color='primary'>{name}</IonText>
+          <IonText>{total}</IonText>
         </IonRow>
       </IonItem>
     </IonCard>
