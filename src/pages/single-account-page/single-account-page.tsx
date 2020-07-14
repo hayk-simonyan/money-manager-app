@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import {
   IonGrid,
@@ -17,34 +18,36 @@ import HeaderRecords from '../../components/header-records/header-records';
 import SubmitButton from '../../components/submit-button/submit-button';
 
 import { connect } from 'react-redux';
-import { postAccount } from '../../redux/accounts/account.actions';
+import { putAccount } from '../../redux/accounts/account.actions';
 
 interface Props {
-  postAccount: (icon: string, name: string, total: string) => void;
+  accounts: { accounts: any; loading: boolean };
+  putAccount: (icon: string, name: string, total: string) => void;
 }
 
-const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
+const SingleAccountPage: React.FC<Props> = ({
+  accounts: { accounts, loading },
+  putAccount,
+}) => {
   const [error, setError] = useState<string>();
 
-  const [icon, setIcon] = useState<string>();
-  const nameInputRef = useRef<HTMLIonInputElement>(null);
-  const totalInputRef = useRef<HTMLIonInputElement>(null);
+  const { id } = useParams();
+  const currentAccount = accounts.filter(
+    (a: { _id: string; icon: string; name: string; total: string }) =>
+      a._id === id
+  );
+
+  const [icon, setIcon] = useState<string>(currentAccount[0].icon);
+  const [name, setName] = useState<string>(currentAccount[0].icon);
+  let [total, setTotal] = useState<string>(currentAccount[0].icon);
 
   const addAccountHandler = () => {
-    const name = nameInputRef.current!.value!;
-    let total = totalInputRef.current!.value!;
-
-    if (!icon || !name || name.toString().trim().length === 0) {
-      setError('Please set an account icon and name');
-      return;
-    }
-
-    // const formData: FormData = new FormData();
-    // formData.append('icon', icon.toString());
-    // formData.append('name', name.toString().trim());
-    // formData.append('total', total.toString().trim());
-
-    postAccount(icon.toString(), name.toString(), total.toString());
+    // if (!icon || !name || name.toString().trim().length === 0) {
+    //   setError('Please set an account icon and name');
+    //   return;
+    // }
+    // if (!total) total = '0';
+    // putAccount(icon.toString(), name.toString(), total.toString());
   };
 
   const clearError = () => {
@@ -84,11 +87,21 @@ const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
             </IonItem>
             <IonItem>
               <IonLabel position='floating'>Account Name</IonLabel>
-              <IonInput ref={nameInputRef} type='text' required />
+              <IonInput
+                value={name}
+                // @ts-ignore
+                onChange={(e) => setName(e.target.value)}
+                type='text'
+              />
             </IonItem>
             <IonItem>
               <IonLabel position='floating'>Initial Amount</IonLabel>
-              <IonInput ref={totalInputRef} type='number' required></IonInput>
+              <IonInput
+                value={total}
+                // @ts-ignore
+                onChange={(e) => setTotal(e.target.value)}
+                type='number'
+              ></IonInput>
             </IonItem>
           </IonCol>
         </IonRow>
@@ -99,8 +112,12 @@ const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  postAccount: (icon: string, name: string, total: string) =>
-    dispatch(postAccount(icon, name, total)),
+  putAccount: (icon: string, name: string, total: string) =>
+    dispatch(putAccount(icon, name, total)),
 });
 
-export default connect(null, mapDispatchToProps)(NewAccountPage);
+const mapStateToProps = (state: any) => ({
+  accounts: state.accounts,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleAccountPage);

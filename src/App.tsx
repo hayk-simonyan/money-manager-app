@@ -12,11 +12,12 @@ import RecordsPage from './pages/records-page/records-page';
 import RecordPage from './pages/records-page/record-edit/record-edit';
 import AboutPage from './pages/about-page/about-page';
 import Menu from './components/menu/menu';
-import NewAccountPage from './pages/new-account-page/new-account-page';
 import SignupPage from './pages/signup-page/signup-page';
 import SigninPage from './pages/signin-page/signin-page';
 import setAuthToken from './utils/setAuthToken';
 import PrivateRoute from './components/private-route/private-route';
+import NewAccountPage from './pages/new-account-page/new-account-page';
+import SingleAccountPage from './pages/single-account-page/single-account-page';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -57,11 +58,18 @@ const App: React.FC = () => {
           {/* <IonTabs> */}
           <IonRouterOutlet id='main'>
             <PrivateRoute exact path='/' component={Homepage} />
+
             <PrivateRoute
               exact
               path='/accounts/new'
               component={NewAccountPage}
             />
+            <PrivateRoute
+              exact
+              path='/accounts/:id'
+              component={SingleAccountPage}
+            />
+
             <PrivateRoute exact path='/records/new' component={NewRecordPage} />
             <PrivateRoute
               exact

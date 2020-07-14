@@ -9,12 +9,7 @@ interface Props {
 
 const SubmitButton: React.FC<Props> = ({ onClickHandler }) => (
   <IonFab horizontal='end' vertical='bottom' slot='fixed'>
-    <IonFabButton
-      type='submit'
-      size='small'
-      color='success'
-      onClick={onClickHandler}
-    >
+    <IonFabButton type='submit' color='success' onClick={onClickHandler}>
       <IonIcon icon={checkmarkOutline} />
     </IonFabButton>
   </IonFab>

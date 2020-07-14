@@ -30,6 +30,7 @@ const Accounts: React.FC<Props> = ({
     (account: { _id: string; icon: string; name: string; total: number }) => (
       <AccountItem
         key={account._id}
+        id={account._id}
         icon={account.icon}
         name={account.name}
         total={account.total}
@@ -45,10 +46,6 @@ const Accounts: React.FC<Props> = ({
       <IonGrid>
         <IonRow>
           {fetchedAccounts}
-          {/* <AccountItem children='Cash' />
-          <AccountItem children='Savings' />
-          <AccountItem children='Cart' />
-          <AccountItem children='Cart' /> */}
           <AddAccountButton />
         </IonRow>
       </IonGrid>
