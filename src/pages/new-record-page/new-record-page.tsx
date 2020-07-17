@@ -13,7 +13,7 @@ import {
   IonSelectOption,
 } from '@ionic/react';
 
-import HeaderRecords from '../../components/header-records/header-records';
+import Header from '../../components/header/header';
 import SubmitButton from '../../components/submit-button/submit-button';
 
 const NewRecordPage: React.FC = () => {
@@ -57,7 +57,7 @@ const NewRecordPage: React.FC = () => {
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <HeaderRecords />
+      <Header title='Add Record' menu={false} />
       <IonGrid>
         <IonRow>
           <IonCol>

@@ -22,7 +22,7 @@ const RecordsPage: React.FC = () => {
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <Header />
+      <Header title='Records' menu={true} />
       <IonContent>
         {DUMMY_RECORDS && (
           <IonList>

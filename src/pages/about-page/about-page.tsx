@@ -7,7 +7,7 @@ import Header from '../../components/header/header';
 const AboutPage: React.FC = () => {
   return (
     <IonPage>
-      <Header />
+      <Header title='About' menu={true} />
       <IonContent>
         <IonGrid>
           <h1>ABOUT PAGE</h1>

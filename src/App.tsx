@@ -16,8 +16,9 @@ import SignupPage from './pages/signup-page/signup-page';
 import SigninPage from './pages/signin-page/signin-page';
 import setAuthToken from './utils/setAuthToken';
 import PrivateRoute from './components/private-route/private-route';
-import NewAccountPage from './pages/new-account-page/new-account-page';
-import SingleAccountPage from './pages/single-account-page/single-account-page';
+import AddAccountPage from './pages/add-account-page/add-account-page';
+import EditAccountPage from './pages/edit-account-page/edit-account-page';
+import Alert from './containers/alert/alert';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -62,12 +63,12 @@ const App: React.FC = () => {
             <PrivateRoute
               exact
               path='/accounts/new'
-              component={NewAccountPage}
+              component={AddAccountPage}
             />
             <PrivateRoute
               exact
               path='/accounts/:id'
-              component={SingleAccountPage}
+              component={EditAccountPage}
             />
 
             <PrivateRoute exact path='/records/new' component={NewRecordPage} />
@@ -94,6 +95,7 @@ const App: React.FC = () => {
         </IonTabBar> */}
           {/* </IonTabs> */}
         </IonReactRouter>
+        <Alert />
       </IonApp>
     </Provider>
   );

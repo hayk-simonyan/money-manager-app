@@ -6,15 +6,25 @@ import {
   IonTitle,
   IonButtons,
   IonMenuButton,
+  IonBackButton,
 } from '@ionic/react';
 
-const Header: React.FC = () => (
+interface Props {
+  title: string;
+  menu: boolean;
+}
+
+const Header: React.FC<Props> = ({ title, menu }) => (
   <IonHeader>
     <IonToolbar color='primary'>
       <IonButtons slot='start'>
-        <IonMenuButton menu='id' auto-hide='false' />
+        {menu ? (
+          <IonMenuButton menu='id' auto-hide='false' />
+        ) : (
+          <IonBackButton defaultHref='/' />
+        )}
       </IonButtons>
-      <IonTitle>Money Manager</IonTitle>
+      <IonTitle>{title}</IonTitle>
     </IonToolbar>
   </IonHeader>
 );

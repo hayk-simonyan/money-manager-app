@@ -65,7 +65,7 @@ const SigninPage: React.FC<Props> = ({
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <Header />
+      <Header title='Money Manager' menu={true} />
       <IonGrid>
         <IonRow>
           <IonCol>

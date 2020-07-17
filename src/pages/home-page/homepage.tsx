@@ -14,7 +14,7 @@ const Homepage: React.FC = () => {
 
   return (
     <IonPage>
-      <Header />
+      <Header title='Home' menu={true} />
       <IonContent>
         <HomepageControls
           segmentValue={segment}

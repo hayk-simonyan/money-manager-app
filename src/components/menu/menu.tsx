@@ -11,6 +11,7 @@ import {
   IonIcon,
   IonLabel,
   IonMenuToggle,
+  IonSpinner,
 } from '@ionic/react';
 import {
   walletOutline,
@@ -35,96 +36,100 @@ interface Props {
 const Menu: React.FC<Props> = ({
   logout,
   auth: { isAuthenticated, loading },
-}) => (
-  <IonMenu contentId='main' side='start' menuId='id'>
-    <IonHeader>
-      <IonToolbar color='primary'>
-        <IonItem routerLink='/settings' color='primary' button>
-          <IonTitle>John Smith</IonTitle>
-        </IonItem>
-      </IonToolbar>
-    </IonHeader>
-    <IonContent>
-      <IonList>
-        <IonMenuToggle>
-          <IonItem lines='full' button routerLink='/' routerDirection='none'>
-            <IonIcon slot='start' icon={walletOutline} />
-            <IonLabel>Home</IonLabel>
+}) => {
+  return loading ? (
+    <IonSpinner />
+  ) : (
+    <IonMenu contentId='main' side='start' menuId='id'>
+      <IonHeader>
+        <IonToolbar color='primary'>
+          <IonItem routerLink='/settings' color='primary' button>
+            <IonTitle>Money Manager</IonTitle>
           </IonItem>
-        </IonMenuToggle>
-        <IonMenuToggle>
-          <IonItem
-            lines='full'
-            button
-            routerLink='/records'
-            routerDirection='none'
-          >
-            <IonIcon slot='start' icon={listOutline} />
-            <IonLabel>Records</IonLabel>
-          </IonItem>
-        </IonMenuToggle>
-        <IonMenuToggle>
-          <IonItem
-            lines='full'
-            button
-            routerLink='/categories'
-            routerDirection='none'
-          >
-            <IonIcon slot='start' icon={appsOutline} />
-            <IonLabel>Categories</IonLabel>
-          </IonItem>
-        </IonMenuToggle>
-        <IonMenuToggle>
-          <IonItem
-            lines='full'
-            button
-            routerLink='/settings'
-            routerDirection='none'
-          >
-            <IonIcon slot='start' icon={settingsOutline} />
-            <IonLabel>Settings</IonLabel>
-          </IonItem>
-        </IonMenuToggle>
-        <IonMenuToggle>
-          <IonItem
-            lines='full'
-            button
-            routerLink='/export'
-            routerDirection='none'
-          >
-            <IonIcon slot='start' icon={exitOutline} />
-            <IonLabel>Export</IonLabel>
-          </IonItem>
-        </IonMenuToggle>
-        <IonMenuToggle>
-          <IonItem
-            lines='full'
-            button
-            routerLink='/about'
-            routerDirection='none'
-          >
-            <IonIcon slot='start' icon={informationCircleOutline} />
-            <IonLabel>About</IonLabel>
-          </IonItem>
-        </IonMenuToggle>
-        {isAuthenticated && (
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <IonList>
           <IonMenuToggle>
-            <IonItem
-              onClick={logout}
-              lines='full'
-              button
-              routerLink='/signin'
-              routerDirection='none'
-            >
-              <IonIcon slot='start' icon={logOutOutline} />
-              <IonLabel>Logout</IonLabel>
+            <IonItem lines='full' button routerLink='/' routerDirection='none'>
+              <IonIcon slot='start' icon={walletOutline} />
+              <IonLabel>Home</IonLabel>
             </IonItem>
           </IonMenuToggle>
-        )}
-      </IonList>
-    </IonContent>
-  </IonMenu>
-);
+          <IonMenuToggle>
+            <IonItem
+              lines='full'
+              button
+              routerLink='/records'
+              routerDirection='none'
+            >
+              <IonIcon slot='start' icon={listOutline} />
+              <IonLabel>Records</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+          <IonMenuToggle>
+            <IonItem
+              lines='full'
+              button
+              routerLink='/categories'
+              routerDirection='none'
+            >
+              <IonIcon slot='start' icon={appsOutline} />
+              <IonLabel>Categories</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+          <IonMenuToggle>
+            <IonItem
+              lines='full'
+              button
+              routerLink='/settings'
+              routerDirection='none'
+            >
+              <IonIcon slot='start' icon={settingsOutline} />
+              <IonLabel>Settings</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+          <IonMenuToggle>
+            <IonItem
+              lines='full'
+              button
+              routerLink='/export'
+              routerDirection='none'
+            >
+              <IonIcon slot='start' icon={exitOutline} />
+              <IonLabel>Export</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+          <IonMenuToggle>
+            <IonItem
+              lines='full'
+              button
+              routerLink='/about'
+              routerDirection='none'
+            >
+              <IonIcon slot='start' icon={informationCircleOutline} />
+              <IonLabel>About</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+          {isAuthenticated && (
+            <IonMenuToggle>
+              <IonItem
+                onClick={logout}
+                lines='full'
+                button
+                routerLink='/signin'
+                routerDirection='none'
+              >
+                <IonIcon slot='start' icon={logOutOutline} />
+                <IonLabel>Logout</IonLabel>
+              </IonItem>
+            </IonMenuToggle>
+          )}
+        </IonList>
+      </IonContent>
+    </IonMenu>
+  );
+};
 
 const mapDispatchToProps = (dispatch: any) => ({
   logout: () => dispatch(logout()),

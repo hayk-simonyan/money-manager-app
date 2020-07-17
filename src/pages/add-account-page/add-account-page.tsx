@@ -11,19 +11,24 @@ import {
   IonPage,
   IonSelect,
   IonSelectOption,
+  IonFab,
+  IonFabButton,
+  IonIcon,
 } from '@ionic/react';
 
-import HeaderRecords from '../../components/header-records/header-records';
-import SubmitButton from '../../components/submit-button/submit-button';
+import Header from '../../components/header/header';
 
 import { connect } from 'react-redux';
 import { postAccount } from '../../redux/accounts/account.actions';
+import { setAlert } from '../../redux/alerts/alert.actions';
+import { checkmarkOutline } from 'ionicons/icons';
 
 interface Props {
   postAccount: (icon: string, name: string, total: string) => void;
+  setAlert: (msg: string, alertType: string) => void;
 }
 
-const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
+const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
   const [error, setError] = useState<string>();
 
   const [icon, setIcon] = useState<string>();
@@ -31,11 +36,11 @@ const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
   const totalInputRef = useRef<HTMLIonInputElement>(null);
 
   const addAccountHandler = () => {
-    const name = nameInputRef.current!.value!;
-    let total = totalInputRef.current!.value!;
+    const name = nameInputRef.current!.value;
+    let total = totalInputRef.current!.value;
 
-    if (!icon || !name || name.toString().trim().length === 0) {
-      setError('Please set an account icon and name');
+    if (!icon || !name || name.toString().trim().length === 0 || !total) {
+      setError('Please fill out all fields');
       return;
     }
 
@@ -45,6 +50,7 @@ const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
     // formData.append('total', total.toString().trim());
 
     postAccount(icon.toString(), name.toString(), total.toString());
+    setAlert('Account Was Created', 'success');
   };
 
   const clearError = () => {
@@ -58,7 +64,7 @@ const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <HeaderRecords />
+      <Header title='Add Account' menu={false} />
       <IonGrid>
         <IonRow>
           <IonCol>
@@ -93,7 +99,16 @@ const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
           </IonCol>
         </IonRow>
       </IonGrid>
-      <SubmitButton onClickHandler={addAccountHandler} />
+      <IonFab horizontal='end' vertical='bottom' slot='fixed'>
+        <IonFabButton
+          type='submit'
+          color='success'
+          routerLink='/'
+          onClick={addAccountHandler}
+        >
+          <IonIcon icon={checkmarkOutline} />
+        </IonFabButton>
+      </IonFab>
     </IonPage>
   );
 };
@@ -101,6 +116,8 @@ const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
 const mapDispatchToProps = (dispatch: any) => ({
   postAccount: (icon: string, name: string, total: string) =>
     dispatch(postAccount(icon, name, total)),
+  setAlert: (msg: string, alertType: string) =>
+    dispatch(setAlert(msg, alertType)),
 });
 
 export default connect(null, mapDispatchToProps)(NewAccountPage);

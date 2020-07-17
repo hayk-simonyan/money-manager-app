@@ -12,7 +12,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { DUMMY_RECORDS } from '../../../data/dummy-records';
 
-import HeaderRecords from '../../../components/header-records/header-records';
+import Header from '../../../components/header/header';
 
 const RecordPage: React.FC = () => {
   const [error, setError] = useState<string>();
@@ -31,7 +31,7 @@ const RecordPage: React.FC = () => {
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <HeaderRecords />
+      <Header title='Records' menu={false} />
       <IonContent>
         <IonGrid>
           <IonCard>
