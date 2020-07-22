@@ -29,7 +29,7 @@ const Homepage: React.FC = () => {
           <Chart />
         )}
       </IonContent>
-      <AddButton />
+      <AddButton url='/records/new' />
     </IonPage>
   );
 };

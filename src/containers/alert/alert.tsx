@@ -7,9 +7,6 @@ interface Props {
 }
 //@ts-ignore
 const Alert: React.FC<Props> = ({ alerts }) => {
-  console.log(alerts !== null);
-  console.log(alerts.length > 0);
-  console.log(alerts);
   return (
     alerts !== null &&
     alerts.length > 0 &&

@@ -19,6 +19,7 @@ import PrivateRoute from './components/private-route/private-route';
 import AddAccountPage from './pages/add-account-page/add-account-page';
 import EditAccountPage from './pages/edit-account-page/edit-account-page';
 import Alert from './containers/alert/alert';
+import CategoriesPage from './pages/categories-page/categories-page';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -40,6 +41,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { loadUser } from './redux/auth/auth.actions';
 import { Provider } from 'react-redux';
+import NewCategoryPage from './pages/new-category-page/new-category-page';
 
 if (localStorage.jwttoken) {
   setAuthToken(localStorage.jwttoken);
@@ -71,6 +73,13 @@ const App: React.FC = () => {
               component={EditAccountPage}
             />
 
+            <PrivateRoute exact path='/categories' component={CategoriesPage} />
+            <PrivateRoute
+              exact
+              path='/categories/new'
+              component={NewCategoryPage}
+            />
+
             <PrivateRoute exact path='/records/new' component={NewRecordPage} />
             <PrivateRoute
               exact
@@ -78,6 +87,7 @@ const App: React.FC = () => {
               component={RecordPage}
             />
             <PrivateRoute exact path='/records' component={RecordsPage} />
+
             <Route exact path='/about' component={AboutPage} />
             <Route exact path='/signup' component={SignupPage} />
             <Route exact path='/signin' component={SigninPage} />

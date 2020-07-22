@@ -36,7 +36,7 @@ const RecordsPage: React.FC = () => {
             ))}
           </IonList>
         )}
-        <AddButton />
+        <AddButton url='/records/new' />
       </IonContent>
     </IonPage>
   );

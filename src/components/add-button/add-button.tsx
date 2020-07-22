@@ -3,9 +3,13 @@ import React from 'react';
 import { IonFab, IonFabButton, IonIcon } from '@ionic/react';
 import { add } from 'ionicons/icons';
 
-const AddButton: React.FC = () => (
+interface Props {
+  url: string;
+}
+
+const AddButton: React.FC<Props> = ({ url }) => (
   <IonFab horizontal='end' vertical='bottom' slot='fixed'>
-    <IonFabButton color='success' routerLink='/records/new'>
+    <IonFabButton color='success' routerLink={url}>
       <IonIcon icon={add} />
     </IonFabButton>
   </IonFab>
