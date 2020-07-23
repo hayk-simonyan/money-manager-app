@@ -16,34 +16,32 @@ import {
 import Header from '../../components/header/header';
 import SubmitButton from '../../components/submit-button/submit-button';
 
-const NewCategoryPage: React.FC = () => {
-  const [records, setRecords] = useState<any[]>();
+import { connect } from 'react-redux';
+import { postCategory } from '../../redux/categories/category.actions';
+import { setAlert } from '../../redux/alerts/alert.actions';
+
+interface Props {
+  postCategory: (type: string, icon: string, name: string) => void;
+  setAlert: (msg: string, alertType: string) => void;
+}
+
+const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
   const [error, setError] = useState<string>();
 
-  const [type, setType] = useState<string>('expence');
-  const [account, setAccount] = useState<string>('cash');
-  const [category, setCategory] = useState<string>('');
-  const dateInputRef = useRef<HTMLIonInputElement>(null);
-  const amountInputRef = useRef<HTMLIonInputElement>(null);
-  const noteInputRef = useRef<HTMLIonInputElement>(null);
+  const [type, setType] = useState<string>('expences');
+  const [icon, setIcon] = useState<string>('');
+  const nameInputRef = useRef<HTMLIonInputElement>(null);
 
   const addRecordHandler = () => {
-    // const recordType = recordTypeInputRef.current!.value;
-    // const category = categoryInputRef.current!.value;
-    const date = dateInputRef.current!.value;
-    const amount = amountInputRef.current!.value;
-    const note = noteInputRef.current!.value;
+    const name = nameInputRef.current!.value;
 
-    if (!type || !account || !category || !date || !amount) {
+    if (!type || !icon || !name) {
       setError('Please fill out all required inputs');
       return;
     }
-    if (+amount <= 0) {
-      setError('Amount cant be less or equal to 0');
-      return;
-    }
 
-    setRecords([amount, category]);
+    postCategory(type, icon, name.toString());
+    setAlert('Account was created', 'success');
   };
 
   const clearError = () => {
@@ -67,27 +65,17 @@ const NewCategoryPage: React.FC = () => {
                 value={type}
                 onIonChange={(e) => setType(e.detail.value)}
               >
-                <IonSelectOption value='expence'>Expence</IonSelectOption>
-                <IonSelectOption value='income'>Income</IonSelectOption>
+                <IonSelectOption value='expences'>Expence</IonSelectOption>
+                <IonSelectOption value='incomes'>Income</IonSelectOption>
               </IonSelect>
             </IonItem>
             <IonItem>
-              <IonLabel>Account</IonLabel>
+              <IonLabel>Icon</IonLabel>
               <IonSelect
-                value={account}
-                onIonChange={(e) => setAccount(e.detail.value)}
-              >
-                <IonSelectOption value='cash'>Cash</IonSelectOption>
-                <IonSelectOption value='savings'>Savings</IonSelectOption>
-              </IonSelect>
-            </IonItem>
-            <IonItem>
-              <IonLabel>Category</IonLabel>
-              <IonSelect
-                value={category}
+                value={icon}
                 cancelText='Cancel'
                 okText='Ok'
-                onIonChange={(e) => setCategory(e.detail.value)}
+                onIonChange={(e) => setIcon(e.detail.value)}
               >
                 <IonSelectOption value='bacon'>Bacon</IonSelectOption>
                 <IonSelectOption value='olives'>Black Olives</IonSelectOption>
@@ -102,31 +90,22 @@ const NewCategoryPage: React.FC = () => {
               </IonSelect>
             </IonItem>
             <IonItem>
-              <IonInput
-                autocomplete='on'
-                autocorrect='on'
-                ref={dateInputRef}
-                type='date'
-              />
-            </IonItem>
-            <IonItem>
-              <IonLabel position='floating'>Amount</IonLabel>
-              <IonInput
-                // placeholder={type === 'expence' ? '-0' : '+0'}
-                ref={amountInputRef}
-                type='number'
-              ></IonInput>
-            </IonItem>
-            <IonItem>
-              <IonLabel position='floating'>Note</IonLabel>
-              <IonInput ref={noteInputRef} type='text'></IonInput>
+              <IonLabel position='floating'>Name</IonLabel>
+              <IonInput ref={nameInputRef} type='text'></IonInput>
             </IonItem>
           </IonCol>
         </IonRow>
       </IonGrid>
-      <SubmitButton onClickHandler={addRecordHandler} />
+      <SubmitButton url='/categories' onClickHandler={addRecordHandler} />
     </IonPage>
   );
 };
 
-export default NewCategoryPage;
+const mapDispatchToProps = (dispatch: any) => ({
+  postCategory: (type: string, icon: string, name: string) =>
+    dispatch(postCategory(type, icon, name)),
+  setAlert: (msg: string, alertType: string) =>
+    dispatch(setAlert(msg, alertType)),
+});
+
+export default connect(null, mapDispatchToProps)(NewCategoryPage);

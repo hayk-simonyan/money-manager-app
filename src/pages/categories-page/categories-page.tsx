@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { IonPage, IonContent } from '@ionic/react';
 
@@ -7,27 +7,41 @@ import CategoriesPageControls from '../../components/categories-page-controls/ca
 import CategoryItem from './category-item/category-item';
 import AddButton from '../../components/add-button/add-button';
 
-const arr = [
-  { id: '1', name: 'blob', type: 'expences', icon: 'url' },
-  { id: '2', name: 'blob', type: 'expences', icon: 'url' },
-  { id: '3', name: 'blob', type: 'expences', icon: 'url' },
-  { id: '4', name: 'blob', type: 'income', icon: 'url' },
-  { id: '5', name: 'blob', type: 'expences', icon: 'url' },
-];
+import { connect } from 'react-redux';
+import { getCategories } from '../../redux/categories/category.actions';
 
-const CategoriesPage: React.FC = () => {
+interface Props {
+  categories: { categories: any; loading: boolean };
+  getCategories: () => void;
+}
+
+interface Category {
+  _id: string;
+  type: string;
+  icon: string;
+  name: string;
+}
+
+const CategoriesPage: React.FC<Props> = ({
+  categories: { categories, loading },
+  getCategories,
+}) => {
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
+
   const [segment, setSegment] = useState<'expences' | 'income'>('expences');
 
-  const expenceCategories = arr.map(
-    (category) =>
+  const expenceCategories = categories.map(
+    (category: Category) =>
       category.type === 'expences' && (
-        <CategoryItem key={category.id} category={category} />
+        <CategoryItem key={category._id} category={category} />
       )
   );
-  const incomeCategories = arr.map(
-    (category) =>
-      category.type === 'income' && (
-        <CategoryItem key={category.id} category={category} />
+  const incomeCategories = categories.map(
+    (category: Category) =>
+      category.type === 'incomes' && (
+        <CategoryItem key={category._id} category={category} />
       )
   );
 
@@ -50,4 +64,12 @@ const CategoriesPage: React.FC = () => {
   );
 };
 
-export default CategoriesPage;
+const mapDispatchToProps = (dispatch: any) => ({
+  getCategories: () => dispatch(getCategories()),
+});
+
+const mapStateToProps = (state: any) => ({
+  categories: state.categories,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesPage);

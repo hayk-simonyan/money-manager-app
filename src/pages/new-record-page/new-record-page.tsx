@@ -20,7 +20,7 @@ const NewRecordPage: React.FC = () => {
   const [records, setRecords] = useState<any[]>();
   const [error, setError] = useState<string>();
 
-  const [type, setType] = useState<string>('expence');
+  const [type, setType] = useState<string>('expences');
   const [account, setAccount] = useState<string>('cash');
   const [category, setCategory] = useState<string>('');
   const dateInputRef = useRef<HTMLIonInputElement>(null);
@@ -67,8 +67,8 @@ const NewRecordPage: React.FC = () => {
                 value={type}
                 onIonChange={(e) => setType(e.detail.value)}
               >
-                <IonSelectOption value='expence'>Expence</IonSelectOption>
-                <IonSelectOption value='income'>Income</IonSelectOption>
+                <IonSelectOption value='expences'>Expence</IonSelectOption>
+                <IonSelectOption value='incomes'>Income</IonSelectOption>
               </IonSelect>
             </IonItem>
             <IonItem>
