@@ -6,13 +6,16 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
+  IonToolbar,
 } from '@ionic/react';
 import RecordItem from './record-item/record-item';
 
 const MonthlyRecords: React.FC = () => (
   <IonCard>
-    <IonCardHeader color='primary'>
-      <IonCardTitle>Monthly Records</IonCardTitle>
+    <IonCardHeader color='default'>
+      <IonToolbar>
+        <IonCardTitle>Monthly Records</IonCardTitle>
+      </IonToolbar>
     </IonCardHeader>
     <IonGrid>
       <IonRow>

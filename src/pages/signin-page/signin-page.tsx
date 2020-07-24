@@ -79,12 +79,12 @@ const SigninPage: React.FC<Props> = ({
             </IonItem>
           </IonCol>
         </IonRow>
-        <IonButton onClick={signInHandler} expand='block'>
+        <IonButton onClick={signInHandler} expand='block' color='secondary'>
           Sign In
         </IonButton>
         <IonItem lines='none'>
           <IonLabel>Create account? </IonLabel>
-          <IonButton color='success' routerLink='/signup' expand='block'>
+          <IonButton color='secondary' routerLink='/signup' expand='block'>
             Sign Up
           </IonButton>
         </IonItem>

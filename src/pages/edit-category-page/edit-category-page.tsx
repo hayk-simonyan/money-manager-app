@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import {
   IonGrid,
@@ -17,20 +18,31 @@ import Header from '../../components/header/header';
 import SubmitButton from '../../components/submit-button/submit-button';
 
 import { connect } from 'react-redux';
-import { postCategory } from '../../redux/categories/category.actions';
+import { putCategory } from '../../redux/categories/category.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
 
 interface Props {
-  postCategory: (type: string, icon: string, name: string) => void;
+  putCategory: (id: string, type: string, icon: string, name: string) => void;
   setAlert: (msg: string, alertType: string) => void;
+  categories: { categories: any; loading: boolean };
 }
 
-const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
+const EditCategoryPage: React.FC<Props> = ({
+  putCategory,
+  setAlert,
+  categories: { categories, loading },
+}) => {
   const [error, setError] = useState<string>();
 
-  const [type, setType] = useState<string>('expences');
-  const [icon, setIcon] = useState<string>('');
-  const nameInputRef = useRef<HTMLIonInputElement>(null);
+  const { id } = useParams();
+  const currentCategory = categories.filter(
+    (c: { _id: string; icon: string; name: string; total: string }) =>
+      c._id === id
+  );
+
+  const [type, setType] = useState<string>(currentCategory[0].type);
+  const [icon, setIcon] = useState<string>(currentCategory[0].icon);
+  const nameInputRef = useRef<HTMLIonInputElement>(currentCategory[0].name);
 
   const addRecordHandler = () => {
     const name = nameInputRef.current!.value;
@@ -40,8 +52,8 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
       return;
     }
 
-    postCategory(type, icon, name.toString());
-    setAlert('Account was created', 'success');
+    putCategory(id, type, icon, name.toString());
+    setAlert('Account was updated', 'success');
   };
 
   const clearError = () => {
@@ -55,7 +67,7 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <Header title='Add Category' menu={false} />
+      <Header title='Edit Category' menu={false} />
       <IonGrid>
         <IonRow>
           <IonCol>
@@ -102,10 +114,14 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  postCategory: (type: string, icon: string, name: string) =>
-    dispatch(postCategory(type, icon, name)),
+  putCategory: (id: string, type: string, icon: string, name: string) =>
+    dispatch(putCategory(id, type, icon, name)),
   setAlert: (msg: string, alertType: string) =>
     dispatch(setAlert(msg, alertType)),
 });
 
-export default connect(null, mapDispatchToProps)(NewCategoryPage);
+const mapStateToProps = (state: any) => ({
+  categories: state.categories,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditCategoryPage);

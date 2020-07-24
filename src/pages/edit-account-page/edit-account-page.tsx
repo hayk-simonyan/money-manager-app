@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import {
   IonGrid,
@@ -24,6 +24,7 @@ import { connect } from 'react-redux';
 import {
   putAccount,
   deleteAccount,
+  getAccounts,
 } from '../../redux/accounts/account.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
 
@@ -31,6 +32,7 @@ interface Props {
   accounts: { accounts: any; loading: boolean };
   putAccount: (id: string, icon: string, name: string, total: string) => void;
   deleteAccount: (id: string) => void;
+  getAccounts: () => void;
   setAlert: (msg: string, alertType: string) => void;
 }
 
@@ -38,9 +40,14 @@ const EditAccountPage: React.FC<Props> = ({
   accounts: { accounts, loading },
   putAccount,
   deleteAccount,
+  getAccounts,
   setAlert,
 }) => {
+  const history = useHistory();
   const [error, setError] = useState<string>();
+  const clearError = () => {
+    setError('');
+  };
 
   const { id } = useParams();
   const currentAccount = accounts.filter(
@@ -72,13 +79,19 @@ const EditAccountPage: React.FC<Props> = ({
     setAlert('Account Was Updated', 'success');
   };
 
-  const removeAccountHandler = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const deleteAccountHandler = () => {
     deleteAccount(id);
+    getAccounts();
     setAlert('Account Was Removed', 'success');
+    history.push('/');
   };
 
-  const clearError = () => {
-    setError('');
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const clearModal = () => {
+    setIsOpen(false);
   };
 
   return loading ? (
@@ -89,6 +102,14 @@ const EditAccountPage: React.FC<Props> = ({
         isOpen={!!error}
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
+      />
+      <IonAlert
+        isOpen={isOpen}
+        message='Are you sure? This will also remove all the records related to this account'
+        buttons={[
+          { text: 'No', handler: clearModal },
+          { text: 'Yes', handler: deleteAccountHandler },
+        ]}
       />
       <Header title='Accounts' menu={false} />
       <IonGrid>
@@ -131,11 +152,7 @@ const EditAccountPage: React.FC<Props> = ({
         </IonRow>
         <IonRow>
           <IonCol size='4'>
-            <IonButton
-              onClick={removeAccountHandler}
-              routerLink='/'
-              color='danger'
-            >
+            <IonButton onClick={openModal} color='light'>
               <IonIcon icon={trashOutline} slot='icon-only' />
             </IonButton>
           </IonCol>
@@ -143,7 +160,7 @@ const EditAccountPage: React.FC<Props> = ({
             <IonButton
               onClick={updateAccountHandler}
               routerLink='/'
-              color='success'
+              color='primary'
             >
               <IonIcon icon={checkmarkOutline} slot='icon-only' />
             </IonButton>
@@ -158,6 +175,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   putAccount: (id: string, icon: string, name: string, total: string) =>
     dispatch(putAccount(id, icon, name, total)),
   deleteAccount: (id: string) => dispatch(deleteAccount(id)),
+  getAccounts: () => dispatch(getAccounts()),
   setAlert: (msg: string, alertType: string) =>
     dispatch(setAlert(msg, alertType)),
 });

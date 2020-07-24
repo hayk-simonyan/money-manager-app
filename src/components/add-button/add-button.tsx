@@ -9,7 +9,7 @@ interface Props {
 
 const AddButton: React.FC<Props> = ({ url }) => (
   <IonFab horizontal='end' vertical='bottom' slot='fixed'>
-    <IonFabButton color='success' routerLink={url}>
+    <IonFabButton color='primary' routerLink={url}>
       <IonIcon icon={add} />
     </IonFabButton>
   </IonFab>

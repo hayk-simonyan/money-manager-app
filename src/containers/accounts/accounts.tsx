@@ -8,6 +8,7 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
+  IonToolbar,
 } from '@ionic/react';
 
 import AccountItem from './account-item/account-item';
@@ -24,7 +25,7 @@ const Accounts: React.FC<Props> = ({
 }) => {
   useEffect(() => {
     getAccounts();
-  }, []);
+  }, [getAccounts]);
 
   const fetchedAccounts = accounts.map(
     (account: { _id: string; icon: string; name: string; total: number }) => (
@@ -40,12 +41,14 @@ const Accounts: React.FC<Props> = ({
 
   return (
     <IonCard>
-      <IonCardHeader color='primary'>
-        <IonCardTitle>Accounts</IonCardTitle>
+      <IonCardHeader color='default'>
+        <IonToolbar>
+          <IonCardTitle>Accounts</IonCardTitle>
+        </IonToolbar>
       </IonCardHeader>
       <IonGrid>
+        <IonRow>{fetchedAccounts}</IonRow>
         <IonRow>
-          {fetchedAccounts}
           <AddAccountButton />
         </IonRow>
       </IonGrid>

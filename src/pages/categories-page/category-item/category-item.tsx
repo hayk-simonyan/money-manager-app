@@ -56,7 +56,7 @@ const CategoryItem: React.FC<Props> = ({
       <IonButton color='secondary' onClick={openModal}>
         <IonIcon slot='icon-only' icon={trashOutline}></IonIcon>
       </IonButton>
-      <IonButton color='secondary' routerLink='/'>
+      <IonButton routerLink={`/categories/${_id}`} color='secondary'>
         <IonIcon slot='icon-only' icon={createOutline}></IonIcon>
       </IonButton>
     </IonItem>

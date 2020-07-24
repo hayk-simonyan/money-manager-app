@@ -51,7 +51,7 @@ export const postCategory = (
   }
 };
 
-export const putAccount = (
+export const putCategory = (
   id: string,
   type: string,
   icon: string,

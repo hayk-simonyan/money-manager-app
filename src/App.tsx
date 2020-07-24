@@ -21,6 +21,7 @@ import EditAccountPage from './pages/edit-account-page/edit-account-page';
 import Alert from './containers/alert/alert';
 import CategoriesPage from './pages/categories-page/categories-page';
 import NewCategoryPage from './pages/new-category-page/new-category-page';
+import EditCategoryPage from './pages/edit-category-page/edit-category-page';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -78,6 +79,11 @@ const App: React.FC = () => {
               exact
               path='/categories/new'
               component={NewCategoryPage}
+            />
+            <PrivateRoute
+              exact
+              path='/categories/:id'
+              component={EditCategoryPage}
             />
 
             <PrivateRoute exact path='/records/new' component={NewRecordPage} />

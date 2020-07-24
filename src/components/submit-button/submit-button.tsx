@@ -12,7 +12,7 @@ const SubmitButton: React.FC<Props> = ({ onClickHandler, url }) => (
   <IonFab horizontal='end' vertical='bottom' slot='fixed'>
     <IonFabButton
       type='submit'
-      color='success'
+      color='primary'
       routerLink={url}
       onClick={onClickHandler}
     >

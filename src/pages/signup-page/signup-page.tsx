@@ -84,7 +84,7 @@ const SignupPage: React.FC<Props> = ({
             </IonItem>
           </IonCol>
         </IonRow>
-        <IonButton onClick={signUpHandler} expand='block' color='success'>
+        <IonButton onClick={signUpHandler} expand='block' color='secondary'>
           Sign Up
         </IonButton>
         <IonItem lines='none'>
