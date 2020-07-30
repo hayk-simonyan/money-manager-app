@@ -191,12 +191,6 @@ const EditRecordPage: React.FC<Props> = ({
               </IonSelect>
             </IonItem>
             <IonItem>
-              {/* <IonInput
-                autocomplete='on'
-                autocorrect='on'
-                ref={dateInputRef}
-                type='date'
-              /> */}
               <IonDatetime
                 value={date}
                 // onIonChange={(e) => setDate(e.detail.value)}
