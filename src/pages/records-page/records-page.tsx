@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { IonAlert, IonPage, IonContent, IonList } from '@ionic/react';
 
@@ -8,7 +8,32 @@ import RecordItem from './record-item/record-item';
 import { DUMMY_RECORDS } from '../../data/dummy-records';
 import AddButton from '../../components/add-button/add-button';
 
-const RecordsPage: React.FC = () => {
+import { connect } from 'react-redux';
+import { getRecords } from '../../redux/records/record.actions';
+
+interface Props {
+  records: { records: any; loading: boolean };
+  getRecords: () => void;
+}
+
+interface Record {
+  _id: string;
+  type: string;
+  account: string;
+  category: string;
+  date: Date;
+  amount: number;
+  note: string;
+}
+
+const RecordsPage: React.FC<Props> = ({
+  records: { records, loading },
+  getRecords,
+}) => {
+  useEffect(() => {
+    getRecords();
+  }, [getRecords]);
+
   const [error, setError] = useState<string>();
 
   const clearError = () => {
@@ -24,15 +49,10 @@ const RecordsPage: React.FC = () => {
       />
       <Header title='Records' menu={true} />
       <IonContent>
-        {DUMMY_RECORDS && (
+        {records && (
           <IonList>
-            {DUMMY_RECORDS.map((record) => (
-              <RecordItem
-                key={record.id}
-                id={record.id}
-                type={record.type}
-                amount={record.amount}
-              />
+            {records.map((record: Record) => (
+              <RecordItem key={record._id} record={record} />
             ))}
           </IonList>
         )}
@@ -42,4 +62,12 @@ const RecordsPage: React.FC = () => {
   );
 };
 
-export default RecordsPage;
+const mapDispatchToProps = (dispatch: any) => ({
+  getRecords: () => dispatch(getRecords()),
+});
+
+const mapStateToProps = (state: any) => ({
+  records: state.records,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecordsPage);

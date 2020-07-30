@@ -1,13 +1,13 @@
 import {
-  GET_CATEGORIES,
-  POST_CATEGORY,
-  PUT_CATEGORY,
-  DELETE_CATEGORY,
-  CATEGORIES_ERROR,
-} from './category.types';
+  GET_RECORDS,
+  POST_RECORD,
+  PUT_RECORD,
+  DELETE_RECORD,
+  RECORDS_ERROR,
+} from './record.types';
 
 const initialState = {
-  categories: [],
+  records: [],
   loading: true,
   error: {},
 };
@@ -19,35 +19,35 @@ export default function (
   const { type, payload } = action;
 
   switch (type) {
-    case GET_CATEGORIES:
+    case GET_RECORDS:
       return {
         ...state,
-        categories: payload,
+        records: payload,
         loading: false,
       };
-    case POST_CATEGORY:
+    case POST_RECORD:
       return {
         ...state,
-        categories: [...state.categories, payload],
+        records: [...state.records, payload],
         loading: false,
       };
-    case PUT_CATEGORY:
+    case PUT_RECORD:
       return {
         ...state,
-        categories: state.categories.map((category) =>
+        records: state.records.map((record) =>
           // @ts-ignore
-          category._id === action.payload.id ? action.payload : category
+          record._id === action.payload.id ? action.payload : record
         ),
         loading: false,
       };
-    case DELETE_CATEGORY:
+    case DELETE_RECORD:
       return {
         ...state,
         // @ts-ignore
-        categories: state.categories.filter((c) => c._id !== payload),
+        records: state.records.filter((r) => r._id !== payload),
         loading: false,
       };
-    case CATEGORIES_ERROR:
+    case RECORDS_ERROR:
       return {
         ...state,
         error: payload,

@@ -9,7 +9,7 @@ import store from './redux/store';
 import Homepage from './pages/home-page/homepage';
 import NewRecordPage from './pages/new-record-page/new-record-page';
 import RecordsPage from './pages/records-page/records-page';
-import RecordPage from './pages/records-page/record-edit/record-edit';
+import EditRecordPage from './pages/edit-record-page/edit-record-page';
 import AboutPage from './pages/about-page/about-page';
 import Menu from './components/menu/menu';
 import SignupPage from './pages/signup-page/signup-page';
@@ -89,8 +89,8 @@ const App: React.FC = () => {
             <PrivateRoute exact path='/records/new' component={NewRecordPage} />
             <PrivateRoute
               exact
-              path='/records/:recordId'
-              component={RecordPage}
+              path='/records/:id'
+              component={EditRecordPage}
             />
             <PrivateRoute exact path='/records' component={RecordsPage} />
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
-  POST_ACCOUNT,
   GET_ACCOUNTS,
+  POST_ACCOUNT,
   ACCOUNTS_ERROR,
   PUT_ACCOUNT,
   DELETE_ACCOUNT,

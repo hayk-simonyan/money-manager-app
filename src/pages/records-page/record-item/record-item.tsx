@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import {
   IonRow,
@@ -16,13 +16,34 @@ import {
 } from '@ionic/react';
 import { expandOutline, trash } from 'ionicons/icons';
 
-interface RecordItemProps {
-  id: string;
-  type: string;
-  amount: string;
+import { connect } from 'react-redux';
+import { getCategories } from '../../../redux/categories/category.actions';
+
+interface Props {
+  record: {
+    _id: string;
+    type: string;
+    account: string;
+    category: string;
+    date: Date;
+    amount: number;
+    note: string;
+  };
+  accounts: { accounts: any };
+  categories: { categories: any };
+  getCategories: () => void;
 }
 
-const RecordItem: React.FC<RecordItemProps> = ({ id, type, amount }) => {
+const RecordItem: React.FC<Props> = ({
+  record: { _id, type, account, category, date, amount, note },
+  accounts: { accounts },
+  categories: { categories },
+  getCategories,
+}) => {
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
+
   const [startedDeleting, setStartedDeleting] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>('');
 
@@ -32,12 +53,25 @@ const RecordItem: React.FC<RecordItemProps> = ({ id, type, amount }) => {
     setStartedDeleting(true);
     slidingOptionsRef.current?.closeOpened();
   };
-  const deleteRecordHandler = (id: string) => {
-    console.log(id);
+  const deleteRecordHandler = (_id: string) => {
     setToastMessage('Record removed');
   };
 
-  return (
+  const dateObj = new Date(date);
+  let month = dateObj.getMonth();
+  let day = String(dateObj.getDate()).padStart(2, '0');
+
+  const accountArray = accounts.map((a: any) => {
+    if (a._id == account) return a;
+  });
+  const acc = accountArray[0];
+
+  const categoryArray = categories.map((c: any) => {
+    if (c._id == category) return c;
+  });
+  const categ = categoryArray[0];
+
+  return categ ? (
     <React.Fragment>
       <IonToast
         isOpen={!!toastMessage}
@@ -57,7 +91,7 @@ const RecordItem: React.FC<RecordItemProps> = ({ id, type, amount }) => {
           },
           {
             text: 'Yes',
-            handler: () => deleteRecordHandler(id),
+            handler: () => deleteRecordHandler(_id),
           },
         ]}
       />
@@ -67,14 +101,15 @@ const RecordItem: React.FC<RecordItemProps> = ({ id, type, amount }) => {
             <IonIcon slot='icon-only' icon={trash} />
           </IonItemOption>
         </IonItemOptions>
-        <IonItem routerLink={`/records/${id}`} lines='full' button>
+        <IonItem routerLink={`/records/${_id}`} lines='full' button>
           <IonGrid>
             <IonRow>
               <IonCol size='2'>
-                <IonIcon icon={expandOutline} />
+                {/* <IonIcon icon={expandOutline} /> */}
+                <IonLabel>{acc.icon}</IonLabel>
               </IonCol>
               <IonCol size='6'>
-                <IonLabel>Category </IonLabel>
+                <IonLabel>{categ.name}</IonLabel>
               </IonCol>
               <IonCol size='4' className='ion-text-right'>
                 <IonLabel>
@@ -84,17 +119,26 @@ const RecordItem: React.FC<RecordItemProps> = ({ id, type, amount }) => {
             </IonRow>
             <IonRow>
               <IonCol size='4' offset='2'>
-                <IonCardSubtitle>Cash</IonCardSubtitle>
+                <IonCardSubtitle>{acc.name}</IonCardSubtitle>
               </IonCol>
               <IonCol size='6' className='ion-text-right'>
-                <IonCardSubtitle>Date</IonCardSubtitle>
+                <IonCardSubtitle>{day + '/' + month}</IonCardSubtitle>
               </IonCol>
             </IonRow>
           </IonGrid>
         </IonItem>
       </IonItemSliding>
     </React.Fragment>
-  );
+  ) : null;
 };
 
-export default RecordItem;
+const mapDispatchToProps = (dispatch: any) => ({
+  getCategories: () => dispatch(getCategories()),
+});
+
+const mapStateToProps = (state: any) => ({
+  categories: state.categories,
+  accounts: state.accounts,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecordItem);
