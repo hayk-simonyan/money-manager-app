@@ -172,8 +172,6 @@ const EditRecordPage: React.FC<Props> = ({
                       {a.name}
                     </IonSelectOption>
                   ))}
-                {/* <IonSelectOption value='cash'>Cash</IonSelectOption> */}
-                {/* <IonSelectOption value='savings'>Savings</IonSelectOption> */}
               </IonSelect>
             </IonItem>
             <IonItem>
