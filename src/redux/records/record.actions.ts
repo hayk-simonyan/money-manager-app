@@ -69,7 +69,14 @@ export const putRecord = (
     },
   };
 
-  const body = { type, account, category, date, amount, note };
+  const body = {
+    type: type,
+    accountId: account,
+    categoryId: category,
+    date: date,
+    amount: amount,
+    note: note,
+  };
 
   try {
     const res = await axios.put(`/records/${id}`, body, config);

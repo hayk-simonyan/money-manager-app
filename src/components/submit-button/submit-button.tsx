@@ -4,7 +4,7 @@ import { IonFab, IonIcon, IonFabButton } from '@ionic/react';
 import { checkmarkOutline } from 'ionicons/icons';
 
 interface Props {
-  onClickHandler?: () => void;
+  onClickHandler: () => void;
   url?: string;
 }
 

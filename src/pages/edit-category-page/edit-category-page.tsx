@@ -44,7 +44,7 @@ const EditCategoryPage: React.FC<Props> = ({
   const [icon, setIcon] = useState<string>(currentCategory[0].icon);
   const nameInputRef = useRef<HTMLIonInputElement>(currentCategory[0].name);
 
-  const addRecordHandler = () => {
+  const updateRecordHandler = () => {
     const name = nameInputRef.current!.value;
 
     if (!type || !icon || !name) {
@@ -108,7 +108,7 @@ const EditCategoryPage: React.FC<Props> = ({
           </IonCol>
         </IonRow>
       </IonGrid>
-      <SubmitButton url='/categories' onClickHandler={addRecordHandler} />
+      <SubmitButton url='/categories' onClickHandler={updateRecordHandler} />
     </IonPage>
   );
 };

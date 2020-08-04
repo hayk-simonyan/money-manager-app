@@ -16,7 +16,6 @@ import {
   IonIcon,
   IonSpinner,
   IonDatetime,
-  IonToast,
 } from '@ionic/react';
 
 import Header from '../../components/header/header';
@@ -43,6 +42,7 @@ interface Props {
   ) => void;
   deleteRecord: (id: string) => void;
   getRecords: () => void;
+  setAlert: (msg: string, alertType: string) => void;
   records: { records: any; loading: boolean };
   accounts: { accounts: any; loading: boolean };
   categories: { categories: any; loading: boolean };
@@ -62,6 +62,7 @@ const EditRecordPage: React.FC<Props> = ({
   putRecord,
   deleteRecord,
   getRecords,
+  setAlert,
   records: { records, loading },
   accounts: { accounts },
   categories: { categories },
@@ -73,29 +74,18 @@ const EditRecordPage: React.FC<Props> = ({
   };
 
   const { id } = useParams();
-  const currentRecord = records.filter((r: Record) => r._id === id);
+  const currentRecord = records.find((r: Record) => r._id === id);
+  const acc = accounts.find((a: any) => a._id === currentRecord.account);
+  const categ = categories.find((c: any) => c._id === currentRecord.category);
 
-  const accountArray = accounts.map((a: any) => {
-    if (a._id == currentRecord[0].account) return a;
-  });
-  const acc = accountArray[0];
-
-  const categoryArray = categories.map((c: any) => {
-    if (c._id == currentRecord[0].category) return c;
-  });
-  const categ = categoryArray[0];
-
-  const [type, setType] = useState<string>(currentRecord[0].type);
+  const [type, setType] = useState<string>(currentRecord.type);
   const [account, setAccount] = useState<string>(acc.name);
   const [category, setCategory] = useState<string>(categ.name);
-  const [date, setDate] = useState<string>(currentRecord[0].date);
-  const amountInputRef = useRef<HTMLIonInputElement>(currentRecord[0].amount);
-  const [amount, setAmount] = useState<number>(currentRecord[0].amount);
+  const [date, setDate] = useState<string>(currentRecord.date);
+  const amountInputRef = useRef<HTMLIonInputElement>(currentRecord.amount);
+  const [amount, setAmount] = useState<number>(currentRecord.amount);
   const noteInputRef = useRef<HTMLIonInputElement>(null);
-  const [note, setNote] = useState<string>(currentRecord[0].note);
-
-  console.log(amountInputRef.current.value);
-  console.log(currentRecord[0].amount);
+  const [note, setNote] = useState<string>(currentRecord.note);
 
   const updateRecordHandler = () => {
     const amount = amountInputRef.current!.value;
@@ -110,16 +100,30 @@ const EditRecordPage: React.FC<Props> = ({
       return;
     }
 
-    // putRecord(id, icon.toString(), name.toString(), total.toString());
-    setAlert('Account Was Updated', 'success');
+    const a = accounts.find((a: any) => a.name === account);
+    const accountId = a._id;
+
+    const c = categories.find((c: any) => c.name === category);
+    const categoryId = c._id;
+
+    putRecord(
+      id,
+      type,
+      accountId,
+      categoryId,
+      new Date(date),
+      parseInt(amount.toString()),
+      note!.toString()
+    );
+    setAlert('Record was Updated', 'success');
   };
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const deleteRecordHandler = async () => {
+    history.push('/records');
     deleteRecord(id);
     await getRecords();
-    setAlert('Account Was Removed', 'success');
-    history.push('/records');
+    setAlert('Record was Removed', 'success');
   };
 
   const openModal = () => {
@@ -191,15 +195,9 @@ const EditRecordPage: React.FC<Props> = ({
               </IonSelect>
             </IonItem>
             <IonItem>
-              {/* <IonInput
-                autocomplete='on'
-                autocorrect='on'
-                ref={dateInputRef}
-                type='date'
-              /> */}
               <IonDatetime
                 value={date}
-                // onIonChange={(e) => setDate(e.detail.value)}
+                onIonChange={(e) => setDate(e.detail.value!)}
                 display-timezone='utc'
               ></IonDatetime>
             </IonItem>
@@ -240,7 +238,7 @@ const EditRecordPage: React.FC<Props> = ({
           </IonCol>
         </IonRow>
       </IonGrid>
-      <SubmitButton onClickHandler={updateRecordHandler} />
+      <SubmitButton url='/records' onClickHandler={updateRecordHandler} />
     </IonPage>
   );
 };

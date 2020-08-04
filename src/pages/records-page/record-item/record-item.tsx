@@ -14,7 +14,7 @@ import {
   IonAlert,
   IonToast,
 } from '@ionic/react';
-import { expandOutline, trash } from 'ionicons/icons';
+import { trash } from 'ionicons/icons';
 
 import { connect } from 'react-redux';
 import { getCategories } from '../../../redux/categories/category.actions';
@@ -61,15 +61,8 @@ const RecordItem: React.FC<Props> = ({
   let month = dateObj.getMonth();
   let day = String(dateObj.getDate()).padStart(2, '0');
 
-  const accountArray = accounts.map((a: any) => {
-    if (a._id == account) return a;
-  });
-  const acc = accountArray[0];
-
-  const categoryArray = categories.map((c: any) => {
-    if (c._id == category) return c;
-  });
-  const categ = categoryArray[0];
+  const acc = accounts.find((a: any) => a._id === account);
+  const categ = categories.find((c: any) => c._id === category);
 
   return categ ? (
     <React.Fragment>
