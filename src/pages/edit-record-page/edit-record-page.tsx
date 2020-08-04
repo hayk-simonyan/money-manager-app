@@ -27,7 +27,6 @@ import {
   getRecords,
 } from '../../redux/records/record.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
-import SubmitButton from '../../components/submit-button/submit-button';
 import { trashOutline, checkmarkOutline } from 'ionicons/icons';
 
 interface Props {
@@ -41,7 +40,6 @@ interface Props {
     note: string
   ) => void;
   deleteRecord: (id: string) => void;
-  getRecords: () => void;
   setAlert: (msg: string, alertType: string) => void;
   records: { records: any; loading: boolean };
   accounts: { accounts: any; loading: boolean };
@@ -61,7 +59,6 @@ interface Record {
 const EditRecordPage: React.FC<Props> = ({
   putRecord,
   deleteRecord,
-  getRecords,
   setAlert,
   records: { records, loading },
   accounts: { accounts },
@@ -122,7 +119,6 @@ const EditRecordPage: React.FC<Props> = ({
   const deleteRecordHandler = async () => {
     history.push('/records');
     deleteRecord(id);
-    await getRecords();
     setAlert('Record was Removed', 'success');
   };
 
@@ -206,18 +202,12 @@ const EditRecordPage: React.FC<Props> = ({
               <IonInput
                 ref={amountInputRef}
                 value={amount}
-                // onIonChange={(e) => setAmount(e.detail.value)}
                 type='number'
               ></IonInput>
             </IonItem>
             <IonItem>
               <IonLabel position='floating'>Note</IonLabel>
-              <IonInput
-                ref={noteInputRef}
-                value={note}
-                // onIonChange={(e) => setAmount(e.detail.value)}
-                type='text'
-              ></IonInput>
+              <IonInput ref={noteInputRef} value={note} type='text'></IonInput>
             </IonItem>
           </IonCol>
         </IonRow>
@@ -230,7 +220,7 @@ const EditRecordPage: React.FC<Props> = ({
           <IonCol size='4' offset='4'>
             <IonButton
               onClick={updateRecordHandler}
-              routerLink='/'
+              routerLink='/records'
               color='primary'
             >
               <IonIcon icon={checkmarkOutline} slot='icon-only' />
@@ -238,7 +228,6 @@ const EditRecordPage: React.FC<Props> = ({
           </IonCol>
         </IonRow>
       </IonGrid>
-      <SubmitButton url='/records' onClickHandler={updateRecordHandler} />
     </IonPage>
   );
 };
@@ -254,7 +243,6 @@ const mapDispatchToProps = (dispatch: any) => ({
     note: string
   ) => dispatch(putRecord(id, type, account, category, date, amount, note)),
   deleteRecord: (id: string) => dispatch(deleteRecord(id)),
-  getRecords: () => dispatch(getRecords()),
   setAlert: (msg: string, alertType: string) =>
     dispatch(setAlert(msg, alertType)),
 });
