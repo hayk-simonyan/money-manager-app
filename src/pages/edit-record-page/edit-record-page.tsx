@@ -21,11 +21,7 @@ import {
 import Header from '../../components/header/header';
 
 import { connect } from 'react-redux';
-import {
-  putRecord,
-  deleteRecord,
-  getRecords,
-} from '../../redux/records/record.actions';
+import { putRecord, deleteRecord } from '../../redux/records/record.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
 import { trashOutline, checkmarkOutline } from 'ionicons/icons';
 
@@ -146,7 +142,7 @@ const EditRecordPage: React.FC<Props> = ({
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <Header title='Add Record' menu={false} />
+      <Header title='Edit Record' menu={false} />
       <IonGrid>
         <IonRow>
           <IonCol>
@@ -156,8 +152,8 @@ const EditRecordPage: React.FC<Props> = ({
                 value={type}
                 onIonChange={(e) => setType(e.detail.value)}
               >
-                <IonSelectOption value='expences'>Expence</IonSelectOption>
-                <IonSelectOption value='incomes'>Income</IonSelectOption>
+                <IonSelectOption value='expences'>Expences</IonSelectOption>
+                <IonSelectOption value='incomes'>Incomes</IonSelectOption>
               </IonSelect>
             </IonItem>
             <IonItem>

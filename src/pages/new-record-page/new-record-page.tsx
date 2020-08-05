@@ -11,26 +11,57 @@ import {
   IonPage,
   IonSelect,
   IonSelectOption,
+  IonSpinner,
+  IonDatetime,
 } from '@ionic/react';
 
 import Header from '../../components/header/header';
 import SubmitButton from '../../components/submit-button/submit-button';
 
-const NewRecordPage: React.FC = () => {
-  const [records, setRecords] = useState<any[]>();
+import { connect } from 'react-redux';
+import { postRecord } from '../../redux/records/record.actions';
+import { setAlert } from '../../redux/alerts/alert.actions';
+
+interface Props {
+  postRecord: (
+    type: string,
+    account: string,
+    category: string,
+    date: Date,
+    amount: number,
+    note: string
+  ) => void;
+  setAlert: (msg: string, alertType: string) => void;
+  accounts: { accounts: any };
+  categories: { categories: any; loading: boolean };
+}
+
+interface Record {
+  _id: string;
+  type: string;
+  account: string;
+  category: string;
+  date: Date;
+  amount: number;
+  note: string;
+}
+
+const NewRecordPage: React.FC<Props> = ({
+  postRecord,
+  setAlert,
+  accounts: { accounts },
+  categories: { categories, loading },
+}) => {
   const [error, setError] = useState<string>();
 
   const [type, setType] = useState<string>('expences');
-  const [account, setAccount] = useState<string>('cash');
-  const [category, setCategory] = useState<string>('');
-  const dateInputRef = useRef<HTMLIonInputElement>(null);
+  const [account, setAccount] = useState<string>(accounts[0].name);
+  const [category, setCategory] = useState<string>(categories[0].name);
+  const [date, setDate] = useState<string>(Date.now().toString());
   const amountInputRef = useRef<HTMLIonInputElement>(null);
   const noteInputRef = useRef<HTMLIonInputElement>(null);
 
   const addRecordHandler = () => {
-    // const recordType = recordTypeInputRef.current!.value;
-    // const category = categoryInputRef.current!.value;
-    const date = dateInputRef.current!.value;
     const amount = amountInputRef.current!.value;
     const note = noteInputRef.current!.value;
 
@@ -43,14 +74,30 @@ const NewRecordPage: React.FC = () => {
       return;
     }
 
-    setRecords([amount, category]);
+    const a = accounts.find((a: any) => a.name === account);
+    const accountId = a._id;
+
+    const c = categories.find((c: any) => c.name === category);
+    const categoryId = c._id;
+
+    postRecord(
+      type,
+      accountId,
+      categoryId,
+      new Date(date),
+      parseInt(amount.toString()),
+      note!.toString()
+    );
+    setAlert('Record was Added!', 'success');
   };
 
   const clearError = () => {
     setError('');
   };
 
-  return (
+  return loading ? (
+    <IonSpinner />
+  ) : (
     <IonPage>
       <IonAlert
         isOpen={!!error}
@@ -67,8 +114,8 @@ const NewRecordPage: React.FC = () => {
                 value={type}
                 onIonChange={(e) => setType(e.detail.value)}
               >
-                <IonSelectOption value='expences'>Expence</IonSelectOption>
-                <IonSelectOption value='incomes'>Income</IonSelectOption>
+                <IonSelectOption value='expences'>Expences</IonSelectOption>
+                <IonSelectOption value='incomes'>Incomes</IonSelectOption>
               </IonSelect>
             </IonItem>
             <IonItem>
@@ -77,8 +124,12 @@ const NewRecordPage: React.FC = () => {
                 value={account}
                 onIonChange={(e) => setAccount(e.detail.value)}
               >
-                <IonSelectOption value='cash'>Cash</IonSelectOption>
-                <IonSelectOption value='savings'>Savings</IonSelectOption>
+                {accounts &&
+                  accounts.map((a: any) => (
+                    <IonSelectOption key={a._id} value={a.name}>
+                      {a.name}
+                    </IonSelectOption>
+                  ))}
               </IonSelect>
             </IonItem>
             <IonItem>
@@ -89,33 +140,24 @@ const NewRecordPage: React.FC = () => {
                 okText='Ok'
                 onIonChange={(e) => setCategory(e.detail.value)}
               >
-                <IonSelectOption value='bacon'>Bacon</IonSelectOption>
-                <IonSelectOption value='olives'>Black Olives</IonSelectOption>
-                <IonSelectOption value='xcheese'>Extra Cheese</IonSelectOption>
-                <IonSelectOption value='peppers'>Green Peppers</IonSelectOption>
-                <IonSelectOption value='mushrooms'>Mushrooms</IonSelectOption>
-                <IonSelectOption value='onions'>Onions</IonSelectOption>
-                <IonSelectOption value='pepperoni'>Pepperoni</IonSelectOption>
-                <IonSelectOption value='pineapple'>Pineapple</IonSelectOption>
-                <IonSelectOption value='sausage'>Sausage</IonSelectOption>
-                <IonSelectOption value='Spinach'>Spinach</IonSelectOption>
+                {categories &&
+                  categories.map((c: any) => (
+                    <IonSelectOption key={c._id} value={c.name}>
+                      {c.name}
+                    </IonSelectOption>
+                  ))}
               </IonSelect>
             </IonItem>
             <IonItem>
-              <IonInput
-                autocomplete='on'
-                autocorrect='on'
-                ref={dateInputRef}
-                type='date'
-              />
+              <IonDatetime
+                value={date}
+                onIonChange={(e) => setDate(e.detail.value!)}
+                display-timezone='utc'
+              ></IonDatetime>
             </IonItem>
             <IonItem>
               <IonLabel position='floating'>Amount</IonLabel>
-              <IonInput
-                // placeholder={type === 'expence' ? '-0' : '+0'}
-                ref={amountInputRef}
-                type='number'
-              ></IonInput>
+              <IonInput ref={amountInputRef} type='number'></IonInput>
             </IonItem>
             <IonItem>
               <IonLabel position='floating'>Note</IonLabel>
@@ -124,9 +166,27 @@ const NewRecordPage: React.FC = () => {
           </IonCol>
         </IonRow>
       </IonGrid>
-      <SubmitButton onClickHandler={addRecordHandler} />
+      <SubmitButton url='/records' onClickHandler={addRecordHandler} />
     </IonPage>
   );
 };
 
-export default NewRecordPage;
+const mapDispatchToProps = (dispatch: any) => ({
+  postRecord: (
+    type: string,
+    account: string,
+    category: string,
+    date: Date,
+    amount: number,
+    note: string
+  ) => dispatch(postRecord(type, account, category, date, amount, note)),
+  setAlert: (msg: string, alertType: string) =>
+    dispatch(setAlert(msg, alertType)),
+});
+
+const mapStateToProps = (state: any) => ({
+  accounts: state.accounts,
+  categories: state.categories,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewRecordPage);
