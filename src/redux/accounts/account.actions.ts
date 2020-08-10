@@ -6,6 +6,7 @@ import {
   PUT_ACCOUNT,
   DELETE_ACCOUNT,
 } from './account.types';
+import { setAlert } from '../alerts/alert.actions';
 
 export const getAccounts = () => async (dispatch: any) => {
   try {
@@ -16,6 +17,13 @@ export const getAccounts = () => async (dispatch: any) => {
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: ACCOUNTS_ERROR,
       payload: { msg: err.statusText, status: err.status },
@@ -44,6 +52,13 @@ export const postAccount = (
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: ACCOUNTS_ERROR,
       payload: { msg: err.statusText, status: err.status },
@@ -73,6 +88,13 @@ export const putAccount = (
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: ACCOUNTS_ERROR,
       payload: { msg: err.statusText, status: err.status },
@@ -95,6 +117,13 @@ export const deleteAccount = (id: string) => async (dispatch: any) => {
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: ACCOUNTS_ERROR,
       payload: { msg: err.statusText, status: err.status },

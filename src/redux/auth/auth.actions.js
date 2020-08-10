@@ -10,6 +10,8 @@ import {
   LOGOUT,
 } from './auth.types';
 
+import { setAlert } from '../alerts/alert.actions';
+
 export const signup = (email, password) => async (dispatch) => {
   const config = {
     headers: {
@@ -21,6 +23,7 @@ export const signup = (email, password) => async (dispatch) => {
 
   try {
     const res = await axios.post('/users', body, config);
+
     dispatch({
       type: SIGNUP_SUCCESS,
       payload: res.data,
@@ -28,6 +31,11 @@ export const signup = (email, password) => async (dispatch) => {
 
     dispatch(loadUser());
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
+    }
+
     dispatch({
       type: SIGNUP_FAIL,
     });
@@ -53,6 +61,11 @@ export const signin = (email, password) => async (dispatch) => {
 
     dispatch(loadUser());
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
+    }
+
     dispatch({
       type: SIGNIN_FAIL,
     });

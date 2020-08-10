@@ -6,6 +6,7 @@ import {
   DELETE_CATEGORY,
   CATEGORIES_ERROR,
 } from './category.types';
+import { setAlert } from '../alerts/alert.actions';
 
 export const getCategories = () => async (dispatch: any) => {
   try {
@@ -16,6 +17,13 @@ export const getCategories = () => async (dispatch: any) => {
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: CATEGORIES_ERROR,
       payload: { msg: err.statusText, status: err.status },
@@ -44,6 +52,13 @@ export const postCategory = (
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: CATEGORIES_ERROR,
       payload: { msg: err.statusText, status: err.status },
@@ -73,6 +88,13 @@ export const putCategory = (
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: CATEGORIES_ERROR,
       payload: { msg: err.statusText, status: err.status },
@@ -95,6 +117,13 @@ export const deleteCategory = (id: string) => async (dispatch: any) => {
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: CATEGORIES_ERROR,
       payload: { msg: err.statusText, status: err.status },

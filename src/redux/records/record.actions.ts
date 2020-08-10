@@ -6,6 +6,7 @@ import {
   DELETE_RECORD,
   RECORDS_ERROR,
 } from './record.types';
+import { setAlert } from '../alerts/alert.actions';
 
 export const getRecords = () => async (dispatch: any) => {
   try {
@@ -16,6 +17,13 @@ export const getRecords = () => async (dispatch: any) => {
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: RECORDS_ERROR,
       payload: { msg: err.statusText, status: err.status },
@@ -54,6 +62,13 @@ export const postRecord = (
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: RECORDS_ERROR,
       payload: { msg: err.statusText, status: err.status },
@@ -93,6 +108,13 @@ export const putRecord = (
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: RECORDS_ERROR,
       payload: { msg: err.statusText, status: err.status },
@@ -115,6 +137,13 @@ export const deleteRecord = (id: string) => async (dispatch: any) => {
       payload: res.data,
     });
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
     dispatch({
       type: RECORDS_ERROR,
       payload: { msg: err.statusText, status: err.status },

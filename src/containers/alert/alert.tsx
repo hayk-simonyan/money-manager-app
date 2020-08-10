@@ -16,7 +16,7 @@ const Alert: React.FC<Props> = ({ alerts }) => {
         isOpen={true}
         color={alert.alertType}
         message={alert.msg}
-        duration={2000}
+        duration={3000}
       />
     ))
   );
