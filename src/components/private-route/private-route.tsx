@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 interface Props {
   component: React.FC;
   path: string;
-  exact: boolean;
+  exact?: boolean;
   //   isAuthenticated: boolean;
   auth: {
     isAuthenticated: any;

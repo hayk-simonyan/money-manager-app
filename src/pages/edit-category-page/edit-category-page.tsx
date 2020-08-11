@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import {
   IonGrid,
@@ -21,6 +21,13 @@ import { connect } from 'react-redux';
 import { putCategory } from '../../redux/categories/category.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
 
+interface Category {
+  _id: string;
+  icon: string;
+  name: string;
+  total: string;
+}
+
 interface Props {
   putCategory: (id: string, type: string, icon: string, name: string) => void;
   setAlert: (msg: string, alertType: string) => void;
@@ -32,17 +39,16 @@ const EditCategoryPage: React.FC<Props> = ({
   setAlert,
   categories: { categories, loading },
 }) => {
+  const history = useHistory();
   const [error, setError] = useState<string>();
 
   const { id } = useParams();
-  const currentCategory = categories.filter(
-    (c: { _id: string; icon: string; name: string; total: string }) =>
-      c._id === id
-  );
+  const currentCategory = categories.find((c: Category) => c._id === id);
 
-  const [type, setType] = useState<string>(currentCategory[0].type);
-  const [icon, setIcon] = useState<string>(currentCategory[0].icon);
-  const nameInputRef = useRef<HTMLIonInputElement>(currentCategory[0].name);
+  const [type, setType] = useState<string>(currentCategory.type);
+  const [icon, setIcon] = useState<string>(currentCategory.icon);
+  const nameInputRef = useRef<HTMLIonInputElement>(currentCategory.name);
+  const [name, setName] = useState<string>(currentCategory.name);
 
   const updateRecordHandler = () => {
     const name = nameInputRef.current!.value;
@@ -54,6 +60,7 @@ const EditCategoryPage: React.FC<Props> = ({
 
     putCategory(id, type, icon, name.toString());
     setAlert('Account was updated', 'success');
+    history.push('/categories');
   };
 
   const clearError = () => {
@@ -103,12 +110,12 @@ const EditCategoryPage: React.FC<Props> = ({
             </IonItem>
             <IonItem>
               <IonLabel position='floating'>Name</IonLabel>
-              <IonInput ref={nameInputRef} type='text'></IonInput>
+              <IonInput value={name} ref={nameInputRef} type='text'></IonInput>
             </IonItem>
           </IonCol>
         </IonRow>
       </IonGrid>
-      <SubmitButton url='/categories' onClickHandler={updateRecordHandler} />
+      <SubmitButton onClickHandler={updateRecordHandler} />
     </IonPage>
   );
 };

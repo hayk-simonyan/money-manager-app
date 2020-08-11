@@ -89,7 +89,7 @@ const EditRecordPage: React.FC<Props> = ({
       return;
     }
     if (+amount <= 0) {
-      setError('Amount cant be less or equal to 0');
+      setError('Amount can not be less or equal to 0');
       return;
     }
 
@@ -109,6 +109,7 @@ const EditRecordPage: React.FC<Props> = ({
       note!.toString()
     );
     setAlert('Record was Updated', 'success');
+    history.push('/records');
   };
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -214,11 +215,7 @@ const EditRecordPage: React.FC<Props> = ({
             </IonButton>
           </IonCol>
           <IonCol size='4' offset='4'>
-            <IonButton
-              onClick={updateRecordHandler}
-              routerLink='/records'
-              color='primary'
-            >
+            <IonButton onClick={updateRecordHandler} color='primary'>
               <IonIcon icon={checkmarkOutline} slot='icon-only' />
             </IonButton>
           </IonCol>

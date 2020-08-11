@@ -69,7 +69,7 @@ const App: React.FC = () => {
               component={NewAccountPage}
             />
             <PrivateRoute
-              exact
+              // exact
               path='/accounts/:id'
               component={EditAccountPage}
             />
@@ -86,7 +86,7 @@ const App: React.FC = () => {
               component={EditCategoryPage}
             />
 
-            <PrivateRoute exact path='/records/new' component={NewRecordPage} />
+            {/* <PrivateRoute exact path='/records/new' component={NewRecordPage} /> */}
             <PrivateRoute
               exact
               path='/records/:id'

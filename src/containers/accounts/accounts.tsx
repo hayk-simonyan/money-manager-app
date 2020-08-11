@@ -25,7 +25,7 @@ const Accounts: React.FC<Props> = ({
 }) => {
   useEffect(() => {
     getAccounts();
-  }, [getAccounts]);
+  }, []);
 
   const fetchedAccounts = accounts.map(
     (account: { _id: string; icon: string; name: string; total: number }) => (

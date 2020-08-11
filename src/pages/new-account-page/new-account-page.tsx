@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import {
   IonGrid,
@@ -29,6 +30,7 @@ interface Props {
 }
 
 const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
+  const history = useHistory();
   const [error, setError] = useState<string>();
 
   const [icon, setIcon] = useState<string>();
@@ -39,7 +41,7 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
     const name = nameInputRef.current!.value;
     let total = totalInputRef.current!.value;
 
-    if (!icon || !name || name.toString().trim().length === 0 || !total) {
+    if (!icon || !name || !total) {
       setError('Please fill out all fields');
       return;
     }
@@ -51,6 +53,7 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
 
     postAccount(icon.toString(), name.toString(), total.toString());
     setAlert('Account Was Created', 'success');
+    history.push('/');
   };
 
   const clearError = () => {
@@ -100,12 +103,7 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
         </IonRow>
       </IonGrid>
       <IonFab horizontal='end' vertical='bottom' slot='fixed'>
-        <IonFabButton
-          type='submit'
-          color='success'
-          routerLink='/'
-          onClick={addAccountHandler}
-        >
+        <IonFabButton type='submit' onClick={addAccountHandler}>
           <IonIcon icon={checkmarkOutline} />
         </IonFabButton>
       </IonFab>

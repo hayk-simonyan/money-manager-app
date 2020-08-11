@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import {
   IonGrid,
@@ -52,6 +53,7 @@ const NewRecordPage: React.FC<Props> = ({
   accounts: { accounts },
   categories: { categories, loading },
 }) => {
+  const history = useHistory();
   const [error, setError] = useState<string>();
 
   const [type, setType] = useState<string>('expences');
@@ -89,6 +91,7 @@ const NewRecordPage: React.FC<Props> = ({
       note!.toString()
     );
     setAlert('Record was Added!', 'success');
+    history.push('/records');
   };
 
   const clearError = () => {
@@ -166,7 +169,7 @@ const NewRecordPage: React.FC<Props> = ({
           </IonCol>
         </IonRow>
       </IonGrid>
-      <SubmitButton url='/records' onClickHandler={addRecordHandler} />
+      <SubmitButton onClickHandler={addRecordHandler} />
     </IonPage>
   );
 };

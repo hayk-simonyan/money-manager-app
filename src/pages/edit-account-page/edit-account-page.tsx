@@ -28,6 +28,13 @@ import {
 } from '../../redux/accounts/account.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
 
+interface Account {
+  _id: string;
+  icon: string;
+  name: string;
+  total: string;
+}
+
 interface Props {
   accounts: { accounts: any; loading: boolean };
   putAccount: (id: string, icon: string, name: string, total: string) => void;
@@ -50,33 +57,28 @@ const EditAccountPage: React.FC<Props> = ({
   };
 
   const { id } = useParams();
-  const currentAccount = accounts.filter(
-    (a: { _id: string; icon: string; name: string; total: string }) =>
-      a._id === id
-  );
+  const currentAccount = accounts.find((a: Account) => a._id === id);
 
-  const [icon, setIcon] = useState<string>(currentAccount[0].icon);
-  const nameInputRef = useRef<HTMLIonInputElement>(currentAccount[0].name);
-  const totalInputRef = useRef<HTMLIonInputElement>(currentAccount[0].total);
-  // const [name, setName] = useState<string>(currentAccount[0].name);
-  // let [total, setTotal] = useState<string>(currentAccount[0].total);
-
-  // const setNameHandler = (e: any) => {
-  //   console.log('event', e.target);
-  //   setName(e.target.value);
-  // };
+  const [icon, setIcon] = useState<string>(currentAccount.icon);
+  const nameInputRef = useRef<HTMLIonInputElement>(currentAccount.name);
+  const [name, setName] = useState<string>(currentAccount.name);
+  const totalInputRef = useRef<HTMLIonInputElement>(currentAccount.total);
+  const [total, setTotal] = useState<number>(currentAccount.total);
+  // const [name, setName] = useState<string>(currentAccount.name);
+  // let [total, setTotal] = useState<string>(currentAccount.total);
 
   const updateAccountHandler = () => {
     const name = nameInputRef.current!.value;
     const total = totalInputRef.current!.value;
 
-    if (!icon || !name || name.toString().trim().length === 0 || !total) {
+    if (!icon || !name || !total) {
       setError('Please fill out all fields');
       return;
     }
 
     putAccount(id, icon.toString(), name.toString(), total.toString());
     setAlert('Account Was Updated', 'success');
+    history.push('/');
   };
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -137,16 +139,15 @@ const EditAccountPage: React.FC<Props> = ({
             </IonItem>
             <IonItem>
               <IonLabel position='floating'>Account Name</IonLabel>
-              <IonInput
-                // value={name}
-                // onChange={setNameHandler}
-                ref={nameInputRef}
-                type='text'
-              />
+              <IonInput value={name} ref={nameInputRef} type='text' />
             </IonItem>
             <IonItem>
               <IonLabel position='floating'>Initial Amount</IonLabel>
-              <IonInput ref={totalInputRef} type='number'></IonInput>
+              <IonInput
+                value={total}
+                ref={totalInputRef}
+                type='number'
+              ></IonInput>
             </IonItem>
           </IonCol>
         </IonRow>
@@ -157,11 +158,7 @@ const EditAccountPage: React.FC<Props> = ({
             </IonButton>
           </IonCol>
           <IonCol size='4' offset='4'>
-            <IonButton
-              onClick={updateAccountHandler}
-              routerLink='/'
-              color='primary'
-            >
+            <IonButton onClick={updateAccountHandler} color='primary'>
               <IonIcon icon={checkmarkOutline} slot='icon-only' />
             </IonButton>
           </IonCol>

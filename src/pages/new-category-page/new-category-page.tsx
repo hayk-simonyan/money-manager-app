@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import {
   IonGrid,
@@ -26,6 +27,7 @@ interface Props {
 }
 
 const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
+  const history = useHistory();
   const [error, setError] = useState<string>();
 
   const [type, setType] = useState<string>('expences');
@@ -42,6 +44,7 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
 
     postCategory(type, icon, name.toString());
     setAlert('Account was created', 'success');
+    history.push('/categories');
   };
 
   const clearError = () => {
@@ -96,7 +99,7 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
           </IonCol>
         </IonRow>
       </IonGrid>
-      <SubmitButton url='/categories' onClickHandler={addRecordHandler} />
+      <SubmitButton onClickHandler={addRecordHandler} />
     </IonPage>
   );
 };
