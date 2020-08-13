@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { IonContent, IonPage } from '@ionic/react';
 
@@ -9,7 +9,30 @@ import MonthlyRecords from '../../containers/monthly-records/monthly-records';
 import Chart from '../../containers/chart/chart';
 import HomepageControls from '../../components/homepage-controls/homepage-controls';
 
-const Homepage: React.FC = () => {
+import { connect } from 'react-redux';
+import { getMonthlyRecords } from '../../redux/records/record.actions';
+
+interface Props {
+  getMonthlyRecords: () => void;
+  records: {
+    monthlyRecords: {
+      monthlyRecords: any;
+      monthlyIncomes: number;
+      monthlyExpences: number;
+    };
+  };
+}
+
+const Homepage: React.FC<Props> = ({
+  getMonthlyRecords,
+  records: {
+    monthlyRecords: { monthlyRecords, monthlyIncomes, monthlyExpences },
+  },
+}) => {
+  useEffect(() => {
+    getMonthlyRecords();
+  }, []);
+
   const [segment, setSegment] = useState<'main' | 'chart'>('main');
 
   return (
@@ -34,4 +57,12 @@ const Homepage: React.FC = () => {
   );
 };
 
-export default Homepage;
+const mapDispatchToProps = (dispatch: any) => ({
+  getMonthlyRecords: () => dispatch(getMonthlyRecords()),
+});
+
+const mapStateToProps = (state: any) => ({
+  records: state.records,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

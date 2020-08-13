@@ -19,7 +19,7 @@ const MonthlyRecords: React.FC = () => (
     </IonCardHeader>
     <IonGrid>
       <IonRow>
-        <RecordItem children='Income' />
+        <RecordItem children='Incomes' />
         <RecordItem children='Expences' />
       </IonRow>
     </IonGrid>

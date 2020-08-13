@@ -1,5 +1,6 @@
 import {
   GET_RECORDS,
+  GET_MONTHLY_RECORDS,
   POST_RECORD,
   PUT_RECORD,
   DELETE_RECORD,
@@ -8,6 +9,7 @@ import {
 
 const initialState = {
   records: [],
+  monthlyRecords: [],
   loading: true,
   error: {},
 };
@@ -19,6 +21,12 @@ export default function (
   const { type, payload } = action;
 
   switch (type) {
+    case GET_MONTHLY_RECORDS:
+      return {
+        ...state,
+        monthlyRecords: payload,
+        loading: false,
+      };
     case GET_RECORDS:
       return {
         ...state,

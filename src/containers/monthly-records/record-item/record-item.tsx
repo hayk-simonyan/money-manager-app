@@ -9,7 +9,25 @@ import {
   IonCard,
 } from '@ionic/react';
 
-const RecordItem: React.FC = ({ children }) => (
+import { connect } from 'react-redux';
+
+interface Props {
+  children: string;
+  records: {
+    monthlyRecords: {
+      monthlyRecords: any;
+      monthlyIncomes: number;
+      monthlyExpences: number;
+    };
+  };
+}
+
+const RecordItem: React.FC<Props> = ({
+  children,
+  records: {
+    monthlyRecords: { monthlyIncomes, monthlyExpences },
+  },
+}) => (
   <IonCol>
     <IonCard>
       <IonItem lines='none' button>
@@ -18,7 +36,9 @@ const RecordItem: React.FC = ({ children }) => (
             <IonText color='primary'>{children}</IonText>
           </IonRow>
           <IonRow>
-            <IonText>4000</IonText>
+            <IonText>
+              {children === 'Expences' ? monthlyExpences : monthlyIncomes}
+            </IonText>
           </IonRow>
         </IonGrid>
       </IonItem>
@@ -26,4 +46,8 @@ const RecordItem: React.FC = ({ children }) => (
   </IonCol>
 );
 
-export default RecordItem;
+const mapStateToProps = (state: any) => ({
+  records: state.records,
+});
+
+export default connect(mapStateToProps)(RecordItem);
