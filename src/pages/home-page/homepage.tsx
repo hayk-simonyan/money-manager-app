@@ -23,12 +23,7 @@ interface Props {
   };
 }
 
-const Homepage: React.FC<Props> = ({
-  getMonthlyRecords,
-  records: {
-    monthlyRecords: { monthlyRecords, monthlyIncomes, monthlyExpences },
-  },
-}) => {
+const Homepage: React.FC<Props> = ({ getMonthlyRecords, records }) => {
   useEffect(() => {
     getMonthlyRecords();
   }, []);
@@ -49,7 +44,7 @@ const Homepage: React.FC<Props> = ({
             <MonthlyRecords />
           </React.Fragment>
         ) : (
-          <Chart />
+          <Chart records={records} />
         )}
       </IonContent>
       <AddButton url='/records/new' />
