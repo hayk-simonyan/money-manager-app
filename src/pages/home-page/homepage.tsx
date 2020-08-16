@@ -19,6 +19,7 @@ interface Props {
       monthlyRecords: any;
       monthlyIncomes: number;
       monthlyExpences: number;
+      monthlyRecordsByCategories: any;
     };
   };
 }

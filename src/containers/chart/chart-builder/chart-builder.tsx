@@ -1,47 +1,78 @@
-import React, { Component } from 'react';
-import CanvasJSReact from '../../../Chart 2.3.2 GA - Stable/canvasjs.react';
-
-const CanvasJS = CanvasJSReact.CanvasJS;
-const CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import React from 'react';
+import { Bar, Line, Pie } from 'react-chartjs-2';
 
 interface Props {
-  records: any;
+  labels: any;
+  data: any;
 }
 
-const ChartBuilder: React.FC<Props> = ({ records }) => {
-  console.log(records);
-  const options = {
-    animationEnabled: true,
-    // exportEnabled: true,
-    theme: 'light1', // "light1", "dark1", "dark2"
-    title: {
-      text: 'Trip Expenses',
-    },
-    data: [
+const ChartBuilder: React.FC<Props> = ({ labels, data }) => {
+  const chartData = {
+    labels: labels,
+    datasets: [
       {
-        type: 'pie',
-        indexLabel: '{label}: {y}%',
-        startAngle: -90,
-        dataPoints: [
-          { y: 20, label: 'Airfare' },
-          { y: 24, label: 'Food & Drinks' },
-          { y: 20, label: 'Accomodation' },
-          { y: 14, label: 'Transportation' },
-          { y: 12, label: 'Activities' },
-          { y: 10, label: 'Misc' },
+        label: 'Population',
+        data: data,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
         ],
       },
     ],
   };
 
   return (
-    <div>
-      <CanvasJSChart
-        options={options}
-        /* onRef={ref => this.chart = ref} */
+    <React.Fragment>
+      <Pie
+        data={chartData}
+        options={{
+          title: {
+            display: true,
+            text: 'Largest Cities In ',
+            fontSize: 25,
+          },
+          legend: {
+            display: true,
+            position: 'right',
+          },
+        }}
       />
-      {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
-    </div>
+
+      <Bar
+        data={chartData}
+        options={{
+          title: {
+            display: 'Chart',
+            text: 'Largest Cities In ',
+            fontSize: 25,
+          },
+          legend: {
+            display: false,
+            position: 'right',
+          },
+        }}
+      />
+
+      <Line
+        data={chartData}
+        options={{
+          title: {
+            display: true,
+            text: 'Largest Cities In ',
+            fontSize: 25,
+          },
+          legend: {
+            display: false,
+            position: 'right',
+          },
+        }}
+      />
+    </React.Fragment>
   );
 };
 
