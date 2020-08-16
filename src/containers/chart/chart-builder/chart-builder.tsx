@@ -33,7 +33,7 @@ const ChartBuilder: React.FC<Props> = ({ labels, data }) => {
         options={{
           title: {
             display: true,
-            text: 'Largest Cities In ',
+            text: 'Records by Categories',
             fontSize: 25,
           },
           legend: {
@@ -48,7 +48,7 @@ const ChartBuilder: React.FC<Props> = ({ labels, data }) => {
         options={{
           title: {
             display: 'Chart',
-            text: 'Largest Cities In ',
+            text: 'Balance Trend',
             fontSize: 25,
           },
           legend: {
@@ -63,7 +63,7 @@ const ChartBuilder: React.FC<Props> = ({ labels, data }) => {
         options={{
           title: {
             display: true,
-            text: 'Largest Cities In ',
+            text: 'Cashflow',
             fontSize: 25,
           },
           legend: {
