@@ -1,6 +1,5 @@
 import {
   GET_RECORDS,
-  GET_MONTHLY_RECORDS,
   POST_RECORD,
   PUT_RECORD,
   DELETE_RECORD,
@@ -9,7 +8,10 @@ import {
 
 const initialState = {
   records: [],
-  monthlyRecords: [],
+  incomes: 0,
+  expences: 0,
+  recordsByCategories: [],
+  cashflow: [],
   loading: true,
   error: {},
 };
@@ -21,16 +23,14 @@ export default function (
   const { type, payload } = action;
 
   switch (type) {
-    case GET_MONTHLY_RECORDS:
-      return {
-        ...state,
-        monthlyRecords: payload,
-        loading: false,
-      };
     case GET_RECORDS:
       return {
         ...state,
-        records: payload,
+        records: payload.records,
+        incomes: parseInt(payload.incomes),
+        expences: parseInt(payload.expences),
+        recordsByCategories: payload.recordsByCategories,
+        cashflow: payload.cashflow,
         loading: false,
       };
     case POST_RECORD:

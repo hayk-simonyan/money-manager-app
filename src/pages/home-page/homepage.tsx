@@ -10,23 +10,22 @@ import Chart from '../../containers/chart/chart';
 import HomepageControls from '../../components/homepage-controls/homepage-controls';
 
 import { connect } from 'react-redux';
-import { getMonthlyRecords } from '../../redux/records/record.actions';
+import { getRecords } from '../../redux/records/record.actions';
 
 interface Props {
-  getMonthlyRecords: () => void;
+  getRecords: () => void;
   records: {
-    monthlyRecords: {
-      monthlyRecords: any;
-      monthlyIncomes: number;
-      monthlyExpences: number;
-      monthlyRecordsByCategories: any;
-    };
+    records: any;
+    incomes: number;
+    expences: number;
+    recordsByCategories: any;
+    cashflow: any;
   };
 }
 
-const Homepage: React.FC<Props> = ({ getMonthlyRecords, records }) => {
+const Homepage: React.FC<Props> = ({ getRecords, records }) => {
   useEffect(() => {
-    getMonthlyRecords();
+    getRecords();
   }, []);
 
   const [segment, setSegment] = useState<'main' | 'chart'>('main');
@@ -54,7 +53,7 @@ const Homepage: React.FC<Props> = ({ getMonthlyRecords, records }) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getMonthlyRecords: () => dispatch(getMonthlyRecords()),
+  getRecords: () => dispatch(getRecords()),
 });
 
 const mapStateToProps = (state: any) => ({

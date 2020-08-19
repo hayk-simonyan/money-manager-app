@@ -14,19 +14,17 @@ import { connect } from 'react-redux';
 interface Props {
   children: string;
   records: {
-    monthlyRecords: {
-      monthlyRecords: any;
-      monthlyIncomes: number;
-      monthlyExpences: number;
-    };
+    records: any;
+    incomes: number;
+    expences: number;
+    recordsByCategories: any;
+    cashflow: any;
   };
 }
 
 const RecordItem: React.FC<Props> = ({
   children,
-  records: {
-    monthlyRecords: { monthlyIncomes, monthlyExpences },
-  },
+  records: { incomes, expences },
 }) => (
   <IonCol>
     <IonCard>
@@ -36,9 +34,7 @@ const RecordItem: React.FC<Props> = ({
             <IonText color='primary'>{children}</IonText>
           </IonRow>
           <IonRow>
-            <IonText>
-              {children === 'Expences' ? monthlyExpences : monthlyIncomes}
-            </IonText>
+            <IonText>{children === 'Expences' ? expences : incomes}</IonText>
           </IonRow>
         </IonGrid>
       </IonItem>
