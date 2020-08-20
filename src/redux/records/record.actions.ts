@@ -11,9 +11,12 @@ import { setAlert } from '../alerts/alert.actions';
 export const getRecords = () => async (dispatch: any) => {
   try {
     const date = new Date();
-    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    let month = date.getMonth().toString();
+    const year = date.getFullYear().toString();
+    if (month.length === 1) month = `0${month}`;
+    const defaultQuery = `?date[gte]=${year}-${month}-01T00:00:00.000Z`;
 
-    const res = await axios.get(`/records`);
+    const res = await axios.get(`/records${defaultQuery}`);
 
     dispatch({
       type: GET_RECORDS,

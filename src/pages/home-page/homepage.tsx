@@ -21,9 +21,12 @@ interface Props {
     recordsByCategories: any;
     cashflow: any;
   };
+  accounts: {
+    accounts: any;
+  };
 }
 
-const Homepage: React.FC<Props> = ({ getRecords, records }) => {
+const Homepage: React.FC<Props> = ({ getRecords, records, accounts }) => {
   useEffect(() => {
     getRecords();
   }, []);
@@ -44,7 +47,7 @@ const Homepage: React.FC<Props> = ({ getRecords, records }) => {
             <MonthlyRecords />
           </React.Fragment>
         ) : (
-          <Chart records={records} />
+          <Chart accounts={accounts} records={records} />
         )}
       </IonContent>
       <AddButton url='/records/new' />
@@ -58,6 +61,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 
 const mapStateToProps = (state: any) => ({
   records: state.records,
+  accounts: state.accounts,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

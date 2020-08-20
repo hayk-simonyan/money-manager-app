@@ -4,6 +4,8 @@ import { Bar, Line, Pie } from 'react-chartjs-2';
 interface Props {
   labels: any;
   data: any;
+  accountNames?: any;
+  accountTotals?: any;
   cashflowDates?: any;
   cashflowAmounts?: any;
 }
@@ -11,6 +13,8 @@ interface Props {
 const ChartBuilder: React.FC<Props> = ({
   labels,
   data,
+  accountNames,
+  accountTotals,
   cashflowDates,
   cashflowAmounts,
 }) => {
@@ -52,6 +56,25 @@ const ChartBuilder: React.FC<Props> = ({
     ],
   };
 
+  const balanceData = {
+    labels: accountNames,
+    datasets: [
+      {
+        label: 'Cashflow',
+        data: accountTotals,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+        ],
+      },
+    ],
+  };
+
   return (
     <React.Fragment>
       <Pie
@@ -59,7 +82,7 @@ const ChartBuilder: React.FC<Props> = ({
         options={{
           title: {
             display: true,
-            text: 'Records by Categories',
+            text: 'Categories',
             fontSize: 25,
           },
           legend: {
@@ -68,36 +91,38 @@ const ChartBuilder: React.FC<Props> = ({
           },
         }}
       />
-
-      <Bar
-        data={mainData}
-        options={{
-          title: {
-            display: 'Chart',
-            text: 'Balance Trend',
-            fontSize: 25,
-          },
-          legend: {
-            display: false,
-            position: 'right',
-          },
-        }}
-      />
-
-      <Line
-        data={cashflowData}
-        options={{
-          title: {
-            display: true,
-            text: 'Cashflow',
-            fontSize: 25,
-          },
-          legend: {
-            display: false,
-            position: 'right',
-          },
-        }}
-      />
+      {accountNames && accountTotals && (
+        <Bar
+          data={balanceData}
+          options={{
+            title: {
+              display: 'Chart',
+              text: 'Balance Trend',
+              fontSize: 25,
+            },
+            legend: {
+              display: false,
+              position: 'right',
+            },
+          }}
+        />
+      )}
+      {cashflowDates && cashflowAmounts && (
+        <Line
+          data={cashflowData}
+          options={{
+            title: {
+              display: true,
+              text: 'Cashflow',
+              fontSize: 25,
+            },
+            legend: {
+              display: false,
+              position: 'right',
+            },
+          }}
+        />
+      )}
     </React.Fragment>
   );
 };

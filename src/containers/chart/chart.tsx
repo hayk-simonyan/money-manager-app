@@ -13,6 +13,13 @@ interface MonthlyRecord {
   total: number;
 }
 
+interface Account {
+  _id: string;
+  icon: string;
+  name: string;
+  total: string;
+}
+
 interface Props {
   records: {
     records: any;
@@ -21,10 +28,12 @@ interface Props {
     recordsByCategories: any;
     cashflow: any;
   };
+  accounts: { accounts: any };
 }
 
 const Chart: React.FC<Props> = ({
   records: { records, incomes, expences, recordsByCategories, cashflow },
+  accounts: { accounts },
 }) => {
   const [segment, setSegment] = useState<'expences' | 'incomes'>('expences');
 
@@ -44,12 +53,23 @@ const Chart: React.FC<Props> = ({
     }
   });
 
+  const accountNames: any = [];
+  const accountTotals: any = [];
+  accounts.forEach((account: Account) => {
+    accountNames.push(account.name);
+    accountTotals.push(account.total);
+  });
+
   const cashflowAmounts: any = [];
   const cashflowDates: any = [];
-
   cashflow.forEach((flow: any) => {
-    cashflowAmounts.push(flow.amount);
-    cashflowDates.push(flow.date.slice(8, -14));
+    if (cashflowDates.includes(flow.date.slice(8, -14))) {
+      const index = cashflowDates.indexOf(flow.date.slice(8, -14));
+      cashflowAmounts[index] = cashflowAmounts[index] + flow.amount;
+    } else {
+      cashflowAmounts.push(flow.amount);
+      cashflowDates.push(flow.date.slice(8, -14));
+    }
   });
 
   return (
@@ -59,7 +79,12 @@ const Chart: React.FC<Props> = ({
         segmentChangeHandler={(e) => setSegment(e)}
       />
       {segment === 'expences' ? (
-        <ChartBuilder labels={expenceLabels} data={expenceData} />
+        <ChartBuilder
+          labels={expenceLabels}
+          data={expenceData}
+          accountNames={accountNames}
+          accountTotals={accountTotals}
+        />
       ) : (
         <ChartBuilder
           labels={incomeLabels}
