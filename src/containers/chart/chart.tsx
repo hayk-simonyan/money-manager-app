@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-
-import { IonCard, IonCardHeader, IonCardTitle, IonPage } from '@ionic/react';
+import React, { useState, useEffect } from 'react';
+import { IonSelect, IonSelectOption } from '@ionic/react';
+import { connect } from 'react-redux';
+import { getRecords } from '../../redux/records/record.actions';
 
 import ChartBuilder from './chart-builder/chart-builder';
 import ChartControls from '../../components/chart-controls/homepage-controls';
@@ -29,12 +30,23 @@ interface Props {
     cashflow: any;
   };
   accounts: { accounts: any };
+  getRecords: (y?: string, m?: string) => void;
 }
 
 const Chart: React.FC<Props> = ({
   records: { records, incomes, expences, recordsByCategories, cashflow },
   accounts: { accounts },
+  getRecords,
 }) => {
+  const date = new Date();
+  const [month, setMonth] = useState(date.getMonth().toString());
+  const [year, setYear] = useState(date.getFullYear().toString());
+  if (month.length === 1) setMonth(`0${month}`);
+
+  useEffect(() => {
+    getRecords(year, month);
+  }, [month]);
+
   const [segment, setSegment] = useState<'expences' | 'incomes'>('expences');
 
   const expenceLabels: any = [];
@@ -52,6 +64,7 @@ const Chart: React.FC<Props> = ({
       incomeData.push(record.total);
     }
   });
+  console.log(expenceLabels);
 
   const accountNames: any = [];
   const accountTotals: any = [];
@@ -78,6 +91,25 @@ const Chart: React.FC<Props> = ({
         segmentValue={segment}
         segmentChangeHandler={(e) => setSegment(e)}
       />
+      <IonSelect
+        value={month}
+        cancelText='Cancel'
+        okText='Ok'
+        onIonChange={(e: any) => setMonth(e.detail.value)}
+      >
+        <IonSelectOption value='00'>January</IonSelectOption>
+        <IonSelectOption value='01'>February</IonSelectOption>
+        <IonSelectOption value='02'>March</IonSelectOption>
+        <IonSelectOption value='03'>April</IonSelectOption>
+        <IonSelectOption value='04'>May</IonSelectOption>
+        <IonSelectOption value='05'>June</IonSelectOption>
+        <IonSelectOption value='06'>July</IonSelectOption>
+        <IonSelectOption value='07'>August</IonSelectOption>
+        <IonSelectOption value='08'>September</IonSelectOption>
+        <IonSelectOption value='09'>October</IonSelectOption>
+        <IonSelectOption value='10'>November</IonSelectOption>
+        <IonSelectOption value='11'>December</IonSelectOption>
+      </IonSelect>
       {segment === 'expences' ? (
         <ChartBuilder
           labels={expenceLabels}
@@ -97,4 +129,12 @@ const Chart: React.FC<Props> = ({
   );
 };
 
-export default Chart;
+const mapDispatchToProps = (dispatch: any) => ({
+  getRecords: (y?: string, m?: string) => dispatch(getRecords(y, m)),
+});
+
+const mapStateToProps = (state: any) => ({
+  records: state.records,
+});
+
+export default connect(null, mapDispatchToProps)(Chart);

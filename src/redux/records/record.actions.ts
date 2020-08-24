@@ -8,15 +8,25 @@ import {
 } from './record.types';
 import { setAlert } from '../alerts/alert.actions';
 
-export const getRecords = () => async (dispatch: any) => {
+export const getRecords = (y: string = '', m: string = '') => async (
+  dispatch: any
+) => {
   try {
     const date = new Date();
     let month = date.getMonth().toString();
     const year = date.getFullYear().toString();
     if (month.length === 1) month = `0${month}`;
-    const defaultQuery = `?date[gte]=${year}-${month}-01T00:00:00.000Z`;
+    if (!m) m = month;
+    if (!y) y = year;
+    let nextMonth = (parseInt(m) + 1).toString();
+    if (nextMonth.length === 1) nextMonth = `0${nextMonth}`;
+    console.log(nextMonth);
+    console.log(y, m);
 
-    const res = await axios.get(`/records${defaultQuery}`);
+    const query = `?date[gte]=${y}-${m}-01T00:00:00.000Z&date[lt]=${y}-${nextMonth}-01T00:00:00.000Z`;
+    console.log(query);
+
+    const res = await axios.get(`/records${query}`);
 
     dispatch({
       type: GET_RECORDS,
