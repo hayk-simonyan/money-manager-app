@@ -89,7 +89,7 @@ const Menu: React.FC<Props> = ({
               <IonLabel>Settings</IonLabel>
             </IonItem>
           </IonMenuToggle>
-          <IonMenuToggle>
+          {/* <IonMenuToggle>
             <IonItem
               lines='full'
               button
@@ -99,7 +99,7 @@ const Menu: React.FC<Props> = ({
               <IonIcon slot='start' icon={exitOutline} />
               <IonLabel>Export</IonLabel>
             </IonItem>
-          </IonMenuToggle>
+          </IonMenuToggle> */}
           <IonMenuToggle>
             <IonItem
               lines='full'

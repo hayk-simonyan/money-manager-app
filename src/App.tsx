@@ -43,6 +43,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { loadUser } from './redux/auth/auth.actions';
 import { Provider } from 'react-redux';
+import SettingsPage from './pages/settings-page/settings-page';
 
 if (localStorage.jwttoken) {
   setAuthToken(localStorage.jwttoken);
@@ -93,6 +94,7 @@ const App: React.FC = () => {
               component={EditRecordPage}
             />
             <PrivateRoute exact path='/records' component={RecordsPage} />
+            <PrivateRoute exact path='/settings' component={SettingsPage} />
 
             <Route exact path='/about' component={AboutPage} />
             <Route exact path='/signup' component={SignupPage} />
