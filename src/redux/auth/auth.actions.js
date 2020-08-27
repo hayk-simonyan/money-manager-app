@@ -8,6 +8,10 @@ import {
   SIGNIN_SUCCESS,
   SIGNIN_FAIL,
   LOGOUT,
+  PUT_EMAIL,
+  PUT_EMAIL_ERROR,
+  PUT_PASSWORD,
+  PUT_PASSWORD_ERROR,
 } from './auth.types';
 
 import { setAlert } from '../alerts/alert.actions';
@@ -91,6 +95,67 @@ export const loadUser = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
+    });
+  }
+};
+
+export const putEmail = (email) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const body = JSON.stringify({ email });
+
+  try {
+    const res = await axios.put(`/auth/email`, body, config);
+    console.log(res);
+
+    dispatch({
+      type: PUT_EMAIL,
+      payload: res.data,
+    });
+
+    dispatch(setAlert(res.data.msg, 'success'));
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
+    }
+
+    dispatch({
+      type: PUT_EMAIL_ERROR,
+    });
+  }
+};
+
+export const putPassword = (oldPassword, password) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const body = JSON.stringify({ oldPassword, password });
+
+  try {
+    const res = await axios.put(`/auth/password`, body, config);
+
+    dispatch({
+      type: PUT_PASSWORD,
+      payload: res.data,
+    });
+
+    dispatch(setAlert(res.data.msg, 'success'));
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
+    }
+
+    dispatch({
+      type: PUT_PASSWORD_ERROR,
     });
   }
 };
