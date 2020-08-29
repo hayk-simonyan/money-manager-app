@@ -3,10 +3,7 @@ import { IonItem, IonLabel, IonIcon, IonAlert, IonButton } from '@ionic/react';
 import { trashOutline, createOutline } from 'ionicons/icons';
 
 import { connect } from 'react-redux';
-import {
-  deleteCategory,
-  getCategories,
-} from '../../../redux/categories/category.actions';
+import { deleteCategory } from '../../../redux/categories/category.actions';
 import { setAlert } from '../../../redux/alerts/alert.actions';
 
 interface Props {
@@ -17,20 +14,17 @@ interface Props {
     name: string;
   };
   deleteCategory: (id: string) => void;
-  getCategories: () => void;
   setAlert: (msg: string, alertType: string) => void;
 }
 
 const CategoryItem: React.FC<Props> = ({
   category: { _id, type, icon, name },
   deleteCategory,
-  getCategories,
   setAlert,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const deleteCategoryHandler = () => {
     deleteCategory(_id);
-    getCategories();
     setAlert('Account Was Removed', 'success');
   };
 
@@ -65,7 +59,6 @@ const CategoryItem: React.FC<Props> = ({
 
 const mapDispatchToProps = (dispatch: any) => ({
   deleteCategory: (id: string) => dispatch(deleteCategory(id)),
-  getCategories: () => dispatch(getCategories()),
   setAlert: (msg: string, alertType: string) =>
     dispatch(setAlert(msg, alertType)),
 });

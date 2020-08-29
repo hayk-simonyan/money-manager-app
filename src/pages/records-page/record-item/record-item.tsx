@@ -58,7 +58,7 @@ const RecordItem: React.FC<Props> = ({
   };
 
   const dateObj = new Date(date);
-  let month = dateObj.getMonth();
+  let month = dateObj.getMonth() + 1;
   let day = String(dateObj.getDate()).padStart(2, '0');
 
   const acc = accounts.find((a: any) => a._id === account);

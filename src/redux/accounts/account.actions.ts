@@ -111,6 +111,7 @@ export const deleteAccount = (id: string) => async (dispatch: any) => {
 
   try {
     const res = await axios.delete(`/accounts/${id}`, config);
+    console.log(res.data);
 
     dispatch({
       type: DELETE_ACCOUNT,

@@ -36,7 +36,7 @@ export default function (
         ...state,
         categories: state.categories.map((category) =>
           // @ts-ignore
-          category._id === action.payload.id ? action.payload : category
+          category._id === payload._id ? payload : category
         ),
         loading: false,
       };

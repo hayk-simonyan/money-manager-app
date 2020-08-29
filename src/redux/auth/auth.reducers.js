@@ -10,7 +10,7 @@ import {
   PUT_EMAIL_ERROR,
   PUT_PASSWORD,
   PUT_PASSWORD_ERROR,
-} from './auth.types';
+} from './auth.types.ts';
 
 const initialState = {
   token: localStorage.getItem('token'),

@@ -20,11 +20,8 @@ export const getRecords = (y: string = '', m: string = '') => async (
     if (!y) y = year;
     let nextMonth = (parseInt(m) + 1).toString();
     if (nextMonth.length === 1) nextMonth = `0${nextMonth}`;
-    console.log(nextMonth);
-    console.log(y, m);
 
     const query = `?date[gte]=${y}-${m}-01T00:00:00.000Z&date[lt]=${y}-${nextMonth}-01T00:00:00.000Z`;
-    console.log(query);
 
     const res = await axios.get(`/records${query}`);
 

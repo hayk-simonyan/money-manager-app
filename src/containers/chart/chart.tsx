@@ -64,7 +64,6 @@ const Chart: React.FC<Props> = ({
       incomeData.push(record.total);
     }
   });
-  console.log(expenceLabels);
 
   const accountNames: any = [];
   const accountTotals: any = [];
@@ -93,6 +92,7 @@ const Chart: React.FC<Props> = ({
       />
       <IonSelect
         value={month}
+        interface='action-sheet'
         cancelText='Cancel'
         okText='Ok'
         onIonChange={(e: any) => setMonth(e.detail.value)}

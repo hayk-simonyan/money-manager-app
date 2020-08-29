@@ -50,7 +50,7 @@ const Homepage: React.FC<Props> = ({ getRecords, records, accounts }) => {
           <Chart accounts={accounts} records={records} />
         )}
       </IonContent>
-      <AddButton url='/records/new' />
+      <AddButton url='records/new' />
     </IonPage>
   );
 };

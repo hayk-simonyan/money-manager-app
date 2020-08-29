@@ -36,7 +36,7 @@ export default function (
         ...state,
         accounts: state.accounts.map((account) =>
           // @ts-ignore
-          account._id === action.payload.id ? action.payload : account
+          account._id === payload._id ? payload : account
         ),
         loading: false,
       };
@@ -44,7 +44,7 @@ export default function (
       return {
         ...state,
         // @ts-ignore
-        accounts: state.accounts.filter((a) => a._id !== payload),
+        accounts: state.accounts.filter((a) => a._id !== payload.id),
         loading: false,
       };
     case ACCOUNTS_ERROR:

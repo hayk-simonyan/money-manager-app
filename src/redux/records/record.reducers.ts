@@ -44,7 +44,7 @@ export default function (
         ...state,
         records: state.records.map((record) =>
           // @ts-ignore
-          record._id === action.payload.id ? action.payload : record
+          record._id === payload._id ? payload : record
         ),
         loading: false,
       };
