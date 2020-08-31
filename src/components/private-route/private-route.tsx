@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signup } from '../../redux/auth/auth.actions';
@@ -7,7 +7,6 @@ interface Props {
   component: React.FC;
   path: string;
   exact?: boolean;
-  //   isAuthenticated: boolean;
   auth: {
     isAuthenticated: any;
     loading: boolean;
@@ -16,24 +15,17 @@ interface Props {
 
 const PrivateRoute: React.FC<Props> = ({
   component: Component,
-  path,
-  exact,
   auth: { isAuthenticated },
+  ...rest
 }) => {
   return (
     <Route
-      exact={exact}
-      path={path}
+      {...rest}
       render={(props) =>
         isAuthenticated ? <Component /> : <Redirect to='/signup' />
       }
     />
   );
-  // return props.auth.isAuthenticated ? (
-  //   <Route exact={props.exact} path={props.path} component={props.component} />
-  // ) : (
-  //   <Redirect to='/signup' />
-  // );
 };
 
 const mapStateToProps = (state: any) => ({
