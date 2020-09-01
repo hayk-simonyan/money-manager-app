@@ -56,12 +56,10 @@ const NewRecordPage: React.FC<Props> = ({
   const history = useHistory();
   const [error, setError] = useState<string>();
 
-  const d = new Date();
-
   const [type, setType] = useState<string>('expences');
-  const [account, setAccount] = useState<string>(accounts[0].name);
-  const [category, setCategory] = useState<string>(categories[0].name);
-  const [date, setDate] = useState<any>(d);
+  const [account, setAccount] = useState<string>('');
+  const [category, setCategory] = useState<string>('');
+  const [date, setDate] = useState<any>(Date.now());
   const amountInputRef = useRef<HTMLIonInputElement>(null);
   const noteInputRef = useRef<HTMLIonInputElement>(null);
 
@@ -146,11 +144,22 @@ const NewRecordPage: React.FC<Props> = ({
                 onIonChange={(e) => setCategory(e.detail.value)}
               >
                 {categories &&
-                  categories.map((c: any) => (
-                    <IonSelectOption key={c._id} value={c.name}>
-                      {c.name}
-                    </IonSelectOption>
-                  ))}
+                  categories.map((c: any) => {
+                    if (type === 'expences' && c.type === 'expences') {
+                      return (
+                        <IonSelectOption key={c._id} value={c.name}>
+                          {c.name}
+                        </IonSelectOption>
+                      );
+                    }
+                    if (type === 'incomes' && c.type === 'incomes') {
+                      return (
+                        <IonSelectOption key={c._id} value={c.name}>
+                          {c.name}
+                        </IonSelectOption>
+                      );
+                    }
+                  })}
               </IonSelect>
             </IonItem>
             <IonItem>

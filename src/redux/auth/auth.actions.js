@@ -14,6 +14,8 @@ import {
   PUT_PASSWORD_ERROR,
 } from './auth.types.ts';
 
+import { getAccounts } from '../accounts/account.actions';
+import { getCategories } from '../categories/category.actions';
 import { setAlert } from '../alerts/alert.actions';
 
 export const signup = (email, password) => async (dispatch) => {
@@ -92,6 +94,9 @@ export const loadUser = () => async (dispatch) => {
       type: USER_LOADED,
       payload: res.data,
     });
+
+    dispatch(getAccounts());
+    dispatch(getCategories());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,

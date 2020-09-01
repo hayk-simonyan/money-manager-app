@@ -116,7 +116,9 @@ export const putRecord = (
   try {
     const res = await axios.put(`/records/${id}`, body, config);
 
-    dispatch({
+    console.log(res.data);
+
+    return dispatch({
       type: PUT_RECORD,
       payload: res.data,
     });
