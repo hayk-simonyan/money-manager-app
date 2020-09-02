@@ -45,7 +45,9 @@ const CategoryItem: React.FC<Props> = ({
           { text: 'Yes', handler: deleteCategoryHandler },
         ]}
       />
-      <IonLabel>{icon}</IonLabel>
+      <IonLabel>
+        <i className={icon}></i>
+      </IonLabel>
       <IonLabel>{name}</IonLabel>
       <IonButton color='secondary' onClick={openModal}>
         <IonIcon slot='icon-only' icon={trashOutline}></IonIcon>
