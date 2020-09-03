@@ -35,6 +35,8 @@ const CategoryItem: React.FC<Props> = ({
     setIsOpen(false);
   };
 
+  let iconOutline = require(`../../../assets/ionicons/${icon}.svg`);
+
   return (
     <IonItem button>
       <IonAlert
@@ -46,7 +48,7 @@ const CategoryItem: React.FC<Props> = ({
         ]}
       />
       <IonLabel>
-        <i className={icon}></i>
+        <IonIcon icon={iconOutline}></IonIcon>
       </IonLabel>
       <IonLabel>{name}</IonLabel>
       <IonButton color='secondary' onClick={openModal}>
