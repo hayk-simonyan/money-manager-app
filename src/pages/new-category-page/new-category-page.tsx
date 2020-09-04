@@ -12,14 +12,19 @@ import {
   IonPage,
   IonSelect,
   IonSelectOption,
+  IonIcon,
+  IonModal,
+  IonButton,
 } from '@ionic/react';
 
 import Header from '../../components/header/header';
 import SubmitButton from '../../components/submit-button/submit-button';
+import { iconsArray } from '../../assets/icons';
 
 import { connect } from 'react-redux';
 import { postCategory } from '../../redux/categories/category.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
+import NewCategoryItem from './new-category-item/new-category-item';
 
 interface Props {
   postCategory: (type: string, icon: string, name: string) => void;
@@ -42,6 +47,8 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
       return;
     }
 
+    console.log(icon);
+
     postCategory(type, icon, name.toString());
     setAlert('Account was created', 'success');
     history.push('/categories');
@@ -49,6 +56,13 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
 
   const clearError = () => {
     setError('');
+  };
+
+  const [showModal, setShowModal] = useState(false);
+  const chooseIconHandler = (icon: string) => {
+    console.log(icon);
+    setIcon(icon);
+    setShowModal(false);
   };
 
   return (
@@ -73,6 +87,25 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
               </IonSelect>
             </IonItem>
             <IonItem>
+              <IonButton color='light' onClick={() => setShowModal(true)}>
+                Icon
+              </IonButton>
+              <IonModal isOpen={showModal} cssClass='my-custom-class'>
+                <IonGrid>
+                  <IonRow>
+                    {iconsArray.map((icon: any, index: any) => (
+                      <NewCategoryItem
+                        chooseIconHandler={chooseIconHandler}
+                        key={index}
+                        iconString={icon}
+                      />
+                    ))}
+                  </IonRow>
+                </IonGrid>
+                <IonButton onClick={() => setShowModal(false)}>Close</IonButton>
+              </IonModal>
+            </IonItem>
+            {/* <IonItem>
               <IonLabel>Icon</IonLabel>
               <IonSelect
                 value={icon}
@@ -80,6 +113,9 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
                 okText='Ok'
                 onIonChange={(e) => setIcon(e.detail.value)}
               >
+                {iconsArray.map((icon: any, index: any) => (
+                  <NewCategoryItem key={index} iconString={icon} />
+                ))}
                 <IonSelectOption value='bacon'>Bacon</IonSelectOption>
                 <IonSelectOption value='olives'>Black Olives</IonSelectOption>
                 <IonSelectOption value='xcheese'>Extra Cheese</IonSelectOption>
@@ -91,7 +127,7 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
                 <IonSelectOption value='sausage'>Sausage</IonSelectOption>
                 <IonSelectOption value='Spinach'>Spinach</IonSelectOption>
               </IonSelect>
-            </IonItem>
+            </IonItem> */}
             <IonItem>
               <IonLabel position='floating'>Name</IonLabel>
               <IonInput ref={nameInputRef} type='text'></IonInput>

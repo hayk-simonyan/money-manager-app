@@ -21,7 +21,7 @@ const CategoriesPageControls: React.FC<Props> = ({
         <IonLabel>Expences</IonLabel>
       </IonSegmentButton>
       <IonSegmentButton value='income'>
-        <IonLabel>Income</IonLabel>
+        <IonLabel>Incomes</IonLabel>
       </IonSegmentButton>
     </IonSegment>
   );
