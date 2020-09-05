@@ -64,6 +64,8 @@ const RecordItem: React.FC<Props> = ({
   const acc = accounts.find((a: any) => a._id === account);
   const categ = categories.find((c: any) => c._id === category);
 
+  let selectedIcon = require(`../../../assets/ionicons/${categ.icon}.svg`);
+
   return categ ? (
     <React.Fragment>
       <IonToast
@@ -98,8 +100,7 @@ const RecordItem: React.FC<Props> = ({
           <IonGrid>
             <IonRow>
               <IonCol size='2'>
-                {/* <IonIcon icon={expandOutline} /> */}
-                <IonLabel>{acc.icon}</IonLabel>
+                <IonIcon icon={selectedIcon}></IonIcon>
               </IonCol>
               <IonCol size='6'>
                 <IonLabel>{categ.name}</IonLabel>

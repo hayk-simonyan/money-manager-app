@@ -12,10 +12,15 @@ import {
   IonPage,
   IonSelect,
   IonSelectOption,
+  IonIcon,
+  IonButton,
+  IonModal,
 } from '@ionic/react';
 
 import Header from '../../components/header/header';
 import SubmitButton from '../../components/submit-button/submit-button';
+import CategoryItem from '../new-category-page/category-item/category-item';
+import { iconsArray } from '../../assets/icons';
 
 import { connect } from 'react-redux';
 import { putCategory } from '../../redux/categories/category.actions';
@@ -67,6 +72,19 @@ const EditCategoryPage: React.FC<Props> = ({
     setError('');
   };
 
+  // show modal to choose an icon
+  const [showModal, setShowModal] = useState(false);
+  // show or hide icon
+  const [showSelectedIcon, setShowSelectedIcon] = useState(true);
+  // set the selected icon
+  let selectedIcon = require(`../../assets/ionicons/${icon}.svg`);
+  // set the icon state on icon click
+  const chooseIconHandler = (iconString: string) => {
+    setIcon(iconString);
+    setShowSelectedIcon(true);
+    setShowModal(false);
+  };
+
   return (
     <IonPage>
       <IonAlert
@@ -89,6 +107,31 @@ const EditCategoryPage: React.FC<Props> = ({
               </IonSelect>
             </IonItem>
             <IonItem>
+              <IonButton color='light' onClick={() => setShowModal(true)}>
+                Icon
+              </IonButton>
+              {showSelectedIcon && (
+                <IonItem lines='none'>
+                  <IonIcon icon={selectedIcon}></IonIcon>
+                </IonItem>
+              )}
+
+              <IonModal isOpen={showModal} cssClass='my-custom-class'>
+                <IonGrid>
+                  <IonRow>
+                    {iconsArray.map((icon: any, index: any) => (
+                      <CategoryItem
+                        chooseIconHandler={chooseIconHandler}
+                        key={index}
+                        iconString={icon}
+                      />
+                    ))}
+                  </IonRow>
+                </IonGrid>
+                <IonButton onClick={() => setShowModal(false)}>Close</IonButton>
+              </IonModal>
+            </IonItem>
+            {/* <IonItem>
               <IonLabel>Icon</IonLabel>
               <IonSelect
                 value={icon}
@@ -107,7 +150,7 @@ const EditCategoryPage: React.FC<Props> = ({
                 <IonSelectOption value='sausage'>Sausage</IonSelectOption>
                 <IonSelectOption value='Spinach'>Spinach</IonSelectOption>
               </IonSelect>
-            </IonItem>
+            </IonItem> */}
             <IonItem>
               <IonLabel position='floating'>Name</IonLabel>
               <IonInput value={name} ref={nameInputRef} type='text'></IonInput>

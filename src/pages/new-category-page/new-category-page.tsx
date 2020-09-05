@@ -19,12 +19,12 @@ import {
 
 import Header from '../../components/header/header';
 import SubmitButton from '../../components/submit-button/submit-button';
+import CategoryItem from './category-item/category-item';
 import { iconsArray } from '../../assets/icons';
 
 import { connect } from 'react-redux';
 import { postCategory } from '../../redux/categories/category.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
-import NewCategoryItem from './new-category-item/new-category-item';
 
 interface Props {
   postCategory: (type: string, icon: string, name: string) => void;
@@ -36,7 +36,7 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
   const [error, setError] = useState<string>();
 
   const [type, setType] = useState<string>('expences');
-  const [icon, setIcon] = useState<string>('');
+  const [icon, setIcon] = useState<string>('cart-outline');
   const nameInputRef = useRef<HTMLIonInputElement>(null);
 
   const addRecordHandler = () => {
@@ -58,10 +58,16 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
     setError('');
   };
 
+  // show modal to choose an icon
   const [showModal, setShowModal] = useState(false);
-  const chooseIconHandler = (icon: string) => {
-    console.log(icon);
-    setIcon(icon);
+  // show or hide icon
+  const [showSelectedIcon, setShowSelectedIcon] = useState(false);
+  // set the selected icon
+  let selectedIcon = require(`../../assets/ionicons/${icon}.svg`);
+  // set the icon state on icon click
+  const chooseIconHandler = (iconString: string) => {
+    setIcon(iconString);
+    setShowSelectedIcon(true);
     setShowModal(false);
   };
 
@@ -90,11 +96,17 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
               <IonButton color='light' onClick={() => setShowModal(true)}>
                 Icon
               </IonButton>
+              {showSelectedIcon && (
+                <IonItem lines='none'>
+                  <IonIcon icon={selectedIcon}></IonIcon>
+                </IonItem>
+              )}
+
               <IonModal isOpen={showModal} cssClass='my-custom-class'>
                 <IonGrid>
                   <IonRow>
                     {iconsArray.map((icon: any, index: any) => (
-                      <NewCategoryItem
+                      <CategoryItem
                         chooseIconHandler={chooseIconHandler}
                         key={index}
                         iconString={icon}
@@ -114,7 +126,7 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
                 onIonChange={(e) => setIcon(e.detail.value)}
               >
                 {iconsArray.map((icon: any, index: any) => (
-                  <NewCategoryItem key={index} iconString={icon} />
+                  <CategoryItem key={index} iconString={icon} />
                 ))}
                 <IonSelectOption value='bacon'>Bacon</IonSelectOption>
                 <IonSelectOption value='olives'>Black Olives</IonSelectOption>

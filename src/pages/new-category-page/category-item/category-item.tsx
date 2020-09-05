@@ -9,7 +9,7 @@ import {
 
 interface Props {
   iconString: string;
-  chooseIconHandler: (icon: string) => void;
+  chooseIconHandler: (iconString: string) => void;
 }
 
 const NewCategoryItem: React.FC<Props> = ({
