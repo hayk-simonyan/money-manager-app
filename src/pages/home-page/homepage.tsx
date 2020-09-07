@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-import { IonContent, IonPage } from '@ionic/react';
+import {
+  IonContent,
+  IonPage,
+  IonLabel,
+  IonList,
+  IonSelect,
+  IonSelectOption,
+} from '@ionic/react';
 
 import Header from '../../components/header/header';
 import AddButton from '../../components/add-button/add-button';
@@ -8,12 +15,24 @@ import Accounts from '../../containers/accounts/accounts';
 import MonthlyRecords from '../../containers/monthly-records/monthly-records';
 import Chart from '../../containers/chart/chart';
 import HomepageControls from '../../components/homepage-controls/homepage-controls';
+import RecordItem from '../records-page/record-item/record-item';
 
 import { connect } from 'react-redux';
 import { getRecords } from '../../redux/records/record.actions';
+import MonthPicker from '../../containers/month-picker/month-picker';
+
+interface Record {
+  _id: string;
+  type: string;
+  account: string;
+  category: string;
+  date: Date;
+  amount: number;
+  note: string;
+}
 
 interface Props {
-  getRecords: () => void;
+  getRecords: (year?: string, month?: string) => void;
   records: {
     records: any;
     incomes: number;
@@ -27,11 +46,7 @@ interface Props {
 }
 
 const Homepage: React.FC<Props> = ({ getRecords, records, accounts }) => {
-  useEffect(() => {
-    getRecords();
-  }, []);
-
-  const [segment, setSegment] = useState<'main' | 'chart'>('main');
+  const [segment, setSegment] = useState<'charts' | 'records'>('charts');
 
   return (
     <IonPage>
@@ -41,13 +56,27 @@ const Homepage: React.FC<Props> = ({ getRecords, records, accounts }) => {
           segmentValue={segment}
           segmentChangeHandler={(e) => setSegment(e)}
         />
-        {segment === 'main' ? (
+        <MonthPicker />
+        {segment === 'charts' ? (
           <React.Fragment>
             <Accounts />
-            <MonthlyRecords />
+            <Chart accounts={accounts} records={records} />
           </React.Fragment>
         ) : (
-          <Chart accounts={accounts} records={records} />
+          <React.Fragment>
+            <MonthlyRecords />
+            <IonContent>
+              {!records.records ? (
+                <IonLabel>No records yet!</IonLabel>
+              ) : (
+                <IonList>
+                  {records.records.map((record: Record) => (
+                    <RecordItem key={record._id} record={record} />
+                  ))}
+                </IonList>
+              )}
+            </IonContent>
+          </React.Fragment>
         )}
       </IonContent>
       <AddButton url='records/new' />
@@ -56,7 +85,8 @@ const Homepage: React.FC<Props> = ({ getRecords, records, accounts }) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getRecords: () => dispatch(getRecords()),
+  getRecords: (year?: string, month?: string) =>
+    dispatch(getRecords(year, month)),
 });
 
 const mapStateToProps = (state: any) => ({

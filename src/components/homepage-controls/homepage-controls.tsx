@@ -3,8 +3,8 @@ import React from 'react';
 import { IonSegment, IonSegmentButton, IonLabel } from '@ionic/react';
 
 interface HomepageControlsProps {
-  segmentValue: 'main' | 'chart';
-  segmentChangeHandler: (value: 'main' | 'chart') => void;
+  segmentValue: 'charts' | 'records';
+  segmentChangeHandler: (value: 'charts' | 'records') => void;
 }
 
 const HomepageControls: React.FC<HomepageControlsProps> = ({
@@ -17,11 +17,11 @@ const HomepageControls: React.FC<HomepageControlsProps> = ({
 
   return (
     <IonSegment value={segmentValue} onIonChange={onChangeHandler}>
-      <IonSegmentButton value='main'>
-        <IonLabel>Main</IonLabel>
+      <IonSegmentButton value='charts'>
+        <IonLabel>Charts</IonLabel>
       </IonSegmentButton>
-      <IonSegmentButton value='chart'>
-        <IonLabel>Chart</IonLabel>
+      <IonSegmentButton value='records'>
+        <IonLabel>Records</IonLabel>
       </IonSegmentButton>
     </IonSegment>
   );

@@ -9,10 +9,12 @@ import AddButton from '../../components/add-button/add-button';
 
 import { connect } from 'react-redux';
 import { getRecords } from '../../redux/records/record.actions';
+import MonthPicker from '../../containers/month-picker/month-picker';
+import ChartRecords from '../../containers/chart-records/chart-records';
 
 interface Props {
   records: { records: any; loading: boolean };
-  getRecords: () => void;
+  getRecords: (year?: string, month?: string) => void;
 }
 
 interface Record {
@@ -25,14 +27,7 @@ interface Record {
   note: string;
 }
 
-const RecordsPage: React.FC<Props> = ({
-  records: { records, loading },
-  getRecords,
-}) => {
-  useEffect(() => {
-    getRecords();
-  }, [getRecords]);
-
+const RecordsPage: React.FC<Props> = ({ records, getRecords }) => {
   const [error, setError] = useState<string>();
 
   const clearError = () => {
@@ -47,12 +42,14 @@ const RecordsPage: React.FC<Props> = ({
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
       <Header title='Records' menu={true} />
+      <MonthPicker />
+      <ChartRecords records={records} />
       <IonContent>
-        {!records ? (
+        {!records.records ? (
           <IonLabel>No records yet!</IonLabel>
         ) : (
           <IonList>
-            {records.map((record: Record) => (
+            {records.records.map((record: Record) => (
               <RecordItem key={record._id} record={record} />
             ))}
           </IonList>
@@ -64,7 +61,8 @@ const RecordsPage: React.FC<Props> = ({
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getRecords: () => dispatch(getRecords()),
+  getRecords: (year?: string, month?: string) =>
+    dispatch(getRecords(year, month)),
 });
 
 const mapStateToProps = (state: any) => ({

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IonSelect, IonSelectOption } from '@ionic/react';
 import { connect } from 'react-redux';
-import { getRecords } from '../../redux/records/record.actions';
+// import { getRecords } from '../../redux/records/record.actions';
 
 import ChartBuilder from './chart-builder/chart-builder';
 import ChartControls from '../../components/chart-controls/homepage-controls';
@@ -30,22 +30,22 @@ interface Props {
     cashflow: any;
   };
   accounts: { accounts: any };
-  getRecords: (y?: string, m?: string) => void;
+  // getRecords: (y?: string, m?: string) => void;
 }
 
 const Chart: React.FC<Props> = ({
   records: { records, incomes, expences, recordsByCategories, cashflow },
   accounts: { accounts },
-  getRecords,
+  // getRecords,
 }) => {
-  const date = new Date();
-  const [month, setMonth] = useState(date.getMonth().toString());
-  const [year, setYear] = useState(date.getFullYear().toString());
-  if (month.length === 1) setMonth(`0${month}`);
+  // const date = new Date();
+  // const [month, setMonth] = useState(date.getMonth().toString());
+  // const [year, setYear] = useState(date.getFullYear().toString());
+  // if (month.length === 1) setMonth(`0${month}`);
 
-  useEffect(() => {
-    getRecords(year, month);
-  }, [month]);
+  // useEffect(() => {
+  //   getRecords(year, month);
+  // }, [month]);
 
   const [segment, setSegment] = useState<'expences' | 'incomes'>('expences');
 
@@ -90,7 +90,7 @@ const Chart: React.FC<Props> = ({
         segmentValue={segment}
         segmentChangeHandler={(e) => setSegment(e)}
       />
-      <IonSelect
+      {/* <IonSelect
         value={month}
         interface='action-sheet'
         cancelText='Cancel'
@@ -109,7 +109,7 @@ const Chart: React.FC<Props> = ({
         <IonSelectOption value='09'>October</IonSelectOption>
         <IonSelectOption value='10'>November</IonSelectOption>
         <IonSelectOption value='11'>December</IonSelectOption>
-      </IonSelect>
+      </IonSelect> */}
       {segment === 'expences' ? (
         <ChartBuilder
           labels={expenceLabels}
@@ -130,7 +130,7 @@ const Chart: React.FC<Props> = ({
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getRecords: (y?: string, m?: string) => dispatch(getRecords(y, m)),
+  // getRecords: (y?: string, m?: string) => dispatch(getRecords(y, m)),
 });
 
 const mapStateToProps = (state: any) => ({

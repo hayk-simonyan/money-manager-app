@@ -15,7 +15,7 @@ const AccountItem: React.FC<Props> = ({ id, icon, name, total }) => (
       <IonItem routerLink={`/accounts/${id}`} button>
         <IonRow>
           <IonText color='primary'>{name}</IonText>
-          <IonText>{total}</IonText>
+          <IonText color={total >= 0 ? 'success' : 'danger'}>{total}</IonText>
         </IonRow>
       </IonItem>
     </IonCard>
