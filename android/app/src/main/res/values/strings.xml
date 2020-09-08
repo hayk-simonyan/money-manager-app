@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">money-manager</string>
-    <string name="title_activity_main">money-manager</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">Money Manager</string>
+    <string name="title_activity_main">Money Manager</string>
+    <string name="package_name">com.moneymanager.www</string>
+    <string name="custom_url_scheme">com.moneymanager.www</string>
 </resources>

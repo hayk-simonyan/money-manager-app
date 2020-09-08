@@ -56,10 +56,12 @@ const NewRecordPage: React.FC<Props> = ({
   const history = useHistory();
   const [error, setError] = useState<string>();
 
+  const myDate: String = new Date().toISOString();
+
   const [type, setType] = useState<string>('expences');
   const [account, setAccount] = useState<string>('');
   const [category, setCategory] = useState<string>('');
-  const [date, setDate] = useState<any>(Date.now());
+  const [date, setDate] = useState<any>(myDate);
   const amountInputRef = useRef<HTMLIonInputElement>(null);
   const noteInputRef = useRef<HTMLIonInputElement>(null);
 

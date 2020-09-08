@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.moneymanager.www;
 
 import android.os.Bundle;
 

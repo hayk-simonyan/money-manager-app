@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "money-manager",
+  "appId": "com.moneymanager.www",
+  "appName": "Money Manager",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",

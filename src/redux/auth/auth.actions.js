@@ -16,6 +16,7 @@ import {
 
 import { getAccounts } from '../accounts/account.actions';
 import { getCategories } from '../categories/category.actions';
+import { getRecords } from '../records/record.actions';
 import { setAlert } from '../alerts/alert.actions';
 
 export const signup = (email, password) => async (dispatch) => {
@@ -97,6 +98,7 @@ export const loadUser = () => async (dispatch) => {
 
     dispatch(getAccounts());
     dispatch(getCategories());
+    dispatch(getRecords());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
