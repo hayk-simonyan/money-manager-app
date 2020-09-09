@@ -98,7 +98,7 @@ export const loadUser = () => async (dispatch) => {
 
     dispatch(getAccounts());
     dispatch(getCategories());
-    dispatch(getRecords());
+    // dispatch(getRecords());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,

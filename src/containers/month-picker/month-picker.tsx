@@ -13,7 +13,7 @@ const MonthPicker: React.FC<Props> = ({ getRecords }) => {
   const date = new Date();
   const [month, setMonth] = useState(date.getMonth().toString());
   const [year, setYear] = useState(date.getFullYear().toString());
-  if (month.length === 1) setMonth(`0${month}`);
+  if (month.length === 1) setMonth(`0${parseInt(month) + 1}`);
 
   useEffect(() => {
     getRecords(year, month);

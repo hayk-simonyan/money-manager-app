@@ -32,7 +32,6 @@ interface Record {
 }
 
 interface Props {
-  getRecords: (year?: string, month?: string) => void;
   records: {
     records: any;
     incomes: number;
@@ -45,7 +44,7 @@ interface Props {
   };
 }
 
-const Homepage: React.FC<Props> = ({ getRecords, records, accounts }) => {
+const Homepage: React.FC<Props> = ({ records, accounts }) => {
   const [segment, setSegment] = useState<'charts' | 'records'>('charts');
 
   return (
@@ -84,10 +83,7 @@ const Homepage: React.FC<Props> = ({ getRecords, records, accounts }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => ({
-  getRecords: (year?: string, month?: string) =>
-    dispatch(getRecords(year, month)),
-});
+const mapDispatchToProps = (dispatch: any) => ({});
 
 const mapStateToProps = (state: any) => ({
   records: state.records,

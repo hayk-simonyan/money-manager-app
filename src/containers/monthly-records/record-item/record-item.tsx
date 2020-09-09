@@ -7,6 +7,7 @@ import {
   IonItem,
   IonText,
   IonCard,
+  IonLabel,
 } from '@ionic/react';
 
 import { connect } from 'react-redux';
@@ -26,19 +27,25 @@ const RecordItem: React.FC<Props> = ({
   children,
   records: { incomes, expences },
 }) => (
-  <IonCol>
-    <IonCard>
-      <IonItem lines='none' button>
-        <IonGrid>
-          <IonRow>
-            <IonText color='primary'>{children}</IonText>
-          </IonRow>
-          <IonRow>
-            <IonText>{children === 'Expences' ? expences : incomes}</IonText>
-          </IonRow>
-        </IonGrid>
-      </IonItem>
-    </IonCard>
+  <IonCol size='4'>
+    {/* <IonCard> */}
+    <IonItem lines='full' button>
+      <IonGrid>
+        <IonRow>
+          <IonLabel color='primary'>{children}</IonLabel>
+        </IonRow>
+        <IonRow>
+          {children === 'Incomes' && <IonLabel>{incomes}</IonLabel>}
+          {children === 'Expences' && <IonLabel>{expences}</IonLabel>}
+          {children === 'Balance' && (
+            <IonLabel color={incomes - expences >= 0 ? 'success' : 'danger'}>
+              {incomes - expences}
+            </IonLabel>
+          )}
+        </IonRow>
+      </IonGrid>
+    </IonItem>
+    {/* </IonCard> */}
   </IonCol>
 );
 

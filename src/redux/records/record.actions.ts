@@ -23,6 +23,8 @@ export const getRecords = (y: string = '', m: string = '') => async (
 
     const query = `?date[gte]=${y}-${m}-01T00:00:00.000Z&date[lt]=${y}-${nextMonth}-01T00:00:00.000Z`;
 
+    console.log(query);
+
     const res = await axios.get(`/records${query}`);
 
     dispatch({

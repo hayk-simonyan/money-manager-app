@@ -107,7 +107,7 @@ const RecordItem: React.FC<Props> = ({
               </IonCol>
               <IonCol size='4' className='ion-text-right'>
                 <IonLabel>
-                  {type === 'expence' ? `-${amount}` : amount}$
+                  {type === 'expences' ? `-${amount}` : amount}$
                 </IonLabel>
               </IonCol>
             </IonRow>

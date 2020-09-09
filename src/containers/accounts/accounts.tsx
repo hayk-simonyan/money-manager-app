@@ -8,7 +8,6 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonToolbar,
 } from '@ionic/react';
 
 import AccountItem from './account-item/account-item';
@@ -42,9 +41,7 @@ const Accounts: React.FC<Props> = ({
   return (
     <IonCard>
       <IonCardHeader color='default'>
-        <IonToolbar>
-          <IonCardTitle>Accounts</IonCardTitle>
-        </IonToolbar>
+        <IonCardTitle>Accounts</IonCardTitle>
       </IonCardHeader>
       <IonGrid>
         <IonRow>{fetchedAccounts}</IonRow>
