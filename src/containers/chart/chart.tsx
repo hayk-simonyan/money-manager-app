@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import ChartBuilder from './chart-builder/chart-builder';
 import ChartControls from '../../components/chart-controls/homepage-controls';
+import { IonPage, IonContent } from '@ionic/react';
 
 interface MonthlyRecord {
   _id: string;
@@ -73,25 +74,27 @@ const Chart: React.FC<Props> = ({
 
   return (
     <React.Fragment>
-      <ChartControls
-        segmentValue={segment}
-        segmentChangeHandler={(e) => setSegment(e)}
-      />
-      {segment === 'expences' ? (
-        <ChartBuilder
-          labels={expenceLabels}
-          data={expenceData}
-          accountNames={accountNames}
-          accountTotals={accountTotals}
+      <IonContent>
+        <ChartControls
+          segmentValue={segment}
+          segmentChangeHandler={(e) => setSegment(e)}
         />
-      ) : (
-        <ChartBuilder
-          labels={incomeLabels}
-          data={incomeData}
-          cashflowAmounts={cashflowAmounts}
-          cashflowDates={cashflowDates}
-        />
-      )}
+        {segment === 'expences' ? (
+          <ChartBuilder
+            labels={expenceLabels}
+            data={expenceData}
+            accountNames={accountNames}
+            accountTotals={accountTotals}
+          />
+        ) : (
+          <ChartBuilder
+            labels={incomeLabels}
+            data={incomeData}
+            cashflowAmounts={cashflowAmounts}
+            cashflowDates={cashflowDates}
+          />
+        )}
+      </IonContent>
     </React.Fragment>
   );
 };
