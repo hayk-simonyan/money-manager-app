@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { IonItem, IonLabel, IonIcon, IonAlert, IonButton } from '@ionic/react';
+import {
+  IonItem,
+  IonLabel,
+  IonIcon,
+  IonAlert,
+  IonButton,
+  IonRow,
+  IonCol,
+  IonGrid,
+} from '@ionic/react';
 import { trashOutline, createOutline } from 'ionicons/icons';
 
 import { connect } from 'react-redux';
@@ -47,16 +56,28 @@ const CategoryItem: React.FC<Props> = ({
           { text: 'Yes', handler: deleteCategoryHandler },
         ]}
       />
-      <IonLabel>
-        <IonIcon icon={iconOutline}></IonIcon>
-      </IonLabel>
-      <IonLabel>{name}</IonLabel>
-      <IonButton color='secondary' onClick={openModal}>
-        <IonIcon slot='icon-only' icon={trashOutline}></IonIcon>
-      </IonButton>
-      <IonButton routerLink={`/categories/${_id}`} color='secondary'>
-        <IonIcon slot='icon-only' icon={createOutline}></IonIcon>
-      </IonButton>
+      <IonGrid>
+        <IonRow>
+          <IonCol size='2'>
+            <IonLabel>
+              <IonIcon icon={iconOutline}></IonIcon>
+            </IonLabel>
+          </IonCol>
+          <IonCol size='6'>
+            <IonLabel>{name}</IonLabel>
+          </IonCol>
+          <IonCol size='2'>
+            <IonButton color='secondary' onClick={openModal}>
+              <IonIcon slot='icon-only' icon={trashOutline}></IonIcon>
+            </IonButton>
+          </IonCol>
+          <IonCol size='2'>
+            <IonButton routerLink={`/categories/${_id}`} color='secondary'>
+              <IonIcon slot='icon-only' icon={createOutline}></IonIcon>
+            </IonButton>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
     </IonItem>
   );
 };

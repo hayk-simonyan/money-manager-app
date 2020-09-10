@@ -16,6 +16,7 @@ import {
   IonIcon,
   IonSpinner,
   IonDatetime,
+  IonContent,
 } from '@ionic/react';
 
 import Header from '../../components/header/header';
@@ -144,83 +145,87 @@ const EditRecordPage: React.FC<Props> = ({
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
       <Header title='Edit Record' menu={false} />
-      <IonGrid>
-        <IonRow>
-          <IonCol>
-            <IonItem>
-              <IonLabel>Type</IonLabel>
-              <IonSelect
-                value={type}
-                onIonChange={(e) => setType(e.detail.value)}
-              >
-                <IonSelectOption value='expences'>Expences</IonSelectOption>
-                <IonSelectOption value='incomes'>Incomes</IonSelectOption>
-              </IonSelect>
-            </IonItem>
-            <IonItem>
-              <IonLabel>Account</IonLabel>
-              <IonSelect
-                value={account}
-                onIonChange={(e) => setAccount(e.detail.value)}
-              >
-                {accounts &&
-                  accounts.map((a: any) => (
-                    <IonSelectOption key={a._id} value={a.name}>
-                      {a.name}
-                    </IonSelectOption>
-                  ))}
-              </IonSelect>
-            </IonItem>
-            <IonItem>
-              <IonLabel>Category</IonLabel>
-              <IonSelect
-                value={category}
-                cancelText='Cancel'
-                okText='Ok'
-                onIonChange={(e) => setCategory(e.detail.value)}
-              >
-                {categories &&
-                  categories.map((c: any) => (
-                    <IonSelectOption key={c._id} value={c.name}>
-                      {c.name}
-                    </IonSelectOption>
-                  ))}
-              </IonSelect>
-            </IonItem>
-            <IonItem>
+      <IonContent>
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <IonItem>
+                <IonLabel>Type</IonLabel>
+                <IonSelect
+                  value={type}
+                  onIonChange={(e) => setType(e.detail.value)}
+                >
+                  <IonSelectOption value='expences'>Expences</IonSelectOption>
+                  <IonSelectOption value='incomes'>Incomes</IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonLabel>Account</IonLabel>
+                <IonSelect
+                  value={account}
+                  onIonChange={(e) => setAccount(e.detail.value)}
+                >
+                  {accounts &&
+                    accounts.map((a: any) => (
+                      <IonSelectOption key={a._id} value={a.name}>
+                        {a.name}
+                      </IonSelectOption>
+                    ))}
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonLabel>Category</IonLabel>
+                <IonSelect
+                  value={category}
+                  cancelText='Cancel'
+                  okText='Ok'
+                  onIonChange={(e) => setCategory(e.detail.value)}
+                >
+                  {categories &&
+                    categories.map((c: any) => (
+                      <IonSelectOption key={c._id} value={c.name}>
+                        {c.name}
+                      </IonSelectOption>
+                    ))}
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>Amount</IonLabel>
+                <IonInput
+                  ref={amountInputRef}
+                  value={amount}
+                  type='number'
+                ></IonInput>
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>Note</IonLabel>
+                <IonInput
+                  ref={noteInputRef}
+                  value={note}
+                  type='text'
+                ></IonInput>
+              </IonItem>
               <IonDatetime
                 value={date}
                 onIonChange={(e) => setDate(e.detail.value!)}
                 display-timezone='utc'
               ></IonDatetime>
-            </IonItem>
-            <IonItem>
-              <IonLabel position='floating'>Amount</IonLabel>
-              <IonInput
-                ref={amountInputRef}
-                value={amount}
-                type='number'
-              ></IonInput>
-            </IonItem>
-            <IonItem>
-              <IonLabel position='floating'>Note</IonLabel>
-              <IonInput ref={noteInputRef} value={note} type='text'></IonInput>
-            </IonItem>
-          </IonCol>
-        </IonRow>
-        <IonRow>
-          <IonCol size='4'>
-            <IonButton onClick={openModal} color='light'>
-              <IonIcon icon={trashOutline} slot='icon-only' />
-            </IonButton>
-          </IonCol>
-          <IonCol size='4' offset='4'>
-            <IonButton onClick={updateRecordHandler} color='primary'>
-              <IonIcon icon={checkmarkOutline} slot='icon-only' />
-            </IonButton>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size='2' offset='2'>
+              <IonButton onClick={openModal} color='danger'>
+                <IonIcon icon={trashOutline} slot='icon-only' />
+              </IonButton>
+            </IonCol>
+            <IonCol size='4' offset='4'>
+              <IonButton onClick={updateRecordHandler} color='success'>
+                <IonIcon icon={checkmarkOutline} slot='icon-only' />
+              </IonButton>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </IonContent>
     </IonPage>
   );
 };

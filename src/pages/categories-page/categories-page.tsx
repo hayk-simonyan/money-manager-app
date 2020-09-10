@@ -48,18 +48,18 @@ const CategoriesPage: React.FC<Props> = ({
   return (
     <IonPage>
       <Header title='Categories' menu={true} />
+      <CategoriesPageControls
+        segmentValue={segment}
+        segmentChangeHandler={(e) => setSegment(e)}
+      />
       <IonContent>
-        <CategoriesPageControls
-          segmentValue={segment}
-          segmentChangeHandler={(e) => setSegment(e)}
-        />
         {segment === 'expences' ? (
           <React.Fragment>{expenceCategories}</React.Fragment>
         ) : (
           <React.Fragment>{incomeCategories}</React.Fragment>
         )}
-        <AddButton url='categories/new' />
       </IonContent>
+      <AddButton url='categories/new' />
     </IonPage>
   );
 };

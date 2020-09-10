@@ -15,6 +15,7 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
+  IonContent,
 } from '@ionic/react';
 
 import Header from '../../components/header/header';
@@ -46,11 +47,6 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
       return;
     }
 
-    // const formData: FormData = new FormData();
-    // formData.append('icon', icon.toString());
-    // formData.append('name', name.toString().trim());
-    // formData.append('total', total.toString().trim());
-
     postAccount(icon.toString(), name.toString(), total.toString());
     setAlert('Account Was Created', 'success');
     history.push('/');
@@ -67,41 +63,53 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <Header title='Add Account' menu={false} />
-      <IonGrid>
-        <IonRow>
-          <IonCol>
-            <IonItem>
-              <IonLabel position='floating'>Icon</IonLabel>
-              <IonSelect
-                value={icon}
-                cancelText='Cancel'
-                okText='Ok'
-                onIonChange={(e) => setIcon(e.detail.value)}
-              >
-                <IonSelectOption value='bacon'>Bacon</IonSelectOption>
-                <IonSelectOption value='olives'>Black Olives</IonSelectOption>
-                <IonSelectOption value='xcheese'>Extra Cheese</IonSelectOption>
-                <IonSelectOption value='peppers'>Green Peppers</IonSelectOption>
-                <IonSelectOption value='mushrooms'>Mushrooms</IonSelectOption>
-                <IonSelectOption value='onions'>Onions</IonSelectOption>
-                <IonSelectOption value='pepperoni'>Pepperoni</IonSelectOption>
-                <IonSelectOption value='pineapple'>Pineapple</IonSelectOption>
-                <IonSelectOption value='sausage'>Sausage</IonSelectOption>
-                <IonSelectOption value='Spinach'>Spinach</IonSelectOption>
-              </IonSelect>
-            </IonItem>
-            <IonItem>
-              <IonLabel position='floating'>Account Name</IonLabel>
-              <IonInput ref={nameInputRef} type='text' required />
-            </IonItem>
-            <IonItem>
-              <IonLabel position='floating'>Initial Amount</IonLabel>
-              <IonInput ref={totalInputRef} type='number' required></IonInput>
-            </IonItem>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
+      <Header title='New Account' menu={false} />
+      <IonContent>
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <IonItem>
+                <IonLabel position='floating'>Account Name</IonLabel>
+                <IonInput ref={nameInputRef} type='text' required />
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>Initial Amount</IonLabel>
+                <IonInput ref={totalInputRef} type='number' required></IonInput>
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>Account Type</IonLabel>
+                <IonSelect
+                  interface='action-sheet'
+                  value={icon}
+                  cancelText='Cancel'
+                  okText='Ok'
+                  onIonChange={(e) => setIcon(e.detail.value)}
+                >
+                  <IonSelectOption value='general'>General</IonSelectOption>
+                  <IonSelectOption value='cash'>Cash</IonSelectOption>
+                  <IonSelectOption value='creditcard'>
+                    Credit Card
+                  </IonSelectOption>
+                  <IonSelectOption value='savingaccount'>
+                    Saving account
+                  </IonSelectOption>
+                  <IonSelectOption value='insurance'>Insurance</IonSelectOption>
+                  <IonSelectOption value='investment'>
+                    Investment
+                  </IonSelectOption>
+                  <IonSelectOption value='mortgage'>Mortgage</IonSelectOption>
+                  <IonSelectOption value='loan'>Loan</IonSelectOption>
+                  <IonSelectOption value='other'>Other</IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              {/* <IonItem>
+                <IonLabel position='floating'>Bank Account Number</IonLabel>
+                <IonInput ref={nameInputRef} type='text' required />
+              </IonItem> */}
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </IonContent>
       <IonFab horizontal='end' vertical='bottom' slot='fixed'>
         <IonFabButton type='submit' onClick={addAccountHandler}>
           <IonIcon icon={checkmarkOutline} />

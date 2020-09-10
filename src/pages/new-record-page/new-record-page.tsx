@@ -14,6 +14,7 @@ import {
   IonSelectOption,
   IonSpinner,
   IonDatetime,
+  IonContent,
 } from '@ionic/react';
 
 import Header from '../../components/header/header';
@@ -109,79 +110,79 @@ const NewRecordPage: React.FC<Props> = ({
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <Header title='Add Record' menu={false} />
-      <IonGrid>
-        <IonRow>
-          <IonCol>
-            <IonItem>
-              <IonLabel>Type</IonLabel>
-              <IonSelect
-                value={type}
-                onIonChange={(e) => setType(e.detail.value)}
-              >
-                <IonSelectOption value='expences'>Expences</IonSelectOption>
-                <IonSelectOption value='incomes'>Incomes</IonSelectOption>
-              </IonSelect>
-            </IonItem>
-            <IonItem>
-              <IonLabel>Account</IonLabel>
-              <IonSelect
-                value={account}
-                onIonChange={(e) => setAccount(e.detail.value)}
-              >
-                {accounts &&
-                  accounts.map((a: any) => (
-                    <IonSelectOption key={a._id} value={a.name}>
-                      {a.name}
-                    </IonSelectOption>
-                  ))}
-              </IonSelect>
-            </IonItem>
-            <IonItem>
-              <IonLabel>Category</IonLabel>
-              <IonSelect
-                value={category}
-                cancelText='Cancel'
-                okText='Ok'
-                onIonChange={(e) => setCategory(e.detail.value)}
-              >
-                {categories &&
-                  categories.map((c: any) => {
-                    if (type === 'expences' && c.type === 'expences') {
-                      return (
-                        <IonSelectOption key={c._id} value={c.name}>
-                          {c.name}
-                        </IonSelectOption>
-                      );
-                    }
-                    if (type === 'incomes' && c.type === 'incomes') {
-                      return (
-                        <IonSelectOption key={c._id} value={c.name}>
-                          {c.name}
-                        </IonSelectOption>
-                      );
-                    }
-                  })}
-              </IonSelect>
-            </IonItem>
-            <IonItem>
+      <Header title='New Record' menu={false} />
+      <IonContent>
+        <IonGrid>
+          <IonRow>
+            <IonCol>
               <IonDatetime
                 value={date}
                 onIonChange={(e) => setDate(e.detail.value!)}
                 display-timezone='utc'
               ></IonDatetime>
-            </IonItem>
-            <IonItem>
-              <IonLabel position='floating'>Amount</IonLabel>
-              <IonInput ref={amountInputRef} type='number'></IonInput>
-            </IonItem>
-            <IonItem>
-              <IonLabel position='floating'>Note</IonLabel>
-              <IonInput ref={noteInputRef} type='text'></IonInput>
-            </IonItem>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
+              <IonItem>
+                <IonLabel>Type</IonLabel>
+                <IonSelect
+                  value={type}
+                  onIonChange={(e) => setType(e.detail.value)}
+                >
+                  <IonSelectOption value='expences'>Expences</IonSelectOption>
+                  <IonSelectOption value='incomes'>Incomes</IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonLabel>Account</IonLabel>
+                <IonSelect
+                  value={account}
+                  onIonChange={(e) => setAccount(e.detail.value)}
+                >
+                  {accounts &&
+                    accounts.map((a: any) => (
+                      <IonSelectOption key={a._id} value={a.name}>
+                        {a.name}
+                      </IonSelectOption>
+                    ))}
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonLabel>Category</IonLabel>
+                <IonSelect
+                  value={category}
+                  cancelText='Cancel'
+                  okText='Ok'
+                  onIonChange={(e) => setCategory(e.detail.value)}
+                >
+                  {categories &&
+                    categories.map((c: any) => {
+                      if (type === 'expences' && c.type === 'expences') {
+                        return (
+                          <IonSelectOption key={c._id} value={c.name}>
+                            {c.name}
+                          </IonSelectOption>
+                        );
+                      }
+                      if (type === 'incomes' && c.type === 'incomes') {
+                        return (
+                          <IonSelectOption key={c._id} value={c.name}>
+                            {c.name}
+                          </IonSelectOption>
+                        );
+                      }
+                    })}
+                </IonSelect>
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>Amount</IonLabel>
+                <IonInput ref={amountInputRef} type='number'></IonInput>
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>Note</IonLabel>
+                <IonInput ref={noteInputRef} type='text'></IonInput>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </IonContent>
       <SubmitButton onClickHandler={addRecordHandler} />
     </IonPage>
   );

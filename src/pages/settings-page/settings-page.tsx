@@ -9,6 +9,8 @@ import {
   IonButton,
   IonList,
   IonText,
+  IonCard,
+  IonCardContent,
 } from '@ionic/react';
 
 import { connect } from 'react-redux';
@@ -16,6 +18,7 @@ import { putEmail, putPassword } from '../../redux/auth/auth.actions';
 
 import Header from '../../components/header/header';
 import { setAlert } from '../../redux/alerts/alert.actions';
+import AddButton from '../../components/add-button/add-button';
 
 interface Props {
   auth: {
@@ -70,31 +73,49 @@ const SettingsPage: React.FC<Props> = ({
       <Header title='Settings' menu={true} />
       <IonContent>
         <IonList>
-          <IonItem>
-            <IonText>Current Email: {email}</IonText>
-            <IonLabel position='floating'>New Email Adress</IonLabel>
-            <IonInput ref={emailInputRef} type='text' />
-          </IonItem>
-          <IonButton onClick={updateEmailHandler} expand='full'>
-            Update Email
-          </IonButton>
-          <IonItem>
-            <IonLabel position='floating'>Old Password</IonLabel>
-            <IonInput ref={oldPasswordInputRef} type='password' />
-          </IonItem>
-          <IonItem>
-            <IonLabel position='floating'>New Password</IonLabel>
-            <IonInput ref={newPasswordInputRef} type='password' />
-          </IonItem>
-          <IonItem>
-            <IonLabel position='floating'>Confirm New Password</IonLabel>
-            <IonInput ref={confirmPasswordInputRef} type='password' />
-          </IonItem>
-          <IonButton onClick={updatePasswordHandler} expand='full'>
-            Update Password
-          </IonButton>
+          <IonCard>
+            <IonCardContent>
+              <IonItem>
+                <IonText>Current Email Address: {email}</IonText>
+                <IonLabel position='floating'>New Email Adress</IonLabel>
+                <IonInput ref={emailInputRef} type='text' />
+              </IonItem>
+              <IonButton
+                onClick={updateEmailHandler}
+                color='success'
+                expand='full'
+              >
+                Update Email
+              </IonButton>
+            </IonCardContent>
+          </IonCard>
+          <IonCard>
+            <IonCardContent>
+              <IonItem>
+                <IonLabel position='floating'>Old Password</IonLabel>
+                <IonInput ref={oldPasswordInputRef} type='password' />
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>New Password</IonLabel>
+                <IonInput ref={newPasswordInputRef} type='password' />
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>Confirm New Password</IonLabel>
+                <IonInput ref={confirmPasswordInputRef} type='password' />
+              </IonItem>
+              <IonButton
+                onClick={updatePasswordHandler}
+                color='success'
+                expand='full'
+              >
+                Update Password
+              </IonButton>
+            </IonCardContent>
+          </IonCard>
         </IonList>
       </IonContent>
+
+      <AddButton url='/records/new' />
     </IonPage>
   );
 };

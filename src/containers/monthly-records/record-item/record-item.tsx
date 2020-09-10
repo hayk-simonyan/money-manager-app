@@ -28,7 +28,6 @@ const RecordItem: React.FC<Props> = ({
   records: { incomes, expences },
 }) => (
   <IonCol size='4'>
-    {/* <IonCard> */}
     <IonItem lines='full' button>
       <IonGrid>
         <IonRow>
@@ -45,7 +44,6 @@ const RecordItem: React.FC<Props> = ({
         </IonRow>
       </IonGrid>
     </IonItem>
-    {/* </IonCard> */}
   </IonCol>
 );
 

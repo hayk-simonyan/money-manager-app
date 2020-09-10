@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import ChartBuilder from './chart-builder/chart-builder';
+import ChartControls from '../../components/chart-controls/homepage-controls';
 
 interface MonthlyRecord {
   _id: string;
@@ -17,6 +18,8 @@ interface Props {
 const ChartRecords: React.FC<Props> = ({
   records: { records, incomes, expences, recordsByCategories, cashflow },
 }) => {
+  const [segment, setSegment] = useState<'expences' | 'incomes'>('expences');
+
   const expenceLabels: any = [];
   const expenceData: any = [];
 
@@ -35,7 +38,15 @@ const ChartRecords: React.FC<Props> = ({
 
   return (
     <React.Fragment>
-      <ChartBuilder labels={expenceLabels} data={expenceData} />
+      <ChartControls
+        segmentValue={segment}
+        segmentChangeHandler={(e) => setSegment(e)}
+      />
+      {segment === 'expences' ? (
+        <ChartBuilder labels={expenceLabels} data={expenceData} />
+      ) : (
+        <ChartBuilder labels={incomeLabels} data={incomeData} />
+      )}
     </React.Fragment>
   );
 };
