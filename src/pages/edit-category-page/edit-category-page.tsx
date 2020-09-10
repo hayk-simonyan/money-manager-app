@@ -15,6 +15,7 @@ import {
   IonIcon,
   IonButton,
   IonModal,
+  IonContent,
 } from '@ionic/react';
 
 import Header from '../../components/header/header';
@@ -93,71 +94,60 @@ const EditCategoryPage: React.FC<Props> = ({
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
       <Header title='Edit Category' menu={false} />
-      <IonGrid>
-        <IonRow>
-          <IonCol>
-            <IonItem>
-              <IonLabel>Type</IonLabel>
-              <IonSelect
-                value={type}
-                onIonChange={(e) => setType(e.detail.value)}
-              >
-                <IonSelectOption value='expences'>Expence</IonSelectOption>
-                <IonSelectOption value='incomes'>Income</IonSelectOption>
-              </IonSelect>
-            </IonItem>
-            <IonItem>
-              <IonButton color='light' onClick={() => setShowModal(true)}>
-                Icon
-              </IonButton>
-              {showSelectedIcon && (
-                <IonItem lines='none'>
-                  <IonIcon icon={selectedIcon}></IonIcon>
-                </IonItem>
-              )}
+      <IonContent>
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <IonItem>
+                <IonLabel>Type</IonLabel>
+                <IonSelect
+                  value={type}
+                  onIonChange={(e) => setType(e.detail.value)}
+                >
+                  <IonSelectOption value='expences'>Expence</IonSelectOption>
+                  <IonSelectOption value='incomes'>Income</IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              <IonItem onClick={() => setShowModal(true)} button>
+                <IonLabel>Icon</IonLabel>
+                {showSelectedIcon && (
+                  <IonItem lines='none'>
+                    <IonIcon icon={selectedIcon}></IonIcon>
+                  </IonItem>
+                )}
+              </IonItem>
 
-              <IonModal isOpen={showModal} cssClass='my-custom-class'>
-                <IonGrid>
-                  <IonRow>
-                    {iconsArray.map((icon: any, index: any) => (
-                      <CategoryItem
-                        chooseIconHandler={chooseIconHandler}
-                        key={index}
-                        iconString={icon}
-                      />
-                    ))}
-                  </IonRow>
-                </IonGrid>
-                <IonButton onClick={() => setShowModal(false)}>Close</IonButton>
-              </IonModal>
-            </IonItem>
-            {/* <IonItem>
-              <IonLabel>Icon</IonLabel>
-              <IonSelect
-                value={icon}
-                cancelText='Cancel'
-                okText='Ok'
-                onIonChange={(e) => setIcon(e.detail.value)}
-              >
-                <IonSelectOption value='bacon'>Bacon</IonSelectOption>
-                <IonSelectOption value='olives'>Black Olives</IonSelectOption>
-                <IonSelectOption value='xcheese'>Extra Cheese</IonSelectOption>
-                <IonSelectOption value='peppers'>Green Peppers</IonSelectOption>
-                <IonSelectOption value='mushrooms'>Mushrooms</IonSelectOption>
-                <IonSelectOption value='onions'>Onions</IonSelectOption>
-                <IonSelectOption value='pepperoni'>Pepperoni</IonSelectOption>
-                <IonSelectOption value='pineapple'>Pineapple</IonSelectOption>
-                <IonSelectOption value='sausage'>Sausage</IonSelectOption>
-                <IonSelectOption value='Spinach'>Spinach</IonSelectOption>
-              </IonSelect>
-            </IonItem> */}
-            <IonItem>
-              <IonLabel position='floating'>Name</IonLabel>
-              <IonInput value={name} ref={nameInputRef} type='text'></IonInput>
-            </IonItem>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
+              <IonItem>
+                <IonLabel position='floating'>Name</IonLabel>
+                <IonInput
+                  value={name}
+                  ref={nameInputRef}
+                  type='text'
+                ></IonInput>
+              </IonItem>
+              <IonItem lines='none'>
+                <IonModal isOpen={showModal} cssClass='my-custom-class'>
+                  <IonGrid>
+                    <IonRow>
+                      {iconsArray.map((icon: any, index: any) => (
+                        <CategoryItem
+                          chooseIconHandler={chooseIconHandler}
+                          key={index}
+                          iconString={icon}
+                        />
+                      ))}
+                    </IonRow>
+                  </IonGrid>
+                  <IonButton onClick={() => setShowModal(false)}>
+                    Close
+                  </IonButton>
+                </IonModal>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </IonContent>
+
       <SubmitButton onClickHandler={updateRecordHandler} />
     </IonPage>
   );
