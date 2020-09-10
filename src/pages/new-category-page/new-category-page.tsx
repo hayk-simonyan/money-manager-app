@@ -15,6 +15,7 @@ import {
   IonIcon,
   IonModal,
   IonButton,
+  IonContent,
 } from '@ionic/react';
 
 import Header from '../../components/header/header';
@@ -78,75 +79,57 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <Header title='Add Category' menu={false} />
-      <IonGrid>
-        <IonRow>
-          <IonCol>
-            <IonItem>
-              <IonLabel>Type</IonLabel>
-              <IonSelect
-                value={type}
-                onIonChange={(e) => setType(e.detail.value)}
-              >
-                <IonSelectOption value='expences'>Expence</IonSelectOption>
-                <IonSelectOption value='incomes'>Income</IonSelectOption>
-              </IonSelect>
-            </IonItem>
-            <IonItem>
-              <IonButton color='light' onClick={() => setShowModal(true)}>
-                Icon
-              </IonButton>
-              {showSelectedIcon && (
-                <IonItem lines='none'>
-                  <IonIcon icon={selectedIcon}></IonIcon>
-                </IonItem>
-              )}
+      <Header title='New Category' menu={false} />
+      <IonContent>
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <IonItem>
+                <IonLabel>Type</IonLabel>
+                <IonSelect
+                  value={type}
+                  onIonChange={(e) => setType(e.detail.value)}
+                >
+                  <IonSelectOption value='expences'>Expence</IonSelectOption>
+                  <IonSelectOption value='incomes'>Income</IonSelectOption>
+                </IonSelect>
+              </IonItem>
+              <IonItem onClick={() => setShowModal(true)} button>
+                <IonLabel>Icon</IonLabel>
+                {showSelectedIcon && (
+                  <IonItem lines='none'>
+                    <IonIcon icon={selectedIcon}></IonIcon>
+                  </IonItem>
+                )}
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>Name</IonLabel>
+                <IonInput ref={nameInputRef} type='text'></IonInput>
+              </IonItem>
 
-              <IonModal isOpen={showModal} cssClass='my-custom-class'>
-                <IonGrid>
-                  <IonRow>
-                    {iconsArray.map((icon: any, index: any) => (
-                      <CategoryItem
-                        chooseIconHandler={chooseIconHandler}
-                        key={index}
-                        iconString={icon}
-                      />
-                    ))}
-                  </IonRow>
-                </IonGrid>
-                <IonButton onClick={() => setShowModal(false)}>Close</IonButton>
-              </IonModal>
-            </IonItem>
-            {/* <IonItem>
-              <IonLabel>Icon</IonLabel>
-              <IonSelect
-                value={icon}
-                cancelText='Cancel'
-                okText='Ok'
-                onIonChange={(e) => setIcon(e.detail.value)}
-              >
-                {iconsArray.map((icon: any, index: any) => (
-                  <CategoryItem key={index} iconString={icon} />
-                ))}
-                <IonSelectOption value='bacon'>Bacon</IonSelectOption>
-                <IonSelectOption value='olives'>Black Olives</IonSelectOption>
-                <IonSelectOption value='xcheese'>Extra Cheese</IonSelectOption>
-                <IonSelectOption value='peppers'>Green Peppers</IonSelectOption>
-                <IonSelectOption value='mushrooms'>Mushrooms</IonSelectOption>
-                <IonSelectOption value='onions'>Onions</IonSelectOption>
-                <IonSelectOption value='pepperoni'>Pepperoni</IonSelectOption>
-                <IonSelectOption value='pineapple'>Pineapple</IonSelectOption>
-                <IonSelectOption value='sausage'>Sausage</IonSelectOption>
-                <IonSelectOption value='Spinach'>Spinach</IonSelectOption>
-              </IonSelect>
-            </IonItem> */}
-            <IonItem>
-              <IonLabel position='floating'>Name</IonLabel>
-              <IonInput ref={nameInputRef} type='text'></IonInput>
-            </IonItem>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
+              {/* conditional icon sheet */}
+              <IonItem lines='none'>
+                <IonModal isOpen={showModal} cssClass='my-custom-class'>
+                  <IonGrid>
+                    <IonRow>
+                      {iconsArray.map((icon: any, index: any) => (
+                        <CategoryItem
+                          chooseIconHandler={chooseIconHandler}
+                          key={index}
+                          iconString={icon}
+                        />
+                      ))}
+                    </IonRow>
+                  </IonGrid>
+                  <IonButton onClick={() => setShowModal(false)}>
+                    Close
+                  </IonButton>
+                </IonModal>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </IonContent>
       <SubmitButton onClickHandler={addRecordHandler} />
     </IonPage>
   );
