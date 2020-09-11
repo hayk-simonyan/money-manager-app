@@ -214,12 +214,12 @@ const EditRecordPage: React.FC<Props> = ({
           </IonRow>
           <IonRow>
             <IonCol size='2' offset='2'>
-              <IonButton onClick={openModal} color='danger'>
+              <IonButton onClick={openModal} color='tertiary'>
                 <IonIcon icon={trashOutline} slot='icon-only' />
               </IonButton>
             </IonCol>
             <IonCol size='4' offset='4'>
-              <IonButton onClick={updateRecordHandler} color='success'>
+              <IonButton onClick={updateRecordHandler} color='primary'>
                 <IonIcon icon={checkmarkOutline} slot='icon-only' />
               </IonButton>
             </IonCol>

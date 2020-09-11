@@ -19,6 +19,8 @@ import { trash } from 'ionicons/icons';
 import { connect } from 'react-redux';
 import { getCategories } from '../../../redux/categories/category.actions';
 
+import './record-item.css';
+
 interface Props {
   record: {
     _id: string;
@@ -98,8 +100,8 @@ const RecordItem: React.FC<Props> = ({
         </IonItemOptions>
         <IonItem routerLink={`/records/${_id}`} lines='full' button>
           <IonGrid>
-            <IonRow>
-              <IonCol size='2'>
+            <IonRow className='container'>
+              <IonCol size='2' className='vertical-align'>
                 <IonIcon icon={selectedIcon}></IonIcon>
               </IonCol>
               <IonCol size='6'>

@@ -82,7 +82,7 @@ const SettingsPage: React.FC<Props> = ({
               </IonItem>
               <IonButton
                 onClick={updateEmailHandler}
-                color='success'
+                color='tertiary'
                 expand='full'
               >
                 Update Email
@@ -105,7 +105,7 @@ const SettingsPage: React.FC<Props> = ({
               </IonItem>
               <IonButton
                 onClick={updatePasswordHandler}
-                color='success'
+                color='tertiary'
                 expand='full'
               >
                 Update Password

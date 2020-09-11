@@ -15,6 +15,8 @@ import { connect } from 'react-redux';
 import { deleteCategory } from '../../../redux/categories/category.actions';
 import { setAlert } from '../../../redux/alerts/alert.actions';
 
+import './category-item.css';
+
 interface Props {
   category: {
     _id: string;
@@ -58,21 +60,29 @@ const CategoryItem: React.FC<Props> = ({
       />
       <IonGrid>
         <IonRow>
-          <IonCol size='2'>
-            <IonLabel>
+          <IonCol size='2' className='container'>
+            <IonLabel className='vertical-center'>
               <IonIcon icon={iconOutline}></IonIcon>
             </IonLabel>
           </IonCol>
-          <IonCol size='6'>
-            <IonLabel>{name}</IonLabel>
+          <IonCol size='6' className='container'>
+            <IonLabel className='vertical-center'>{name}</IonLabel>
           </IonCol>
-          <IonCol size='2'>
-            <IonButton color='secondary' onClick={openModal}>
+          <IonCol size='2' className='container'>
+            <IonButton
+              onClick={openModal}
+              color='secondary'
+              className='vertical-align'
+            >
               <IonIcon slot='icon-only' icon={trashOutline}></IonIcon>
             </IonButton>
           </IonCol>
-          <IonCol size='2'>
-            <IonButton routerLink={`/categories/${_id}`} color='secondary'>
+          <IonCol size='2' className='container'>
+            <IonButton
+              routerLink={`/categories/${_id}`}
+              color='secondary'
+              className='vertical-align'
+            >
               <IonIcon slot='icon-only' icon={createOutline}></IonIcon>
             </IonButton>
           </IonCol>
