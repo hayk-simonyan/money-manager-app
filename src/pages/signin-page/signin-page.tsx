@@ -10,6 +10,7 @@ import {
   IonAlert,
   IonPage,
   IonButton,
+  IonContent,
 } from '@ionic/react';
 
 import Header from '../../components/header/header';
@@ -17,6 +18,8 @@ import Header from '../../components/header/header';
 import { connect } from 'react-redux';
 import { signin } from '../../redux/auth/auth.actions';
 import { Redirect } from 'react-router-dom';
+
+import './signin-page.css';
 
 interface Props {
   signin: (email: string, password: string) => void;
@@ -66,29 +69,41 @@ const SigninPage: React.FC<Props> = ({
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
       <Header title='Money Manager' menu={true} />
-      <IonGrid>
-        <IonRow>
-          <IonCol>
-            <IonItem>
-              <IonLabel position='floating'>Email</IonLabel>
-              <IonInput ref={emailInputRef} type='text' />
-            </IonItem>
-            <IonItem>
-              <IonLabel position='floating'>Password</IonLabel>
-              <IonInput ref={passwordInputRef} type='password'></IonInput>
-            </IonItem>
-          </IonCol>
-        </IonRow>
-        <IonButton onClick={signInHandler} expand='block' color='secondary'>
-          Sign In
-        </IonButton>
-        <IonItem lines='none'>
-          <IonLabel>Create account? </IonLabel>
-          <IonButton color='secondary' routerLink='/signup' expand='block'>
-            Sign Up
+      <IonContent>
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <IonItem>
+                <IonLabel position='floating'>Email</IonLabel>
+                <IonInput ref={emailInputRef} type='text' />
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>Password</IonLabel>
+                <IonInput ref={passwordInputRef} type='password'></IonInput>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+          <IonButton onClick={signInHandler} expand='block' color='tertiary'>
+            Sign In
           </IonButton>
-        </IonItem>
-      </IonGrid>
+          <IonItem lines='none'>
+            <IonGrid>
+              <IonRow>
+                <IonCol size='6' className='container'>
+                  <IonLabel className='vertical-center'>
+                    Create account?{' '}
+                  </IonLabel>
+                </IonCol>
+                <IonCol size='6'>
+                  <IonButton color='light' routerLink='/signup' expand='block'>
+                    Sign Up
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+          </IonItem>
+        </IonGrid>
+      </IonContent>
     </IonPage>
   );
 };
