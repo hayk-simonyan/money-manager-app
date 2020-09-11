@@ -19,7 +19,6 @@ import {
   informationCircleOutline,
   appsOutline,
   settingsOutline,
-  exitOutline,
   logOutOutline,
 } from 'ionicons/icons';
 import { connect } from 'react-redux';

@@ -9,6 +9,7 @@ import {
   IonAlert,
   IonPage,
   IonButton,
+  IonContent,
 } from '@ionic/react';
 import { connect } from 'react-redux';
 
@@ -16,8 +17,10 @@ import Header from '../../components/header/header';
 import { signup } from '../../redux/auth/auth.actions';
 import { Redirect } from 'react-router-dom';
 
+import './signup-page.css';
+
 interface Props {
-  signup: (email: string, password: string) => void;
+  signup: (name: string, email: string, password: string) => void;
   auth: {
     isAuthenticated: any;
     loading: boolean;
@@ -30,17 +33,17 @@ const SignupPage: React.FC<Props> = ({
 }) => {
   const [error, setError] = useState<string>();
 
-  // const nameInputRef = useRef<HTMLIonInputElement>(null);
+  const nameInputRef = useRef<HTMLIonInputElement>(null);
   const emailInputRef = useRef<HTMLIonInputElement>(null);
   const passwordInputRef = useRef<HTMLIonInputElement>(null);
 
   const signUpHandler = () => {
-    // const name = nameInputRef.current!.value;
+    const name = nameInputRef.current!.value;
     const email = emailInputRef.current!.value;
     const password = passwordInputRef.current!.value;
 
     if (
-      // !name ||
+      !name ||
       !email ||
       !password ||
       email.toString().trim().length === 0 ||
@@ -50,7 +53,7 @@ const SignupPage: React.FC<Props> = ({
       return;
     }
 
-    signup(email.toString().trim(), password.toString());
+    signup(name.toString(), email.toString().trim(), password.toString());
   };
 
   const clearError = () => {
@@ -67,40 +70,52 @@ const SignupPage: React.FC<Props> = ({
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
       <Header title='Money Manager' menu={true} />
-      <IonGrid>
-        <IonRow>
-          <IonCol>
-            {/* <IonItem>
-              <IonLabel position='floating'>Full Name</IonLabel>
-              <IonInput ref={nameInputRef} type='text' />
-            </IonItem> */}
-            <IonItem>
-              <IonLabel position='floating'>Email</IonLabel>
-              <IonInput ref={emailInputRef} type='text' />
-            </IonItem>
-            <IonItem>
-              <IonLabel position='floating'>Password</IonLabel>
-              <IonInput ref={passwordInputRef} type='password'></IonInput>
-            </IonItem>
-          </IonCol>
-        </IonRow>
-        <IonButton onClick={signUpHandler} expand='block' color='secondary'>
-          Sign Up
-        </IonButton>
-        <IonItem lines='none'>
-          <IonLabel>Have an account? </IonLabel>
-          <IonButton color='light' routerLink='/signin' expand='block'>
-            Sign In
+      <IonContent>
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <IonItem>
+                <IonLabel position='floating'>Full Name</IonLabel>
+                <IonInput ref={nameInputRef} type='text' />
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>Email</IonLabel>
+                <IonInput ref={emailInputRef} type='text' />
+              </IonItem>
+              <IonItem>
+                <IonLabel position='floating'>Password</IonLabel>
+                <IonInput ref={passwordInputRef} type='password'></IonInput>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+          <IonButton onClick={signUpHandler} expand='block' color='tertiary'>
+            Sign Up
           </IonButton>
-        </IonItem>
-      </IonGrid>
+          <IonItem lines='none'>
+            <IonGrid>
+              <IonRow>
+                <IonCol size='6' className='container'>
+                  <IonLabel className='vertical-center'>
+                    Have an account?
+                  </IonLabel>
+                </IonCol>
+                <IonCol size='6'>
+                  <IonButton color='light' routerLink='/signin' expand='block'>
+                    Sign In
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+          </IonItem>
+        </IonGrid>
+      </IonContent>
     </IonPage>
   );
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  signup: (email: string, password: string) =>
-    dispatch(signup(email, password)),
+  signup: (name: string, email: string, password: string) =>
+    dispatch(signup(name, email, password)),
 });
 
 const mapStateToProps = (state: any) => ({

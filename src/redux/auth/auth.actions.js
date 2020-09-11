@@ -19,14 +19,14 @@ import { getCategories } from '../categories/category.actions';
 import { getRecords } from '../records/record.actions';
 import { setAlert } from '../alerts/alert.actions';
 
-export const signup = (email, password) => async (dispatch) => {
+export const signup = (name, email, password) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  const body = JSON.stringify({ email, password });
+  const body = JSON.stringify({ name, email, password });
 
   try {
     const res = await axios.post('/users', body, config);
@@ -98,7 +98,7 @@ export const loadUser = () => async (dispatch) => {
 
     dispatch(getAccounts());
     dispatch(getCategories());
-    // dispatch(getRecords());
+    dispatch(getRecords());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
