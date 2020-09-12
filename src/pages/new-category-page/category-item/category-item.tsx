@@ -29,12 +29,6 @@ const NewCategoryItem: React.FC<Props> = ({
           <IonIcon size='medium' icon={iconOutline}></IonIcon>
         </IonItem>
       </IonCol>
-      {/* <IonSelectOption value={iconString}>
-        <i className='fas fa-paw'></i>
-        <IonLabel>
-          <IonIcon icon={iconOutline}></IonIcon>text
-        </IonLabel>
-      </IonSelectOption> */}
     </React.Fragment>
   );
 };
