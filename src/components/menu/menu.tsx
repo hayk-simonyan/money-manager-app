@@ -42,7 +42,7 @@ const Menu: React.FC<Props> = ({
     <IonMenu contentId='main' side='start' menuId='id'>
       <IonHeader>
         <IonToolbar color='primary'>
-          <IonItem routerLink='/settings' color='primary' button>
+          <IonItem routerLink='/settings' color='primary' lines='none' button>
             <IonTitle>Money Manager</IonTitle>
           </IonItem>
         </IonToolbar>
