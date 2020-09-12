@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Money Manager</string>
     <string name="title_activity_main">Money Manager</string>
-    <string name="package_name">com.moneymanager.www</string>
-    <string name="custom_url_scheme">com.moneymanager.www</string>
+    <string name="package_name">app.web.moneymanager</string>
+    <string name="custom_url_scheme">app.web.moneymanager</string>
 </resources>

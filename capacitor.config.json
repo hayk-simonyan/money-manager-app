@@ -1,5 +1,5 @@
 {
-  "appId": "com.moneymanager.www",
+  "appId": "app.web.moneymanager",
   "appName": "Money Manager",
   "bundledWebRuntime": false,
   "npmClient": "npm",

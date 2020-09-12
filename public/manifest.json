@@ -1,6 +1,6 @@
 {
-  "short_name": "Ionic App",
-  "name": "My Ionic App",
+  "short_name": "Money Manager",
+  "name": "Money Manager, Free Expense and Balance Tracker",
   "icons": [
     {
       "src": "assets/icon/favicon.png",

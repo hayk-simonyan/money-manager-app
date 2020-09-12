@@ -1,4 +1,4 @@
-package com.moneymanager.www;
+package app.web.moneymanager;
 
 import android.os.Bundle;
 
