@@ -25,8 +25,8 @@ interface Props {
   record: {
     _id: string;
     type: string;
-    account: string;
-    category: string;
+    account: any;
+    category: any;
     date: Date;
     amount: number;
     note: string;
@@ -59,16 +59,21 @@ const RecordItem: React.FC<Props> = ({
     setToastMessage('Record removed');
   };
 
-  const dateObj = new Date(date);
-  let month = dateObj.getMonth() + 1;
-  let day = String(dateObj.getDate()).padStart(2, '0');
+  let [month, day, year] = new Date(date).toLocaleDateString().split('/');
 
-  const acc = accounts.find((a: any) => a._id === account);
-  const categ = categories.find((c: any) => c._id === category);
+  // const acc = accounts.find((a: any) => a._id === account);
 
-  let selectedIcon = require(`../../../assets/ionicons/${categ.icon}.svg`);
+  // const categ = categories.find((c: any) => {
+  //   console.log(c._id);
+  //   console.log(category);
+  //   console.log(c._id === category);
+  //   return c._id === category;
+  // });
+  // console.log('categ', categ);
 
-  return categ ? (
+  let selectedIcon = require(`../../../assets/ionicons/${category.icon}.svg`);
+
+  return (
     <React.Fragment>
       <IonToast
         isOpen={!!toastMessage}
@@ -105,7 +110,7 @@ const RecordItem: React.FC<Props> = ({
                 <IonIcon icon={selectedIcon}></IonIcon>
               </IonCol>
               <IonCol size='6'>
-                <IonLabel>{categ.name}</IonLabel>
+                <IonLabel>{category.name}</IonLabel>
               </IonCol>
               <IonCol size='4' className='ion-text-right'>
                 <IonLabel>
@@ -115,7 +120,7 @@ const RecordItem: React.FC<Props> = ({
             </IonRow>
             <IonRow>
               <IonCol size='4' offset='2'>
-                <IonCardSubtitle>{acc.name}</IonCardSubtitle>
+                <IonCardSubtitle>{account.name}</IonCardSubtitle>
               </IonCol>
               <IonCol size='6' className='ion-text-right'>
                 <IonCardSubtitle>{day + '/' + month}</IonCardSubtitle>
@@ -125,7 +130,7 @@ const RecordItem: React.FC<Props> = ({
         </IonItem>
       </IonItemSliding>
     </React.Fragment>
-  ) : null;
+  );
 };
 
 const mapDispatchToProps = (dispatch: any) => ({

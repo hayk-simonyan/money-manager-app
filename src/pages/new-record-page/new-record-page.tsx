@@ -94,7 +94,7 @@ const NewRecordPage: React.FC<Props> = ({
       note!.toString()
     );
     setAlert('Record was Added!', 'success');
-    history.push('/records');
+    // history.push('/records');
   };
 
   const clearError = () => {

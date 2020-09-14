@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  IonSelectOption,
-  IonIcon,
-  IonLabel,
-  IonCol,
-  IonItem,
-} from '@ionic/react';
+import { IonIcon, IonCol, IonItem } from '@ionic/react';
 
 interface Props {
   iconString: string;

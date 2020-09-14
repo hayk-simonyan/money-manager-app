@@ -12,16 +12,11 @@ export const getRecords = (y: string = '', m: string = '') => async (
   dispatch: any
 ) => {
   try {
-    const date = new Date();
-    let month = date.getMonth().toString();
-    const year = date.getFullYear().toString();
-    if (month.length === 1) month = `0${month}`;
-    if (!m) m = month;
-    if (!y) y = year;
-    let nextMonth = (parseInt(m) + 1).toString();
-    if (nextMonth.length === 1) nextMonth = `0${nextMonth}`;
+    const gt = new Date(parseInt(y), parseInt(m), 1);
+    const lt = new Date(parseInt(y), parseInt(m) + 1, 1);
 
-    const query = `?date[gte]=${y}-${m}-01T00:00:00.000Z&date[lt]=${y}-${nextMonth}-01T00:00:00.000Z`;
+    const query = `?date[gte]=${gt}&date[lt]=${lt}`;
+    // const query = `?date[gte]=${y}-${m}-01T00:00:00.000Z&date[lt]=${y}-${nextMonth}-01T00:00:00.000Z`;
 
     console.log(query);
 
