@@ -42,15 +42,9 @@ export default function (
     case PUT_RECORD:
       return {
         ...state,
-        records: state.records.map((record) => {
-          // @ts-ignore
-          console.log(record._id);
-          console.log(payload._id);
-          // @ts-ignore
-          console.log(record._id === payload._id);
-          // @ts-ignore
-          return record._id === payload._id ? payload : record;
-        }),
+        records: state.records.map((record: any) =>
+          record._id === payload._id ? payload : record
+        ),
         loading: false,
       };
     case DELETE_RECORD:

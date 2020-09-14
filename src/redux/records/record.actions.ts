@@ -18,8 +18,6 @@ export const getRecords = (y: string = '', m: string = '') => async (
     const query = `?date[gte]=${gt}&date[lt]=${lt}`;
     // const query = `?date[gte]=${y}-${m}-01T00:00:00.000Z&date[lt]=${y}-${nextMonth}-01T00:00:00.000Z`;
 
-    console.log(query);
-
     const res = await axios.get(`/records${query}`);
 
     dispatch({
@@ -112,8 +110,6 @@ export const putRecord = (
 
   try {
     const res = await axios.put(`/records/${id}`, body, config);
-
-    console.log(res.data);
 
     return dispatch({
       type: PUT_RECORD,

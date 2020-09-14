@@ -46,8 +46,8 @@ interface Props {
 interface Record {
   _id: string;
   type: string;
-  account: string;
-  category: string;
+  account: any;
+  category: any;
   date: Date;
   amount: number;
   note: string;
@@ -69,12 +69,10 @@ const EditRecordPage: React.FC<Props> = ({
 
   const { id } = useParams();
   const currentRecord = records.find((r: Record) => r._id === id);
-  const acc = accounts.find((a: any) => a._id === currentRecord.account);
-  const categ = categories.find((c: any) => c._id === currentRecord.category);
 
   const [type, setType] = useState<string>(currentRecord.type);
-  const [account, setAccount] = useState<string>(acc.name);
-  const [category, setCategory] = useState<string>(categ.name);
+  const [account, setAccount] = useState<string>(currentRecord.account.name);
+  const [category, setCategory] = useState<string>(currentRecord.category.name);
   const [date, setDate] = useState<string>(currentRecord.date);
   const amountInputRef = useRef<HTMLIonInputElement>(currentRecord.amount);
   const [amount, setAmount] = useState<number>(currentRecord.amount);
