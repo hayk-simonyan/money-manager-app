@@ -12,11 +12,26 @@ export const getRecords = (y: string = '', m: string = '') => async (
   dispatch: any
 ) => {
   try {
-    const gt = new Date(parseInt(y), parseInt(m), 1);
-    const lt = new Date(parseInt(y), parseInt(m) + 1, 1);
+    let gte;
+    let lt;
 
-    const query = `?date[gte]=${gt}&date[lt]=${lt}`;
-    // const query = `?date[gte]=${y}-${m}-01T00:00:00.000Z&date[lt]=${y}-${nextMonth}-01T00:00:00.000Z`;
+    // build default query if no month specified
+    if (y === '' || m === '') {
+      const date = new Date();
+      const month = date.getMonth();
+      const year = date.getFullYear();
+
+      gte = new Date(year, month, 1);
+      lt = new Date(year, month + 1, 1);
+    } else {
+      gte = new Date(parseInt(y), parseInt(m), 1);
+      lt = new Date(parseInt(y), parseInt(m) + 1, 1);
+    }
+
+    let query = `?date[gte]=${gte}&date[lt]=${lt}`;
+    // query = `?date[gte]=${year}-${thisMonth}-01T00:00:00.000Z&date[lt]=${year}-${nextMonth}-01T00:00:00.000Z`;
+
+    console.log(query);
 
     const res = await axios.get(`/records${query}`);
 

@@ -94,7 +94,7 @@ const NewRecordPage: React.FC<Props> = ({
       note!.toString()
     );
     setAlert('Record was Added!', 'success');
-    history.push('/records');
+    history.push('/');
   };
 
   const clearError = () => {
@@ -125,6 +125,7 @@ const NewRecordPage: React.FC<Props> = ({
                 <IonSelect
                   value={type}
                   onIonChange={(e) => setType(e.detail.value)}
+                  interface='action-sheet'
                 >
                   <IonSelectOption value='expences'>Expences</IonSelectOption>
                   <IonSelectOption value='incomes'>Incomes</IonSelectOption>
@@ -135,6 +136,7 @@ const NewRecordPage: React.FC<Props> = ({
                 <IonSelect
                   value={account}
                   onIonChange={(e) => setAccount(e.detail.value)}
+                  interface='action-sheet'
                 >
                   {accounts &&
                     accounts.map((a: any) => (
@@ -151,6 +153,7 @@ const NewRecordPage: React.FC<Props> = ({
                   cancelText='Cancel'
                   okText='Ok'
                   onIonChange={(e) => setCategory(e.detail.value)}
+                  interface='action-sheet'
                 >
                   {categories &&
                     categories.map((c: any) => {
