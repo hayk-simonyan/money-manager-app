@@ -40,7 +40,6 @@ interface Props {
   accounts: { accounts: any; loading: boolean };
   putAccount: (id: string, icon: string, name: string, total: string) => void;
   deleteAccount: (id: string) => void;
-  getAccounts: () => void;
   setAlert: (msg: string, alertType: string) => void;
 }
 
@@ -48,7 +47,6 @@ const EditAccountPage: React.FC<Props> = ({
   accounts: { accounts, loading },
   putAccount,
   deleteAccount,
-  getAccounts,
   setAlert,
 }) => {
   const history = useHistory();
@@ -84,10 +82,9 @@ const EditAccountPage: React.FC<Props> = ({
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const deleteAccountHandler = () => {
-    deleteAccount(id);
-    getAccounts();
-    setAlert('Account Was Removed', 'success');
     history.push('/');
+    deleteAccount(id);
+    setAlert('Account Was Removed', 'success');
   };
 
   const openModal = () => {
@@ -102,17 +99,17 @@ const EditAccountPage: React.FC<Props> = ({
   ) : (
     <IonPage>
       <IonAlert
-        isOpen={!!error}
-        message={error}
-        buttons={[{ text: 'Ok', handler: clearError }]}
-      />
-      <IonAlert
         isOpen={isOpen}
         message='Are you sure? This will also remove all the records related to this account'
         buttons={[
           { text: 'No', handler: clearModal },
           { text: 'Yes', handler: deleteAccountHandler },
         ]}
+      />
+      <IonAlert
+        isOpen={!!error}
+        message={error}
+        buttons={[{ text: 'Ok', handler: clearError }]}
       />
       <Header title='Accounts' menu={false} />
       <IonContent>
@@ -182,7 +179,6 @@ const mapDispatchToProps = (dispatch: any) => ({
   putAccount: (id: string, icon: string, name: string, total: string) =>
     dispatch(putAccount(id, icon, name, total)),
   deleteAccount: (id: string) => dispatch(deleteAccount(id)),
-  getAccounts: () => dispatch(getAccounts()),
   setAlert: (msg: string, alertType: string) =>
     dispatch(setAlert(msg, alertType)),
 });

@@ -154,10 +154,11 @@ export const deleteRecord = (id: string) => async (dispatch: any) => {
 
   try {
     const res = await axios.delete(`/records/${id}`, config);
+    console.log(res.data);
 
     dispatch({
       type: DELETE_RECORD,
-      payload: res.data,
+      payload: id,
     });
   } catch (err) {
     const errors = err.response.data.errors;

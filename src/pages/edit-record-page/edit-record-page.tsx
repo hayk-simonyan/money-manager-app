@@ -79,6 +79,11 @@ const EditRecordPage: React.FC<Props> = ({
   const noteInputRef = useRef<HTMLIonInputElement>(null);
   const [note, setNote] = useState<string>(currentRecord.note);
 
+  const changeRecordTypeHandler = (e: any) => {
+    setType(e.detail.value);
+    setCategory('');
+  };
+
   const updateRecordHandler = () => {
     const amount = amountInputRef.current!.value;
     const note = noteInputRef.current!.value;
@@ -108,12 +113,12 @@ const EditRecordPage: React.FC<Props> = ({
       note!.toString()
     );
     setAlert('Record was Updated', 'success');
-    history.push('/records');
+    history.push('/');
   };
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const deleteRecordHandler = async () => {
-    history.push('/records');
+  const deleteRecordHandler = () => {
+    history.push('/');
     deleteRecord(id);
     setAlert('Record was Removed', 'success');
   };
@@ -147,12 +152,14 @@ const EditRecordPage: React.FC<Props> = ({
         <IonGrid>
           <IonRow>
             <IonCol>
+              <IonDatetime
+                value={date}
+                onIonChange={(e) => setDate(e.detail.value!)}
+                display-timezone='utc'
+              ></IonDatetime>
               <IonItem>
                 <IonLabel>Type</IonLabel>
-                <IonSelect
-                  value={type}
-                  onIonChange={(e) => setType(e.detail.value)}
-                >
+                <IonSelect value={type} onIonChange={changeRecordTypeHandler}>
                   <IonSelectOption value='expences'>Expences</IonSelectOption>
                   <IonSelectOption value='incomes'>Incomes</IonSelectOption>
                 </IonSelect>
@@ -180,11 +187,22 @@ const EditRecordPage: React.FC<Props> = ({
                   onIonChange={(e) => setCategory(e.detail.value)}
                 >
                   {categories &&
-                    categories.map((c: any) => (
-                      <IonSelectOption key={c._id} value={c.name}>
-                        {c.name}
-                      </IonSelectOption>
-                    ))}
+                    categories.map((c: any) => {
+                      if (type === 'expences' && c.type === 'expences') {
+                        return (
+                          <IonSelectOption key={c._id} value={c.name}>
+                            {c.name}
+                          </IonSelectOption>
+                        );
+                      }
+                      if (type === 'incomes' && c.type === 'incomes') {
+                        return (
+                          <IonSelectOption key={c._id} value={c.name}>
+                            {c.name}
+                          </IonSelectOption>
+                        );
+                      }
+                    })}
                 </IonSelect>
               </IonItem>
               <IonItem>
@@ -203,11 +221,6 @@ const EditRecordPage: React.FC<Props> = ({
                   type='text'
                 ></IonInput>
               </IonItem>
-              <IonDatetime
-                value={date}
-                onIonChange={(e) => setDate(e.detail.value!)}
-                display-timezone='utc'
-              ></IonDatetime>
             </IonCol>
           </IonRow>
           <IonRow>

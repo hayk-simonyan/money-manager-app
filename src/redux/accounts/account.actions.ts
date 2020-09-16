@@ -103,19 +103,13 @@ export const putAccount = (
 };
 
 export const deleteAccount = (id: string) => async (dispatch: any) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
   try {
-    const res = await axios.delete(`/accounts/${id}`, config);
+    const res = await axios.delete(`/accounts/${id}`);
     console.log(res.data);
 
     dispatch({
       type: DELETE_ACCOUNT,
-      payload: res.data,
+      payload: id,
     });
   } catch (err) {
     const errors = err.response.data.errors;

@@ -44,7 +44,7 @@ export default function (
       return {
         ...state,
         // @ts-ignore
-        accounts: state.accounts.filter((a) => a._id !== payload.id),
+        accounts: state.accounts.filter((a) => a._id !== payload),
         loading: false,
       };
     case ACCOUNTS_ERROR:

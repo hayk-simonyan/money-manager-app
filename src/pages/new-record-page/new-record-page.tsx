@@ -66,6 +66,11 @@ const NewRecordPage: React.FC<Props> = ({
   const amountInputRef = useRef<HTMLIonInputElement>(null);
   const noteInputRef = useRef<HTMLIonInputElement>(null);
 
+  const changeRecordTypeHandler = (e: any) => {
+    setType(e.detail.value);
+    setCategory('');
+  };
+
   const addRecordHandler = () => {
     const amount = amountInputRef.current!.value;
     const note = noteInputRef.current!.value;
@@ -122,11 +127,7 @@ const NewRecordPage: React.FC<Props> = ({
               ></IonDatetime>
               <IonItem>
                 <IonLabel>Type</IonLabel>
-                <IonSelect
-                  value={type}
-                  onIonChange={(e) => setType(e.detail.value)}
-                  interface='action-sheet'
-                >
+                <IonSelect value={type} onIonChange={changeRecordTypeHandler}>
                   <IonSelectOption value='expences'>Expences</IonSelectOption>
                   <IonSelectOption value='incomes'>Incomes</IonSelectOption>
                 </IonSelect>
@@ -136,7 +137,6 @@ const NewRecordPage: React.FC<Props> = ({
                 <IonSelect
                   value={account}
                   onIonChange={(e) => setAccount(e.detail.value)}
-                  interface='action-sheet'
                 >
                   {accounts &&
                     accounts.map((a: any) => (
@@ -153,7 +153,6 @@ const NewRecordPage: React.FC<Props> = ({
                   cancelText='Cancel'
                   okText='Ok'
                   onIonChange={(e) => setCategory(e.detail.value)}
-                  interface='action-sheet'
                 >
                   {categories &&
                     categories.map((c: any) => {
