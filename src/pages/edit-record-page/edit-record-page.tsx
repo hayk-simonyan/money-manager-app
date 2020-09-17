@@ -68,7 +68,9 @@ const EditRecordPage: React.FC<Props> = ({
   };
 
   const { id } = useParams();
-  const currentRecord = records.find((r: Record) => r._id === id);
+  const findRecord = records.find((r: Record) => r._id === id);
+  const currentRecord = { ...findRecord };
+  console.log(currentRecord);
 
   const [type, setType] = useState<string>(currentRecord.type);
   const [account, setAccount] = useState<string>(currentRecord.account.name);
@@ -123,11 +125,8 @@ const EditRecordPage: React.FC<Props> = ({
     setAlert('Record was Removed', 'success');
   };
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-  const clearModal = () => {
-    setIsOpen(false);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
   };
 
   return loading ? (
@@ -138,7 +137,7 @@ const EditRecordPage: React.FC<Props> = ({
         isOpen={isOpen}
         message='Are you sure?'
         buttons={[
-          { text: 'No', handler: clearModal },
+          { text: 'No', handler: toggleModal },
           { text: 'Yes', handler: deleteRecordHandler },
         ]}
       />
@@ -225,7 +224,7 @@ const EditRecordPage: React.FC<Props> = ({
           </IonRow>
           <IonRow>
             <IonCol size='2' offset='2'>
-              <IonButton onClick={openModal} color='tertiary'>
+              <IonButton onClick={toggleModal} color='tertiary'>
                 <IonIcon icon={trashOutline} slot='icon-only' />
               </IonButton>
             </IonCol>

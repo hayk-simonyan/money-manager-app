@@ -56,7 +56,8 @@ const EditAccountPage: React.FC<Props> = ({
   };
 
   const { id } = useParams();
-  const currentAccount = accounts.find((a: Account) => a._id === id);
+  const findAccount = accounts.find((a: Account) => a._id === id);
+  const currentAccount = { ...findAccount };
 
   const [icon, setIcon] = useState<string>(currentAccount.icon);
   const nameInputRef = useRef<HTMLIonInputElement>(currentAccount.name);
@@ -81,17 +82,15 @@ const EditAccountPage: React.FC<Props> = ({
   };
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const deleteAccountHandler = () => {
+  const deleteAccountHandler = async () => {
+    console.log('deleteaccounthandlercalled');
     history.push('/');
     deleteAccount(id);
     setAlert('Account Was Removed', 'success');
   };
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-  const clearModal = () => {
-    setIsOpen(false);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
   };
 
   return loading ? (
@@ -102,7 +101,7 @@ const EditAccountPage: React.FC<Props> = ({
         isOpen={isOpen}
         message='Are you sure? This will also remove all the records related to this account'
         buttons={[
-          { text: 'No', handler: clearModal },
+          { text: 'No', handler: toggleModal },
           { text: 'Yes', handler: deleteAccountHandler },
         ]}
       />
@@ -159,7 +158,7 @@ const EditAccountPage: React.FC<Props> = ({
           </IonRow>
           <IonRow>
             <IonCol size='2' offset='2'>
-              <IonButton onClick={openModal} color='tertiary'>
+              <IonButton onClick={toggleModal} color='tertiary'>
                 <IonIcon icon={trashOutline} slot='icon-only' />
               </IonButton>
             </IonCol>

@@ -50,8 +50,12 @@ export default function (
     case DELETE_RECORD:
       return {
         ...state,
-        // @ts-ignore
-        records: state.records.filter((r) => r._id !== payload),
+        records: state.records.filter((r: any) => {
+          console.log(r._id);
+          console.log(payload);
+          console.log(r._id !== payload);
+          return r._id !== payload;
+        }),
         loading: false,
       };
     case RECORDS_ERROR:

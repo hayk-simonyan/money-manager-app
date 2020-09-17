@@ -12,12 +12,13 @@ import {
   IonItemOption,
   IonItemOptions,
   IonAlert,
-  IonToast,
 } from '@ionic/react';
 import { trash } from 'ionicons/icons';
 
 import { connect } from 'react-redux';
 import { getCategories } from '../../../redux/categories/category.actions';
+import { deleteRecord } from '../../../redux/records/record.actions';
+import { setAlert } from '../../../redux/alerts/alert.actions';
 
 import './record-item.css';
 
@@ -31,23 +32,22 @@ interface Props {
     amount: number;
     note: string;
   };
-  accounts: { accounts: any };
-  categories: { categories: any };
   getCategories: () => void;
+  deleteRecord: (id: string) => void;
+  setAlert: (msg: string, alertType: string) => void;
 }
 
 const RecordItem: React.FC<Props> = ({
   record: { _id, type, account, category, date, amount, note },
-  accounts: { accounts },
-  categories: { categories },
   getCategories,
+  deleteRecord,
+  setAlert,
 }) => {
   useEffect(() => {
     getCategories();
   }, [getCategories]);
 
   const [startedDeleting, setStartedDeleting] = useState<boolean>(false);
-  const [toastMessage, setToastMessage] = useState<string>('');
 
   const slidingOptionsRef = useRef<HTMLIonItemSlidingElement>(null);
 
@@ -55,32 +55,17 @@ const RecordItem: React.FC<Props> = ({
     setStartedDeleting(true);
     slidingOptionsRef.current?.closeOpened();
   };
-  const deleteRecordHandler = (_id: string) => {
-    setToastMessage('Record removed');
+  const deleteRecordHandler = (id: string) => {
+    deleteRecord(id);
+    setAlert('Record was Removed', 'success');
   };
 
   let [month, day, year] = new Date(date).toLocaleDateString().split('/');
-
-  // const acc = accounts.find((a: any) => a._id === account);
-
-  // const categ = categories.find((c: any) => {
-  //   console.log(c._id);
-  //   console.log(category);
-  //   console.log(c._id === category);
-  //   return c._id === category;
-  // });
-  // console.log('categ', categ);
 
   let selectedIcon = require(`../../../assets/ionicons/${category.icon}.svg`);
 
   return (
     <React.Fragment>
-      <IonToast
-        isOpen={!!toastMessage}
-        message={toastMessage}
-        duration={2000}
-        onDidDismiss={() => setToastMessage('')}
-      />
       <IonAlert
         isOpen={startedDeleting}
         header='Delete this record?'
@@ -135,11 +120,11 @@ const RecordItem: React.FC<Props> = ({
 
 const mapDispatchToProps = (dispatch: any) => ({
   getCategories: () => dispatch(getCategories()),
+  deleteRecord: (id: string) => dispatch(deleteRecord(id)),
+  setAlert: (msg: string, alertType: string) =>
+    dispatch(setAlert(msg, alertType)),
 });
 
-const mapStateToProps = (state: any) => ({
-  categories: state.categories,
-  accounts: state.accounts,
-});
+const mapStateToProps = (state: any) => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecordItem);
+export default connect(null, mapDispatchToProps)(RecordItem);

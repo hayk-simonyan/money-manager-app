@@ -103,18 +103,12 @@ export const putCategory = (
 };
 
 export const deleteCategory = (id: string) => async (dispatch: any) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
   try {
-    const res = await axios.delete(`/categories/${id}`, config);
+    await axios.delete(`/categories/${id}`);
 
     dispatch({
       type: DELETE_CATEGORY,
-      payload: res.data,
+      payload: id,
     });
   } catch (err) {
     const errors = err.response.data.errors;

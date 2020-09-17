@@ -146,15 +146,8 @@ export const putRecord = (
 };
 
 export const deleteRecord = (id: string) => async (dispatch: any) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
   try {
-    const res = await axios.delete(`/records/${id}`, config);
-    console.log(res.data);
+    await axios.delete(`/records/${id}`);
 
     dispatch({
       type: DELETE_RECORD,
