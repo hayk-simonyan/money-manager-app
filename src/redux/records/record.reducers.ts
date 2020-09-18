@@ -36,7 +36,7 @@ export default function (
     case POST_RECORD:
       return {
         ...state,
-        records: [...state.records, payload],
+        // records: [payload, ...state.records],
         loading: false,
       };
     case PUT_RECORD:
@@ -50,12 +50,7 @@ export default function (
     case DELETE_RECORD:
       return {
         ...state,
-        records: state.records.filter((r: any) => {
-          console.log(r._id);
-          console.log(payload);
-          console.log(r._id !== payload);
-          return r._id !== payload;
-        }),
+        records: state.records.filter((r: any) => r._id !== payload),
         loading: false,
       };
     case RECORDS_ERROR:

@@ -43,9 +43,9 @@ const RecordItem: React.FC<Props> = ({
   deleteRecord,
   setAlert,
 }) => {
-  useEffect(() => {
-    getCategories();
-  }, [getCategories]);
+  // useEffect(() => {
+  //   getCategories();
+  // }, [getCategories]);
 
   const [startedDeleting, setStartedDeleting] = useState<boolean>(false);
 

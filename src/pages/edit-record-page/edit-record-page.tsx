@@ -69,7 +69,7 @@ const EditRecordPage: React.FC<Props> = ({
 
   const { id } = useParams();
   const findRecord = records.find((r: Record) => r._id === id);
-  const currentRecord = { ...findRecord };
+  let currentRecord = { ...findRecord };
   console.log(currentRecord);
 
   const [type, setType] = useState<string>(currentRecord.type);

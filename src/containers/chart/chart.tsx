@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import ChartBuilder from './chart-builder/chart-builder';
 import ChartControls from '../../components/chart-controls/homepage-controls';
-import { IonPage, IonContent } from '@ionic/react';
+import { IonContent } from '@ionic/react';
 
 interface MonthlyRecord {
   _id: string;
@@ -105,4 +105,4 @@ const mapStateToProps = (state: any) => ({
   records: state.records,
 });
 
-export default connect(null, mapDispatchToProps)(Chart);
+export default connect(mapStateToProps, mapDispatchToProps)(Chart);

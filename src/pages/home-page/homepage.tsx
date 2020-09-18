@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import {
-  IonContent,
-  IonPage,
-  IonLabel,
-  IonList,
-  IonSelect,
-  IonSelectOption,
-} from '@ionic/react';
+import { IonContent, IonPage, IonLabel, IonList } from '@ionic/react';
 
 import Header from '../../components/header/header';
 import AddButton from '../../components/add-button/add-button';
@@ -18,7 +11,6 @@ import HomepageControls from '../../components/homepage-controls/homepage-contro
 import RecordItem from '../records-page/record-item/record-item';
 
 import { connect } from 'react-redux';
-import { getRecords } from '../../redux/records/record.actions';
 import MonthPicker from '../../containers/month-picker/month-picker';
 
 interface Record {
@@ -59,7 +51,7 @@ const Homepage: React.FC<Props> = ({ records, accounts }) => {
         {segment === 'charts' ? (
           <React.Fragment>
             <Accounts />
-            <Chart accounts={accounts} records={records} />
+            <Chart accounts={accounts} />
           </React.Fragment>
         ) : (
           <React.Fragment>

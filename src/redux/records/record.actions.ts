@@ -84,6 +84,8 @@ export const postRecord = (
       type: POST_RECORD,
       payload: res.data,
     });
+
+    dispatch(getRecords());
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
