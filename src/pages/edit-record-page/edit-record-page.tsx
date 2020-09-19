@@ -158,7 +158,11 @@ const EditRecordPage: React.FC<Props> = ({
               ></IonDatetime>
               <IonItem>
                 <IonLabel>Type</IonLabel>
-                <IonSelect value={type} onIonChange={changeRecordTypeHandler}>
+                <IonSelect
+                  value={type}
+                  onIonChange={changeRecordTypeHandler}
+                  interface='action-sheet'
+                >
                   <IonSelectOption value='expences'>Expences</IonSelectOption>
                   <IonSelectOption value='incomes'>Incomes</IonSelectOption>
                 </IonSelect>
@@ -168,6 +172,7 @@ const EditRecordPage: React.FC<Props> = ({
                 <IonSelect
                   value={account}
                   onIonChange={(e) => setAccount(e.detail.value)}
+                  interface='action-sheet'
                 >
                   {accounts &&
                     accounts.map((a: any) => (
@@ -184,6 +189,7 @@ const EditRecordPage: React.FC<Props> = ({
                   cancelText='Cancel'
                   okText='Ok'
                   onIonChange={(e) => setCategory(e.detail.value)}
+                  interface='action-sheet'
                 >
                   {categories &&
                     categories.map((c: any) => {

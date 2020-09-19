@@ -32,7 +32,7 @@ export const getAccounts = () => async (dispatch: any) => {
 };
 
 export const postAccount = (
-  icon: string,
+  type: string,
   name: string,
   total: string
 ) => async (dispatch: any) => {
@@ -42,7 +42,7 @@ export const postAccount = (
     },
   };
 
-  const body = { icon, name, total };
+  const body = { type, name, total };
 
   try {
     const res = await axios.post(`/accounts`, body, config);
@@ -68,7 +68,7 @@ export const postAccount = (
 
 export const putAccount = (
   id: string,
-  icon: string,
+  type: string,
   name: string,
   total: string
 ) => async (dispatch: any) => {
@@ -78,7 +78,7 @@ export const putAccount = (
     },
   };
 
-  const body = { icon, name, total };
+  const body = { type, name, total };
 
   try {
     const res = await axios.put(`/accounts/${id}`, body, config);

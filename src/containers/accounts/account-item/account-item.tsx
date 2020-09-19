@@ -11,12 +11,12 @@ import {
 
 interface Props {
   id: string;
-  icon: string;
+  type: string;
   name: string;
   total: number;
 }
 
-const AccountItem: React.FC<Props> = ({ id, icon, name, total }) => (
+const AccountItem: React.FC<Props> = ({ id, type, name, total }) => (
   <IonCol size='6'>
     <IonCard>
       <IonItem routerLink={`/accounts/${id}`} button>

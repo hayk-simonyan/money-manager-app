@@ -103,6 +103,7 @@ const EditCategoryPage: React.FC<Props> = ({
                 <IonSelect
                   value={type}
                   onIonChange={(e) => setType(e.detail.value)}
+                  interface='action-sheet'
                 >
                   <IonSelectOption value='expences'>Expence</IonSelectOption>
                   <IonSelectOption value='incomes'>Income</IonSelectOption>

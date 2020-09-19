@@ -25,20 +25,19 @@ import { connect } from 'react-redux';
 import {
   putAccount,
   deleteAccount,
-  getAccounts,
 } from '../../redux/accounts/account.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
 
 interface Account {
   _id: string;
-  icon: string;
+  type: string;
   name: string;
   total: string;
 }
 
 interface Props {
   accounts: { accounts: any; loading: boolean };
-  putAccount: (id: string, icon: string, name: string, total: string) => void;
+  putAccount: (id: string, type: string, name: string, total: string) => void;
   deleteAccount: (id: string) => void;
   setAlert: (msg: string, alertType: string) => void;
 }
@@ -59,7 +58,7 @@ const EditAccountPage: React.FC<Props> = ({
   const findAccount = accounts.find((a: Account) => a._id === id);
   const currentAccount = { ...findAccount };
 
-  const [icon, setIcon] = useState<string>(currentAccount.icon);
+  const [type, setType] = useState<string>(currentAccount.icon);
   const nameInputRef = useRef<HTMLIonInputElement>(currentAccount.name);
   const [name, setName] = useState<string>(currentAccount.name);
   const totalInputRef = useRef<HTMLIonInputElement>(currentAccount.total);
@@ -71,12 +70,12 @@ const EditAccountPage: React.FC<Props> = ({
     const name = nameInputRef.current!.value;
     const total = totalInputRef.current!.value;
 
-    if (!icon || !name || !total) {
+    if (!type || !name || !total) {
       setError('Please fill out all fields');
       return;
     }
 
-    putAccount(id, icon.toString(), name.toString(), total.toString());
+    putAccount(id, type.toString(), name.toString(), total.toString());
     setAlert('Account Was Updated', 'success');
     history.push('/');
   };
@@ -132,10 +131,10 @@ const EditAccountPage: React.FC<Props> = ({
                 <IonLabel position='floating'>Account Type</IonLabel>
                 <IonSelect
                   interface='action-sheet'
-                  value={icon}
+                  value={type}
                   cancelText='Cancel'
                   okText='Ok'
-                  onIonChange={(e) => setIcon(e.detail.value)}
+                  onIonChange={(e) => setType(e.detail.value)}
                 >
                   <IonSelectOption value='general'>General</IonSelectOption>
                   <IonSelectOption value='cash'>Cash</IonSelectOption>

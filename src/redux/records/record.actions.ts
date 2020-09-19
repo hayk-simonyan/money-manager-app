@@ -155,6 +155,8 @@ export const deleteRecord = (id: string) => async (dispatch: any) => {
       type: DELETE_RECORD,
       payload: id,
     });
+
+    dispatch(getRecords());
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

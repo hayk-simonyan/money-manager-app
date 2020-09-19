@@ -60,18 +60,6 @@ const AboutPage: React.FC = () => {
                 </IonList>
               </IonCardContent>
             </IonCard>
-
-            <IonCardSubtitle>
-              <p>
-                Developed by{' '}
-                <a
-                  style={{ color: 'gray', textDecoration: 'none' }}
-                  href='https://hayk-simonyan.web.app/'
-                >
-                  Hayk Simonyan
-                </a>
-              </p>
-            </IonCardSubtitle>
           </IonRow>
         </IonGrid>
       </IonContent>

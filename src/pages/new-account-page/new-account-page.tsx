@@ -26,7 +26,7 @@ import { setAlert } from '../../redux/alerts/alert.actions';
 import { checkmarkOutline } from 'ionicons/icons';
 
 interface Props {
-  postAccount: (icon: string, name: string, total: string) => void;
+  postAccount: (type: string, name: string, total: string) => void;
   setAlert: (msg: string, alertType: string) => void;
 }
 
@@ -34,7 +34,7 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
   const history = useHistory();
   const [error, setError] = useState<string>();
 
-  const [icon, setIcon] = useState<string>();
+  const [type, setType] = useState<string>();
   const nameInputRef = useRef<HTMLIonInputElement>(null);
   const totalInputRef = useRef<HTMLIonInputElement>(null);
 
@@ -42,12 +42,12 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
     const name = nameInputRef.current!.value;
     let total = totalInputRef.current!.value;
 
-    if (!icon || !name || !total) {
+    if (!type || !name || !total) {
       setError('Please fill out all fields');
       return;
     }
 
-    postAccount(icon.toString(), name.toString(), total.toString());
+    postAccount(type.toString(), name.toString(), total.toString());
     setAlert('Account Was Created', 'success');
     history.push('/');
   };
@@ -80,10 +80,10 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
                 <IonLabel position='floating'>Account Type</IonLabel>
                 <IonSelect
                   interface='action-sheet'
-                  value={icon}
+                  value={type}
                   cancelText='Cancel'
                   okText='Ok'
-                  onIonChange={(e) => setIcon(e.detail.value)}
+                  onIonChange={(e) => setType(e.detail.value)}
                 >
                   <IonSelectOption value='general'>General</IonSelectOption>
                   <IonSelectOption value='cash'>Cash</IonSelectOption>
@@ -120,8 +120,8 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  postAccount: (icon: string, name: string, total: string) =>
-    dispatch(postAccount(icon, name, total)),
+  postAccount: (type: string, name: string, total: string) =>
+    dispatch(postAccount(type, name, total)),
   setAlert: (msg: string, alertType: string) =>
     dispatch(setAlert(msg, alertType)),
 });

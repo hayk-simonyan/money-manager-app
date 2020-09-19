@@ -89,6 +89,7 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
                 <IonSelect
                   value={type}
                   onIonChange={(e) => setType(e.detail.value)}
+                  interface='action-sheet'
                 >
                   <IonSelectOption value='expences'>Expence</IonSelectOption>
                   <IonSelectOption value='incomes'>Income</IonSelectOption>

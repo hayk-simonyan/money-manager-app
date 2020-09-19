@@ -27,11 +27,11 @@ const Accounts: React.FC<Props> = ({
   }, []);
 
   const fetchedAccounts = accounts.map(
-    (account: { _id: string; icon: string; name: string; total: number }) => (
+    (account: { _id: string; type: string; name: string; total: number }) => (
       <AccountItem
         key={account._id}
         id={account._id}
-        icon={account.icon}
+        type={account.type}
         name={account.name}
         total={account.total}
       />
