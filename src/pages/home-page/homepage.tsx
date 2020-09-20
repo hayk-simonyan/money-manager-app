@@ -56,17 +56,15 @@ const Homepage: React.FC<Props> = ({ records, accounts }) => {
         ) : (
           <React.Fragment>
             <MonthlyRecords />
-            <IonContent>
-              {!records.records ? (
-                <IonLabel>No records yet!</IonLabel>
-              ) : (
-                <IonList>
-                  {records.records.map((record: Record) => (
-                    <RecordItem key={record._id} record={record} />
-                  ))}
-                </IonList>
-              )}
-            </IonContent>
+            {!records.records ? (
+              <IonLabel>No records yet!</IonLabel>
+            ) : (
+              <IonList>
+                {records.records.map((record: Record) => (
+                  <RecordItem key={record._id} record={record} />
+                ))}
+              </IonList>
+            )}
           </React.Fragment>
         )}
       </IonContent>

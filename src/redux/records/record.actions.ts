@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
   GET_RECORDS,
+  GET_RECORD,
   POST_RECORD,
   PUT_RECORD,
   DELETE_RECORD,
@@ -38,6 +39,29 @@ export const getRecords = (y: string = '', m: string = '') => async (
     dispatch({
       type: GET_RECORDS,
       payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
+    dispatch({
+      type: RECORDS_ERROR,
+      payload: { msg: err.statusText, status: err.status },
+    });
+  }
+};
+
+export const getRecord = (id: string) => async (dispatch: any) => {
+  try {
+    const res = await axios.get(`/records/${id}`);
+
+    dispatch({
+      type: GET_RECORD,
+      payload: res.data.record,
     });
   } catch (err) {
     const errors = err.response.data.errors;

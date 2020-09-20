@@ -16,7 +16,6 @@ import {
 import { trash } from 'ionicons/icons';
 
 import { connect } from 'react-redux';
-import { getCategories } from '../../../redux/categories/category.actions';
 import { deleteRecord } from '../../../redux/records/record.actions';
 import { setAlert } from '../../../redux/alerts/alert.actions';
 
@@ -32,14 +31,12 @@ interface Props {
     amount: number;
     note: string;
   };
-  getCategories: () => void;
   deleteRecord: (id: string) => void;
   setAlert: (msg: string, alertType: string) => void;
 }
 
 const RecordItem: React.FC<Props> = ({
   record: { _id, type, account, category, date, amount, note },
-  getCategories,
   deleteRecord,
   setAlert,
 }) => {
@@ -119,7 +116,6 @@ const RecordItem: React.FC<Props> = ({
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getCategories: () => dispatch(getCategories()),
   deleteRecord: (id: string) => dispatch(deleteRecord(id)),
   setAlert: (msg: string, alertType: string) =>
     dispatch(setAlert(msg, alertType)),

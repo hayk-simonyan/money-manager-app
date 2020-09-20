@@ -1,5 +1,6 @@
 import {
   GET_RECORDS,
+  GET_RECORD,
   POST_RECORD,
   PUT_RECORD,
   DELETE_RECORD,
@@ -8,6 +9,7 @@ import {
 
 const initialState = {
   records: [],
+  currentRecord: null,
   incomes: 0,
   expences: 0,
   recordsByCategories: [],
@@ -31,6 +33,12 @@ export default function (
         expences: parseInt(payload.expences),
         recordsByCategories: payload.recordsByCategories,
         cashflow: payload.cashflow,
+        loading: false,
+      };
+    case GET_RECORD:
+      return {
+        ...state,
+        currentRecord: payload,
         loading: false,
       };
     case POST_RECORD:

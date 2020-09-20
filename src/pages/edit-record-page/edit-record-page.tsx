@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import {
@@ -38,7 +38,7 @@ interface Props {
   ) => void;
   deleteRecord: (id: string) => void;
   setAlert: (msg: string, alertType: string) => void;
-  records: { records: any; loading: boolean };
+  records: { records: any; currentRecord: any; loading: boolean };
   accounts: { accounts: any; loading: boolean };
   categories: { categories: any; loading: boolean };
 }
@@ -61,20 +61,21 @@ const EditRecordPage: React.FC<Props> = ({
   accounts: { accounts },
   categories: { categories },
 }) => {
+  //@ts-ignore
+  const { id } = useParams();
+
   const history = useHistory();
   const [error, setError] = useState<string>();
   const clearError = () => {
     setError('');
   };
 
-  const { id } = useParams();
   const findRecord = records.find((r: Record) => r._id === id);
   let currentRecord = { ...findRecord };
-  console.log(currentRecord);
 
   const [type, setType] = useState<string>(currentRecord.type);
-  const [account, setAccount] = useState<string>(currentRecord.account.name);
-  const [category, setCategory] = useState<string>(currentRecord.category.name);
+  const [account, setAccount] = useState<string>(''); // currentRecord.account.name
+  const [category, setCategory] = useState<string>(''); // currentRecord.category.name
   const [date, setDate] = useState<string>(currentRecord.date);
   const amountInputRef = useRef<HTMLIonInputElement>(currentRecord.amount);
   const [amount, setAmount] = useState<number>(currentRecord.amount);
