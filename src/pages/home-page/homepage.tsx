@@ -30,6 +30,7 @@ interface Props {
     expences: number;
     recordsByCategories: any;
     cashflow: any;
+    loading: boolean;
   };
   accounts: {
     accounts: any;

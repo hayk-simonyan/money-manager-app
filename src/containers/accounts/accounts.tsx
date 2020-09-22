@@ -12,6 +12,7 @@ import {
 
 import AccountItem from './account-item/account-item';
 import AddAccountButton from './add-account-button/add-account-button';
+import AccountsSkeleton from './accounts-skeleton/accounts-skeleton';
 
 interface Props {
   accounts: { accounts: any; loading: boolean };
@@ -43,12 +44,16 @@ const Accounts: React.FC<Props> = ({
       <IonCardHeader color='default'>
         <IonCardTitle>Accounts</IonCardTitle>
       </IonCardHeader>
-      <IonGrid>
-        <IonRow>{fetchedAccounts}</IonRow>
-        <IonRow>
-          <AddAccountButton />
-        </IonRow>
-      </IonGrid>
+      {loading ? (
+        <AccountsSkeleton />
+      ) : (
+        <IonGrid>
+          <IonRow>{fetchedAccounts}</IonRow>
+          <IonRow>
+            <AddAccountButton />
+          </IonRow>
+        </IonGrid>
+      )}
     </IonCard>
   );
 };
