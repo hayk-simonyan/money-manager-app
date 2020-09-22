@@ -88,17 +88,27 @@ const RecordItem: React.FC<Props> = ({
         <IonItem routerLink={`/records/${_id}`} lines='full' button>
           <IonGrid>
             <IonRow>
-              <IonCol size='2'>
-                <IonIcon icon={selectedIcon}></IonIcon>
+              <IonCol size='2' className='ion-no-padding'>
+                <IonIcon
+                  style={{
+                    position: 'absolute',
+                    margin: 'auto',
+                    top: '-0.9rem',
+                    left: '-0.6rem',
+                    right: 0,
+                    bottom: 0,
+                    fontSize: '1.5rem',
+                  }}
+                  icon={selectedIcon}
+                />
               </IonCol>
-              <IonCol size='10'>
+              <IonCol size='10' className='ion-no-padding'>
                 <IonGrid>
                   <IonRow>
                     <IonCol size='7'>
-                      {' '}
                       <IonLabel>{category.name}</IonLabel>
                     </IonCol>
-                    <IonCol size='5' className='ion-text-right'>
+                    <IonCol size='5' className='ion-text-right '>
                       <IonLabel>
                         {type === 'expences' ? `-${amount}` : amount}$
                       </IonLabel>
@@ -108,7 +118,7 @@ const RecordItem: React.FC<Props> = ({
                     <IonCol size='7'>
                       <IonCardSubtitle>{account.name}</IonCardSubtitle>
                     </IonCol>
-                    <IonCol size='5' className='ion-text-right'>
+                    <IonCol size='5' className='ion-text-right '>
                       <IonCardSubtitle>{day + '/' + month}</IonCardSubtitle>
                     </IonCol>
                   </IonRow>
