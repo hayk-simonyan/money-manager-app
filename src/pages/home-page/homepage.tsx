@@ -55,7 +55,7 @@ const Homepage: React.FC<Props> = ({ records, accounts }) => {
             <Chart accounts={accounts} />
           </React.Fragment>
         ) : (
-          <React.Fragment>
+          <div style={{ marginBottom: '3.6rem' }}>
             <MonthlyRecords />
             {!records.records ? (
               <IonLabel>No records yet!</IonLabel>
@@ -66,7 +66,7 @@ const Homepage: React.FC<Props> = ({ records, accounts }) => {
                 ))}
               </IonList>
             )}
-          </React.Fragment>
+          </div>
         )}
       </IonContent>
       <AddButton url='records/new' />

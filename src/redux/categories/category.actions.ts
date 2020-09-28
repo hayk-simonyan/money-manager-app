@@ -10,7 +10,9 @@ import { setAlert } from '../alerts/alert.actions';
 
 export const getCategories = () => async (dispatch: any) => {
   try {
-    const res = await axios.get(`/categories`);
+    const res = await axios.get(
+      `https://money-manager-api-v1.herokuapp.com/categories`
+    );
 
     dispatch({
       type: GET_CATEGORIES,
@@ -45,7 +47,11 @@ export const postCategory = (
   const body = { type, icon, name };
 
   try {
-    const res = await axios.post(`/categories`, body, config);
+    const res = await axios.post(
+      `https://money-manager-api-v1.herokuapp.com/categories`,
+      body,
+      config
+    );
 
     dispatch({
       type: POST_CATEGORY,
@@ -81,7 +87,11 @@ export const putCategory = (
   const body = { type, icon, name };
 
   try {
-    const res = await axios.put(`/categories/${id}`, body, config);
+    const res = await axios.put(
+      `https://money-manager-api-v1.herokuapp.com/categories/${id}`,
+      body,
+      config
+    );
 
     dispatch({
       type: PUT_CATEGORY,
@@ -104,7 +114,9 @@ export const putCategory = (
 
 export const deleteCategory = (id: string) => async (dispatch: any) => {
   try {
-    await axios.delete(`/categories/${id}`);
+    await axios.delete(
+      `https://money-manager-api-v1.herokuapp.com/categories/${id}`
+    );
 
     dispatch({
       type: DELETE_CATEGORY,

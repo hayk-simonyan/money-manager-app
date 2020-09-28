@@ -46,7 +46,7 @@ const RecordsPage: React.FC<Props> = ({ records }) => {
         {!records.records ? (
           <IonLabel>No records yet!</IonLabel>
         ) : (
-          <IonList>
+          <IonList style={{ marginBottom: '3.6rem' }}>
             {records.records.map((record: Record) => (
               <RecordItem key={record._id} record={record} />
             ))}

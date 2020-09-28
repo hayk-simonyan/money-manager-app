@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import {
@@ -46,8 +46,12 @@ interface Props {
 interface Record {
   _id: string;
   type: string;
-  account: any;
-  category: any;
+  account: {
+    name: string;
+  };
+  category: {
+    name: string;
+  };
   date: Date;
   amount: number;
   note: string;
@@ -74,8 +78,12 @@ const EditRecordPage: React.FC<Props> = ({
   let currentRecord = { ...findRecord };
 
   const [type, setType] = useState<string>(currentRecord.type);
-  const [account, setAccount] = useState<string>(''); // currentRecord.account.name
-  const [category, setCategory] = useState<string>(''); // currentRecord.category.name
+  const [account, setAccount] = useState<string>(
+    currentRecord.account ? currentRecord.account.name : null
+  );
+  const [category, setCategory] = useState<string>(
+    currentRecord.account ? currentRecord.category.name : null
+  );
   const [date, setDate] = useState<string>(currentRecord.date);
   const amountInputRef = useRef<HTMLIonInputElement>(currentRecord.amount);
   const [amount, setAmount] = useState<number>(currentRecord.amount);
@@ -171,7 +179,7 @@ const EditRecordPage: React.FC<Props> = ({
               <IonItem>
                 <IonLabel>Account</IonLabel>
                 <IonSelect
-                  value={account}
+                  value={account || null}
                   onIonChange={(e) => setAccount(e.detail.value)}
                   interface='action-sheet'
                 >
@@ -186,7 +194,7 @@ const EditRecordPage: React.FC<Props> = ({
               <IonItem>
                 <IonLabel>Category</IonLabel>
                 <IonSelect
-                  value={category}
+                  value={category || null}
                   cancelText='Cancel'
                   okText='Ok'
                   onIonChange={(e) => setCategory(e.detail.value)}

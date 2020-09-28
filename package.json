@@ -61,5 +61,5 @@
     "react-scripts": "3.4.1"
   },
   "description": "An Ionic project",
-  "proxy": "http://localhost:5000"
+  "proxy": "https://money-manager-api-v1.herokuapp.com/"
 }

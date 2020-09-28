@@ -10,7 +10,9 @@ import { setAlert } from '../alerts/alert.actions';
 
 export const getAccounts = () => async (dispatch: any) => {
   try {
-    const res = await axios.get(`/accounts`);
+    const res = await axios.get(
+      `https://money-manager-api-v1.herokuapp.com/accounts`
+    );
 
     dispatch({
       type: GET_ACCOUNTS,
@@ -45,7 +47,11 @@ export const postAccount = (
   const body = { type, name, total };
 
   try {
-    const res = await axios.post(`/accounts`, body, config);
+    const res = await axios.post(
+      `https://money-manager-api-v1.herokuapp.com/accounts`,
+      body,
+      config
+    );
 
     dispatch({
       type: POST_ACCOUNT,
@@ -81,7 +87,11 @@ export const putAccount = (
   const body = { type, name, total };
 
   try {
-    const res = await axios.put(`/accounts/${id}`, body, config);
+    const res = await axios.put(
+      `https://money-manager-api-v1.herokuapp.com/accounts/${id}`,
+      body,
+      config
+    );
 
     dispatch({
       type: PUT_ACCOUNT,
@@ -104,7 +114,9 @@ export const putAccount = (
 
 export const deleteAccount = (id: string) => async (dispatch: any) => {
   try {
-    await axios.delete(`/accounts/${id}`);
+    await axios.delete(
+      `https://money-manager-api-v1.herokuapp.com/accounts/${id}`
+    );
 
     dispatch({
       type: DELETE_ACCOUNT,
