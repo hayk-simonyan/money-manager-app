@@ -8,6 +8,10 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
+  IonItem,
+  IonSkeletonText,
+  IonCol,
+  IonLabel,
 } from '@ionic/react';
 
 import AccountItem from './account-item/account-item';

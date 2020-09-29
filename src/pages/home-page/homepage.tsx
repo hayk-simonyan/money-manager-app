@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { IonContent, IonPage, IonLabel, IonList } from '@ionic/react';
 
@@ -34,6 +34,7 @@ interface Props {
   };
   accounts: {
     accounts: any;
+    loading: boolean;
   };
 }
 
