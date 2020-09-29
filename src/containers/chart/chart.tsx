@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { IonContent } from '@ionic/react';
 
 import ChartBuilder from './chart-builder/chart-builder';
 import ChartControls from '../../components/chart-controls/homepage-controls';
-import { IonContent } from '@ionic/react';
+import ChartSkeleton from './chart-skeleton/chart-skeleton';
 
 interface MonthlyRecord {
   _id: string;
@@ -27,12 +28,20 @@ interface Props {
     expences: number;
     recordsByCategories: any;
     cashflow: any;
+    loading: boolean;
   };
   accounts: { accounts: any };
 }
 
 const Chart: React.FC<Props> = ({
-  records: { records, incomes, expences, recordsByCategories, cashflow },
+  records: {
+    records,
+    incomes,
+    expences,
+    recordsByCategories,
+    cashflow,
+    loading,
+  },
   accounts: { accounts },
 }) => {
   const [segment, setSegment] = useState<'expences' | 'incomes'>('expences');
@@ -79,7 +88,9 @@ const Chart: React.FC<Props> = ({
           segmentValue={segment}
           segmentChangeHandler={(e) => setSegment(e)}
         />
-        {segment === 'expences' ? (
+        {loading ? (
+          <ChartSkeleton />
+        ) : segment === 'expences' ? (
           <ChartBuilder
             labels={expenceLabels}
             data={expenceData}

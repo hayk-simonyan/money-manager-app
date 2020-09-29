@@ -16,14 +16,7 @@ interface Props {
 }
 
 const ChartRecords: React.FC<Props> = ({
-  records: {
-    records,
-    incomes,
-    expences,
-    recordsByCategories,
-    cashflow,
-    loading,
-  },
+  records: { records, incomes, expences, recordsByCategories, cashflow },
 }) => {
   const [segment, setSegment] = useState<'expences' | 'incomes'>('expences');
 

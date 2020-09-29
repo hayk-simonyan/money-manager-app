@@ -1,6 +1,6 @@
 import React from 'react';
-
 import {
+  IonAvatar,
   IonCol,
   IonGrid,
   IonItem,
@@ -8,49 +8,31 @@ import {
   IonSkeletonText,
 } from '@ionic/react';
 
-export default function AccountsSkeleton() {
+import './chart-skeleton.css';
+
+export default function ChartSkeleton() {
   return (
     <IonGrid>
       <IonRow>
-        <IonCol>
-          <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
+        <IonCol className='container'>
+          <IonItem className='vertical-center' lines='none'>
+            <IonAvatar className='avatar '>
+              <IonSkeletonText animated />
+            </IonAvatar>
           </IonItem>
         </IonCol>
         <IonCol>
           <IonItem lines='none'>
             <IonSkeletonText animated style={{ width: '70%' }} />
           </IonItem>
-        </IonCol>
-      </IonRow>
-      <IonRow>
-        <IonCol>
           <IonItem lines='none'>
             <IonSkeletonText animated style={{ width: '70%' }} />
           </IonItem>
-        </IonCol>
-        <IonCol>
           <IonItem lines='none'>
             <IonSkeletonText animated style={{ width: '70%' }} />
           </IonItem>
-        </IonCol>
-      </IonRow>
-      <IonRow>
-        <IonCol>
           <IonItem lines='none'>
             <IonSkeletonText animated style={{ width: '70%' }} />
-          </IonItem>
-        </IonCol>
-        <IonCol>
-          <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
-          </IonItem>
-        </IonCol>
-      </IonRow>
-      <IonRow>
-        <IonCol offset='8'>
-          <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '60%' }} />
           </IonItem>
         </IonCol>
       </IonRow>
