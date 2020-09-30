@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  IonCard,
   IonCol,
   IonGrid,
   IonItem,
@@ -12,46 +13,93 @@ export default function AccountsSkeleton() {
   return (
     <IonGrid>
       <IonRow>
-        <IonCol>
-          <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
-          </IonItem>
+        <IonCol size='6'>
+          <IonCard>
+            <IonItem lines='none' button>
+              <IonGrid>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '70%' }} />
+                </IonRow>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '50%' }} />
+                </IonRow>
+              </IonGrid>
+            </IonItem>
+          </IonCard>
         </IonCol>
-        <IonCol>
-          <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
-          </IonItem>
-        </IonCol>
-      </IonRow>
-      <IonRow>
-        <IonCol>
-          <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
-          </IonItem>
-        </IonCol>
-        <IonCol>
-          <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
-          </IonItem>
-        </IonCol>
-      </IonRow>
-      <IonRow>
-        <IonCol>
-          <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
-          </IonItem>
-        </IonCol>
-        <IonCol>
-          <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
-          </IonItem>
+        <IonCol size='6'>
+          <IonCard>
+            <IonItem lines='none' button>
+              <IonGrid>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '70%' }} />
+                </IonRow>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '50%' }} />
+                </IonRow>
+              </IonGrid>
+            </IonItem>
+          </IonCard>
         </IonCol>
       </IonRow>
       <IonRow>
-        <IonCol offset='8'>
-          <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '60%' }} />
-          </IonItem>
+        <IonCol size='6'>
+          <IonCard>
+            <IonItem lines='none' button>
+              <IonGrid>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '70%' }} />
+                </IonRow>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '50%' }} />
+                </IonRow>
+              </IonGrid>
+            </IonItem>
+          </IonCard>
+        </IonCol>
+        <IonCol size='6'>
+          <IonCard>
+            <IonItem lines='none' button>
+              <IonGrid>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '70%' }} />
+                </IonRow>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '50%' }} />
+                </IonRow>
+              </IonGrid>
+            </IonItem>
+          </IonCard>
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <IonCol size='6'>
+          <IonCard>
+            <IonItem lines='none' button>
+              <IonGrid>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '70%' }} />
+                </IonRow>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '50%' }} />
+                </IonRow>
+              </IonGrid>
+            </IonItem>
+          </IonCard>
+        </IonCol>
+        <IonCol size='6'>
+          <IonCard>
+            <IonItem lines='none' button>
+              <IonGrid>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '70%' }} />
+                </IonRow>
+                <IonRow>
+                  <IonSkeletonText animated style={{ width: '50%' }} />
+                </IonRow>
+              </IonGrid>
+            </IonItem>
+          </IonCard>
         </IonCol>
       </IonRow>
     </IonGrid>

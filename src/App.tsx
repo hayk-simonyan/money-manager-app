@@ -15,7 +15,7 @@ import Menu from './components/menu/menu';
 import SignupPage from './pages/signup-page/signup-page';
 import SigninPage from './pages/signin-page/signin-page';
 import setAuthToken from './utils/setAuthToken';
-import PrivateRoute from './components/private-route/private-route';
+import PrivateRoute from './containers/private-route/private-route';
 import NewAccountPage from './pages/new-account-page/new-account-page';
 import EditAccountPage from './pages/edit-account-page/edit-account-page';
 import Alert from './containers/alert/alert';

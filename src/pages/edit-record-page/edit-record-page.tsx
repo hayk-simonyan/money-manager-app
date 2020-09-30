@@ -14,7 +14,6 @@ import {
   IonInput,
   IonButton,
   IonIcon,
-  IonSpinner,
   IonDatetime,
   IonContent,
 } from '@ionic/react';
@@ -138,9 +137,7 @@ const EditRecordPage: React.FC<Props> = ({
     setIsOpen(!isOpen);
   };
 
-  return loading ? (
-    <IonSpinner />
-  ) : (
+  return (
     <IonPage>
       <IonAlert
         isOpen={isOpen}

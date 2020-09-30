@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-
 import { IonContent, IonPage, IonLabel, IonList } from '@ionic/react';
+import { connect } from 'react-redux';
 
 import Header from '../../components/header/header';
 import AddButton from '../../components/add-button/add-button';
@@ -9,8 +9,6 @@ import MonthlyRecords from '../../containers/monthly-records/monthly-records';
 import Chart from '../../containers/chart/chart';
 import HomepageControls from '../../components/homepage-controls/homepage-controls';
 import RecordItem from '../records-page/record-item/record-item';
-
-import { connect } from 'react-redux';
 import MonthPicker from '../../containers/month-picker/month-picker';
 
 interface Record {

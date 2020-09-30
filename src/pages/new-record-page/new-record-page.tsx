@@ -12,7 +12,6 @@ import {
   IonPage,
   IonSelect,
   IonSelectOption,
-  IonSpinner,
   IonDatetime,
   IonContent,
 } from '@ionic/react';
@@ -106,9 +105,7 @@ const NewRecordPage: React.FC<Props> = ({
     setError('');
   };
 
-  return loading ? (
-    <IonSpinner />
-  ) : (
+  return (
     <IonPage>
       <IonAlert
         isOpen={!!error}

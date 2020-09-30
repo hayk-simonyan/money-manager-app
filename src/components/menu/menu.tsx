@@ -11,7 +11,6 @@ import {
   IonIcon,
   IonLabel,
   IonMenuToggle,
-  IonSpinner,
 } from '@ionic/react';
 import {
   walletOutline,
@@ -36,9 +35,7 @@ const Menu: React.FC<Props> = ({
   logout,
   auth: { isAuthenticated, loading },
 }) => {
-  return loading ? (
-    <IonSpinner />
-  ) : (
+  return (
     <IonMenu contentId='main' side='start' menuId='id'>
       <IonHeader>
         <IonToolbar color='primary'>

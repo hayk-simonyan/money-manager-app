@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 
 import { IonAlert, IonPage, IonContent, IonList, IonLabel } from '@ionic/react';
+import { connect } from 'react-redux';
 
 import Header from '../../components/header/header';
 import RecordItem from './record-item/record-item';
-
 import AddButton from '../../components/add-button/add-button';
-
-import { connect } from 'react-redux';
 import MonthPicker from '../../containers/month-picker/month-picker';
 import ChartRecords from '../../containers/chart-records/chart-records';
 
@@ -46,8 +44,8 @@ const RecordsPage: React.FC<Props> = ({ records }) => {
         {!records.records ? (
           <IonLabel>No records yet!</IonLabel>
         ) : (
-          <IonList style={{ marginBottom: '3.6rem' }}>
-            {records.records.map((record: Record) => (
+          <IonList style={{ marginBottom: '3.7rem' }}>
+            {records.records.map((record: Record, index: any) => (
               <RecordItem key={record._id} record={record} />
             ))}
           </IonList>

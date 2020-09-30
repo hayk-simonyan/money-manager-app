@@ -12,7 +12,6 @@ import {
   IonPage,
   IonSelect,
   IonSelectOption,
-  IonSpinner,
   IonButton,
   IonIcon,
   IonContent,
@@ -54,6 +53,7 @@ const EditAccountPage: React.FC<Props> = ({
     setError('');
   };
 
+  //@ts-ignore
   const { id } = useParams();
   const findAccount = accounts.find((a: Account) => a._id === id);
   const currentAccount = { ...findAccount };
@@ -92,9 +92,7 @@ const EditAccountPage: React.FC<Props> = ({
     setIsOpen(!isOpen);
   };
 
-  return loading ? (
-    <IonSpinner />
-  ) : (
+  return (
     <IonPage>
       <IonAlert
         isOpen={isOpen}

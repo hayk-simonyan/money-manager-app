@@ -8,10 +8,6 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonItem,
-  IonSkeletonText,
-  IonCol,
-  IonLabel,
 } from '@ionic/react';
 
 import AccountItem from './account-item/account-item';
@@ -48,16 +44,14 @@ const Accounts: React.FC<Props> = ({
       <IonCardHeader color='default'>
         <IonCardTitle>Accounts</IonCardTitle>
       </IonCardHeader>
-      {loading ? (
-        <AccountsSkeleton />
-      ) : (
+      {
         <IonGrid>
-          <IonRow>{fetchedAccounts}</IonRow>
+          <IonRow>{loading ? <AccountsSkeleton /> : fetchedAccounts}</IonRow>
           <IonRow>
             <AddAccountButton />
           </IonRow>
         </IonGrid>
-      )}
+      }
     </IonCard>
   );
 };
