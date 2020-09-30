@@ -14,25 +14,30 @@ export default function ChartSkeleton() {
   return (
     <IonGrid>
       <IonRow>
-        <IonCol className='container'>
+        <IonCol
+          offset='1'
+          size='5'
+          className='container 
+        '
+        >
           <IonItem className='vertical-center' lines='none'>
             <IonAvatar className='avatar '>
               <IonSkeletonText animated />
             </IonAvatar>
           </IonItem>
         </IonCol>
-        <IonCol>
+        <IonCol offset='2' size='4' className='container'>
           <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
+            <IonSkeletonText animated />
           </IonItem>
           <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
+            <IonSkeletonText animated />
           </IonItem>
           <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
+            <IonSkeletonText animated />
           </IonItem>
           <IonItem lines='none'>
-            <IonSkeletonText animated style={{ width: '70%' }} />
+            <IonSkeletonText animated />
           </IonItem>
         </IonCol>
       </IonRow>
