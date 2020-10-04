@@ -41,6 +41,8 @@ export const signup = (name, email, password) => async (dispatch) => {
     });
 
     dispatch(loadUser());
+
+    dispatch(setAlert('Welcome to Money Manager', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -75,6 +77,8 @@ export const signin = (email, password) => async (dispatch) => {
     });
 
     dispatch(loadUser());
+
+    dispatch(setAlert('Welcome back', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -89,6 +93,7 @@ export const signin = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
+  dispatch(setAlert('Logged you out', 'success'));
 };
 
 export const loadUser = () => async (dispatch) => {

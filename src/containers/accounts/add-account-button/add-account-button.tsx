@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   IonCol,
   IonCard,
@@ -10,11 +9,13 @@ import {
 } from '@ionic/react';
 import { addOutline } from 'ionicons/icons';
 
+import './add-account-button.css';
+
 const AddAccountButton: React.FC = () => (
   <IonCol offset='8' size='4'>
     <IonCard>
       <IonButtons>
-        <IonButton routerLink='/accounts/new' expand='block'>
+        <IonButton routerLink='/accounts/new' className='center'>
           <IonLabel color='primary' slot='start'>
             Add
           </IonLabel>

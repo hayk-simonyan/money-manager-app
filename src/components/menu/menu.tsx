@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   IonMenu,
   IonHeader,
@@ -21,6 +20,7 @@ import {
   logOutOutline,
 } from 'ionicons/icons';
 import { connect } from 'react-redux';
+
 import { logout } from '../../redux/auth/auth.actions';
 
 interface Props {
