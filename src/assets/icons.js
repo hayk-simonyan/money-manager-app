@@ -66,16 +66,3 @@ export const iconsArray = [
   'watch-outline',
   'woman-outline',
 ];
-
-// export const iconsArray = [
-//   require(`./ionicons/airplane-outline.svg`),
-//   require(`./ionicons/albums-outline.svg`),
-//   require(`./ionicons/american-football-outline.svg`),
-//   require(`./ionicons/archive-outline.svg`),
-//   require(`./ionicons/barbell-outline.svg`),
-//   require(`./ionicons/baseball-outline.svg`),
-//   require(`./ionicons/baseball-outline.svg`),
-//   require(`./ionicons/basketball-outline.svg`),
-//   require(`./ionicons/beer-outline.svg`),
-//   require(`./ionicons/beer-outline.svg`),
-// ];
