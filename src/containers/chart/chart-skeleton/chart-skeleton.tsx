@@ -4,6 +4,7 @@ import {
   IonCol,
   IonGrid,
   IonItem,
+  IonLabel,
   IonRow,
   IonSkeletonText,
 } from '@ionic/react';
@@ -14,32 +15,13 @@ export default function ChartSkeleton() {
   return (
     <IonGrid>
       <IonRow>
-        <IonCol
-          offset='1'
-          size='5'
-          className='container 
-        '
-        >
-          <IonItem className='vertical-center' lines='none'>
-            <IonAvatar className='avatar '>
-              <IonSkeletonText animated />
-            </IonAvatar>
-          </IonItem>
-        </IonCol>
-        <IonCol offset='2' size='4' className='container'>
-          <IonItem lines='none'>
+        <IonItem className='horizontal-center' lines='none'>
+          <IonAvatar className='avatar'>
             <IonSkeletonText animated />
-          </IonItem>
-          <IonItem lines='none'>
-            <IonSkeletonText animated />
-          </IonItem>
-          <IonItem lines='none'>
-            <IonSkeletonText animated />
-          </IonItem>
-          <IonItem lines='none'>
-            <IonSkeletonText animated />
-          </IonItem>
-        </IonCol>
+          </IonAvatar>
+        </IonItem>
+        <IonSkeletonText animated />
+        <IonSkeletonText animated />
       </IonRow>
     </IonGrid>
   );
