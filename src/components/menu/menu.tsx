@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  IonAlert,
   IonMenu,
   IonHeader,
   IonToolbar,
@@ -35,11 +36,29 @@ const Menu: React.FC<Props> = ({
   logout,
   auth: { isAuthenticated, loading },
 }) => {
+  const [showAbout, setShowAbout] = useState(false);
+
   return (
     <IonMenu contentId='main' side='start' menuId='id'>
+      <IonAlert
+        isOpen={showAbout}
+        onDidDismiss={() => setShowAbout(false)}
+        header={'Money Manager'}
+        subHeader={'Version 1.0.0'}
+        message={`
+          <p>Expense and Income Tracker</p>
+          <p>Without limitation Features, Free</p>
+          <p>Financial Planning and Review</p>
+          <p>Cashflow and Balance Trend</p>
+          <p>Clean User Interface</p>
+          <p>Easy to Use</p>
+        `}
+        buttons={['Close']}
+      />
+
       <IonHeader>
         <IonToolbar color='primary'>
-          <IonItem routerLink='/settings' color='primary' lines='none' button>
+          <IonItem routerLink='/' color='primary' lines='none' button>
             <IonTitle>Money Manager</IonTitle>
           </IonItem>
         </IonToolbar>
@@ -100,7 +119,8 @@ const Menu: React.FC<Props> = ({
             <IonItem
               lines='full'
               button
-              routerLink='/about'
+              onClick={(e) => setShowAbout(true)}
+              // routerLink='/about'
               routerDirection='none'
             >
               <IonIcon slot='start' icon={informationCircleOutline} />

@@ -32,8 +32,8 @@ const ChartBuilder: React.FC<Props> = ({ labels, data }) => {
         data={mainData}
         options={{
           title: {
-            display: false,
-            text: 'Categories',
+            display: true,
+            text: 'Chart',
             fontSize: 25,
           },
           legend: {
