@@ -97,7 +97,7 @@ const RecordItem: React.FC<Props> = ({
                     left: '-0.6rem',
                     right: 0,
                     bottom: 0,
-                    fontSize: '1.4rem',
+                    fontSize: '1.25rem',
                   }}
                   icon={selectedIcon}
                 />

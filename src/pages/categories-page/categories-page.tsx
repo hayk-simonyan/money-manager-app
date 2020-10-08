@@ -54,9 +54,9 @@ const CategoriesPage: React.FC<Props> = ({
       />
       <IonContent>
         {segment === 'expences' ? (
-          <React.Fragment>{expenceCategories}</React.Fragment>
+          <div style={{ marginBottom: '4.7rem' }}>{expenceCategories}</div>
         ) : (
-          <React.Fragment>{incomeCategories}</React.Fragment>
+          <div style={{ marginBottom: '4.7rem' }}>{incomeCategories}</div>
         )}
       </IonContent>
       <AddButton url='categories/new' />
