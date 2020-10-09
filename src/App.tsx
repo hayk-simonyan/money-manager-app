@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { Route, Redirect } from 'react-router-dom';
 import { IonReactRouter } from '@ionic/react-router';
+import { Plugins } from '@capacitor/core';
 
 import store from './redux/store';
 
@@ -44,18 +45,36 @@ import './theme/variables.css';
 import { loadUser } from './redux/auth/auth.actions';
 import { Provider } from 'react-redux';
 import SettingsPage from './pages/settings-page/settings-page';
+import NetworkError from './components/network-error/network-error';
+
+const { Network } = Plugins;
 
 if (localStorage.jwttoken) {
   setAuthToken(localStorage.jwttoken);
 }
 
 const App: React.FC = () => {
+  const [networkState, setNetworkState] = useState<boolean>(true);
+
+  Network.getStatus().then((status) => {
+    setNetworkState(status.connected);
+  });
+
   useEffect(() => {
-    // @ts-ignore
-    store.dispatch(loadUser());
+    Network.addListener('networkStatusChange', (status) => {
+      console.log(status.connected);
+      setNetworkState(status.connected);
+    });
   }, []);
 
-  return (
+  useEffect(() => {
+    if (networkState) {
+      // @ts-ignore
+      store.dispatch(loadUser());
+    }
+  }, []);
+
+  return networkState ? (
     <Provider store={store}>
       <IonApp>
         <IonReactRouter>
@@ -117,6 +136,8 @@ const App: React.FC = () => {
         <Alert />
       </IonApp>
     </Provider>
+  ) : (
+    <NetworkError />
   );
 };
 
