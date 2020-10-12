@@ -32,7 +32,7 @@ export const getRecords = (y: string = '', m: string = '') => async (
     let query = `?date[gte]=${gte}&date[lt]=${lt}`;
     // query = `?date[gte]=${year}-${thisMonth}-01T00:00:00.000Z&date[lt]=${year}-${nextMonth}-01T00:00:00.000Z`;
 
-    const res = await axios.get(`http://localhost:5000/records${query}`);
+    const res = await axios.get(`https://money-manager-api-v1.herokuapp.com/records${query}`);
 
     dispatch({
       type: GET_RECORDS,
@@ -55,7 +55,7 @@ export const getRecords = (y: string = '', m: string = '') => async (
 
 export const getRecord = (id: string) => async (dispatch: any) => {
   try {
-    const res = await axios.get(`http://localhost:5000/records/${id}`);
+    const res = await axios.get(`https://money-manager-api-v1.herokuapp.com/records/${id}`);
 
     dispatch({
       type: GET_RECORD,
@@ -100,7 +100,7 @@ export const postRecord = (
   };
 
   try {
-    const res = await axios.post(`http://localhost:5000/records`, body, config);
+    const res = await axios.post(`https://money-manager-api-v1.herokuapp.com/records`, body, config);
 
     dispatch({
       type: POST_RECORD,
@@ -149,7 +149,7 @@ export const putRecord = (
 
   try {
     const res = await axios.put(
-      `http://localhost:5000/records/${id}`,
+      `https://money-manager-api-v1.herokuapp.com/records/${id}`,
       body,
       config
     );
@@ -175,7 +175,7 @@ export const putRecord = (
 
 export const deleteRecord = (id: string) => async (dispatch: any) => {
   try {
-    await axios.delete(`http://localhost:5000/records/${id}`);
+    await axios.delete(`https://money-manager-api-v1.herokuapp.com/records/${id}`);
 
     dispatch({
       type: DELETE_RECORD,

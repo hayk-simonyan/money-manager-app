@@ -31,7 +31,7 @@ export const signup = (name: string, email: string, password: string) => async (
   const body = JSON.stringify({ name, email, password });
 
   try {
-    const res = await axios.post('http://localhost:5000/users', body, config);
+    const res = await axios.post('https://money-manager-api-v1.herokuapp.com/users', body, config);
 
     dispatch({
       type: SIGNUP_SUCCESS,
@@ -65,7 +65,7 @@ export const signin = (email: string, password: string) => async (
   const body = JSON.stringify({ email, password });
 
   try {
-    const res = await axios.post('http://localhost:5000/auth', body, config);
+    const res = await axios.post('https://money-manager-api-v1.herokuapp.com/auth', body, config);
 
     dispatch({
       type: SIGNIN_SUCCESS,
@@ -98,7 +98,7 @@ export const loadUser = () => async (dispatch: any) => {
   }
 
   try {
-    const res = await axios.get('http://localhost:5000/auth');
+    const res = await axios.get('https://money-manager-api-v1.herokuapp.com/auth');
 
     dispatch({
       type: USER_LOADED,
