@@ -2,7 +2,10 @@ import React from 'react';
 
 import { refreshOutline } from 'ionicons/icons';
 import {
+  IonCard,
+  IonCardHeader,
   IonCardSubtitle,
+  IonCardTitle,
   IonContent,
   IonIcon,
   IonItem,
@@ -11,22 +14,24 @@ import {
 } from '@ionic/react';
 
 import './network-error.css';
+import Header from '../header/header';
 
 export default function NetworkError() {
   return (
     <IonPage>
-      <IonContent className='network-error-container'>
-        <div className='vertical-center horizontal-center ion-text-center'>
-          <h1>No Internet</h1>
+      <Header title='No Internet' menu={true} />
+      <IonCard>
+        <IonCardHeader>
+          <IonCardTitle>No Internet</IonCardTitle>
           <IonCardSubtitle>
             Check your internet connection and try again
           </IonCardSubtitle>
-          <IonItem lines='none'>
-            <IonIcon icon={refreshOutline} />
-            <IonLabel>Refresh</IonLabel>
-          </IonItem>
-        </div>
-      </IonContent>
+        </IonCardHeader>
+      </IonCard>
+      <IonItem lines='none' button>
+        <IonIcon icon={refreshOutline} />
+        <IonLabel>Refresh</IonLabel>
+      </IonItem>
     </IonPage>
   );
 }
