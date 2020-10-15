@@ -29,12 +29,13 @@ const ChartBuilder: React.FC<Props> = ({ labels, data }) => {
   return (
     <React.Fragment>
       <Polar
+        height={160}
         data={mainData}
         options={{
           title: {
             display: true,
             text: 'Chart',
-            fontSize: 25,
+            fontSize: 20,
           },
           legend: {
             display: false,
