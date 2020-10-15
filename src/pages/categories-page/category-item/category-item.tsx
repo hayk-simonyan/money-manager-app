@@ -62,7 +62,18 @@ const CategoryItem: React.FC<Props> = ({
         <IonRow>
           <IonCol size='2' className='container'>
             <IonLabel className='vertical-center'>
-              <IonIcon icon={iconOutline}></IonIcon>
+              <IonIcon
+                style={{
+                  position: 'abssolute',
+                  margin: 'auto',
+                  top: '-0.9rem',
+                  left: '-0.6rem',
+                  right: 0,
+                  bottom: 0,
+                  fontSize: '1.25rem',
+                }}
+                icon={iconOutline}
+              ></IonIcon>
             </IonLabel>
           </IonCol>
           <IonCol size='6' className='container'>

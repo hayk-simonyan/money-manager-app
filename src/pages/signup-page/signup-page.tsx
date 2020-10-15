@@ -80,7 +80,7 @@ const SignupPage: React.FC<Props> = ({
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Email</IonLabel>
-                <IonInput ref={emailInputRef} type='text' />
+                <IonInput ref={emailInputRef} type='email' />
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Password</IonLabel>

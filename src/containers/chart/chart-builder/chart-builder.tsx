@@ -128,12 +128,13 @@ const ChartBuilder: React.FC<Props> = ({
   return (
     <React.Fragment>
       <Pie
+        height={165}
         data={mainData}
         options={{
           title: {
             display: true,
             text: 'Categories',
-            fontSize: 25,
+            fontSize: 20,
           },
           legend: {
             display: true,
@@ -152,7 +153,7 @@ const ChartBuilder: React.FC<Props> = ({
             title: {
               display: 'Chart',
               text: 'Balance Trend',
-              fontSize: 25,
+              fontSize: 20,
             },
             legend: {
               display: false,
@@ -168,7 +169,7 @@ const ChartBuilder: React.FC<Props> = ({
             title: {
               display: true,
               text: 'Cashflow',
-              fontSize: 25,
+              fontSize: 20,
             },
             legend: {
               display: false,

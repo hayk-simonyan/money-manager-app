@@ -75,7 +75,7 @@ const SigninPage: React.FC<Props> = ({
             <IonCol>
               <IonItem>
                 <IonLabel position='floating'>Email</IonLabel>
-                <IonInput ref={emailInputRef} type='text' />
+                <IonInput ref={emailInputRef} type='email' />
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Password</IonLabel>

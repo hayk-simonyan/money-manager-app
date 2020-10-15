@@ -45,7 +45,7 @@ const Accounts: React.FC<Props> = ({
         <IonCardTitle>Accounts</IonCardTitle>
       </IonCardHeader>
       {
-        <IonGrid>
+        <IonGrid style={{ padding: 0 }}>
           <IonRow>{loading ? <AccountsSkeleton /> : fetchedAccounts}</IonRow>
           <IonRow>
             <AddAccountButton />

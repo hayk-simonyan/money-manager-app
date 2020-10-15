@@ -17,9 +17,9 @@ interface Props {
 }
 
 const AccountItem: React.FC<Props> = ({ id, type, name, total }) => (
-  <IonCol size='6'>
+  <IonCol size='6' style={{ padding: 0 }}>
     <IonCard>
-      <IonItem routerLink={`/accounts/${id}`} button>
+      <IonItem routerLink={`/accounts/${id}`} button lines='none'>
         <IonGrid>
           <IonRow>
             <IonLabel color='primary'>{name}</IonLabel>

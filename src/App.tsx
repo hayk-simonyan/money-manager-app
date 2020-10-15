@@ -45,7 +45,7 @@ import './theme/variables.css';
 import { loadUser } from './redux/auth/auth.actions';
 import { Provider } from 'react-redux';
 import SettingsPage from './pages/settings-page/settings-page';
-import NetworkError from './components/network-error/network-error';
+import NetworkError from './pages/network-error/network-error';
 
 const { Network } = Plugins;
 
