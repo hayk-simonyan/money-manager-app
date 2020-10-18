@@ -51,7 +51,6 @@ export default function (
         loading: false,
       };
     case SIGNUP_FAIL:
-    case AUTH_ERROR:
     case SIGNIN_FAIL:
     case LOGOUT:
       localStorage.removeItem('token');
@@ -61,6 +60,7 @@ export default function (
         isAuthenticated: false,
         loading: false,
       };
+    case AUTH_ERROR:
     default:
       return state;
   }

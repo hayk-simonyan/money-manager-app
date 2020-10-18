@@ -50,6 +50,11 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
     postAccount(type.toString(), name.toString(), total.toString());
     setAlert('Account Was Created', 'success');
     history.push('/');
+
+    // Clear the state
+    setType('');
+    nameInputRef.current!.value = null;
+    totalInputRef.current!.value = null;
   };
 
   const clearError = () => {

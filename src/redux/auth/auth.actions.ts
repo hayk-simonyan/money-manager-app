@@ -31,7 +31,11 @@ export const signup = (name: string, email: string, password: string) => async (
   const body = JSON.stringify({ name, email, password });
 
   try {
-    const res = await axios.post('https://money-manager-api-v1.herokuapp.com/users', body, config);
+    const res = await axios.post(
+      'https://money-manager-api-v1.herokuapp.com/users',
+      body,
+      config
+    );
 
     dispatch({
       type: SIGNUP_SUCCESS,
@@ -65,7 +69,11 @@ export const signin = (email: string, password: string) => async (
   const body = JSON.stringify({ email, password });
 
   try {
-    const res = await axios.post('https://money-manager-api-v1.herokuapp.com/auth', body, config);
+    const res = await axios.post(
+      'https://money-manager-api-v1.herokuapp.com/auth',
+      body,
+      config
+    );
 
     dispatch({
       type: SIGNIN_SUCCESS,
@@ -98,7 +106,9 @@ export const loadUser = () => async (dispatch: any) => {
   }
 
   try {
-    const res = await axios.get('https://money-manager-api-v1.herokuapp.com/auth');
+    const res = await axios.get(
+      'https://money-manager-api-v1.herokuapp.com/auth'
+    );
 
     dispatch({
       type: USER_LOADED,
@@ -126,14 +136,13 @@ export const putEmail = (email: string) => async (dispatch: any) => {
 
   try {
     const res = await axios.put(`/auth/email`, body, config);
-    console.log(res);
 
     dispatch({
       type: PUT_EMAIL,
       payload: res.data,
     });
 
-    dispatch(setAlert(res.data.msg, 'success'));
+    dispatch(setAlert('Email updated', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -165,7 +174,7 @@ export const putPassword = (oldPassword: string, password: string) => async (
       payload: res.data,
     });
 
-    dispatch(setAlert(res.data.msg, 'success'));
+    dispatch(setAlert('Password Updated', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
