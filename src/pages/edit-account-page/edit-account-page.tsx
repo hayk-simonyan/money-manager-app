@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import {
@@ -25,7 +25,6 @@ import {
   putAccount,
   deleteAccount,
 } from '../../redux/accounts/account.actions';
-import { setAlert } from '../../redux/alerts/alert.actions';
 
 interface Account {
   _id: string;
@@ -38,14 +37,12 @@ interface Props {
   accounts: { accounts: any; loading: boolean };
   putAccount: (id: string, type: string, name: string, total: string) => void;
   deleteAccount: (id: string) => void;
-  setAlert: (msg: string, alertType: string) => void;
 }
 
 const EditAccountPage: React.FC<Props> = ({
   accounts: { accounts, loading },
   putAccount,
   deleteAccount,
-  setAlert,
 }) => {
   const history = useHistory();
   const [error, setError] = useState<string>();
@@ -53,12 +50,12 @@ const EditAccountPage: React.FC<Props> = ({
     setError('');
   };
 
-  //@ts-ignore
+  // @ts-ignore
   const { id } = useParams();
   const findAccount = accounts.find((a: Account) => a._id === id);
   const currentAccount = { ...findAccount };
 
-  const [type, setType] = useState<string>(currentAccount.icon);
+  const [type, setType] = useState<string>(currentAccount.type);
   const nameInputRef = useRef<HTMLIonInputElement>(currentAccount.name);
   const [name, setName] = useState<string>(currentAccount.name);
   const totalInputRef = useRef<HTMLIonInputElement>(currentAccount.total);
@@ -76,7 +73,6 @@ const EditAccountPage: React.FC<Props> = ({
     }
 
     putAccount(id, type.toString(), name.toString(), total.toString());
-    setAlert('Account Was Updated', 'success');
     history.push('/');
   };
 
@@ -85,7 +81,6 @@ const EditAccountPage: React.FC<Props> = ({
     console.log('deleteaccounthandlercalled');
     history.push('/');
     deleteAccount(id);
-    setAlert('Account Was Removed', 'success');
   };
 
   const toggleModal = () => {
@@ -175,8 +170,6 @@ const mapDispatchToProps = (dispatch: any) => ({
   putAccount: (id: string, icon: string, name: string, total: string) =>
     dispatch(putAccount(id, icon, name, total)),
   deleteAccount: (id: string) => dispatch(deleteAccount(id)),
-  setAlert: (msg: string, alertType: string) =>
-    dispatch(setAlert(msg, alertType)),
 });
 
 const mapStateToProps = (state: any) => ({

@@ -46,6 +46,7 @@ const Menu: React.FC<Props> = ({
         header={'Money Manager'}
         subHeader={'Version 1.0.0'}
         message={`
+          <p>Uncomplicated Money Manager</p>
           <p>Expense and Income Tracker</p>
           <p>Without limitation Features, Free</p>
           <p>Financial Planning and Review</p>

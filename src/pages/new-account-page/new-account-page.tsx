@@ -22,15 +22,13 @@ import Header from '../../components/header/header';
 
 import { connect } from 'react-redux';
 import { postAccount } from '../../redux/accounts/account.actions';
-import { setAlert } from '../../redux/alerts/alert.actions';
 import { checkmarkOutline } from 'ionicons/icons';
 
 interface Props {
   postAccount: (type: string, name: string, total: string) => void;
-  setAlert: (msg: string, alertType: string) => void;
 }
 
-const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
+const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
   const history = useHistory();
   const [error, setError] = useState<string>();
 
@@ -48,7 +46,6 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
     }
 
     postAccount(type.toString(), name.toString(), total.toString());
-    setAlert('Account Was Created', 'success');
     history.push('/');
 
     // Clear the state
@@ -127,8 +124,6 @@ const NewAccountPage: React.FC<Props> = ({ postAccount, setAlert }) => {
 const mapDispatchToProps = (dispatch: any) => ({
   postAccount: (type: string, name: string, total: string) =>
     dispatch(postAccount(type, name, total)),
-  setAlert: (msg: string, alertType: string) =>
-    dispatch(setAlert(msg, alertType)),
 });
 
 export default connect(null, mapDispatchToProps)(NewAccountPage);

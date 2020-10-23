@@ -10,7 +10,7 @@ import { setAlert } from '../alerts/alert.actions';
 
 export const getAccounts = () => async (dispatch: any) => {
   try {
-    const res = await axios.get(`https://money-manager-api-v1.herokuapp.com/accounts`);
+    const res = await axios.get(`http://localhost:5000/accounts`);
 
     dispatch({
       type: GET_ACCOUNTS,
@@ -46,7 +46,7 @@ export const postAccount = (
 
   try {
     const res = await axios.post(
-      `https://money-manager-api-v1.herokuapp.com/accounts`,
+      `http://localhost:5000/accounts`,
       body,
       config
     );
@@ -55,6 +55,8 @@ export const postAccount = (
       type: POST_ACCOUNT,
       payload: res.data,
     });
+
+    dispatch(setAlert('Account Was Created', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -86,7 +88,7 @@ export const putAccount = (
 
   try {
     const res = await axios.put(
-      `https://money-manager-api-v1.herokuapp.com/accounts/${id}`,
+      `http://localhost:5000/accounts/${id}`,
       body,
       config
     );
@@ -95,6 +97,8 @@ export const putAccount = (
       type: PUT_ACCOUNT,
       payload: res.data,
     });
+
+    dispatch(setAlert('Account Was Updated', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -112,12 +116,14 @@ export const putAccount = (
 
 export const deleteAccount = (id: string) => async (dispatch: any) => {
   try {
-    await axios.delete(`https://money-manager-api-v1.herokuapp.com/accounts/${id}`);
+    await axios.delete(`http://localhost:5000/accounts/${id}`);
 
     dispatch({
       type: DELETE_ACCOUNT,
       payload: id,
     });
+
+    dispatch(setAlert('Account Was Removed', 'success'));
   } catch (err) {
     console.log(err);
     const errors = err.response.data.errors;

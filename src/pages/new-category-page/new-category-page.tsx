@@ -25,34 +25,33 @@ import { iconsArray } from '../../assets/icons';
 
 import { connect } from 'react-redux';
 import { postCategory } from '../../redux/categories/category.actions';
-import { setAlert } from '../../redux/alerts/alert.actions';
 
 interface Props {
   postCategory: (type: string, icon: string, name: string) => void;
-  setAlert: (msg: string, alertType: string) => void;
 }
 
-const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
+const NewCategoryPage: React.FC<Props> = ({ postCategory }) => {
   const history = useHistory();
   const [error, setError] = useState<string>();
 
   const [type, setType] = useState<string>('expences');
-  const [icon, setIcon] = useState<string>('cart-outline');
+  const [icon, setIcon] = useState<string>('starter');
   const nameInputRef = useRef<HTMLIonInputElement>(null);
 
   const addRecordHandler = () => {
     const name = nameInputRef.current!.value;
 
-    if (!type || !icon || !name) {
+    if (!type || !icon || !name || icon === 'starter') {
       setError('Please fill out all required inputs');
       return;
     }
 
-    console.log(icon);
-
     postCategory(type, icon, name.toString());
-    setAlert('Account was created', 'success');
     history.push('/categories');
+
+    setType('expences');
+    setIcon('starter');
+    nameInputRef.current!.value = null;
   };
 
   const clearError = () => {
@@ -139,8 +138,6 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory, setAlert }) => {
 const mapDispatchToProps = (dispatch: any) => ({
   postCategory: (type: string, icon: string, name: string) =>
     dispatch(postCategory(type, icon, name)),
-  setAlert: (msg: string, alertType: string) =>
-    dispatch(setAlert(msg, alertType)),
 });
 
 export default connect(null, mapDispatchToProps)(NewCategoryPage);

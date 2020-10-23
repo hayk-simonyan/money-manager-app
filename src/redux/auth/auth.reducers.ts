@@ -61,6 +61,12 @@ export default function (
         loading: false,
       };
     case AUTH_ERROR:
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        loading: false,
+      };
     default:
       return state;
   }

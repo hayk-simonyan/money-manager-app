@@ -31,11 +31,7 @@ export const signup = (name: string, email: string, password: string) => async (
   const body = JSON.stringify({ name, email, password });
 
   try {
-    const res = await axios.post(
-      'https://money-manager-api-v1.herokuapp.com/users',
-      body,
-      config
-    );
+    const res = await axios.post('http://localhost:5000/users', body, config);
 
     dispatch({
       type: SIGNUP_SUCCESS,
@@ -69,11 +65,7 @@ export const signin = (email: string, password: string) => async (
   const body = JSON.stringify({ email, password });
 
   try {
-    const res = await axios.post(
-      'https://money-manager-api-v1.herokuapp.com/auth',
-      body,
-      config
-    );
+    const res = await axios.post('http://localhost:5000/auth', body, config);
 
     dispatch({
       type: SIGNIN_SUCCESS,
@@ -106,9 +98,7 @@ export const loadUser = () => async (dispatch: any) => {
   }
 
   try {
-    const res = await axios.get(
-      'https://money-manager-api-v1.herokuapp.com/auth'
-    );
+    const res = await axios.get('http://localhost:5000/auth');
 
     dispatch({
       type: USER_LOADED,
@@ -135,7 +125,11 @@ export const putEmail = (email: string) => async (dispatch: any) => {
   const body = JSON.stringify({ email });
 
   try {
-    const res = await axios.put(`/auth/email`, body, config);
+    const res = await axios.put(
+      `http://localhost:5000/auth/email`,
+      body,
+      config
+    );
 
     dispatch({
       type: PUT_EMAIL,
@@ -167,7 +161,11 @@ export const putPassword = (oldPassword: string, password: string) => async (
   const body = JSON.stringify({ oldPassword, password });
 
   try {
-    const res = await axios.put(`/auth/password`, body, config);
+    const res = await axios.put(
+      `http://localhost:5000/auth/password`,
+      body,
+      config
+    );
 
     dispatch({
       type: PUT_PASSWORD,

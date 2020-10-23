@@ -25,7 +25,6 @@ import { iconsArray } from '../../assets/icons';
 
 import { connect } from 'react-redux';
 import { putCategory } from '../../redux/categories/category.actions';
-import { setAlert } from '../../redux/alerts/alert.actions';
 
 interface Category {
   _id: string;
@@ -36,18 +35,17 @@ interface Category {
 
 interface Props {
   putCategory: (id: string, type: string, icon: string, name: string) => void;
-  setAlert: (msg: string, alertType: string) => void;
   categories: { categories: any; loading: boolean };
 }
 
 const EditCategoryPage: React.FC<Props> = ({
   putCategory,
-  setAlert,
   categories: { categories, loading },
 }) => {
   const history = useHistory();
   const [error, setError] = useState<string>();
 
+  // @ts-ignore
   const { id } = useParams();
   const currentCategory = categories.find((c: Category) => c._id === id);
 
@@ -65,7 +63,6 @@ const EditCategoryPage: React.FC<Props> = ({
     }
 
     putCategory(id, type, icon, name.toString());
-    setAlert('Account was updated', 'success');
     history.push('/categories');
   };
 
@@ -157,8 +154,6 @@ const EditCategoryPage: React.FC<Props> = ({
 const mapDispatchToProps = (dispatch: any) => ({
   putCategory: (id: string, type: string, icon: string, name: string) =>
     dispatch(putCategory(id, type, icon, name)),
-  setAlert: (msg: string, alertType: string) =>
-    dispatch(setAlert(msg, alertType)),
 });
 
 const mapStateToProps = (state: any) => ({

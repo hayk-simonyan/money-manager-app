@@ -99,6 +99,13 @@ const NewRecordPage: React.FC<Props> = ({
     );
     setAlert('Record was Added!', 'success');
     history.push('/');
+
+    // setType('expences');
+    // setAccount('');
+    // setCategory('');
+    // setDate(myDate);
+    // amountInputRef.current!.value = null;
+    // noteInputRef.current!.value = null;
   };
 
   const clearError = () => {
