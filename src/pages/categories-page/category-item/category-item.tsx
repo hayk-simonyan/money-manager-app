@@ -82,7 +82,7 @@ const CategoryItem: React.FC<Props> = ({
           <IonCol size='2' className='container'>
             <IonButton
               onClick={openModal}
-              color='secondary'
+              color='primary'
               className='vertical-align'
             >
               <IonIcon slot='icon-only' icon={trashOutline}></IonIcon>
@@ -91,7 +91,7 @@ const CategoryItem: React.FC<Props> = ({
           <IonCol size='2' className='container'>
             <IonButton
               routerLink={`/categories/${_id}`}
-              color='secondary'
+              color='primary'
               className='vertical-align'
             >
               <IonIcon slot='icon-only' icon={createOutline}></IonIcon>

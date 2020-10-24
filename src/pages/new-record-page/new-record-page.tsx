@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import {
@@ -89,23 +89,25 @@ const NewRecordPage: React.FC<Props> = ({
     const c = categories.find((c: any) => c.name === category);
     const categoryId = c._id;
 
+    console.log(type, accountId, categoryId, date, amount, note);
+
     postRecord(
       type,
       accountId,
       categoryId,
       new Date(date),
       parseInt(amount.toString()),
-      note!.toString()
+      note ? note!.toString() : ''
     );
     setAlert('Record was Added!', 'success');
     history.push('/');
 
-    // setType('expences');
-    // setAccount('');
-    // setCategory('');
-    // setDate(myDate);
-    // amountInputRef.current!.value = null;
-    // noteInputRef.current!.value = null;
+    setType('expences');
+    setAccount('');
+    setCategory('');
+    setDate(myDate);
+    amountInputRef.current!.value = null;
+    noteInputRef.current!.value = null;
   };
 
   const clearError = () => {
@@ -137,7 +139,7 @@ const NewRecordPage: React.FC<Props> = ({
                   interface='action-sheet'
                 >
                   <IonSelectOption value='expences'>Expences</IonSelectOption>
-                  <IonSelectOption value='incomes'>Incomes</IonSelectOption>
+                  <IonSelectOption value='incomes'>Income</IonSelectOption>
                 </IonSelect>
               </IonItem>
               <IonItem>
