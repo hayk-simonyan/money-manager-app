@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 
 import {
   IonGrid,
@@ -34,16 +34,11 @@ interface Account {
 }
 
 interface Props {
-  accounts: { accounts: any; loading: boolean };
   putAccount: (id: string, type: string, name: string, total: string) => void;
   deleteAccount: (id: string) => void;
 }
 
-const EditAccountPage: React.FC<Props> = ({
-  accounts: { accounts, loading },
-  putAccount,
-  deleteAccount,
-}) => {
+const EditAccountPage: React.FC<Props> = ({ putAccount, deleteAccount }) => {
   const history = useHistory();
   const [error, setError] = useState<string>();
   const clearError = () => {
@@ -52,16 +47,15 @@ const EditAccountPage: React.FC<Props> = ({
 
   // @ts-ignore
   const { id } = useParams();
-  const findAccount = accounts.find((a: Account) => a._id === id);
-  const currentAccount = { ...findAccount };
+  const location = useLocation();
+  const currentAccount: any = location.state;
+  //@ts-ignore
+  console.log(location.state.type);
 
-  const [type, setType] = useState<string>(currentAccount.type);
+  const [type, setType] = useState<HTMLIonSelectElement>(currentAccount.type);
   const nameInputRef = useRef<HTMLIonInputElement>(currentAccount.name);
-  const [name, setName] = useState<string>(currentAccount.name);
   const totalInputRef = useRef<HTMLIonInputElement>(currentAccount.total);
-  const [total, setTotal] = useState<number>(currentAccount.total);
-  // const [name, setName] = useState<string>(currentAccount.name);
-  // let [total, setTotal] = useState<string>(currentAccount.total);
+  console.log(type);
 
   const updateAccountHandler = () => {
     const name = nameInputRef.current!.value;
@@ -109,12 +103,18 @@ const EditAccountPage: React.FC<Props> = ({
             <IonCol>
               <IonItem>
                 <IonLabel position='floating'>Account Name</IonLabel>
-                <IonInput value={name} ref={nameInputRef} type='text' />
+                <IonInput
+                  //@ts-ignore
+                  value={location.state.name}
+                  ref={nameInputRef}
+                  type='text'
+                />
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Initial Amount</IonLabel>
                 <IonInput
-                  value={total}
+                  // @ts-ignore
+                  value={location.state.total}
                   ref={totalInputRef}
                   type='number'
                 ></IonInput>
@@ -172,8 +172,4 @@ const mapDispatchToProps = (dispatch: any) => ({
   deleteAccount: (id: string) => dispatch(deleteAccount(id)),
 });
 
-const mapStateToProps = (state: any) => ({
-  accounts: state.accounts,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditAccountPage);
+export default connect(null, mapDispatchToProps)(EditAccountPage);
