@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 
 import {
   IonGrid,
@@ -37,44 +37,27 @@ interface Props {
   ) => void;
   deleteRecord: (id: string) => void;
   setAlert: (msg: string, alertType: string) => void;
-  records: { records: any; currentRecord: any; loading: boolean };
   accounts: { accounts: any; loading: boolean };
   categories: { categories: any; loading: boolean };
-}
-
-interface Record {
-  _id: string;
-  type: string;
-  account: {
-    name: string;
-  };
-  category: {
-    name: string;
-  };
-  date: Date;
-  amount: number;
-  note: string;
 }
 
 const EditRecordPage: React.FC<Props> = ({
   putRecord,
   deleteRecord,
   setAlert,
-  records: { records, loading },
   accounts: { accounts },
   categories: { categories },
 }) => {
   //@ts-ignore
   const { id } = useParams();
+  const location = useLocation();
+  const currentRecord: any = location.state;
 
   const history = useHistory();
   const [error, setError] = useState<string>();
   const clearError = () => {
     setError('');
   };
-
-  const findRecord = records.find((r: Record) => r._id === id);
-  let currentRecord = { ...findRecord };
 
   const [type, setType] = useState<string>(currentRecord.type);
   const [account, setAccount] = useState<string>(
@@ -268,7 +251,6 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 const mapStateToProps = (state: any) => ({
-  records: state.records,
   accounts: state.accounts,
   categories: state.categories,
 });

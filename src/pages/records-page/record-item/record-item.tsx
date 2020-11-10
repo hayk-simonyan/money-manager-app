@@ -14,6 +14,7 @@ import {
   IonAlert,
 } from '@ionic/react';
 import { trash } from 'ionicons/icons';
+import { useHistory } from 'react-router';
 
 import { connect } from 'react-redux';
 import { deleteRecord } from '../../../redux/records/record.actions';
@@ -40,9 +41,19 @@ const RecordItem: React.FC<Props> = ({
   deleteRecord,
   setAlert,
 }) => {
-  // useEffect(() => {
-  //   getCategories();
-  // }, [getCategories]);
+  const history = useHistory();
+
+  const redirectToRecord = (id: string) => {
+    history.push(`/records/${id}`, {
+      id,
+      type,
+      account,
+      category,
+      date,
+      amount,
+      note,
+    });
+  };
 
   const [startedDeleting, setStartedDeleting] = useState<boolean>(false);
 
@@ -85,7 +96,7 @@ const RecordItem: React.FC<Props> = ({
             <IonIcon slot='icon-only' icon={trash} />
           </IonItemOption>
         </IonItemOptions>
-        <IonItem routerLink={`/records/${_id}`} lines='full' button>
+        <IonItem onClick={() => redirectToRecord(_id)} lines='full' button>
           <IonGrid>
             <IonRow>
               <IonCol size='2' className='ion-no-padding'>

@@ -37,7 +37,7 @@ const CategoryItem: React.FC<Props> = ({
   const history = useHistory();
 
   const redirectToCategory = (id: string) => {
-    history.push(`/categories/${_id}`, { id: _id, type, icon, name });
+    history.push(`/categories/${id}`, { id, type, icon, name });
   };
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
