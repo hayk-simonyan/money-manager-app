@@ -49,8 +49,13 @@ const EditAccountPage: React.FC<Props> = ({ putAccount, deleteAccount }) => {
   const { id } = useParams();
   const location = useLocation();
   const currentAccount: any = location.state;
-  //@ts-ignore
-  console.log(location.state.type);
+
+  console.log(
+    'currentAccount',
+    currentAccount.name,
+    currentAccount.total,
+    currentAccount.type
+  );
 
   const [type, setType] = useState<HTMLIonSelectElement>(currentAccount.type);
   const nameInputRef = useRef<HTMLIonInputElement>(currentAccount.name);

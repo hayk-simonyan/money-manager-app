@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 
 import {
   IonGrid,
@@ -35,19 +35,16 @@ interface Category {
 
 interface Props {
   putCategory: (id: string, type: string, icon: string, name: string) => void;
-  categories: { categories: any; loading: boolean };
 }
 
-const EditCategoryPage: React.FC<Props> = ({
-  putCategory,
-  categories: { categories, loading },
-}) => {
+const EditCategoryPage: React.FC<Props> = ({ putCategory }) => {
   const history = useHistory();
   const [error, setError] = useState<string>();
 
   // @ts-ignore
   const { id } = useParams();
-  const currentCategory = categories.find((c: Category) => c._id === id);
+  const location = useLocation();
+  const currentCategory: any = location.state;
 
   const [type, setType] = useState<string>(currentCategory.type);
   const [icon, setIcon] = useState<string>(currentCategory.icon);
@@ -156,8 +153,4 @@ const mapDispatchToProps = (dispatch: any) => ({
     dispatch(putCategory(id, type, icon, name)),
 });
 
-const mapStateToProps = (state: any) => ({
-  categories: state.categories,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditCategoryPage);
+export default connect(null, mapDispatchToProps)(EditCategoryPage);

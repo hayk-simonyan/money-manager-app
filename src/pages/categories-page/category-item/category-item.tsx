@@ -10,6 +10,7 @@ import {
   IonGrid,
 } from '@ionic/react';
 import { trashOutline, createOutline } from 'ionicons/icons';
+import { useHistory } from 'react-router';
 
 import { connect } from 'react-redux';
 import { deleteCategory } from '../../../redux/categories/category.actions';
@@ -33,6 +34,12 @@ const CategoryItem: React.FC<Props> = ({
   deleteCategory,
   setAlert,
 }) => {
+  const history = useHistory();
+
+  const redirectToCategory = (id: string) => {
+    history.push(`/categories/${_id}`, { id: _id, type, icon, name });
+  };
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const deleteCategoryHandler = () => {
     deleteCategory(_id);
@@ -90,7 +97,7 @@ const CategoryItem: React.FC<Props> = ({
           </IonCol>
           <IonCol size='2' className='container'>
             <IonButton
-              routerLink={`/categories/${_id}`}
+              onClick={() => redirectToCategory(_id)}
               color='primary'
               className='vertical-align'
             >
