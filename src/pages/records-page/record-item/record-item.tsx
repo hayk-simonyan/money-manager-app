@@ -136,28 +136,6 @@ const RecordItem: React.FC<Props> = ({
                 </IonGrid>
               </IonCol>
             </IonRow>
-
-            {/* <IonRow className='container'>
-              <IonCol size='2' className='vertical-align'>
-                <IonIcon icon={selectedIcon}></IonIcon>
-              </IonCol>
-              <IonCol size='6'>
-                <IonLabel>{category.name}</IonLabel>
-              </IonCol>
-              <IonCol size='4' className='ion-text-right'>
-                <IonLabel>
-                  {type === 'expences' ? `-${amount}` : amount}$
-                </IonLabel>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol size='4' offset='2'>
-                <IonCardSubtitle>{account.name}</IonCardSubtitle>
-              </IonCol>
-              <IonCol size='6' className='ion-text-right'>
-                <IonCardSubtitle>{day + '/' + month}</IonCardSubtitle>
-              </IonCol>
-            </IonRow> */}
           </IonGrid>
         </IonItem>
       </IonItemSliding>

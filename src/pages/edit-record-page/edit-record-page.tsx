@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 
 import {
@@ -71,6 +71,16 @@ const EditRecordPage: React.FC<Props> = ({
   const [amount, setAmount] = useState<number>(currentRecord.amount);
   const noteInputRef = useRef<HTMLIonInputElement>(null);
   const [note, setNote] = useState<string>(currentRecord.note);
+
+  // update state if location.state is changed
+  useEffect(() => {
+    setType(currentRecord.type);
+    setAccount(currentRecord.account ? currentRecord.account.name : null);
+    setCategory(currentRecord.account ? currentRecord.category.name : null);
+    setDate(currentRecord.date);
+    setAmount(currentRecord.amount);
+    setNote(currentRecord.note);
+  }, [location.state]);
 
   const changeRecordTypeHandler = (e: any) => {
     setType(e.detail.value);

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 
 import {
@@ -50,17 +50,14 @@ const EditAccountPage: React.FC<Props> = ({ putAccount, deleteAccount }) => {
   const location = useLocation();
   const currentAccount: any = location.state;
 
-  console.log(
-    'currentAccount',
-    currentAccount.name,
-    currentAccount.total,
-    currentAccount.type
-  );
-
   const [type, setType] = useState<HTMLIonSelectElement>(currentAccount.type);
   const nameInputRef = useRef<HTMLIonInputElement>(currentAccount.name);
   const totalInputRef = useRef<HTMLIonInputElement>(currentAccount.total);
-  console.log(type);
+
+  // update state if location.state is changed
+  useEffect(() => {
+    setType(currentAccount.type);
+  }, [location.state]);
 
   const updateAccountHandler = () => {
     const name = nameInputRef.current!.value;

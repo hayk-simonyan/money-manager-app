@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 
 import {
@@ -50,6 +50,12 @@ const EditCategoryPage: React.FC<Props> = ({ putCategory }) => {
   const [icon, setIcon] = useState<string>(currentCategory.icon);
   const nameInputRef = useRef<HTMLIonInputElement>(currentCategory.name);
   const [name, setName] = useState<string>(currentCategory.name);
+
+  // update state if location.state is changed
+  useEffect(() => {
+    setType(currentCategory.type);
+    setName(currentCategory.name);
+  }, [location.state]);
 
   const updateRecordHandler = () => {
     const name = nameInputRef.current!.value;
