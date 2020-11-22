@@ -51,7 +51,8 @@ const EditRecordPage: React.FC<Props> = ({
   //@ts-ignore
   const { id } = useParams();
   const location = useLocation();
-  const currentRecord: any = location.state;
+  const findRecord: any = location.state;
+  const currentRecord = { ...findRecord };
 
   const history = useHistory();
   const [error, setError] = useState<string>();
@@ -68,8 +69,9 @@ const EditRecordPage: React.FC<Props> = ({
   );
   const [date, setDate] = useState<string>(currentRecord.date);
   const amountInputRef = useRef<HTMLIonInputElement>(currentRecord.amount);
-  const [amount, setAmount] = useState<number>(currentRecord.amount);
   const noteInputRef = useRef<HTMLIonInputElement>(null);
+
+  const [amount, setAmount] = useState<number>(currentRecord.amount);
   const [note, setNote] = useState<string>(currentRecord.note);
 
   // update state if location.state is changed
@@ -78,6 +80,7 @@ const EditRecordPage: React.FC<Props> = ({
     setAccount(currentRecord.account ? currentRecord.account.name : null);
     setCategory(currentRecord.account ? currentRecord.category.name : null);
     setDate(currentRecord.date);
+
     setAmount(currentRecord.amount);
     setNote(currentRecord.note);
   }, [location.state]);
