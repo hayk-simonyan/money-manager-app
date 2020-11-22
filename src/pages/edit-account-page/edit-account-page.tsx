@@ -26,13 +26,6 @@ import {
   deleteAccount,
 } from '../../redux/accounts/account.actions';
 
-interface Account {
-  _id: string;
-  type: string;
-  name: string;
-  total: string;
-}
-
 interface Props {
   putAccount: (id: string, type: string, name: string, total: string) => void;
   deleteAccount: (id: string) => void;

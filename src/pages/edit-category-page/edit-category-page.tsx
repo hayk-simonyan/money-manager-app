@@ -26,13 +26,6 @@ import { iconsArray } from '../../assets/icons';
 import { connect } from 'react-redux';
 import { putCategory } from '../../redux/categories/category.actions';
 
-interface Category {
-  _id: string;
-  icon: string;
-  name: string;
-  total: string;
-}
-
 interface Props {
   putCategory: (id: string, type: string, icon: string, name: string) => void;
 }
@@ -44,7 +37,8 @@ const EditCategoryPage: React.FC<Props> = ({ putCategory }) => {
   // @ts-ignore
   const { id } = useParams();
   const location = useLocation();
-  const currentCategory: any = location.state;
+  const findCategory: any = location.state;
+  const currentCategory: any = { ...findCategory };
 
   const [type, setType] = useState<string>(currentCategory.type);
   const [icon, setIcon] = useState<string>(currentCategory.icon);
