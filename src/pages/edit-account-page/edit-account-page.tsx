@@ -47,16 +47,23 @@ const EditAccountPage: React.FC<Props> = ({ putAccount, deleteAccount }) => {
 
   // @ts-ignore
   const { id } = useParams();
-  const location = useLocation();
-  const currentAccount: any = location.state;
+  const location: any = useLocation();
+  const findAccount: any = location.state;
+  const currentAccount = { ...findAccount };
 
   const [type, setType] = useState<HTMLIonSelectElement>(currentAccount.type);
   const nameInputRef = useRef<HTMLIonInputElement>(currentAccount.name);
   const totalInputRef = useRef<HTMLIonInputElement>(currentAccount.total);
 
+  const [name, setName] = useState<string>(currentAccount.name);
+  const [total, setTotal] = useState<number>(currentAccount.total);
+
   // update state if location.state is changed
   useEffect(() => {
     setType(currentAccount.type);
+
+    setName(currentAccount.name);
+    setTotal(currentAccount.total);
   }, [location.state]);
 
   const updateAccountHandler = () => {
@@ -105,18 +112,12 @@ const EditAccountPage: React.FC<Props> = ({ putAccount, deleteAccount }) => {
             <IonCol>
               <IonItem>
                 <IonLabel position='floating'>Account Name</IonLabel>
-                <IonInput
-                  //@ts-ignore
-                  value={location.state.name}
-                  ref={nameInputRef}
-                  type='text'
-                />
+                <IonInput value={name} ref={nameInputRef} type='text' />
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Initial Amount</IonLabel>
                 <IonInput
-                  // @ts-ignore
-                  value={location.state.total}
+                  value={total}
                   ref={totalInputRef}
                   type='number'
                 ></IonInput>
