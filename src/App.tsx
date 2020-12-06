@@ -47,7 +47,7 @@ import { Provider } from 'react-redux';
 import SettingsPage from './pages/settings-page/settings-page';
 import NetworkError from './pages/network-error/network-error';
 
-const { Network } = Plugins;
+const { Network, StatusBar } = Plugins;
 
 if (localStorage.jwttoken) {
   setAuthToken(localStorage.jwttoken);
@@ -61,6 +61,10 @@ const App: React.FC = () => {
   });
 
   useEffect(() => {
+    StatusBar.setBackgroundColor({
+      color: '#3880FF',
+    });
+
     Network.addListener('networkStatusChange', (status) => {
       setNetworkState(status.connected);
     });
