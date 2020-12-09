@@ -49,10 +49,6 @@ import NetworkError from './pages/network-error/network-error';
 
 const { Network, StatusBar } = Plugins;
 
-if (localStorage.jwttoken) {
-  setAuthToken(localStorage.jwttoken);
-}
-
 const App: React.FC = () => {
   const [networkState, setNetworkState] = useState<boolean>(true);
 
@@ -74,6 +70,10 @@ const App: React.FC = () => {
     if (networkState) {
       // @ts-ignore
       store.dispatch(loadUser());
+    }
+
+    if (networkState && localStorage.token) {
+      setAuthToken(localStorage.token);
     }
   }, []);
 
