@@ -57,16 +57,14 @@ const App: React.FC = () => {
   });
 
   useEffect(() => {
+    Network.addListener('networkStatusChange', (status) => {
+      setNetworkState(status.connected);
+    });
+
     StatusBar.setBackgroundColor({
       color: '#3880FF',
     });
 
-    Network.addListener('networkStatusChange', (status) => {
-      setNetworkState(status.connected);
-    });
-  }, []);
-
-  useEffect(() => {
     if (networkState) {
       // @ts-ignore
       store.dispatch(loadUser());
