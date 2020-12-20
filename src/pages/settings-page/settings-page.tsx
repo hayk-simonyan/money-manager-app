@@ -11,6 +11,8 @@ import {
   IonText,
   IonCard,
   IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
 } from '@ionic/react';
 
 import { connect } from 'react-redux';
@@ -74,9 +76,16 @@ const SettingsPage: React.FC<Props> = ({
       <IonContent>
         <IonList>
           <IonCard>
-            <IonCardContent>
+            <IonCardHeader>
               <IonItem>
-                <IonText>Current Email Address: {email}</IonText>
+                <IonCardTitle>UPDATE EMAIL</IonCardTitle>
+              </IonItem>
+            </IonCardHeader>
+            <IonCardContent>
+              <IonItem lines='none'>
+                <IonText color='medium'>Current Email Address: {email}</IonText>
+              </IonItem>
+              <IonItem>
                 <IonLabel position='floating'>New Email Adress</IonLabel>
                 <IonInput ref={emailInputRef} type='email' />
               </IonItem>
@@ -90,6 +99,11 @@ const SettingsPage: React.FC<Props> = ({
             </IonCardContent>
           </IonCard>
           <IonCard>
+            <IonCardHeader>
+              <IonItem>
+                <IonCardTitle>UPDATE PASSWORD</IonCardTitle>
+              </IonItem>
+            </IonCardHeader>
             <IonCardContent>
               <IonItem>
                 <IonLabel position='floating'>Old Password</IonLabel>
