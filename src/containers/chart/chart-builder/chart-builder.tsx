@@ -1,6 +1,7 @@
 import React from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import RecordPercentages from '../../../components/record-percentages/record-percentages';
+import AccountPercentages from '../../../components/account-percentages/account-percentages';
 
 const colors = [
   'rgba(255, 99, 132, 0.6)',
@@ -41,6 +42,7 @@ interface Props {
   cashflowAmounts?: any;
   recordsByCategories?: any;
   recordsType: string;
+  accounts?: any;
 }
 
 const ChartBuilder: React.FC<Props> = ({
@@ -52,6 +54,7 @@ const ChartBuilder: React.FC<Props> = ({
   cashflowAmounts,
   recordsByCategories,
   recordsType,
+  accounts,
 }) => {
   const mainData = {
     labels: labels,
@@ -114,22 +117,25 @@ const ChartBuilder: React.FC<Props> = ({
         />
       </div>
 
-      {accountNames && accountTotals && (
-        <Bar
-          data={balanceData}
-          options={{
-            title: {
-              display: 'Chart',
-              text: 'Balance Trend',
-              fontSize: 20,
-            },
-            legend: {
-              display: false,
-              position: 'right',
-            },
-          }}
-        />
-      )}
+      <div className='account-percentages'>
+        {accountNames && accountTotals && (
+          <Bar
+            data={balanceData}
+            options={{
+              title: {
+                display: 'Chart',
+                text: 'Balance Trend',
+                fontSize: 20,
+              },
+              legend: {
+                display: false,
+                position: 'right',
+              },
+            }}
+          />
+        )}
+        <AccountPercentages accounts={accounts} />
+      </div>
 
       {cashflowDates && cashflowAmounts && (
         <Line

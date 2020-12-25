@@ -99,6 +99,7 @@ const Chart: React.FC<Props> = ({
             accountTotals={accountTotals}
             recordsByCategories={recordsByCategories}
             recordsType={segment}
+            accounts={accounts}
           />
         ) : (
           <ChartBuilder
@@ -108,6 +109,7 @@ const Chart: React.FC<Props> = ({
             cashflowDates={cashflowDates}
             recordsByCategories={recordsByCategories}
             recordsType={segment}
+            accounts={accounts}
           />
         )}
       </IonContent>
