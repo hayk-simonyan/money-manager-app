@@ -91,7 +91,7 @@ const ChartBuilder: React.FC<Props> = ({
 
   return (
     <React.Fragment>
-      <div className='main-chart'>
+      <div className='main-chart' style={{ borderBottom: '1px solid gray' }}>
         <Pie
           height={165}
           data={mainData}
@@ -117,8 +117,8 @@ const ChartBuilder: React.FC<Props> = ({
         />
       </div>
 
-      <div className='account-percentages'>
-        {accountNames && accountTotals && (
+      {accountNames && accountTotals && (
+        <div className='account-percentages'>
           <Bar
             data={balanceData}
             options={{
@@ -133,9 +133,9 @@ const ChartBuilder: React.FC<Props> = ({
               },
             }}
           />
-        )}
-        <AccountPercentages accounts={accounts} />
-      </div>
+          <AccountPercentages accounts={accounts} />
+        </div>
+      )}
 
       {cashflowDates && cashflowAmounts && (
         <Line
