@@ -8,11 +8,13 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
+  IonCol,
 } from '@ionic/react';
 
 import AccountItem from './account-item/account-item';
 import AddAccountButton from './add-account-button/add-account-button';
 import AccountsSkeleton from './accounts-skeleton/accounts-skeleton';
+import './accounts.css';
 
 interface Props {
   accounts: { accounts: any; loading: boolean };
@@ -40,16 +42,20 @@ const Accounts: React.FC<Props> = ({
   );
 
   return (
-    <IonCard>
+    <IonCard className='accounts-wrapper'>
       <IonCardHeader color='default'>
-        <IonCardTitle>Accounts</IonCardTitle>
+        <IonRow>
+          <IonCol size='9'>
+            <IonCardTitle>Accounts</IonCardTitle>
+          </IonCol>
+          <IonCol size='3' style={{ padding: 0 }}>
+            <AddAccountButton />
+          </IonCol>
+        </IonRow>
       </IonCardHeader>
       {
         <IonGrid style={{ padding: 0 }}>
           <IonRow>{loading ? <AccountsSkeleton /> : fetchedAccounts}</IonRow>
-          <IonRow>
-            <AddAccountButton />
-          </IonRow>
         </IonGrid>
       }
     </IonCard>

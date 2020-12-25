@@ -1,0 +1,7 @@
+.accounts-wrapper {
+  padding-bottom: 10px;
+}
+
+.accounts-wrapper ion-card-header {
+  padding-inline-end: 0;
+}

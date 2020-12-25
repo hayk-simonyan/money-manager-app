@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   IonCol,
   IonCard,
@@ -9,6 +8,8 @@ import {
   IonGrid,
 } from '@ionic/react';
 import { useHistory } from 'react-router';
+
+import './account-item.css';
 
 interface Props {
   id: string;
@@ -26,7 +27,7 @@ const AccountItem: React.FC<Props> = ({ id, type, name, total }) => {
   };
 
   return (
-    <IonCol size='6' style={{ padding: 0 }}>
+    <IonCol className='account-item' size='6'>
       <IonCard>
         <IonItem onClick={() => redirectToAccount(id)} button lines='none'>
           <IonGrid>

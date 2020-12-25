@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import {
   IonPage,
@@ -39,7 +39,7 @@ const SettingsPage: React.FC<Props> = ({
   putPassword,
   setAlert,
 }) => {
-  // const [icon, setIcon] = useState<string>(currentAccount.icon);
+  const [emailFromState, setEmailFromState] = useState<string>(email);
   const emailInputRef = useRef<HTMLIonInputElement>(null);
 
   const oldPasswordInputRef = useRef<HTMLIonInputElement>(null);
@@ -52,6 +52,8 @@ const SettingsPage: React.FC<Props> = ({
     if (!email) return setAlert('Email can not be empty', 'danger');
 
     putEmail(email!.toString());
+    setEmailFromState(email.toString());
+    emailInputRef.current!.value = null;
   };
 
   const updatePasswordHandler = (e: any) => {
@@ -68,6 +70,9 @@ const SettingsPage: React.FC<Props> = ({
       return setAlert('Passwords do not match', 'danger');
 
     putPassword(oldPassword, password);
+    oldPasswordInputRef.current!.value = null;
+    newPasswordInputRef.current!.value = null;
+    confirmPasswordInputRef.current!.value = null;
   };
 
   return (
@@ -83,7 +88,9 @@ const SettingsPage: React.FC<Props> = ({
             </IonCardHeader>
             <IonCardContent>
               <IonItem lines='none'>
-                <IonText color='medium'>Current Email Address: {email}</IonText>
+                <IonText color='medium'>
+                  Current Email Address: {emailFromState}
+                </IonText>
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>New Email Adress</IonLabel>
