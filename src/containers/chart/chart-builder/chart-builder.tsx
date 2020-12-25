@@ -1,5 +1,36 @@
 import React from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
+import RecordPercentages from '../../../components/record-percentages/record-percentages';
+
+const colors = [
+  'rgba(255, 99, 132, 0.6)',
+  'rgba(54, 162, 235, 0.6)',
+  'rgba(255, 206, 86, 0.6)',
+  'rgba(75, 192, 192, 0.6)',
+  'rgba(153, 102, 255, 0.6)',
+  'rgba(255, 159, 64, 0.6)',
+  '#845EC2',
+  '#FF9671',
+  '#FF6F91',
+  '#FFC75F',
+  '#F9F871',
+  '#00C9A7',
+  '#B39CD0',
+  '#457b9d',
+  '#2a9d8f',
+  '#9d4edd',
+  '#fcbf49',
+  '#ffb4a2',
+  '#ade8f4',
+  '#2a9d8f',
+  '#e9c46a',
+  '#f4a261',
+  '#e76f51',
+  '#a8dadc',
+  '#457b9d',
+  '#cb997e',
+  '#ddbea9',
+];
 
 interface Props {
   labels: any;
@@ -8,6 +39,8 @@ interface Props {
   accountTotals?: any;
   cashflowDates?: any;
   cashflowAmounts?: any;
+  recordsByCategories?: any;
+  recordsType: string;
 }
 
 const ChartBuilder: React.FC<Props> = ({
@@ -17,6 +50,8 @@ const ChartBuilder: React.FC<Props> = ({
   accountTotals,
   cashflowDates,
   cashflowAmounts,
+  recordsByCategories,
+  recordsType,
 }) => {
   const mainData = {
     labels: labels,
@@ -24,35 +59,7 @@ const ChartBuilder: React.FC<Props> = ({
       {
         label: 'Records',
         data: data,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          '#845EC2',
-          '#FF9671',
-          '#FF6F91',
-          '#FFC75F',
-          '#F9F871',
-          '#00C9A7',
-          '#B39CD0',
-          '#457b9d',
-          '#2a9d8f',
-          '#9d4edd',
-          '#fcbf49',
-          '#ffb4a2',
-          '#ade8f4',
-          '#2a9d8f',
-          '#e9c46a',
-          '#f4a261',
-          '#e76f51',
-          '#a8dadc',
-          '#457b9d',
-          '#cb997e',
-          '#ddbea9',
-        ],
+        backgroundColor: colors,
       },
     ],
   };
@@ -63,35 +70,7 @@ const ChartBuilder: React.FC<Props> = ({
       {
         label: 'Cashflow',
         data: cashflowAmounts,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          '#845EC2',
-          '#FF9671',
-          '#FF6F91',
-          '#FFC75F',
-          '#F9F871',
-          '#00C9A7',
-          '#B39CD0',
-          '#457b9d',
-          '#2a9d8f',
-          '#9d4edd',
-          '#fcbf49',
-          '#ffb4a2',
-          '#ade8f4',
-          '#2a9d8f',
-          '#e9c46a',
-          '#f4a261',
-          '#e76f51',
-          '#a8dadc',
-          '#457b9d',
-          '#cb997e',
-          '#ddbea9',
-        ],
+        backgroundColor: colors,
       },
     ],
   };
@@ -102,60 +81,39 @@ const ChartBuilder: React.FC<Props> = ({
       {
         label: 'Cashflow',
         data: accountTotals,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          '#845EC2',
-          '#FF9671',
-          '#FF6F91',
-          '#FFC75F',
-          '#F9F871',
-          '#00C9A7',
-          '#B39CD0',
-          '#457b9d',
-          '#2a9d8f',
-          '#9d4edd',
-          '#fcbf49',
-          '#ffb4a2',
-          '#ade8f4',
-          '#2a9d8f',
-          '#e9c46a',
-          '#f4a261',
-          '#e76f51',
-          '#a8dadc',
-          '#457b9d',
-          '#cb997e',
-          '#ddbea9',
-        ],
+        backgroundColor: colors,
       },
     ],
   };
 
   return (
     <React.Fragment>
-      <Pie
-        height={165}
-        data={mainData}
-        options={{
-          title: {
-            display: true,
-            text: 'Categories',
-            fontSize: 20,
-          },
-          legend: {
-            display: true,
-            position: 'bottom',
-            labels: {
-              usePointStyle: true,
-              padding: 7,
+      <div className='main-chart'>
+        <Pie
+          height={165}
+          data={mainData}
+          options={{
+            title: {
+              display: true,
+              text: 'Categories',
+              fontSize: 20,
             },
-          },
-        }}
-      />
+            legend: {
+              display: true,
+              position: 'bottom',
+              labels: {
+                usePointStyle: true,
+                padding: 7,
+              },
+            },
+          }}
+        />
+        <RecordPercentages
+          recordsByCategories={recordsByCategories}
+          recordsType={recordsType}
+        />
+      </div>
+
       {accountNames && accountTotals && (
         <Bar
           data={balanceData}
@@ -172,6 +130,7 @@ const ChartBuilder: React.FC<Props> = ({
           }}
         />
       )}
+
       {cashflowDates && cashflowAmounts && (
         <Line
           data={cashflowData}

@@ -50,10 +50,9 @@ const Menu: React.FC<Props> = ({
           <p>Expense and Income Tracker</p>
           <p>Without limitation Features, Free</p>
           <p>Financial Planning and Review</p>
-          <p>Cashflow and Balance Trend</p>
-          <p>Clean User Interface</p>
+          <p>Detailed Analysis</p>
           <p>Easy to Use</p>
-        `}
+          `}
         buttons={['Close']}
       />
 

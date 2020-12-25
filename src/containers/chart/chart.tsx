@@ -12,6 +12,7 @@ interface MonthlyRecord {
   icon: string;
   name: string;
   total: number;
+  percentage: number;
 }
 
 interface Account {
@@ -55,10 +56,10 @@ const Chart: React.FC<Props> = ({
   recordsByCategories.forEach((record: MonthlyRecord) => {
     if (record.type === 'expences') {
       expenceLabels.push(record.name);
-      expenceData.push(record.total);
+      expenceData.push(record.percentage);
     } else {
       incomeLabels.push(record.name);
-      incomeData.push(record.total);
+      incomeData.push(record.percentage);
     }
   });
 
@@ -96,6 +97,8 @@ const Chart: React.FC<Props> = ({
             data={expenceData}
             accountNames={accountNames}
             accountTotals={accountTotals}
+            recordsByCategories={recordsByCategories}
+            recordsType={segment}
           />
         ) : (
           <ChartBuilder
@@ -103,6 +106,8 @@ const Chart: React.FC<Props> = ({
             data={incomeData}
             cashflowAmounts={cashflowAmounts}
             cashflowDates={cashflowDates}
+            recordsByCategories={recordsByCategories}
+            recordsType={segment}
           />
         )}
       </IonContent>
