@@ -84,35 +84,33 @@ const Chart: React.FC<Props> = ({
 
   return (
     <React.Fragment>
-      <IonContent>
-        <ChartControls
-          segmentValue={segment}
-          segmentChangeHandler={(e) => setSegment(e)}
+      <ChartControls
+        segmentValue={segment}
+        segmentChangeHandler={(e) => setSegment(e)}
+      />
+      {loading ? (
+        <ChartSkeleton />
+      ) : segment === 'expences' ? (
+        <ChartBuilder
+          labels={expenceLabels}
+          data={expenceData}
+          accountNames={accountNames}
+          accountTotals={accountTotals}
+          recordsByCategories={recordsByCategories}
+          recordsType={segment}
+          accounts={accounts}
         />
-        {loading ? (
-          <ChartSkeleton />
-        ) : segment === 'expences' ? (
-          <ChartBuilder
-            labels={expenceLabels}
-            data={expenceData}
-            accountNames={accountNames}
-            accountTotals={accountTotals}
-            recordsByCategories={recordsByCategories}
-            recordsType={segment}
-            accounts={accounts}
-          />
-        ) : (
-          <ChartBuilder
-            labels={incomeLabels}
-            data={incomeData}
-            cashflowAmounts={cashflowAmounts}
-            cashflowDates={cashflowDates}
-            recordsByCategories={recordsByCategories}
-            recordsType={segment}
-            accounts={accounts}
-          />
-        )}
-      </IonContent>
+      ) : (
+        <ChartBuilder
+          labels={incomeLabels}
+          data={incomeData}
+          cashflowAmounts={cashflowAmounts}
+          cashflowDates={cashflowDates}
+          recordsByCategories={recordsByCategories}
+          recordsType={segment}
+          accounts={accounts}
+        />
+      )}
     </React.Fragment>
   );
 };

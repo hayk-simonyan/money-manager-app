@@ -22,7 +22,6 @@ const AccountItem: React.FC<Props> = ({ id, type, name, total }) => {
   const history = useHistory();
 
   const redirectToAccount = (id: string) => {
-    console.log(name, total, type);
     history.push(`/accounts/${id}`, { id, type, name, total });
   };
 

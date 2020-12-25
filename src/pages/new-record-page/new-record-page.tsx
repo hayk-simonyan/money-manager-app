@@ -89,8 +89,6 @@ const NewRecordPage: React.FC<Props> = ({
     const c = categories.find((c: any) => c.name === category);
     const categoryId = c._id;
 
-    console.log(type, accountId, categoryId, date, amount, note);
-
     postRecord(
       type,
       accountId,

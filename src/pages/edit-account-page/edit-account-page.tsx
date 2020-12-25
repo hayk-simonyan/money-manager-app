@@ -74,7 +74,6 @@ const EditAccountPage: React.FC<Props> = ({ putAccount, deleteAccount }) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const deleteAccountHandler = async () => {
-    console.log('deleteaccounthandlercalled');
     history.push('/');
     deleteAccount(id);
   };

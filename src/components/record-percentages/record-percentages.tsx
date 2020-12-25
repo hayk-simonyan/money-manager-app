@@ -13,25 +13,36 @@ interface MonthlyRecord {
 interface Props {
   recordsByCategories: MonthlyRecord[];
   recordsType: string;
-  colors?: string[];
+  colors: string[];
 }
 
 const RecordPercentages: React.FC<Props> = ({
   recordsByCategories,
   recordsType,
+  colors,
 }) => (
   <IonList>
-    {recordsByCategories.map((recordByCategory) =>
+    {recordsByCategories.map((recordByCategory, index) =>
       recordByCategory.type === recordsType && recordByCategory.percentage ? (
-        <IonItem key={recordByCategory._id} lines='none'>
+        <IonItem key={recordByCategory._id} lines='full'>
           <IonCol size='2'>
-            <IonLabel>{recordByCategory.percentage}% </IonLabel>
+            <span
+              style={{
+                backgroundColor: colors[index],
+                padding: '4px',
+                borderRadius: '4px',
+              }}
+            >
+              {recordByCategory.percentage}%{' '}
+            </span>
           </IonCol>
           <IonCol size='8'>
             <IonLabel>{recordByCategory.name}</IonLabel>
           </IonCol>
           <IonCol size='2'>
-            <IonLabel>{recordByCategory.total}</IonLabel>
+            <IonLabel className='ion-text-end'>
+              {recordByCategory.total}
+            </IonLabel>
           </IonCol>
         </IonItem>
       ) : null

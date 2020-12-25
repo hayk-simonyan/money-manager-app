@@ -54,7 +54,7 @@ const Homepage: React.FC<Props> = ({ records, accounts }) => {
             <Chart accounts={accounts} />
           </React.Fragment>
         ) : (
-          <div style={{ marginBottom: '3.6rem' }}>
+          <div style={{ paddingBottom: '3.6rem' }}>
             <MonthlyRecords />
             {!records.records ? (
               <IonLabel>No records yet!</IonLabel>

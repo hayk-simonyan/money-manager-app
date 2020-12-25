@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 
-import { IonAlert, IonPage, IonContent, IonList, IonLabel } from '@ionic/react';
+import {
+  IonAlert,
+  IonPage,
+  IonContent,
+  IonList,
+  IonLabel,
+  IonListHeader,
+} from '@ionic/react';
 import { connect } from 'react-redux';
 
 import Header from '../../components/header/header';
@@ -39,12 +46,13 @@ const RecordsPage: React.FC<Props> = ({ records }) => {
       />
       <Header title='Records' menu={true} />
       <MonthPicker />
-      <ChartRecords records={records} />
       <IonContent>
+        <ChartRecords records={records} />
         {!records.records ? (
           <IonLabel>No records yet!</IonLabel>
         ) : (
-          <IonList style={{ marginBottom: '3.7rem' }}>
+          <IonList style={{ paddingBottom: '3.7rem' }}>
+            <IonListHeader>All Records</IonListHeader>
             {records.records.map((record: Record, index: any) => (
               <RecordItem key={record._id} record={record} />
             ))}

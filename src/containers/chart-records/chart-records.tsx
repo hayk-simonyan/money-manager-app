@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import ChartBuilder from './chart-builder/chart-builder';
 import ChartControls from '../../components/chart-controls/homepage-controls';
-import RecordPercentages from '../../components/record-percentages/record-percentages';
 
 interface MonthlyRecord {
   _id: string;
@@ -43,14 +42,20 @@ const ChartRecords: React.FC<Props> = ({
         segmentValue={segment}
         segmentChangeHandler={(e) => setSegment(e)}
       />
-      <RecordPercentages
-        recordsByCategories={recordsByCategories}
-        recordsType={segment}
-      />
       {segment === 'expences' ? (
-        <ChartBuilder labels={expenceLabels} data={expenceData} />
+        <ChartBuilder
+          labels={expenceLabels}
+          data={expenceData}
+          recordsByCategories={recordsByCategories}
+          recordsType={segment}
+        />
       ) : (
-        <ChartBuilder labels={incomeLabels} data={incomeData} />
+        <ChartBuilder
+          labels={incomeLabels}
+          data={incomeData}
+          recordsByCategories={recordsByCategories}
+          recordsType={segment}
+        />
       )}
     </React.Fragment>
   );

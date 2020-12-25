@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
-import RecordPercentages from '../../../components/record-percentages/record-percentages';
 import AccountPercentages from '../../../components/account-percentages/account-percentages';
+import RecordPercentages from '../../../components/record-percentages/record-percentages';
 
 const colors = [
   'rgba(255, 99, 132, 0.6)',
@@ -90,15 +90,15 @@ const ChartBuilder: React.FC<Props> = ({
   };
 
   return (
-    <React.Fragment>
-      <div className='main-chart' style={{ borderBottom: '1px solid gray' }}>
+    <div style={{ paddingBottom: '3.7rem' }}>
+      <div className='main-chart'>
         <Pie
           height={165}
           data={mainData}
           options={{
             title: {
               display: true,
-              text: 'Categories',
+              // text: 'Categories',
               fontSize: 20,
             },
             legend: {
@@ -114,6 +114,7 @@ const ChartBuilder: React.FC<Props> = ({
         <RecordPercentages
           recordsByCategories={recordsByCategories}
           recordsType={recordsType}
+          colors={colors}
         />
       </div>
 
@@ -153,7 +154,7 @@ const ChartBuilder: React.FC<Props> = ({
           }}
         />
       )}
-    </React.Fragment>
+    </div>
   );
 };
 

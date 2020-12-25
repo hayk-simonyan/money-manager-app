@@ -7,6 +7,7 @@ import {
   DELETE_ACCOUNT,
 } from './account.types';
 import { setAlert } from '../alerts/alert.actions';
+import { getRecords } from './../records/record.actions';
 
 export const getAccounts = () => async (dispatch: any) => {
   try {
@@ -128,6 +129,7 @@ export const deleteAccount = (id: string) => async (dispatch: any) => {
     });
 
     dispatch(setAlert('Account Was Removed', 'success'));
+    dispatch(getRecords());
   } catch (err) {
     console.log(err);
     const errors = err.response.data.errors;
