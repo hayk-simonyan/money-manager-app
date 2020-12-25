@@ -11,15 +11,25 @@ interface Account {
 
 interface Props {
   accounts: Account[];
+  colors: string[];
 }
 
-const AccountPercentages: React.FC<Props> = ({ accounts }) => (
+const AccountPercentages: React.FC<Props> = ({ accounts, colors }) => (
   <IonList>
-    {accounts.map((account) =>
+    {accounts.map((account, index) =>
       account.total > 0 ? (
         <IonItem key={account._id} lines='none'>
           <IonCol size='2'>
-            <IonLabel>{account.percentage}% </IonLabel>
+            <IonLabel
+              className='ion-text-center'
+              style={{
+                backgroundColor: colors[index],
+                padding: '4px',
+                borderRadius: '4px',
+              }}
+            >
+              {account.percentage}%{' '}
+            </IonLabel>
           </IonCol>
           <IonCol size='8'>
             <IonLabel>{account.name}</IonLabel>

@@ -134,7 +134,7 @@ const ChartBuilder: React.FC<Props> = ({
               },
             }}
           />
-          <AccountPercentages accounts={accounts} />
+          <AccountPercentages accounts={accounts} colors={colors} />
         </div>
       )}
 

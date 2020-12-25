@@ -26,7 +26,8 @@ const RecordPercentages: React.FC<Props> = ({
       recordByCategory.type === recordsType && recordByCategory.percentage ? (
         <IonItem key={recordByCategory._id} lines='full'>
           <IonCol size='2'>
-            <span
+            <IonLabel
+              className='ion-text-center'
               style={{
                 backgroundColor: colors[index],
                 padding: '4px',
@@ -34,7 +35,7 @@ const RecordPercentages: React.FC<Props> = ({
               }}
             >
               {recordByCategory.percentage}%{' '}
-            </span>
+            </IonLabel>
           </IonCol>
           <IonCol size='8'>
             <IonLabel>{recordByCategory.name}</IonLabel>
