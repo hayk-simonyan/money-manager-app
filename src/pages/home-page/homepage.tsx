@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonContent, IonPage, IonLabel, IonList } from '@ionic/react';
+import { IonContent, IonPage, IonLabel, IonList, IonItem } from '@ionic/react';
 import { connect } from 'react-redux';
 
 import Header from '../../components/header/header';
@@ -56,8 +56,12 @@ const Homepage: React.FC<Props> = ({ records, accounts }) => {
         ) : (
           <div style={{ paddingBottom: '3.6rem' }}>
             <MonthlyRecords />
-            {!records.records ? (
-              <IonLabel>No records yet!</IonLabel>
+            {!records.records.length ? (
+              <IonItem lines='full'>
+                <IonLabel className='ion-text-center'>
+                  No Records found
+                </IonLabel>
+              </IonItem>
             ) : (
               <IonList>
                 {records.records.map((record: Record) => (

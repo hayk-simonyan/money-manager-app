@@ -35,6 +35,7 @@ const AccountItem: React.FC<Props> = ({ id, type, name, total }) => {
             </IonRow>
             <IonRow>
               <IonLabel color={total >= 0 ? 'success' : 'danger'}>
+                {`${localStorage.getItem('currency') || '$'} `}
                 {total}
               </IonLabel>
             </IonRow>

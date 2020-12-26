@@ -121,7 +121,8 @@ const RecordItem: React.FC<Props> = ({
                     </IonCol>
                     <IonCol size='5' className='ion-text-right '>
                       <IonLabel>
-                        {type === 'expences' ? `-${amount}` : amount}$
+                        {`${localStorage.getItem('currency') || '$'} `}
+                        {type === 'expences' ? `-${amount}` : amount}
                       </IonLabel>
                     </IonCol>
                   </IonRow>

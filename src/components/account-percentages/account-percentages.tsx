@@ -35,7 +35,10 @@ const AccountPercentages: React.FC<Props> = ({ accounts, colors }) => (
             <IonLabel>{account.name}</IonLabel>
           </IonCol>
           <IonCol size='2'>
-            <IonLabel>{account.total}</IonLabel>
+            <IonLabel className='ion-text-end'>
+              {`${localStorage.getItem('currency') || '$'} `}
+              {account.total}
+            </IonLabel>
           </IonCol>
         </IonItem>
       ) : null

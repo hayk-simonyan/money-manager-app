@@ -7,6 +7,7 @@ import {
   IonList,
   IonLabel,
   IonListHeader,
+  IonItem,
 } from '@ionic/react';
 import { connect } from 'react-redux';
 
@@ -48,8 +49,10 @@ const RecordsPage: React.FC<Props> = ({ records }) => {
       <MonthPicker />
       <IonContent>
         <ChartRecords records={records} />
-        {!records.records ? (
-          <IonLabel>No records yet!</IonLabel>
+        {!records.records.length ? (
+          <IonItem lines='full'>
+            <IonLabel className='ion-text-center'>No Records found</IonLabel>
+          </IonItem>
         ) : (
           <IonList style={{ paddingBottom: '3.7rem' }}>
             <IonListHeader>All Records</IonListHeader>

@@ -13,6 +13,8 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
+  IonSelect,
+  IonSelectOption,
 } from '@ionic/react';
 
 import { connect } from 'react-redux';
@@ -21,6 +23,7 @@ import { putEmail, putPassword } from '../../redux/auth/auth.actions';
 import Header from '../../components/header/header';
 import { setAlert } from '../../redux/alerts/alert.actions';
 import AddButton from '../../components/add-button/add-button';
+import currencies from './currencies.json';
 
 interface Props {
   auth: {
@@ -39,6 +42,10 @@ const SettingsPage: React.FC<Props> = ({
   putPassword,
   setAlert,
 }) => {
+  const [currency, setCurrency] = useState<string>(
+    localStorage.getItem('currency') || '$'
+  );
+
   const [emailFromState, setEmailFromState] = useState<string>(email);
   const emailInputRef = useRef<HTMLIonInputElement>(null);
 
@@ -79,7 +86,31 @@ const SettingsPage: React.FC<Props> = ({
     <IonPage>
       <Header title='Settings' menu={true} />
       <IonContent>
-        <IonList>
+        <IonList style={{ paddingBottom: '3.7rem' }}>
+          <IonCard>
+            <IonCardHeader>
+              <IonItem>
+                <IonCardTitle>CURRENCY</IonCardTitle>
+              </IonItem>
+            </IonCardHeader>
+            <IonCardContent>
+              <IonSelect
+                value={currency}
+                interface='action-sheet'
+                onIonChange={(e: any) => {
+                  setCurrency(e.detail.value);
+                  localStorage.setItem('currency', e.detail.value);
+                  setAlert('Currency Updated', 'success');
+                }}
+              >
+                {currencies.map((currency) => (
+                  <IonSelectOption key={currency.code} value={currency.symbol}>
+                    {currency.name} {`(${currency.symbol})`}
+                  </IonSelectOption>
+                ))}
+              </IonSelect>
+            </IonCardContent>
+          </IonCard>
           <IonCard>
             <IonCardHeader>
               <IonItem>

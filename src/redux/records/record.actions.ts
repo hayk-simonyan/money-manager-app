@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import {
   GET_RECORDS,
   GET_RECORD,
@@ -8,6 +9,7 @@ import {
   RECORDS_ERROR,
 } from './record.types';
 import { setAlert } from '../alerts/alert.actions';
+import { getAccounts } from './../accounts/account.actions';
 
 export const getRecords = (y: string = '', m: string = '') => async (
   dispatch: any
@@ -116,6 +118,7 @@ export const postRecord = (
     });
 
     dispatch(getRecords());
+    dispatch(getAccounts());
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
