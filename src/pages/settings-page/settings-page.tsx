@@ -100,6 +100,7 @@ const SettingsPage: React.FC<Props> = ({
                 onIonChange={(e: any) => {
                   setCurrency(e.detail.value);
                   localStorage.setItem('currency', e.detail.value);
+                  window.location.reload(false);
                   setAlert('Currency Updated', 'success');
                 }}
               >
