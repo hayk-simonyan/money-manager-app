@@ -3,6 +3,18 @@ import { Bar, Line, Pie } from 'react-chartjs-2';
 import AccountPercentages from '../../../components/account-percentages/account-percentages';
 import RecordPercentages from '../../../components/record-percentages/record-percentages';
 
+const lightColors = [
+  '#FFB1C1',
+  '#9AD0F5',
+  '#FFE6AA',
+  '#A5DFDF',
+  '#CCB2FF',
+  '#FFCF9F',
+  '#E4E5E7',
+];
+
+const solidColors = ['#FF6384', '#FF9F40', '#FFCD56', '#4BC0C0', '#36A2EB'];
+
 const colors = [
   'rgba(255, 99, 132, 0.6)',
   'rgba(54, 162, 235, 0.6)',
@@ -33,6 +45,15 @@ const colors = [
   '#ddbea9',
 ];
 
+function getRandomColor() {
+  var letters = '0123456789ABCDEF'.split('');
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 interface Props {
   labels: any;
   data: any;
@@ -62,7 +83,7 @@ const ChartBuilder: React.FC<Props> = ({
       {
         label: 'Records',
         data: data,
-        backgroundColor: colors,
+        backgroundColor: solidColors,
       },
     ],
   };
