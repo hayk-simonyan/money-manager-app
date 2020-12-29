@@ -20,6 +20,7 @@ interface Account {
   icon: string;
   name: string;
   total: string;
+  percentage?: number;
 }
 
 interface Props {
@@ -54,11 +55,19 @@ const Chart: React.FC<Props> = ({
   const incomeData: any = [];
 
   recordsByCategories.forEach((record: MonthlyRecord) => {
-    if (record.type === 'expences') {
-      expenceLabels.push(record.name);
+    if (record.type === 'expences' && record.total !== 0) {
+      expenceLabels.push(
+        `${record.name} ${record.percentage}% (${
+          localStorage.getItem('currency') || '$'
+        }${record.total})`
+      );
       expenceData.push(record.percentage);
-    } else {
-      incomeLabels.push(record.name);
+    } else if (record.type === 'incomes' && record.total !== 0) {
+      incomeLabels.push(
+        `${record.name} ${record.percentage}% (${
+          localStorage.getItem('currency') || '$'
+        }${record.total})`
+      );
       incomeData.push(record.percentage);
     }
   });
@@ -66,8 +75,10 @@ const Chart: React.FC<Props> = ({
   const accountNames: any = [];
   const accountTotals: any = [];
   accounts.forEach((account: Account) => {
-    accountNames.push(account.name);
-    accountTotals.push(account.total);
+    if (parseInt(account.total) !== 0) {
+      accountNames.push(account.name);
+      accountTotals.push(account.total);
+    }
   });
 
   const cashflowAmounts: any = [];
@@ -77,7 +88,9 @@ const Chart: React.FC<Props> = ({
       const index = cashflowDates.indexOf(flow.date.slice(8, -14));
       cashflowAmounts[index] = cashflowAmounts[index] + flow.amount;
     } else {
-      cashflowAmounts.push(flow.amount);
+      cashflowAmounts.push(
+        `${localStorage.getItem('currency') || '$'} ${flow.amount}`
+      );
       cashflowDates.push(flow.date.slice(8, -14));
     }
   });

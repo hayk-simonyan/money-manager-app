@@ -22,11 +22,11 @@ const AccountPercentages: React.FC<Props> = ({ accounts, colors }) => (
           <IonCol size='2'>
             <IonLabel
               className='ion-text-center'
-              style={{
-                backgroundColor: colors[index],
-                padding: '4px',
-                borderRadius: '4px',
-              }}
+              // style={{
+              //   backgroundColor: colors[index],
+              //   padding: '4px',
+              //   borderRadius: '4px',
+              // }}
             >
               {account.percentage}%{' '}
             </IonLabel>

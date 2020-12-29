@@ -1,9 +1,31 @@
 import React from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import AccountPercentages from '../../../components/account-percentages/account-percentages';
-import RecordPercentages from '../../../components/record-percentages/record-percentages';
 
-const lightColors = [
+const pieColors = [
+  '#FF6384',
+  '#FF9F40',
+  '#FFCD56',
+  '#4BC0C0',
+  '#36A2EB',
+
+  'rgb(221,28,92)',
+  'rgb(238,119,51)',
+  'rgb(233,233,97)',
+  'rgb(122,227,128)',
+  'rgb(64,236,190)',
+  'rgb(68,170,255)',
+  'rgb(136,68,255)',
+
+  'rgb(162,0,255)',
+  'rgb(231,5,255)',
+  'rgb(255,198,0)',
+  'rgb(221,255,0)',
+  'rgb(0,255,162)',
+  'rgb(0,221,255)',
+];
+
+const barColors = [
   '#FFB1C1',
   '#9AD0F5',
   '#FFE6AA',
@@ -11,9 +33,28 @@ const lightColors = [
   '#CCB2FF',
   '#FFCF9F',
   '#E4E5E7',
-];
 
-const solidColors = ['#FF6384', '#FF9F40', '#FFCD56', '#4BC0C0', '#36A2EB'];
+  'rgb(255,147,240)',
+  'rgb(255,122,175)',
+  'rgb(255,195,91)',
+  'rgb(242,255,158)',
+  'rgb(107,255,201)',
+  'rgb(122,237,255)',
+  'rgb(175,147,240)',
+
+  'rgb(213,62,79) ',
+  'rgb(244,109,67)',
+  'rgb(253,174,97)',
+  'rgb(254,224,139)',
+  'rgb(255,255,191)',
+  'rgb(230,245,152)',
+  'rgb(171,221,164)',
+  'rgb(136,221,170)',
+  'rgb(102,194,165)',
+  'rgb(55,182,155)',
+  'rgb(50,136,189)',
+  'rgb(113,172,188)',
+];
 
 const colors = [
   'rgba(255, 99, 132, 0.6)',
@@ -83,7 +124,7 @@ const ChartBuilder: React.FC<Props> = ({
       {
         label: 'Records',
         data: data,
-        backgroundColor: solidColors,
+        backgroundColor: pieColors,
       },
     ],
   };
@@ -94,7 +135,7 @@ const ChartBuilder: React.FC<Props> = ({
       {
         label: 'Cashflow',
         data: cashflowAmounts,
-        backgroundColor: colors,
+        backgroundColor: barColors,
       },
     ],
   };
@@ -103,9 +144,9 @@ const ChartBuilder: React.FC<Props> = ({
     labels: accountNames,
     datasets: [
       {
-        label: 'Cashflow',
+        label: 'Balance Trend',
         data: accountTotals,
-        backgroundColor: colors,
+        backgroundColor: barColors,
       },
     ],
   };
@@ -117,25 +158,17 @@ const ChartBuilder: React.FC<Props> = ({
           height={165}
           data={mainData}
           options={{
-            title: {
-              display: true,
-              // text: 'Categories',
-              fontSize: 20,
-            },
+            title: { display: true },
             legend: {
               display: true,
-              position: 'bottom',
+              position: 'right',
               labels: {
-                usePointStyle: true,
+                fontSize: 16,
                 padding: 7,
+                usePointStyle: true,
               },
             },
           }}
-        />
-        <RecordPercentages
-          recordsByCategories={recordsByCategories}
-          recordsType={recordsType}
-          colors={colors}
         />
       </div>
 
@@ -151,7 +184,6 @@ const ChartBuilder: React.FC<Props> = ({
               },
               legend: {
                 display: false,
-                position: 'right',
               },
             }}
           />
