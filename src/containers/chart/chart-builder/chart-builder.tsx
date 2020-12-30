@@ -1,8 +1,38 @@
 import React from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import AccountPercentages from '../../../components/account-percentages/account-percentages';
+import ChartSkeleton from '../chart-skeleton-non-animated/chart-skeleton';
+import 'chartjs-plugin-labels';
 
 const pieColors = [
+  'rgba(255, 99, 132, 0.6)',
+  'rgba(54, 162, 235, 0.6)',
+  'rgba(255, 206, 86, 0.6)',
+  'rgba(75, 192, 192, 0.6)',
+  'rgba(153, 102, 255, 0.6)',
+  'rgba(255, 159, 64, 0.6)',
+  '#845EC2',
+  '#FF9671',
+  '#FF6F91',
+  '#FFC75F',
+  '#F9F871',
+  '#00C9A7',
+  '#B39CD0',
+  '#457b9d',
+  '#2a9d8f',
+  '#9d4edd',
+  '#fcbf49',
+  '#ffb4a2',
+  '#ade8f4',
+  '#2a9d8f',
+  '#e9c46a',
+  '#f4a261',
+  '#e76f51',
+  '#a8dadc',
+  '#457b9d',
+  '#cb997e',
+  '#ddbea9',
+
   '#FF6384',
   '#FF9F40',
   '#FFCD56',
@@ -86,15 +116,6 @@ const colors = [
   '#ddbea9',
 ];
 
-function getRandomColor() {
-  var letters = '0123456789ABCDEF'.split('');
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
 interface Props {
   labels: any;
   data: any;
@@ -153,24 +174,41 @@ const ChartBuilder: React.FC<Props> = ({
 
   return (
     <div style={{ paddingBottom: '3.7rem' }}>
-      <div className='main-chart'>
-        <Pie
-          height={165}
-          data={mainData}
-          options={{
-            title: { display: true },
-            legend: {
-              display: true,
-              position: 'right',
-              labels: {
-                fontSize: 16,
-                padding: 7,
-                usePointStyle: true,
+      <div className='chart-container'>
+        {data.length > 0 ? (
+          <Pie
+            height={165}
+            data={mainData}
+            options={{
+              plugins: {
+                labels: [
+                  {
+                    render: 'label',
+                    position: 'outside',
+                  },
+                  {
+                    render: 'percentage',
+                  },
+                ],
               },
-            },
-          }}
-        />
+              title: { display: false },
+              legend: {
+                display: false,
+                position: 'right',
+                labels: {
+                  fontSize: 16,
+                  padding: 7,
+                  usePointStyle: true,
+                },
+              },
+            }}
+          />
+        ) : (
+          <ChartSkeleton />
+        )}
       </div>
+
+      <div style={{ clear: 'both' }}></div>
 
       {accountNames && accountTotals && (
         <div className='account-percentages'>

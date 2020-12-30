@@ -20,8 +20,8 @@ export default function ChartSkeleton() {
             <IonSkeletonText animated />
           </IonAvatar>
         </IonItem>
-        <IonSkeletonText animated />
-        <IonSkeletonText animated />
+        {/* <IonSkeletonText animated /> */}
+        {/* <IonSkeletonText animated /> */}
       </IonRow>
     </IonGrid>
   );
