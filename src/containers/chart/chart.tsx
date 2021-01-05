@@ -80,9 +80,7 @@ const Chart: React.FC<Props> = ({
       const index = cashflowDates.indexOf(flow.date.slice(8, -14));
       cashflowAmounts[index] = cashflowAmounts[index] + flow.amount;
     } else {
-      cashflowAmounts.push(
-        `${localStorage.getItem('currency') || '$'} ${flow.amount}`
-      );
+      cashflowAmounts.push(flow.amount);
       cashflowDates.push(flow.date.slice(8, -14));
     }
   });

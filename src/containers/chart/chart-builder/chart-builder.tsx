@@ -4,88 +4,6 @@ import AccountPercentages from '../../../components/account-percentages/account-
 import ChartSkeleton from '../chart-skeleton-non-animated/chart-skeleton';
 import 'chartjs-plugin-labels';
 
-const pieColors = [
-  'rgba(255, 99, 132, 0.6)',
-  'rgba(54, 162, 235, 0.6)',
-  'rgba(255, 206, 86, 0.6)',
-  'rgba(75, 192, 192, 0.6)',
-  'rgba(153, 102, 255, 0.6)',
-  'rgba(255, 159, 64, 0.6)',
-  '#845EC2',
-  '#FF9671',
-  '#FF6F91',
-  '#FFC75F',
-  '#F9F871',
-  '#00C9A7',
-  '#B39CD0',
-  '#457b9d',
-  '#2a9d8f',
-  '#9d4edd',
-  '#fcbf49',
-  '#ffb4a2',
-  '#ade8f4',
-  '#2a9d8f',
-  '#e9c46a',
-  '#f4a261',
-  '#e76f51',
-  '#a8dadc',
-  '#457b9d',
-  '#cb997e',
-  '#ddbea9',
-
-  '#FF6384',
-  '#FF9F40',
-  '#FFCD56',
-  '#4BC0C0',
-  '#36A2EB',
-
-  'rgb(221,28,92)',
-  'rgb(238,119,51)',
-  'rgb(233,233,97)',
-  'rgb(122,227,128)',
-  'rgb(64,236,190)',
-  'rgb(68,170,255)',
-  'rgb(136,68,255)',
-
-  'rgb(162,0,255)',
-  'rgb(231,5,255)',
-  'rgb(255,198,0)',
-  'rgb(221,255,0)',
-  'rgb(0,255,162)',
-  'rgb(0,221,255)',
-];
-
-const barColors = [
-  '#FFB1C1',
-  '#9AD0F5',
-  '#FFE6AA',
-  '#A5DFDF',
-  '#CCB2FF',
-  '#FFCF9F',
-  '#E4E5E7',
-
-  'rgb(255,147,240)',
-  'rgb(255,122,175)',
-  'rgb(255,195,91)',
-  'rgb(242,255,158)',
-  'rgb(107,255,201)',
-  'rgb(122,237,255)',
-  'rgb(175,147,240)',
-
-  'rgb(213,62,79) ',
-  'rgb(244,109,67)',
-  'rgb(253,174,97)',
-  'rgb(254,224,139)',
-  'rgb(255,255,191)',
-  'rgb(230,245,152)',
-  'rgb(171,221,164)',
-  'rgb(136,221,170)',
-  'rgb(102,194,165)',
-  'rgb(55,182,155)',
-  'rgb(50,136,189)',
-  'rgb(113,172,188)',
-];
-
 const colors = [
   'rgba(255, 99, 132, 0.6)',
   'rgba(54, 162, 235, 0.6)',
@@ -93,27 +11,39 @@ const colors = [
   'rgba(75, 192, 192, 0.6)',
   'rgba(153, 102, 255, 0.6)',
   'rgba(255, 159, 64, 0.6)',
-  '#845EC2',
-  '#FF9671',
-  '#FF6F91',
-  '#FFC75F',
-  '#F9F871',
-  '#00C9A7',
-  '#B39CD0',
-  '#457b9d',
-  '#2a9d8f',
-  '#9d4edd',
-  '#fcbf49',
-  '#ffb4a2',
-  '#ade8f4',
-  '#2a9d8f',
-  '#e9c46a',
-  '#f4a261',
-  '#e76f51',
-  '#a8dadc',
-  '#457b9d',
-  '#cb997e',
-  '#ddbea9',
+
+  '#E6EE9C',
+  '#81D4FA',
+  '#FFCC80',
+  '#CE93D8',
+  '#FFAB91',
+  '#C5E1A5',
+  '#80DEEA',
+  '#FFF59D',
+  '#9FA8DA',
+  '#F48FB1',
+  '#90CAF9',
+  '#ef9a9a',
+  '#80CBC4',
+  '#FFE082',
+  '#B39DDB',
+  '#A5D6A7',
+
+  'rgb(255,122,175)',
+  'rgb(242,255,158)',
+  'rgb(107,255,201)',
+  'rgb(255,195,91)',
+  'rgb(255,147,240)',
+  'rgb(122,237,255)',
+  'rgb(175,147,240)',
+
+  'rgb(221,28,92)',
+  'rgb(122,227,128)',
+  'rgb(233,233,97)',
+  'rgb(64,236,190)',
+  'rgb(68,170,255)',
+  'rgb(238,119,51)',
+  'rgb(136,68,255)',
 ];
 
 interface Props {
@@ -145,7 +75,7 @@ const ChartBuilder: React.FC<Props> = ({
       {
         label: 'Records',
         data: data,
-        backgroundColor: pieColors,
+        backgroundColor: colors,
       },
     ],
   };
@@ -156,7 +86,7 @@ const ChartBuilder: React.FC<Props> = ({
       {
         label: 'Cashflow',
         data: cashflowAmounts,
-        backgroundColor: barColors,
+        backgroundColor: colors,
       },
     ],
   };
@@ -167,7 +97,7 @@ const ChartBuilder: React.FC<Props> = ({
       {
         label: 'Balance Trend',
         data: accountTotals,
-        backgroundColor: barColors,
+        backgroundColor: colors,
       },
     ],
   };
@@ -215,6 +145,14 @@ const ChartBuilder: React.FC<Props> = ({
           <Bar
             data={balanceData}
             options={{
+              plugins: {
+                labels: [
+                  {
+                    render: 'value',
+                    position: 'outside',
+                  },
+                ],
+              },
               title: {
                 display: 'Chart',
                 text: 'Balance Trend',
