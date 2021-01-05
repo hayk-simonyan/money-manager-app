@@ -172,6 +172,14 @@ const ChartBuilder: React.FC<Props> = ({
         <Line
           data={cashflowData}
           options={{
+            plugins: {
+              labels: [
+                {
+                  render: 'value',
+                  position: 'outside',
+                },
+              ],
+            },
             title: {
               display: true,
               text: 'Cashflow',

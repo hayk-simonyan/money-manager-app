@@ -84,6 +84,8 @@ const Chart: React.FC<Props> = ({
       cashflowDates.push(flow.date.slice(8, -14));
     }
   });
+  cashflowAmounts.reverse();
+  cashflowDates.reverse();
 
   return (
     <React.Fragment>
