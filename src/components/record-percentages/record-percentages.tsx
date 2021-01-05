@@ -28,11 +28,11 @@ const RecordPercentages: React.FC<Props> = ({
           <IonCol size='2'>
             <IonLabel
               className='ion-text-center'
-              style={{
-                backgroundColor: colors[index],
-                padding: '4px',
-                borderRadius: '4px',
-              }}
+              // style={{
+              //   backgroundColor: colors[index],
+              //   padding: '4px',
+              //   borderRadius: '4px',
+              // }}
             >
               {recordByCategory.percentage}%{' '}
             </IonLabel>

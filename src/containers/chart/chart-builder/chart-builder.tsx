@@ -1,8 +1,9 @@
 import React from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
-import AccountPercentages from '../../../components/account-percentages/account-percentages';
-import ChartSkeleton from '../chart-skeleton-non-animated/chart-skeleton';
 import 'chartjs-plugin-labels';
+
+import ChartSkeleton from '../chart-skeleton-non-animated/chart-skeleton';
+import AccountPercentages from '../../../components/account-percentages/account-percentages';
 
 const colors = [
   'rgba(255, 99, 132, 0.6)',

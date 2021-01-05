@@ -1,5 +1,6 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import 'chartjs-plugin-labels';
 
 import RecordPercentages from '../../../components/record-percentages/record-percentages';
 
@@ -60,11 +61,22 @@ const ChartBuilder: React.FC<Props> = ({
   return (
     <React.Fragment>
       <Doughnut
-        height={160}
+        height={180}
         data={mainData}
         options={{
+          plugins: {
+            labels: [
+              {
+                render: 'label',
+                position: 'outside',
+              },
+              {
+                render: 'percentage',
+              },
+            ],
+          },
           title: {
-            display: true,
+            display: false,
             // text: 'Chart',
             fontSize: 20,
           },
