@@ -18,7 +18,7 @@ const HomepageControls: React.FC<HomepageControlsProps> = ({
   return (
     <IonSegment value={segmentValue} onIonChange={onChangeHandler}>
       <IonSegmentButton value='charts'>
-        <IonLabel>Charts</IonLabel>
+        <IonLabel>Stats</IonLabel>
       </IonSegmentButton>
       <IonSegmentButton value='records'>
         <IonLabel>Records</IonLabel>
