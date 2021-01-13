@@ -4,6 +4,7 @@ import 'chartjs-plugin-labels';
 
 import ChartSkeleton from '../chart-skeleton-non-animated/chart-skeleton';
 import AccountPercentages from '../../../components/account-percentages/account-percentages';
+import RecordPercentages from '../../../components/record-percentages/record-percentages';
 
 const colors = [
   'rgba(255, 99, 132, 0.6)',
@@ -107,33 +108,40 @@ const ChartBuilder: React.FC<Props> = ({
     <div style={{ paddingBottom: '3.7rem' }}>
       <div className='chart-container'>
         {data.length > 0 ? (
-          <Pie
-            height={165}
-            data={mainData}
-            options={{
-              plugins: {
-                labels: [
-                  {
-                    render: 'label',
-                    position: 'outside',
-                  },
-                  {
-                    render: 'percentage',
-                  },
-                ],
-              },
-              title: { display: false },
-              legend: {
-                display: false,
-                position: 'right',
-                labels: {
-                  fontSize: 16,
-                  padding: 7,
-                  usePointStyle: true,
+          <div>
+            <Pie
+              height={165}
+              data={mainData}
+              options={{
+                plugins: {
+                  labels: [
+                    {
+                      render: 'label',
+                      position: 'outside',
+                    },
+                    {
+                      render: 'percentage',
+                    },
+                  ],
                 },
-              },
-            }}
-          />
+                title: { display: false },
+                legend: {
+                  display: false,
+                  position: 'right',
+                  labels: {
+                    fontSize: 16,
+                    padding: 7,
+                    usePointStyle: true,
+                  },
+                },
+              }}
+            />
+            <RecordPercentages
+              recordsByCategories={recordsByCategories}
+              recordsType={recordsType}
+              colors={colors}
+            />
+          </div>
         ) : (
           <ChartSkeleton />
         )}
