@@ -116,11 +116,8 @@ const ChartBuilder: React.FC<Props> = ({
                 plugins: {
                   labels: [
                     {
-                      render: 'label',
-                      position: 'outside',
-                    },
-                    {
                       render: 'percentage',
+                      position: 'outside',
                     },
                   ],
                 },

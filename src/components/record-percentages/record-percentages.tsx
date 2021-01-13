@@ -22,16 +22,18 @@ const RecordPercentages: React.FC<Props> = ({
   colors,
 }) => {
   // filter for colors
+  const filteredRecordsByCategories: MonthlyRecord[] = [];
   recordsByCategories.map((recordByCategory, index) => {
-    if (recordByCategory.type !== recordsType)
-      recordsByCategories.splice(index, 1);
-    if (recordByCategory.percentage === 0) recordsByCategories.splice(index, 1);
+    if (
+      recordByCategory.type === recordsType &&
+      recordByCategory.percentage !== 0
+    )
+      filteredRecordsByCategories.push(recordByCategory);
   });
 
   return (
     <IonList>
-      {/* {for(let i=0; i<recordsByCategories.length; i++)} */}
-      {recordsByCategories.map((recordByCategory, index) =>
+      {filteredRecordsByCategories.map((recordByCategory, index) =>
         recordByCategory.type === recordsType && recordByCategory.percentage ? (
           <IonItem key={recordByCategory._id} lines='full'>
             {console.log(index)}
