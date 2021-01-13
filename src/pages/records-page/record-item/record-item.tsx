@@ -65,7 +65,7 @@ const RecordItem: React.FC<Props> = ({
   };
   const deleteRecordHandler = (id: string) => {
     deleteRecord(id);
-    setAlert('Record was Removed', 'success');
+    setAlert('Record Removed', 'success');
   };
 
   let [month, day, year] = new Date(date).toLocaleDateString().split('/');

@@ -58,7 +58,7 @@ export const postCategory = (
       payload: res.data,
     });
 
-    dispatch(setAlert('Category was created', 'success'));
+    dispatch(setAlert('Category Created', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -100,7 +100,7 @@ export const putCategory = (
       payload: res.data,
     });
 
-    dispatch(setAlert('Category was updated', 'success'));
+    dispatch(setAlert('Category Updated', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

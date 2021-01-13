@@ -82,7 +82,7 @@ export const signin = (email: string, password: string) => async (
 
     dispatch(loadUser());
 
-    dispatch(setAlert('Welcome back', 'success'));
+    dispatch(setAlert('Welcome Back', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -97,7 +97,7 @@ export const signin = (email: string, password: string) => async (
 
 export const logout = () => (dispatch: any) => {
   dispatch({ type: LOGOUT });
-  dispatch(setAlert('Logged you out', 'success'));
+  dispatch(setAlert('Logged You Out', 'success'));
 };
 
 export const loadUser = () => async (dispatch: any) => {
@@ -146,7 +146,7 @@ export const putEmail = (email: string) => async (dispatch: any) => {
       payload: res.data,
     });
 
-    dispatch(setAlert('Email updated', 'success'));
+    dispatch(setAlert('Email Updated', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

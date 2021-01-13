@@ -59,7 +59,7 @@ export const postAccount = (
       payload: res.data,
     });
 
-    dispatch(setAlert('Account Was Created', 'success'));
+    dispatch(setAlert('Account Created', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -101,7 +101,7 @@ export const putAccount = (
       payload: res.data,
     });
 
-    dispatch(setAlert('Account Was Updated', 'success'));
+    dispatch(setAlert('Account Updated', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -128,7 +128,7 @@ export const deleteAccount = (id: string) => async (dispatch: any) => {
       payload: id,
     });
 
-    dispatch(setAlert('Account Was Removed', 'success'));
+    dispatch(setAlert('Account Removed', 'success'));
     dispatch(getRecords());
   } catch (err) {
     console.log(err);
