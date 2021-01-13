@@ -36,7 +36,6 @@ const RecordPercentages: React.FC<Props> = ({
       {filteredRecordsByCategories.map((recordByCategory, index) =>
         recordByCategory.type === recordsType && recordByCategory.percentage ? (
           <IonItem key={recordByCategory._id} lines='full'>
-            {console.log(index)}
             <IonCol size='2'>
               <IonLabel
                 className='ion-text-center'

@@ -114,14 +114,9 @@ const ChartBuilder: React.FC<Props> = ({
               data={mainData}
               options={{
                 plugins: {
-                  labels: [
-                    {
-                      render: 'percentage',
-                      position: 'outside',
-                    },
-                  ],
+                  labels: [],
                 },
-                title: { display: false },
+                title: { display: true },
                 legend: {
                   display: false,
                   position: 'right',

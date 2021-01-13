@@ -16,7 +16,11 @@ export default function ChartSkeleton() {
   return (
     <IonGrid>
       <IonRow>
-        <IonItem className='horizontal-center' lines='none'>
+        <IonItem
+          style={{ marginTop: '15px' }}
+          className='horizontal-center'
+          lines='none'
+        >
           <IonAvatar className='avatar'>
             <IonSkeletonText />
           </IonAvatar>

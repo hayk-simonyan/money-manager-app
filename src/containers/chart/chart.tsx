@@ -56,11 +56,11 @@ const Chart: React.FC<Props> = ({
 
   recordsByCategories.forEach((record: MonthlyRecord) => {
     if (record.type === 'expences' && record.total !== 0) {
-      expenceLabels.push(`${record.name} ${record.total}`);
-      expenceData.push(record.percentage);
+      expenceLabels.push(record.name);
+      expenceData.push(record.total);
     } else if (record.type === 'incomes' && record.total !== 0) {
-      incomeLabels.push(`${record.name} ${record.total}`);
-      incomeData.push(record.percentage);
+      incomeLabels.push(record.name);
+      incomeData.push(record.total);
     }
   });
 
