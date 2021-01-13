@@ -68,7 +68,10 @@ const RecordItem: React.FC<Props> = ({
     setAlert('Record Removed', 'success');
   };
 
-  let [month, day, year] = new Date(date).toLocaleDateString().split('/');
+  let [m, day, y] = new Date(date).toLocaleDateString().split('/');
+  let [month] = new Date(date)
+    .toLocaleDateString('default', { month: 'short' })
+    .split('/');
 
   let selectedIcon = require(`../../../assets/ionicons/${category.icon}.svg`);
 
@@ -131,7 +134,7 @@ const RecordItem: React.FC<Props> = ({
                       <IonCardSubtitle>{account.name}</IonCardSubtitle>
                     </IonCol>
                     <IonCol size='5' className='ion-text-right '>
-                      <IonCardSubtitle>{day + '/' + month}</IonCardSubtitle>
+                      <IonCardSubtitle>{`${day} ${month}`}</IonCardSubtitle>
                     </IonCol>
                   </IonRow>
                 </IonGrid>
