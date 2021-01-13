@@ -25,8 +25,6 @@ export default function ChartSkeleton() {
             <IonSkeletonText />
           </IonAvatar>
         </IonItem>
-        {/* <IonSkeletonText animated /> */}
-        {/* <IonSkeletonText animated /> */}
       </IonRow>
       <IonRow className='ion-text-center'>
         <IonItem className='horizontal-center' lines='none'>
