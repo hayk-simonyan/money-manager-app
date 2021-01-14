@@ -60,6 +60,7 @@ export const postAccount = (
     });
 
     dispatch(setAlert('Account Created', 'success'));
+    dispatch(getAccounts());
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -102,6 +103,7 @@ export const putAccount = (
     });
 
     dispatch(setAlert('Account Updated', 'success'));
+    dispatch(getAccounts());
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -130,6 +132,7 @@ export const deleteAccount = (id: string) => async (dispatch: any) => {
 
     dispatch(setAlert('Account Removed', 'success'));
     dispatch(getRecords());
+    dispatch(getAccounts());
   } catch (err) {
     console.log(err);
     const errors = err.response.data.errors;
