@@ -87,20 +87,12 @@ const CategoryItem: React.FC<Props> = ({
             <IonLabel className='vertical-center'>{name}</IonLabel>
           </IonCol>
           <IonCol size='2' className='container'>
-            <IonButton
-              onClick={openModal}
-              color='primary'
-              className='vertical-align'
-            >
+            <IonButton onClick={openModal} color='light'>
               <IonIcon slot='icon-only' icon={trashOutline}></IonIcon>
             </IonButton>
           </IonCol>
           <IonCol size='2' className='container'>
-            <IonButton
-              onClick={() => redirectToCategory(_id)}
-              color='primary'
-              className='vertical-align'
-            >
+            <IonButton onClick={() => redirectToCategory(_id)} color='light'>
               <IonIcon slot='icon-only' icon={createOutline}></IonIcon>
             </IonButton>
           </IonCol>
