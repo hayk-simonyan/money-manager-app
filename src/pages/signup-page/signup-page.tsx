@@ -14,13 +14,14 @@ import {
 import { connect } from 'react-redux';
 
 import Header from '../../components/header/header';
-import { signup } from '../../redux/auth/auth.actions';
+import { signup, loadUser } from '../../redux/auth/auth.actions';
 import { Redirect } from 'react-router-dom';
 
 import './signup-page.css';
 
 interface Props {
   signup: (name: string, email: string, password: string) => void;
+  loadUser: () => void;
   auth: {
     isAuthenticated: any;
     loading: boolean;
@@ -29,8 +30,13 @@ interface Props {
 
 const SignupPage: React.FC<Props> = ({
   signup,
+  loadUser,
   auth: { isAuthenticated, loading },
 }) => {
+  setTimeout(() => {
+    console.log('timeout');
+    localStorage.getItem('token') && loadUser();
+  }, 1000);
   const [error, setError] = useState<string>();
 
   const nameInputRef = useRef<HTMLIonInputElement>(null);
@@ -116,6 +122,7 @@ const SignupPage: React.FC<Props> = ({
 const mapDispatchToProps = (dispatch: any) => ({
   signup: (name: string, email: string, password: string) =>
     dispatch(signup(name, email, password)),
+  loadUser: () => dispatch(loadUser()),
 });
 
 const mapStateToProps = (state: any) => ({
