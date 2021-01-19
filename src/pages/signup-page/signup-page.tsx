@@ -36,7 +36,7 @@ const SignupPage: React.FC<Props> = ({
   setTimeout(() => {
     console.log('timeout');
     localStorage.getItem('token') && loadUser();
-  }, 1000);
+  }, 0);
   const [error, setError] = useState<string>();
 
   const nameInputRef = useRef<HTMLIonInputElement>(null);
@@ -75,7 +75,7 @@ const SignupPage: React.FC<Props> = ({
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <Header title='Money Manager' menu={true} />
+      <Header title='Create Your Account' menu={true} />
       <IonContent>
         <IonGrid>
           <IonRow>
