@@ -112,6 +112,30 @@ const NewRecordPage: React.FC<Props> = ({
     setError('');
   };
 
+  const expenseCategoriesSelectOptions = categories.map((c: any) => {
+    if (c.type === 'expences') {
+      return (
+        <IonSelectOption key={c._id} value={c.name}>
+          {c.name}
+        </IonSelectOption>
+      );
+    }
+  });
+  const incomeCategoriesSelectOptions = categories.map((c: any) => {
+    if (c.type === 'incomes') {
+      return (
+        <IonSelectOption key={c._id} value={c.name}>
+          {c.name}
+        </IonSelectOption>
+      );
+    }
+  });
+  const accountSelectOptions = accounts.map((a: any) => (
+    <IonSelectOption key={a._id} value={a.name}>
+      {a.name}
+    </IonSelectOption>
+  ));
+
   return (
     <IonPage>
       <IonAlert
@@ -147,12 +171,7 @@ const NewRecordPage: React.FC<Props> = ({
                   onIonChange={(e) => setAccount(e.detail.value)}
                   interface='action-sheet'
                 >
-                  {accounts &&
-                    accounts.map((a: any) => (
-                      <IonSelectOption key={a._id} value={a.name}>
-                        {a.name}
-                      </IonSelectOption>
-                    ))}
+                  {accounts && accountSelectOptions}
                 </IonSelect>
               </IonItem>
               <IonItem>
@@ -164,7 +183,10 @@ const NewRecordPage: React.FC<Props> = ({
                   onIonChange={(e) => setCategory(e.detail.value)}
                   interface='action-sheet'
                 >
-                  {categories &&
+                  {categories && type === 'expences'
+                    ? expenseCategoriesSelectOptions
+                    : incomeCategoriesSelectOptions}
+                  {/* {categories &&
                     categories.map((c: any) => {
                       if (type === 'expences' && c.type === 'expences') {
                         return (
@@ -180,7 +202,7 @@ const NewRecordPage: React.FC<Props> = ({
                           </IonSelectOption>
                         );
                       }
-                    })}
+                    })} */}
                 </IonSelect>
               </IonItem>
               <IonItem>
