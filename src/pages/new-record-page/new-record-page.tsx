@@ -189,7 +189,11 @@ const NewRecordPage: React.FC<Props> = ({
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Note</IonLabel>
-                <IonInput ref={noteInputRef} type='text'></IonInput>
+                <IonInput
+                  ref={noteInputRef}
+                  type='text'
+                  autocomplete='off'
+                ></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>

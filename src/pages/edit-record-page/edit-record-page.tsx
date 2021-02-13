@@ -226,6 +226,7 @@ const EditRecordPage: React.FC<Props> = ({
                   ref={noteInputRef}
                   value={note}
                   type='text'
+                  autocomplete='off'
                 ></IonInput>
               </IonItem>
             </IonCol>

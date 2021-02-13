@@ -72,7 +72,12 @@ const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
             <IonCol>
               <IonItem>
                 <IonLabel position='floating'>Account Name</IonLabel>
-                <IonInput ref={nameInputRef} type='text' required />
+                <IonInput
+                  ref={nameInputRef}
+                  type='text'
+                  required
+                  autocomplete='off'
+                />
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Initial Amount</IonLabel>
