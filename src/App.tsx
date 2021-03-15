@@ -58,6 +58,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     Network.addListener('networkStatusChange', (status) => {
+      window.location.reload(false);
       setNetworkState(status.connected);
     });
 
