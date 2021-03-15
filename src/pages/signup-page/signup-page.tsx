@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   IonGrid,
   IonRow,
@@ -28,15 +28,19 @@ interface Props {
   };
 }
 
+window.addEventListener(
+  'storage',
+  function () {
+    localStorage.getItem('token') && loadUser();
+  },
+  false
+);
+
 const SignupPage: React.FC<Props> = ({
   signup,
   loadUser,
   auth: { isAuthenticated, loading },
 }) => {
-  setTimeout(() => {
-    console.log('timeout');
-    localStorage.getItem('token') && loadUser();
-  }, 0);
   const [error, setError] = useState<string>();
 
   const nameInputRef = useRef<HTMLIonInputElement>(null);
