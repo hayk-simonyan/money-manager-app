@@ -32,7 +32,7 @@ export const signup = (name: string, email: string, password: string) => async (
 
   try {
     const res = await axios.post(
-      'https://money-manager-api-v1.herokuapp.com/users',
+      'https://moneymanager.digital/users',
       body,
       config
     );
@@ -70,7 +70,7 @@ export const signin = (email: string, password: string) => async (
 
   try {
     const res = await axios.post(
-      'https://money-manager-api-v1.herokuapp.com/auth',
+      'https://moneymanager.digital/auth',
       body,
       config
     );
@@ -106,9 +106,7 @@ export const loadUser = () => async (dispatch: any) => {
   }
 
   try {
-    const res = await axios.get(
-      'https://money-manager-api-v1.herokuapp.com/auth'
-    );
+    const res = await axios.get('https://moneymanager.digital/auth');
 
     dispatch({
       type: USER_LOADED,
@@ -136,7 +134,7 @@ export const putEmail = (email: string) => async (dispatch: any) => {
 
   try {
     const res = await axios.put(
-      `https://money-manager-api-v1.herokuapp.com/auth/email`,
+      `https://moneymanager.digital/auth/email`,
       body,
       config
     );
@@ -172,7 +170,7 @@ export const putPassword = (oldPassword: string, password: string) => async (
 
   try {
     const res = await axios.put(
-      `https://money-manager-api-v1.herokuapp.com/auth/password`,
+      `https://moneymanager.digital/auth/password`,
       body,
       config
     );

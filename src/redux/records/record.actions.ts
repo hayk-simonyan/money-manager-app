@@ -34,9 +34,7 @@ export const getRecords = (y: string = '', m: string = '') => async (
     let query = `?date[gte]=${gte}&date[lt]=${lt}`;
     // query = `?date[gte]=${year}-${thisMonth}-01T00:00:00.000Z&date[lt]=${year}-${nextMonth}-01T00:00:00.000Z`;
 
-    const res = await axios.get(
-      `https://money-manager-api-v1.herokuapp.com/records${query}`
-    );
+    const res = await axios.get(`https://moneymanager.digital/records${query}`);
 
     dispatch({
       type: GET_RECORDS,
@@ -59,9 +57,7 @@ export const getRecords = (y: string = '', m: string = '') => async (
 
 export const getRecord = (id: string) => async (dispatch: any) => {
   try {
-    const res = await axios.get(
-      `https://money-manager-api-v1.herokuapp.com/records/${id}`
-    );
+    const res = await axios.get(`https://moneymanager.digital/records/${id}`);
 
     dispatch({
       type: GET_RECORD,
@@ -107,7 +103,7 @@ export const postRecord = (
 
   try {
     const res = await axios.post(
-      `https://money-manager-api-v1.herokuapp.com/records`,
+      `https://moneymanager.digital/records`,
       body,
       config
     );
@@ -160,7 +156,7 @@ export const putRecord = (
 
   try {
     const res = await axios.put(
-      `https://money-manager-api-v1.herokuapp.com/records/${id}`,
+      `https://moneymanager.digital/records/${id}`,
       body,
       config
     );
@@ -186,9 +182,7 @@ export const putRecord = (
 
 export const deleteRecord = (id: string) => async (dispatch: any) => {
   try {
-    await axios.delete(
-      `https://money-manager-api-v1.herokuapp.com/records/${id}`
-    );
+    await axios.delete(`https://moneymanager.digital/records/${id}`);
 
     dispatch({
       type: DELETE_RECORD,
