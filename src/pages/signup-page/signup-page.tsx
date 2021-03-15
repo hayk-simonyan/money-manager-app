@@ -28,14 +28,6 @@ interface Props {
   };
 }
 
-window.addEventListener(
-  'storage',
-  function () {
-    localStorage.getItem('token') && loadUser();
-  },
-  false
-);
-
 const SignupPage: React.FC<Props> = ({
   signup,
   loadUser,
