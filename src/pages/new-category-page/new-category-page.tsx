@@ -104,7 +104,11 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory }) => {
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Name</IonLabel>
-                <IonInput ref={nameInputRef} autocomplete='off'></IonInput>
+                <IonInput
+                  ref={nameInputRef}
+                  autocomplete='off'
+                  autocorrect='off'
+                ></IonInput>
               </IonItem>
 
               {/* conditional icon sheet */}

@@ -104,7 +104,12 @@ const EditAccountPage: React.FC<Props> = ({ putAccount, deleteAccount }) => {
             <IonCol>
               <IonItem>
                 <IonLabel position='floating'>Account Name</IonLabel>
-                <IonInput value={name} ref={nameInputRef} autocomplete='off' />
+                <IonInput
+                  value={name}
+                  ref={nameInputRef}
+                  autocomplete='off'
+                  autocorrect='off'
+                />
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Initial Amount</IonLabel>

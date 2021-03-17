@@ -118,6 +118,7 @@ const EditCategoryPage: React.FC<Props> = ({ putCategory }) => {
                   value={name}
                   ref={nameInputRef}
                   autocomplete='off'
+                  autocorrect='off'
                 ></IonInput>
               </IonItem>
               <IonItem lines='none'>
