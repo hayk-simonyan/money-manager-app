@@ -75,11 +75,23 @@ const SigninPage: React.FC<Props> = ({
             <IonCol>
               <IonItem>
                 <IonLabel position='floating'>Email</IonLabel>
-                <IonInput ref={emailInputRef} type='email' />
+                <IonInput
+                  ref={emailInputRef}
+                  type='email'
+                  autocomplete='off'
+                  autocorrect='off'
+                  spellcheck={false}
+                />
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Password</IonLabel>
-                <IonInput ref={passwordInputRef} type='password'></IonInput>
+                <IonInput
+                  ref={passwordInputRef}
+                  type='password'
+                  autocomplete='off'
+                  autocorrect='off'
+                  spellcheck={false}
+                ></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
