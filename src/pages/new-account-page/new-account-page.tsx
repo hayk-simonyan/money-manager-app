@@ -77,11 +77,19 @@ const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
                   required
                   autocomplete='off'
                   autocorrect='off'
+                  spellcheck={false}
                 />
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Initial Amount</IonLabel>
-                <IonInput ref={totalInputRef} type='number' required></IonInput>
+                <IonInput
+                  ref={totalInputRef}
+                  type='number'
+                  autocomplete='off'
+                  autocorrect='off'
+                  spellcheck={false}
+                  required
+                ></IonInput>
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Account Type</IonLabel>
@@ -109,10 +117,6 @@ const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
                   <IonSelectOption value='other'>Other</IonSelectOption>
                 </IonSelect>
               </IonItem>
-              {/* <IonItem>
-                <IonLabel position='floating'>Bank Account Number</IonLabel>
-                <IonInput ref={nameInputRef} type='text' required />
-              </IonItem> */}
             </IonCol>
           </IonRow>
         </IonGrid>

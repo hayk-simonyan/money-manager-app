@@ -218,6 +218,9 @@ const EditRecordPage: React.FC<Props> = ({
                   ref={amountInputRef}
                   value={amount}
                   type='number'
+                  autocomplete='off'
+                  autocorrect='off'
+                  spellcheck={false}
                 ></IonInput>
               </IonItem>
               <IonItem>
@@ -227,6 +230,7 @@ const EditRecordPage: React.FC<Props> = ({
                   value={note}
                   autocomplete='off'
                   autocorrect='off'
+                  spellcheck={false}
                 ></IonInput>
               </IonItem>
             </IonCol>

@@ -186,28 +186,17 @@ const NewRecordPage: React.FC<Props> = ({
                   {categories && type === 'expences'
                     ? expenseCategoriesSelectOptions
                     : incomeCategoriesSelectOptions}
-                  {/* {categories &&
-                    categories.map((c: any) => {
-                      if (type === 'expences' && c.type === 'expences') {
-                        return (
-                          <IonSelectOption key={c._id} value={c.name}>
-                            {c.name}
-                          </IonSelectOption>
-                        );
-                      }
-                      if (type === 'incomes' && c.type === 'incomes') {
-                        return (
-                          <IonSelectOption key={c._id} value={c.name}>
-                            {c.name}
-                          </IonSelectOption>
-                        );
-                      }
-                    })} */}
                 </IonSelect>
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Amount</IonLabel>
-                <IonInput ref={amountInputRef} type='number'></IonInput>
+                <IonInput
+                  ref={amountInputRef}
+                  type='number'
+                  autocomplete='off'
+                  autocorrect='off'
+                  spellcheck={false}
+                ></IonInput>
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Note</IonLabel>
@@ -215,6 +204,7 @@ const NewRecordPage: React.FC<Props> = ({
                   ref={noteInputRef}
                   autocomplete='off'
                   autocorrect='off'
+                  spellcheck={false}
                 ></IonInput>
               </IonItem>
             </IonCol>

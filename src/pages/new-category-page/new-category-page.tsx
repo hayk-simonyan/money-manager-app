@@ -108,6 +108,7 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory }) => {
                   ref={nameInputRef}
                   autocomplete='off'
                   autocorrect='off'
+                  spellcheck={false}
                 ></IonInput>
               </IonItem>
 

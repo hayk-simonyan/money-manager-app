@@ -109,6 +109,7 @@ const EditAccountPage: React.FC<Props> = ({ putAccount, deleteAccount }) => {
                   ref={nameInputRef}
                   autocomplete='off'
                   autocorrect='off'
+                  spellcheck={false}
                 />
               </IonItem>
               <IonItem>
@@ -117,6 +118,9 @@ const EditAccountPage: React.FC<Props> = ({ putAccount, deleteAccount }) => {
                   value={total}
                   ref={totalInputRef}
                   type='number'
+                  autocomplete='off'
+                  autocorrect='off'
+                  spellcheck={false}
                 ></IonInput>
               </IonItem>
 
