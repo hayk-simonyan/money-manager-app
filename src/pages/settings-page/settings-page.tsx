@@ -126,7 +126,13 @@ const SettingsPage: React.FC<Props> = ({
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>New Email Adress</IonLabel>
-                <IonInput ref={emailInputRef} type='email' />
+                <IonInput
+                  ref={emailInputRef}
+                  type='email'
+                  autocomplete='off'
+                  autocorrect='off'
+                  spellcheck={false}
+                />
               </IonItem>
               <IonButton
                 onClick={updateEmailHandler}
@@ -146,15 +152,33 @@ const SettingsPage: React.FC<Props> = ({
             <IonCardContent>
               <IonItem>
                 <IonLabel position='floating'>Old Password</IonLabel>
-                <IonInput ref={oldPasswordInputRef} type='password' />
+                <IonInput
+                  ref={oldPasswordInputRef}
+                  type='password'
+                  autocomplete='off'
+                  autocorrect='off'
+                  spellcheck={false}
+                />
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>New Password</IonLabel>
-                <IonInput ref={newPasswordInputRef} type='password' />
+                <IonInput
+                  ref={newPasswordInputRef}
+                  type='password'
+                  autocomplete='off'
+                  autocorrect='off'
+                  spellcheck={false}
+                />
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Confirm New Password</IonLabel>
-                <IonInput ref={confirmPasswordInputRef} type='password' />
+                <IonInput
+                  ref={confirmPasswordInputRef}
+                  type='password'
+                  autocomplete='off'
+                  autocorrect='off'
+                  spellcheck={false}
+                />
               </IonItem>
               <IonButton
                 onClick={updatePasswordHandler}
