@@ -26,7 +26,6 @@ const AccountPercentages: React.FC<Props> = ({ accounts, colors }) => {
       {filteredAccounts.map((account, index) =>
         account.total > 0 ? (
           <IonItem key={account._id} lines='none'>
-            {console.log(index)}
             <IonCol size='2'>
               <IonLabel
                 className='ion-text-center'
