@@ -125,7 +125,7 @@ const SettingsPage: React.FC<Props> = ({
                 </IonText>
               </IonItem>
               <IonItem>
-                <IonLabel position='floating'>New Email Adress</IonLabel>
+                <IonLabel position='floating'>New E-mail Adress</IonLabel>
                 <IonInput
                   ref={emailInputRef}
                   type='email'
