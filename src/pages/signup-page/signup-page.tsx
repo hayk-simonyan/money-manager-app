@@ -75,7 +75,7 @@ const SignupPage: React.FC<Props> = ({
           <IonRow>
             <IonCol>
               <IonItem>
-                <IonLabel position='floating'>Full Name</IonLabel>
+                <IonLabel position='floating'>Username</IonLabel>
                 <IonInput
                   ref={nameInputRef}
                   autocomplete='off'
@@ -84,7 +84,7 @@ const SignupPage: React.FC<Props> = ({
                 />
               </IonItem>
               <IonItem>
-                <IonLabel position='floating'>Email</IonLabel>
+                <IonLabel position='floating'>E-mail Address</IonLabel>
                 <IonInput
                   ref={emailInputRef}
                   type='email'
