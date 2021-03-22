@@ -71,7 +71,7 @@ const NewAccountPage: React.FC<Props> = ({ postAccount }) => {
           <IonRow>
             <IonCol>
               <IonItem>
-                <IonLabel position='floating'>Account Name</IonLabel>
+                <IonLabel position='floating'>Account Label</IonLabel>
                 <IonInput
                   ref={nameInputRef}
                   required

@@ -103,7 +103,7 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory }) => {
                 )}
               </IonItem>
               <IonItem>
-                <IonLabel position='floating'>Name</IonLabel>
+                <IonLabel position='floating'>Category Label</IonLabel>
                 <IonInput
                   ref={nameInputRef}
                   autocomplete='off'

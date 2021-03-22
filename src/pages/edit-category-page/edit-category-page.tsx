@@ -113,7 +113,7 @@ const EditCategoryPage: React.FC<Props> = ({ putCategory }) => {
               </IonItem>
 
               <IonItem>
-                <IonLabel position='floating'>Name</IonLabel>
+                <IonLabel position='floating'>Category Label</IonLabel>
                 <IonInput
                   value={name}
                   ref={nameInputRef}

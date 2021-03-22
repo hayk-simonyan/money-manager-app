@@ -103,7 +103,7 @@ const EditAccountPage: React.FC<Props> = ({ putAccount, deleteAccount }) => {
           <IonRow>
             <IonCol>
               <IonItem>
-                <IonLabel position='floating'>Account Name</IonLabel>
+                <IonLabel position='floating'>Account Label</IonLabel>
                 <IonInput
                   value={name}
                   ref={nameInputRef}
