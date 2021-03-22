@@ -94,7 +94,7 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory }) => {
                   <IonSelectOption value='incomes'>Income</IonSelectOption>
                 </IonSelect>
               </IonItem>
-              <IonItem onClick={() => setShowModal(true)} button>
+              <IonItem onClick={() => setShowModal(true)} lines='full' button>
                 <IonLabel>Icon</IonLabel>
                 {showSelectedIcon && (
                   <IonItem lines='none'>
