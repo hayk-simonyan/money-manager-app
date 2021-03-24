@@ -48,10 +48,10 @@ const RecordPercentages: React.FC<Props> = ({
                 {recordByCategory.percentage}%{' '}
               </IonLabel>
             </IonCol>
-            <IonCol size='8'>
+            <IonCol size='6'>
               <IonLabel>{recordByCategory.name}</IonLabel>
             </IonCol>
-            <IonCol size='2'>
+            <IonCol size='4'>
               <IonLabel className='ion-text-end'>
                 {`${localStorage.getItem('currency') || '$'} `}
                 {recordByCategory.total}
