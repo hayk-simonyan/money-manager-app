@@ -23,8 +23,6 @@ import { connect } from 'react-redux';
 import { postRecord } from '../../redux/records/record.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
 
-import './index.css';
-
 interface Props {
   postRecord: (
     type: string,

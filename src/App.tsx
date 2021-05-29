@@ -47,6 +47,8 @@ import CategoriesPage from './pages/categories-page/categories-page';
 import NewCategoryPage from './pages/new-category-page/new-category-page';
 import EditCategoryPage from './pages/edit-category-page/edit-category-page';
 
+import './override.css';
+
 const { Network, StatusBar } = Plugins;
 
 const App: React.FC = () => {
