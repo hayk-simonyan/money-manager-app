@@ -23,6 +23,8 @@ import { connect } from 'react-redux';
 import { postRecord } from '../../redux/records/record.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
 
+import './index.css';
+
 interface Props {
   postRecord: (
     type: string,
@@ -178,8 +180,8 @@ const NewRecordPage: React.FC<Props> = ({
                 <IonLabel>Category</IonLabel>
                 <IonSelect
                   value={category}
-                  cancelText='Cancel'
-                  okText='Ok'
+                  // cancelText='Cancel'
+                  // okText='Ok'
                   onIonChange={(e) => setCategory(e.detail.value)}
                   interface='action-sheet'
                 >
