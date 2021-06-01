@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonIcon, IonCol, IonItem } from '@ionic/react';
+import { IonIcon, IonCol, IonItem, IonLabel } from '@ionic/react';
 
 interface Props {
   iconString: string;
@@ -20,7 +20,9 @@ const NewCategoryItem: React.FC<Props> = ({
           onClick={() => chooseIconHandler(iconString)}
           button
         >
-          <IonIcon size='medium' icon={iconOutline}></IonIcon>
+          <IonLabel>
+            <IonIcon size='medium' icon={iconOutline}></IonIcon>
+          </IonLabel>
         </IonItem>
       </IonCol>
     </React.Fragment>
