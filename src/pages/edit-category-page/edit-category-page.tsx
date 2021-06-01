@@ -105,11 +105,7 @@ const EditCategoryPage: React.FC<Props> = ({ putCategory }) => {
               </IonItem>
               <IonItem onClick={() => setShowModal(true)} lines='full' button>
                 <IonLabel>Icon</IonLabel>
-                {showSelectedIcon && (
-                  <IonItem lines='none'>
-                    <IonIcon icon={selectedIcon}></IonIcon>
-                  </IonItem>
-                )}
+                {showSelectedIcon && <IonIcon icon={selectedIcon}></IonIcon>}
               </IonItem>
 
               <IonItem>

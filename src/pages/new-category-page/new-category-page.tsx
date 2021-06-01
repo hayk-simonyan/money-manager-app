@@ -96,11 +96,7 @@ const NewCategoryPage: React.FC<Props> = ({ postCategory }) => {
               </IonItem>
               <IonItem onClick={() => setShowModal(true)} lines='full' button>
                 <IonLabel>Icon</IonLabel>
-                {showSelectedIcon && (
-                  <IonItem lines='none'>
-                    <IonIcon icon={selectedIcon}></IonIcon>
-                  </IonItem>
-                )}
+                {showSelectedIcon && <IonIcon icon={selectedIcon}></IonIcon>}
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Category Label</IonLabel>
