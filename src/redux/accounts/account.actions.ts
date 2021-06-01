@@ -32,90 +32,84 @@ export const getAccounts = () => async (dispatch: any) => {
   }
 };
 
-export const postAccount = (
-  type: string,
-  name: string,
-  total: string
-) => async (dispatch: any) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
+export const postAccount =
+  (type: string, name: string, total: string) => async (dispatch: any) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const body = { type, name, total };
+
+    try {
+      const res = await axios.post(
+        `https://moneymanager.digital/accounts`,
+        body,
+        config
+      );
+
+      dispatch({
+        type: POST_ACCOUNT,
+        payload: res.data,
+      });
+
+      dispatch(setAlert('Account Created', ''));
+      dispatch(getAccounts());
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((err: { msg: string }) =>
+          dispatch(setAlert(err.msg, 'danger'))
+        );
+      }
+
+      dispatch({
+        type: ACCOUNTS_ERROR,
+        payload: { msg: err.statusText, status: err.status },
+      });
+    }
   };
 
-  const body = { type, name, total };
+export const putAccount =
+  (id: string, type: string, name: string, total: string) =>
+  async (dispatch: any) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  try {
-    const res = await axios.post(
-      `https://moneymanager.digital/accounts`,
-      body,
-      config
-    );
+    const body = { type, name, total };
 
-    dispatch({
-      type: POST_ACCOUNT,
-      payload: res.data,
-    });
-
-    dispatch(setAlert('Account Created', 'success'));
-    dispatch(getAccounts());
-  } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach((err: { msg: string }) =>
-        dispatch(setAlert(err.msg, 'danger'))
+    try {
+      const res = await axios.put(
+        `https://moneymanager.digital/accounts/${id}`,
+        body,
+        config
       );
+
+      dispatch({
+        type: PUT_ACCOUNT,
+        payload: res.data,
+      });
+
+      dispatch(setAlert('Account Updated', ''));
+      dispatch(getAccounts());
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((err: { msg: string }) =>
+          dispatch(setAlert(err.msg, 'danger'))
+        );
+      }
+
+      dispatch({
+        type: ACCOUNTS_ERROR,
+        payload: { msg: err.statusText, status: err.status },
+      });
     }
-
-    dispatch({
-      type: ACCOUNTS_ERROR,
-      payload: { msg: err.statusText, status: err.status },
-    });
-  }
-};
-
-export const putAccount = (
-  id: string,
-  type: string,
-  name: string,
-  total: string
-) => async (dispatch: any) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
   };
-
-  const body = { type, name, total };
-
-  try {
-    const res = await axios.put(
-      `https://moneymanager.digital/accounts/${id}`,
-      body,
-      config
-    );
-
-    dispatch({
-      type: PUT_ACCOUNT,
-      payload: res.data,
-    });
-
-    dispatch(setAlert('Account Updated', 'success'));
-    dispatch(getAccounts());
-  } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach((err: { msg: string }) =>
-        dispatch(setAlert(err.msg, 'danger'))
-      );
-    }
-
-    dispatch({
-      type: ACCOUNTS_ERROR,
-      payload: { msg: err.statusText, status: err.status },
-    });
-  }
-};
 
 export const deleteAccount = (id: string) => async (dispatch: any) => {
   try {
@@ -126,7 +120,7 @@ export const deleteAccount = (id: string) => async (dispatch: any) => {
       payload: id,
     });
 
-    dispatch(setAlert('Account Removed', 'success'));
+    dispatch(setAlert('Account Removed', ''));
     dispatch(getRecords());
     dispatch(getAccounts());
   } catch (err) {

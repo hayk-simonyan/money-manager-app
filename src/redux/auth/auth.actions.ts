@@ -19,85 +19,83 @@ import { getCategories } from '../categories/category.actions';
 import { getRecords } from '../records/record.actions';
 import { setAlert } from '../alerts/alert.actions';
 
-export const signup = (name: string, email: string, password: string) => async (
-  dispatch: any
-) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
+export const signup =
+  (name: string, email: string, password: string) => async (dispatch: any) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const body = JSON.stringify({ name, email, password });
+
+    try {
+      const res = await axios.post(
+        'https://moneymanager.digital/users',
+        body,
+        config
+      );
+
+      dispatch({
+        type: SIGNUP_SUCCESS,
+        payload: res.data,
+      });
+
+      dispatch(loadUser());
+
+      dispatch(setAlert('Welcome to Money Manager', 'success'));
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
+      }
+
+      dispatch({
+        type: SIGNUP_FAIL,
+      });
+    }
   };
 
-  const body = JSON.stringify({ name, email, password });
+export const signin =
+  (email: string, password: string) => async (dispatch: any) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  try {
-    const res = await axios.post(
-      'https://moneymanager.digital/users',
-      body,
-      config
-    );
+    const body = JSON.stringify({ email, password });
 
-    dispatch({
-      type: SIGNUP_SUCCESS,
-      payload: res.data,
-    });
+    try {
+      const res = await axios.post(
+        'https://moneymanager.digital/auth',
+        body,
+        config
+      );
 
-    dispatch(loadUser());
+      dispatch({
+        type: SIGNIN_SUCCESS,
+        payload: res.data,
+      });
 
-    dispatch(setAlert('Welcome to Money Manager', 'success'));
-  } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
+      dispatch(loadUser());
+
+      dispatch(setAlert('Welcome Back', 'success'));
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
+      }
+
+      dispatch({
+        type: SIGNIN_FAIL,
+      });
     }
-
-    dispatch({
-      type: SIGNUP_FAIL,
-    });
-  }
-};
-
-export const signin = (email: string, password: string) => async (
-  dispatch: any
-) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
   };
-
-  const body = JSON.stringify({ email, password });
-
-  try {
-    const res = await axios.post(
-      'https://moneymanager.digital/auth',
-      body,
-      config
-    );
-
-    dispatch({
-      type: SIGNIN_SUCCESS,
-      payload: res.data,
-    });
-
-    dispatch(loadUser());
-
-    dispatch(setAlert('Welcome Back', 'success'));
-  } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
-    }
-
-    dispatch({
-      type: SIGNIN_FAIL,
-    });
-  }
-};
 
 export const logout = () => (dispatch: any) => {
   dispatch({ type: LOGOUT });
-  dispatch(setAlert('Logged You Out', 'success'));
+  dispatch(setAlert('Logged You Out', ''));
 };
 
 export const loadUser = () => async (dispatch: any) => {
@@ -144,7 +142,7 @@ export const putEmail = (email: string) => async (dispatch: any) => {
       payload: res.data,
     });
 
-    dispatch(setAlert('Email Updated', 'success'));
+    dispatch(setAlert('Email Updated', ''));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -157,38 +155,37 @@ export const putEmail = (email: string) => async (dispatch: any) => {
   }
 };
 
-export const putPassword = (oldPassword: string, password: string) => async (
-  dispatch: any
-) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+export const putPassword =
+  (oldPassword: string, password: string) => async (dispatch: any) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  const body = JSON.stringify({ oldPassword, password });
+    const body = JSON.stringify({ oldPassword, password });
 
-  try {
-    const res = await axios.put(
-      `https://moneymanager.digital/auth/password`,
-      body,
-      config
-    );
+    try {
+      const res = await axios.put(
+        `https://moneymanager.digital/auth/password`,
+        body,
+        config
+      );
 
-    dispatch({
-      type: PUT_PASSWORD,
-      payload: res.data,
-    });
+      dispatch({
+        type: PUT_PASSWORD,
+        payload: res.data,
+      });
 
-    dispatch(setAlert('Password Updated', 'success'));
-  } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
+      dispatch(setAlert('Password Updated', ''));
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
+      }
+
+      dispatch({
+        type: PUT_PASSWORD_ERROR,
+      });
     }
-
-    dispatch({
-      type: PUT_PASSWORD_ERROR,
-    });
-  }
-};
+  };

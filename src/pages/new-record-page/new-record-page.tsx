@@ -97,7 +97,7 @@ const NewRecordPage: React.FC<Props> = ({
       parseInt(amount.toString()),
       note ? note!.toString() : ''
     );
-    setAlert('Record Created', 'success');
+    setAlert('Record Created', '');
     history.push('/');
 
     setType('expences');
