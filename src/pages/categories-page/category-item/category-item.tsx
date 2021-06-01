@@ -43,7 +43,7 @@ const CategoryItem: React.FC<Props> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const deleteCategoryHandler = () => {
     deleteCategory(_id);
-    setAlert('Category Removed', 'success');
+    setAlert('Category Removed', '');
   };
 
   const openModal = () => {

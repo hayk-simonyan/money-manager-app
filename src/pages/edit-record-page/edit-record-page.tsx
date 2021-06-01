@@ -118,7 +118,7 @@ const EditRecordPage: React.FC<Props> = ({
       parseInt(amount.toString()),
       note!.toString()
     );
-    setAlert('Record Updated', 'success');
+    setAlert('Record Updated', '');
     history.push('/');
   };
 
@@ -126,7 +126,7 @@ const EditRecordPage: React.FC<Props> = ({
   const deleteRecordHandler = () => {
     history.push('/');
     deleteRecord(id);
-    setAlert('Record Removed', 'success');
+    setAlert('Record Removed', '');
   };
 
   const toggleModal = () => {

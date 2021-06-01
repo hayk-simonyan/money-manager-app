@@ -101,7 +101,6 @@ const SettingsPage: React.FC<Props> = ({
                   setCurrency(e.detail.value);
                   localStorage.setItem('currency', e.detail.value);
                   window.location.reload(false);
-                  setAlert('Currency Updated', 'success');
                 }}
               >
                 {currencies.map((currency) => (
