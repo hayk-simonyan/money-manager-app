@@ -14,6 +14,10 @@ import {
   IonSelectOption,
   IonDatetime,
   IonContent,
+  IonModal,
+  IonIcon,
+  IonButton,
+  IonList,
 } from '@ionic/react';
 
 import Header from '../../components/header/header';
@@ -65,6 +69,9 @@ const NewRecordPage: React.FC<Props> = ({
   const amountInputRef = useRef<HTMLIonInputElement>(null);
   const noteInputRef = useRef<HTMLIonInputElement>(null);
 
+  const [showModal, setShowModal] = useState(false);
+  const [categoryIcon, setCategoryIcon] = useState('');
+
   const changeRecordTypeHandler = (e: any) => {
     setType(e.detail.value);
     setCategory('');
@@ -112,21 +119,51 @@ const NewRecordPage: React.FC<Props> = ({
     setError('');
   };
 
+  const setCategoryHandler = (e: any, c: any) => {
+    e.stopPropagation();
+    setCategory(c.name);
+    setCategoryIcon(c.icon);
+    setShowModal(false);
+  };
+
   const expenseCategoriesSelectOptions = categories.map((c: any) => {
     if (c.type === 'expences') {
       return (
-        <IonSelectOption key={c._id} value={c.name}>
-          {c.name}
-        </IonSelectOption>
+        <IonCol size='6'>
+          <IonItem
+            // lines='none'
+            key={c._id}
+            button
+            onClick={(e) => setCategoryHandler(e, c)}
+          >
+            <IonLabel>
+              <IonIcon
+                icon={`${require(`../../assets/ionicons/${c.icon}.svg`)}`}
+              />{' '}
+              {c.name}
+            </IonLabel>
+          </IonItem>
+        </IonCol>
       );
     }
   });
   const incomeCategoriesSelectOptions = categories.map((c: any) => {
     if (c.type === 'incomes') {
       return (
-        <IonSelectOption key={c._id} value={c.name}>
-          {c.name}
-        </IonSelectOption>
+        <IonItem
+          lines='none'
+          key={c._id}
+          button
+          onClick={(e) => setCategoryHandler(e, c)}
+        >
+          <IonLabel>
+            <IonIcon
+              icon={`${require(`../../assets/ionicons/${c.icon}.svg`)}`}
+            />
+            {'   '}
+            {c.name}
+          </IonLabel>
+        </IonItem>
       );
     }
   });
@@ -174,19 +211,36 @@ const NewRecordPage: React.FC<Props> = ({
                   {accounts && accountSelectOptions}
                 </IonSelect>
               </IonItem>
-              <IonItem>
+              <IonItem lines='full' button onClick={() => setShowModal(true)}>
                 <IonLabel>Category</IonLabel>
-                <IonSelect
-                  value={category}
-                  // cancelText='Cancel'
-                  // okText='Ok'
-                  onIonChange={(e) => setCategory(e.detail.value)}
-                  interface='action-sheet'
-                >
-                  {categories && type === 'expences'
-                    ? expenseCategoriesSelectOptions
-                    : incomeCategoriesSelectOptions}
-                </IonSelect>
+                <IonLabel style={{ textAlign: 'right' }}>{category}</IonLabel>
+                {categoryIcon && (
+                  <IonIcon
+                    slot='end'
+                    icon={`${require(`../../assets/ionicons/${categoryIcon}.svg`)}`}
+                  />
+                )}
+                <IonModal isOpen={showModal} cssClass='my-custom-class'>
+                  <IonContent>
+                    <IonList>
+                      <IonGrid>
+                        <IonRow>
+                          {categories && type === 'expences'
+                            ? expenseCategoriesSelectOptions
+                            : incomeCategoriesSelectOptions}
+                        </IonRow>
+                      </IonGrid>
+                    </IonList>
+                  </IonContent>
+                  <IonButton
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowModal(false);
+                    }}
+                  >
+                    Close
+                  </IonButton>
+                </IonModal>
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Amount</IonLabel>
