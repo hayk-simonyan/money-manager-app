@@ -130,12 +130,7 @@ const NewRecordPage: React.FC<Props> = ({
     if (c.type === 'expences') {
       return (
         <IonCol size='6'>
-          <IonItem
-            // lines='none'
-            key={c._id}
-            button
-            onClick={(e) => setCategoryHandler(e, c)}
-          >
+          <IonItem key={c._id} button onClick={(e) => setCategoryHandler(e, c)}>
             <IonLabel>
               <IonIcon
                 icon={`${require(`../../assets/ionicons/${c.icon}.svg`)}`}
@@ -150,20 +145,16 @@ const NewRecordPage: React.FC<Props> = ({
   const incomeCategoriesSelectOptions = categories.map((c: any) => {
     if (c.type === 'incomes') {
       return (
-        <IonItem
-          lines='none'
-          key={c._id}
-          button
-          onClick={(e) => setCategoryHandler(e, c)}
-        >
-          <IonLabel>
-            <IonIcon
-              icon={`${require(`../../assets/ionicons/${c.icon}.svg`)}`}
-            />
-            {'   '}
-            {c.name}
-          </IonLabel>
-        </IonItem>
+        <IonCol size='6'>
+          <IonItem key={c._id} button onClick={(e) => setCategoryHandler(e, c)}>
+            <IonLabel>
+              <IonIcon
+                icon={`${require(`../../assets/ionicons/${c.icon}.svg`)}`}
+              />{' '}
+              {c.name}
+            </IonLabel>
+          </IonItem>
+        </IonCol>
       );
     }
   });
