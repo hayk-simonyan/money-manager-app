@@ -26,6 +26,7 @@ import SubmitButton from '../../components/submit-button/submit-button';
 import { connect } from 'react-redux';
 import { postRecord } from '../../redux/records/record.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
+import { caretDownOutline } from 'ionicons/icons';
 
 interface Props {
   postRecord: (
@@ -110,6 +111,7 @@ const NewRecordPage: React.FC<Props> = ({
     setType('expences');
     setAccount('');
     setCategory('');
+    setCategoryIcon('');
     setDate(myDate);
     amountInputRef.current!.value = null;
     noteInputRef.current!.value = null;
@@ -134,7 +136,8 @@ const NewRecordPage: React.FC<Props> = ({
             <IonLabel>
               <IonIcon
                 icon={`${require(`../../assets/ionicons/${c.icon}.svg`)}`}
-              />{' '}
+                style={{ paddingRight: '0.7em' }}
+              />
               {c.name}
             </IonLabel>
           </IonItem>
@@ -150,7 +153,8 @@ const NewRecordPage: React.FC<Props> = ({
             <IonLabel>
               <IonIcon
                 icon={`${require(`../../assets/ionicons/${c.icon}.svg`)}`}
-              />{' '}
+                style={{ paddingRight: '0.7em' }}
+              />
               {c.name}
             </IonLabel>
           </IonItem>
@@ -205,12 +209,24 @@ const NewRecordPage: React.FC<Props> = ({
               <IonItem lines='full' button onClick={() => setShowModal(true)}>
                 <IonLabel>Category</IonLabel>
                 <IonLabel style={{ textAlign: 'right' }}>{category}</IonLabel>
-                {categoryIcon && (
+                {categoryIcon ? (
                   <IonIcon
                     slot='end'
                     icon={`${require(`../../assets/ionicons/${categoryIcon}.svg`)}`}
                   />
+                ) : (
+                  <IonIcon
+                    style={{
+                      opacity: '0.6',
+                      width: '0.75em',
+                      marginRight: '0.1em',
+                    }}
+                    size='small'
+                    slot='end'
+                    icon={caretDownOutline}
+                  />
                 )}
+
                 <IonModal isOpen={showModal} cssClass='my-custom-class'>
                   <IonContent>
                     <IonList>
@@ -228,6 +244,7 @@ const NewRecordPage: React.FC<Props> = ({
                       e.stopPropagation();
                       setShowModal(false);
                     }}
+                    style={{ margin: '1em' }}
                   >
                     Close
                   </IonButton>
