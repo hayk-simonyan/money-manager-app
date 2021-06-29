@@ -19,6 +19,7 @@ import {
   IonButton,
   IonList,
 } from '@ionic/react';
+import { caretDownOutline } from 'ionicons/icons';
 
 import Header from '../../components/header/header';
 import SubmitButton from '../../components/submit-button/submit-button';
@@ -26,7 +27,6 @@ import SubmitButton from '../../components/submit-button/submit-button';
 import { connect } from 'react-redux';
 import { postRecord } from '../../redux/records/record.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
-import { caretDownOutline } from 'ionicons/icons';
 
 interface Props {
   postRecord: (
