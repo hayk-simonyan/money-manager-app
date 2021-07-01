@@ -64,7 +64,9 @@ const NewRecordPage: React.FC<Props> = ({
   const myDate: String = new Date().toISOString();
 
   const [type, setType] = useState<string>('expences');
-  const [account, setAccount] = useState<string>('');
+  const [account, setAccount] = useState<string>(
+    accounts[0] ? accounts[0].name : ''
+  );
   const [category, setCategory] = useState<string>('');
   const [date, setDate] = useState<any>(myDate);
   const amountInputRef = useRef<HTMLIonInputElement>(null);
@@ -110,7 +112,7 @@ const NewRecordPage: React.FC<Props> = ({
     history.push('/');
 
     setType('expences');
-    setAccount('');
+    // setAccount('');
     setCategory('');
     setCategoryIcon('');
     setDate(myDate);
