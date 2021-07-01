@@ -129,6 +129,7 @@ const NewRecordPage: React.FC<Props> = ({
     setCategory(c.name);
     setCategoryIcon(c.icon);
     setShowModal(false);
+    setTimeout(() => amountInputRef.current?.setFocus(), 0);
   };
 
   const expenseCategoriesSelectOptions = categories.map((c: any) => {
