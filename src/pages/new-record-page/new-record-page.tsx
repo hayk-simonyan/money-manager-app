@@ -76,6 +76,7 @@ const NewRecordPage: React.FC<Props> = ({
   const changeRecordTypeHandler = (e: any) => {
     setType(e.detail.value);
     setCategory('');
+    setCategoryIcon('');
   };
 
   const addRecordHandler = () => {

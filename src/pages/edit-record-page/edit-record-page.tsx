@@ -58,7 +58,7 @@ const EditRecordPage: React.FC<Props> = ({
   const findRecord: any = location.state;
   const currentRecord = { ...findRecord };
 
-  const [error, setError] = useState<string>();
+  const [error, setError] = useState<string>('');
   const clearError = () => {
     setError('');
   };
@@ -68,7 +68,7 @@ const EditRecordPage: React.FC<Props> = ({
     currentRecord.account ? currentRecord.account.name : null
   );
   const [category, setCategory] = useState<string>(
-    currentRecord.category ? currentRecord.category.name : ''
+    currentRecord.account ? currentRecord.category.name : ''
   );
   const [date, setDate] = useState<string>(currentRecord.date);
   const amountInputRef = useRef<HTMLIonInputElement>(currentRecord.amount);
@@ -84,9 +84,8 @@ const EditRecordPage: React.FC<Props> = ({
 
   // update state if location.state is changed
   useEffect(() => {
-    setType(currentRecord.type);
     setAccount(currentRecord.account ? currentRecord.account.name : null);
-    setCategory(currentRecord.category ? currentRecord.category.name : null);
+    setCategory(currentRecord.category ? currentRecord.category.name : '');
     setDate(currentRecord.date);
 
     setAmount(currentRecord.amount);
@@ -98,6 +97,7 @@ const EditRecordPage: React.FC<Props> = ({
   const changeRecordTypeHandler = (e: any) => {
     setType(e.detail.value);
     setCategory('');
+    setCategoryIcon('');
   };
 
   const setCategoryHandler = (e: any, c: any) => {
