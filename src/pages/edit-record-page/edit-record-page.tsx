@@ -16,7 +16,10 @@ import {
   IonIcon,
   IonDatetime,
   IonContent,
+  IonModal,
+  IonList,
 } from '@ionic/react';
+import { caretDownOutline } from 'ionicons/icons';
 
 import Header from '../../components/header/header';
 
@@ -51,11 +54,11 @@ const EditRecordPage: React.FC<Props> = ({
   //@ts-ignore
   const { id } = useParams();
   const location = useLocation();
+  const history = useHistory();
   const findRecord: any = location.state;
   const currentRecord = { ...findRecord };
 
-  const history = useHistory();
-  const [error, setError] = useState<string>();
+  const [error, setError] = useState<string>('');
   const clearError = () => {
     setError('');
   };
@@ -65,29 +68,44 @@ const EditRecordPage: React.FC<Props> = ({
     currentRecord.account ? currentRecord.account.name : null
   );
   const [category, setCategory] = useState<string>(
-    currentRecord.account ? currentRecord.category.name : null
+    currentRecord.account ? currentRecord.category.name : ''
   );
   const [date, setDate] = useState<string>(currentRecord.date);
   const amountInputRef = useRef<HTMLIonInputElement>(currentRecord.amount);
   const noteInputRef = useRef<HTMLIonInputElement>(null);
+
+  const [showModal, setShowModal] = useState(false);
+  const [categoryIcon, setCategoryIcon] = useState(
+    currentRecord.account ? currentRecord.category.icon : ''
+  );
 
   const [amount, setAmount] = useState<number>(currentRecord.amount);
   const [note, setNote] = useState<string>(currentRecord.note);
 
   // update state if location.state is changed
   useEffect(() => {
-    setType(currentRecord.type);
     setAccount(currentRecord.account ? currentRecord.account.name : null);
-    setCategory(currentRecord.account ? currentRecord.category.name : null);
+    setCategory(currentRecord.category ? currentRecord.category.name : '');
     setDate(currentRecord.date);
 
     setAmount(currentRecord.amount);
     setNote(currentRecord.note);
+
+    setCategoryIcon(currentRecord.account ? currentRecord.category.icon : '');
   }, [location.state]);
 
   const changeRecordTypeHandler = (e: any) => {
     setType(e.detail.value);
     setCategory('');
+    setCategoryIcon('');
+  };
+
+  const setCategoryHandler = (e: any, c: any) => {
+    e.stopPropagation();
+    setCategory(c.name);
+    setCategoryIcon(c.icon);
+
+    setShowModal(false);
   };
 
   const updateRecordHandler = () => {
@@ -132,6 +150,41 @@ const EditRecordPage: React.FC<Props> = ({
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
+
+  const expenseCategoriesSelectOptions = categories.map((c: any) => {
+    if (c.type === 'expences') {
+      return (
+        <IonCol size='6'>
+          <IonItem key={c._id} button onClick={(e) => setCategoryHandler(e, c)}>
+            <IonLabel>
+              <IonIcon
+                icon={`${require(`../../assets/ionicons/${c.icon}.svg`)}`}
+                style={{ paddingRight: '0.7em' }}
+              />
+              {c.name}
+            </IonLabel>
+          </IonItem>
+        </IonCol>
+      );
+    }
+  });
+  const incomeCategoriesSelectOptions = categories.map((c: any) => {
+    if (c.type === 'incomes') {
+      return (
+        <IonCol size='6'>
+          <IonItem key={c._id} button onClick={(e) => setCategoryHandler(e, c)}>
+            <IonLabel>
+              <IonIcon
+                icon={`${require(`../../assets/ionicons/${c.icon}.svg`)}`}
+                style={{ paddingRight: '0.7em' }}
+              />
+              {c.name}
+            </IonLabel>
+          </IonItem>
+        </IonCol>
+      );
+    }
+  });
 
   return (
     <IonPage>
@@ -184,33 +237,48 @@ const EditRecordPage: React.FC<Props> = ({
                     ))}
                 </IonSelect>
               </IonItem>
-              <IonItem>
+              <IonItem lines='full' button onClick={() => setShowModal(true)}>
                 <IonLabel>Category</IonLabel>
-                <IonSelect
-                  value={category || null}
-                  cancelText='Cancel'
-                  okText='Ok'
-                  onIonChange={(e) => setCategory(e.detail.value)}
-                  interface='action-sheet'
-                >
-                  {categories &&
-                    categories.map((c: any) => {
-                      if (type === 'expences' && c.type === 'expences') {
-                        return (
-                          <IonSelectOption key={c._id} value={c.name}>
-                            {c.name}
-                          </IonSelectOption>
-                        );
-                      }
-                      if (type === 'incomes' && c.type === 'incomes') {
-                        return (
-                          <IonSelectOption key={c._id} value={c.name}>
-                            {c.name}
-                          </IonSelectOption>
-                        );
-                      }
-                    })}
-                </IonSelect>
+                <IonLabel style={{ textAlign: 'right' }}>{category}</IonLabel>
+                {categoryIcon ? (
+                  <IonIcon
+                    slot='end'
+                    icon={`${require(`../../assets/ionicons/${categoryIcon}.svg`)}`}
+                  />
+                ) : (
+                  <IonIcon
+                    style={{
+                      opacity: '0.6',
+                      width: '0.75em',
+                      marginRight: '0.1em',
+                    }}
+                    size='small'
+                    slot='end'
+                    icon={caretDownOutline}
+                  />
+                )}
+                <IonModal isOpen={showModal} cssClass='my-custom-class'>
+                  <IonContent>
+                    <IonList>
+                      <IonGrid>
+                        <IonRow>
+                          {categories && type === 'expences'
+                            ? expenseCategoriesSelectOptions
+                            : incomeCategoriesSelectOptions}
+                        </IonRow>
+                      </IonGrid>
+                    </IonList>
+                  </IonContent>
+                  <IonButton
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowModal(false);
+                    }}
+                    style={{ margin: '1em' }}
+                  >
+                    Close
+                  </IonButton>
+                </IonModal>
               </IonItem>
               <IonItem>
                 <IonLabel position='floating'>Amount</IonLabel>
