@@ -1,5 +1,5 @@
-import axios from "axios";
-import setAuthToken from "../../utils/setAuthToken";
+import axios from 'axios';
+import setAuthToken from '../../utils/setAuthToken';
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
@@ -12,19 +12,19 @@ import {
   PUT_EMAIL_ERROR,
   PUT_PASSWORD,
   PUT_PASSWORD_ERROR,
-} from "./auth.types";
+} from './auth.types';
 
-import { getAccounts } from "../accounts/account.actions";
-import { getCategories } from "../categories/category.actions";
-import { getRecords } from "../records/record.actions";
-import { setAlert } from "../alerts/alert.actions";
-import config from "../../config";
+import { getAccounts } from '../accounts/account.actions';
+import { getCategories } from '../categories/category.actions';
+import { getRecords } from '../records/record.actions';
+import { setAlert } from '../alerts/alert.actions';
+import config from '../../config';
 
 export const signup =
   (name: string, email: string, password: string) => async (dispatch: any) => {
     const requestConfig = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
@@ -44,11 +44,11 @@ export const signup =
 
       dispatch(loadUser());
 
-      dispatch(setAlert("Welcome to Money Manager", "success"));
+      dispatch(setAlert('Welcome to Money Manager', 'success'));
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
-        errors.forEach((err: any) => dispatch(setAlert(err.msg, "danger")));
+        errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
       }
 
       dispatch({
@@ -61,7 +61,7 @@ export const signin =
   (email: string, password: string) => async (dispatch: any) => {
     const requestConfig = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
@@ -81,11 +81,11 @@ export const signin =
 
       dispatch(loadUser());
 
-      dispatch(setAlert("Welcome Back", "success"));
+      dispatch(setAlert('Welcome Back', 'success'));
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
-        errors.forEach((err: any) => dispatch(setAlert(err.msg, "danger")));
+        errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
       }
 
       dispatch({
@@ -96,7 +96,7 @@ export const signin =
 
 export const logout = () => (dispatch: any) => {
   dispatch({ type: LOGOUT });
-  dispatch(setAlert("Logged You Out", ""));
+  dispatch(setAlert('Logged You Out', ''));
 };
 
 export const loadUser = () => async (dispatch: any) => {
@@ -125,7 +125,7 @@ export const loadUser = () => async (dispatch: any) => {
 export const putEmail = (email: string) => async (dispatch: any) => {
   const requestConfig = {
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   };
 
@@ -143,11 +143,11 @@ export const putEmail = (email: string) => async (dispatch: any) => {
       payload: res.data,
     });
 
-    dispatch(setAlert("Email Updated", ""));
+    dispatch(setAlert('Email Updated', ''));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
-      errors.forEach((err: any) => dispatch(setAlert(err.msg, "danger")));
+      errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
     }
 
     dispatch({
@@ -160,7 +160,7 @@ export const putPassword =
   (oldPassword: string, password: string) => async (dispatch: any) => {
     const requestConfig = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
@@ -178,11 +178,11 @@ export const putPassword =
         payload: res.data,
       });
 
-      dispatch(setAlert("Password Updated", ""));
+      dispatch(setAlert('Password Updated', ''));
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
-        errors.forEach((err: any) => dispatch(setAlert(err.msg, "danger")));
+        errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
       }
 
       dispatch({
