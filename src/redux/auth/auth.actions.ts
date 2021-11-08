@@ -1,5 +1,5 @@
-import axios from 'axios';
-import setAuthToken from '../../utils/setAuthToken';
+import axios from "axios";
+import setAuthToken from "../../utils/setAuthToken";
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
@@ -12,18 +12,19 @@ import {
   PUT_EMAIL_ERROR,
   PUT_PASSWORD,
   PUT_PASSWORD_ERROR,
-} from './auth.types';
+} from "./auth.types";
 
-import { getAccounts } from '../accounts/account.actions';
-import { getCategories } from '../categories/category.actions';
-import { getRecords } from '../records/record.actions';
-import { setAlert } from '../alerts/alert.actions';
+import { getAccounts } from "../accounts/account.actions";
+import { getCategories } from "../categories/category.actions";
+import { getRecords } from "../records/record.actions";
+import { setAlert } from "../alerts/alert.actions";
+import config from "../../config";
 
 export const signup =
   (name: string, email: string, password: string) => async (dispatch: any) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -31,7 +32,7 @@ export const signup =
 
     try {
       const res = await axios.post(
-        'https://moneymanager.digital/users',
+        "https://moneymanager.digital/users",
         body,
         config
       );
@@ -43,11 +44,11 @@ export const signup =
 
       dispatch(loadUser());
 
-      dispatch(setAlert('Welcome to Money Manager', 'success'));
+      dispatch(setAlert("Welcome to Money Manager", "success"));
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
-        errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
+        errors.forEach((err: any) => dispatch(setAlert(err.msg, "danger")));
       }
 
       dispatch({
@@ -58,9 +59,9 @@ export const signup =
 
 export const signin =
   (email: string, password: string) => async (dispatch: any) => {
-    const config = {
+    const requestConfig = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -68,9 +69,9 @@ export const signin =
 
     try {
       const res = await axios.post(
-        'https://moneymanager.digital/auth',
+        `${config.backendUrl}/auth`,
         body,
-        config
+        requestConfig
       );
 
       dispatch({
@@ -80,11 +81,11 @@ export const signin =
 
       dispatch(loadUser());
 
-      dispatch(setAlert('Welcome Back', 'success'));
+      dispatch(setAlert("Welcome Back", "success"));
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
-        errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
+        errors.forEach((err: any) => dispatch(setAlert(err.msg, "danger")));
       }
 
       dispatch({
@@ -95,7 +96,7 @@ export const signin =
 
 export const logout = () => (dispatch: any) => {
   dispatch({ type: LOGOUT });
-  dispatch(setAlert('Logged You Out', ''));
+  dispatch(setAlert("Logged You Out", ""));
 };
 
 export const loadUser = () => async (dispatch: any) => {
@@ -104,7 +105,7 @@ export const loadUser = () => async (dispatch: any) => {
   }
 
   try {
-    const res = await axios.get('https://moneymanager.digital/auth');
+    const res = await axios.get(`${config.backendUrl}/auth`);
 
     dispatch({
       type: USER_LOADED,
@@ -122,9 +123,9 @@ export const loadUser = () => async (dispatch: any) => {
 };
 
 export const putEmail = (email: string) => async (dispatch: any) => {
-  const config = {
+  const requestConfig = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
@@ -132,9 +133,9 @@ export const putEmail = (email: string) => async (dispatch: any) => {
 
   try {
     const res = await axios.put(
-      `https://moneymanager.digital/auth/email`,
+      `${config.backendUrl}/auth/email`,
       body,
-      config
+      requestConfig
     );
 
     dispatch({
@@ -142,11 +143,11 @@ export const putEmail = (email: string) => async (dispatch: any) => {
       payload: res.data,
     });
 
-    dispatch(setAlert('Email Updated', ''));
+    dispatch(setAlert("Email Updated", ""));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
-      errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
+      errors.forEach((err: any) => dispatch(setAlert(err.msg, "danger")));
     }
 
     dispatch({
@@ -157,9 +158,9 @@ export const putEmail = (email: string) => async (dispatch: any) => {
 
 export const putPassword =
   (oldPassword: string, password: string) => async (dispatch: any) => {
-    const config = {
+    const requestConfig = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -167,9 +168,9 @@ export const putPassword =
 
     try {
       const res = await axios.put(
-        `https://moneymanager.digital/auth/password`,
+        `${config.backendUrl}/auth/password`,
         body,
-        config
+        requestConfig
       );
 
       dispatch({
@@ -177,11 +178,11 @@ export const putPassword =
         payload: res.data,
       });
 
-      dispatch(setAlert('Password Updated', ''));
+      dispatch(setAlert("Password Updated", ""));
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
-        errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
+        errors.forEach((err: any) => dispatch(setAlert(err.msg, "danger")));
       }
 
       dispatch({
