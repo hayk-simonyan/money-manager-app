@@ -22,7 +22,7 @@ import config from "../../config";
 
 export const signup =
   (name: string, email: string, password: string) => async (dispatch: any) => {
-    const config = {
+    const requestConfig = {
       headers: {
         "Content-Type": "application/json",
       },
@@ -32,9 +32,9 @@ export const signup =
 
     try {
       const res = await axios.post(
-        "https://moneymanager.digital/users",
+        `${config.backendUrl}/users`,
         body,
-        config
+        requestConfig
       );
 
       dispatch({
