@@ -41,7 +41,7 @@ export const getRecords =
         type: GET_RECORDS,
         payload: res.data,
       });
-    } catch (err: any) {
+    } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
         errors.forEach((err: { msg: string }) =>
@@ -64,7 +64,7 @@ export const getRecord = (id: string) => async (dispatch: any) => {
       type: GET_RECORD,
       payload: res.data.record,
     });
-  } catch (err: any) {
+  } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((err: { msg: string }) =>
@@ -118,7 +118,7 @@ export const postRecord =
 
       dispatch(getRecords());
       dispatch(getAccounts());
-    } catch (err: any) {
+    } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
         errors.forEach((err: { msg: string }) =>
@@ -170,7 +170,7 @@ export const putRecord =
         type: PUT_RECORD,
         payload: res.data,
       });
-    } catch (err: any) {
+    } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
         errors.forEach((err: { msg: string }) =>
@@ -195,7 +195,7 @@ export const deleteRecord = (id: string) => async (dispatch: any) => {
     });
 
     dispatch(getRecords());
-  } catch (err: any) {
+  } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((err: { msg: string }) =>

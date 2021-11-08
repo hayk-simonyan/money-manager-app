@@ -17,7 +17,7 @@ export const getCategories = () => async (dispatch: any) => {
       type: GET_CATEGORIES,
       payload: res.data,
     });
-  } catch (err: any) {
+  } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((err: { msg: string }) =>
@@ -55,7 +55,7 @@ export const postCategory =
       });
 
       dispatch(setAlert('Category Created', ''));
-    } catch (err: any) {
+    } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
         errors.forEach((err: { msg: string }) =>
@@ -94,7 +94,7 @@ export const putCategory =
       });
 
       dispatch(setAlert('Category Updated', ''));
-    } catch (err: any) {
+    } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
         errors.forEach((err: { msg: string }) =>
@@ -117,7 +117,7 @@ export const deleteCategory = (id: string) => async (dispatch: any) => {
       type: DELETE_CATEGORY,
       payload: id,
     });
-  } catch (err: any) {
+  } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((err: { msg: string }) =>

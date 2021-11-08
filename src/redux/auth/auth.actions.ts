@@ -45,7 +45,7 @@ export const signup =
       dispatch(loadUser());
 
       dispatch(setAlert('Welcome to Money Manager', 'success'));
-    } catch (err: any) {
+    } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
         errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
@@ -82,7 +82,7 @@ export const signin =
       dispatch(loadUser());
 
       dispatch(setAlert('Welcome Back', 'success'));
-    } catch (err: any) {
+    } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
         errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
@@ -144,7 +144,7 @@ export const putEmail = (email: string) => async (dispatch: any) => {
     });
 
     dispatch(setAlert('Email Updated', ''));
-  } catch (err: any) {
+  } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
@@ -179,7 +179,7 @@ export const putPassword =
       });
 
       dispatch(setAlert('Password Updated', ''));
-    } catch (err: any) {
+    } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
         errors.forEach((err: any) => dispatch(setAlert(err.msg, 'danger')));
