@@ -18,7 +18,7 @@ export const getAccounts = () => async (dispatch: any) => {
       type: GET_ACCOUNTS,
       payload: res.data,
     });
-  } catch (err) {
+  } catch (err: any) {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((err: { msg: string }) =>
@@ -57,7 +57,7 @@ export const postAccount =
 
       dispatch(setAlert('Account Created', ''));
       dispatch(getAccounts());
-    } catch (err) {
+    } catch (err: any) {
       const errors = err.response.data.errors;
       if (errors) {
         errors.forEach((err: { msg: string }) =>
@@ -97,7 +97,7 @@ export const putAccount =
 
       dispatch(setAlert('Account Updated', ''));
       dispatch(getAccounts());
-    } catch (err) {
+    } catch (err: any) {
       const errors = err.response.data.errors;
       if (errors) {
         errors.forEach((err: { msg: string }) =>
@@ -124,7 +124,7 @@ export const deleteAccount = (id: string) => async (dispatch: any) => {
     dispatch(setAlert('Account Removed', ''));
     dispatch(getRecords());
     dispatch(getAccounts());
-  } catch (err) {
+  } catch (err: any) {
     console.log(err);
     const errors = err.response.data.errors;
     if (errors) {
