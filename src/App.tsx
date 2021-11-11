@@ -54,12 +54,12 @@ const { Network, StatusBar } = Plugins;
 const App: React.FC = () => {
   const [networkState, setNetworkState] = useState<boolean>(true);
 
-  Network.getStatus().then((status) => {
+  Network.getStatus().then(status => {
     setNetworkState(status.connected);
   });
 
   useEffect(() => {
-    Network.addListener('networkStatusChange', (status) => {
+    Network.addListener('networkStatusChange', status => {
       window.location.reload(false);
       setNetworkState(status.connected);
     });
