@@ -83,59 +83,48 @@ const App: React.FC = () => {
       <IonApp>
         <IonReactRouter>
           <Menu />
-          {/* <IonTabs> */}
-          <IonRouterOutlet id='main'>
-            <PrivateRoute exact path='/' component={Homepage} />
+          <IonRouterOutlet id="main">
+            <PrivateRoute exact path="/" component={Homepage} />
 
             <PrivateRoute
               exact
-              path='/accounts/new'
+              path="/accounts/new"
               component={NewAccountPage}
             />
             <PrivateRoute
               exact
-              path='/accounts/:id'
+              path="/accounts/:id"
               component={EditAccountPage}
             />
 
-            <PrivateRoute exact path='/categories' component={CategoriesPage} />
+            <PrivateRoute exact path="/categories" component={CategoriesPage} />
             <PrivateRoute
               exact
-              path='/categories/new'
+              path="/categories/new"
               component={NewCategoryPage}
             />
             <PrivateRoute
               exact
-              path='/categories/:id'
+              path="/categories/:id"
               component={EditCategoryPage}
             />
 
-            <PrivateRoute exact path='/records' component={RecordsPage} />
-            <PrivateRoute exact path='/records/new' component={NewRecordPage} />
+            <PrivateRoute exact path="/records" component={RecordsPage} />
+            <PrivateRoute exact path="/records/new" component={NewRecordPage} />
             <PrivateRoute
               exact
-              path='/records/:id'
+              path="/records/:id"
               component={EditRecordPage}
             />
 
-            <PrivateRoute exact path='/settings' component={SettingsPage} />
+            <PrivateRoute exact path="/settings" component={SettingsPage} />
 
-            <Route exact path='/about' component={AboutPage} />
-            <Route exact path='/signup' component={SignupPage} />
-            <Route exact path='/signin' component={SigninPage} />
-            <Redirect to='/' />
+            <Route exact path="/about" component={AboutPage} />
+            <Route exact path="/signup" component={SignupPage} />
+            <Route exact path="/signin" component={SigninPage} />
+
+            <Redirect to="/" />
           </IonRouterOutlet>
-          {/* <IonTabBar slot='bottom'>
-          <IonTabButton tab='home' href='/home'>
-            <IonIcon icon={homeOutline} />
-            <IonLabel>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab='records' href='/records'>
-            <IonIcon icon={cashOutline} />
-            <IonLabel>Records</IonLabel>
-          </IonTabButton>
-        </IonTabBar> */}
-          {/* </IonTabs> */}
         </IonReactRouter>
         <Alert />
       </IonApp>

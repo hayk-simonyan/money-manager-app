@@ -18,10 +18,11 @@ import { getAccounts } from '../accounts/account.actions';
 import { getCategories } from '../categories/category.actions';
 import { getRecords } from '../records/record.actions';
 import { setAlert } from '../alerts/alert.actions';
+import config from '../../config';
 
 export const signup =
   (name: string, email: string, password: string) => async (dispatch: any) => {
-    const config = {
+    const requestConfig = {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -31,9 +32,9 @@ export const signup =
 
     try {
       const res = await axios.post(
-        'https://moneymanager.digital/users',
+        `${config.backendUrl}/users`,
         body,
-        config
+        requestConfig
       );
 
       dispatch({
@@ -58,7 +59,7 @@ export const signup =
 
 export const signin =
   (email: string, password: string) => async (dispatch: any) => {
-    const config = {
+    const requestConfig = {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -68,9 +69,9 @@ export const signin =
 
     try {
       const res = await axios.post(
-        'https://moneymanager.digital/auth',
+        `${config.backendUrl}/auth`,
         body,
-        config
+        requestConfig
       );
 
       dispatch({
@@ -104,7 +105,7 @@ export const loadUser = () => async (dispatch: any) => {
   }
 
   try {
-    const res = await axios.get('https://moneymanager.digital/auth');
+    const res = await axios.get(`${config.backendUrl}/auth`);
 
     dispatch({
       type: USER_LOADED,
@@ -122,7 +123,7 @@ export const loadUser = () => async (dispatch: any) => {
 };
 
 export const putEmail = (email: string) => async (dispatch: any) => {
-  const config = {
+  const requestConfig = {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -132,9 +133,9 @@ export const putEmail = (email: string) => async (dispatch: any) => {
 
   try {
     const res = await axios.put(
-      `https://moneymanager.digital/auth/email`,
+      `${config.backendUrl}/auth/email`,
       body,
-      config
+      requestConfig
     );
 
     dispatch({
@@ -157,7 +158,7 @@ export const putEmail = (email: string) => async (dispatch: any) => {
 
 export const putPassword =
   (oldPassword: string, password: string) => async (dispatch: any) => {
-    const config = {
+    const requestConfig = {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -167,9 +168,9 @@ export const putPassword =
 
     try {
       const res = await axios.put(
-        `https://moneymanager.digital/auth/password`,
+        `${config.backendUrl}/auth/password`,
         body,
-        config
+        requestConfig
       );
 
       dispatch({

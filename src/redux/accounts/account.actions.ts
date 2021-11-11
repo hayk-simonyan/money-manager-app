@@ -8,10 +8,11 @@ import {
 } from './account.types';
 import { setAlert } from '../alerts/alert.actions';
 import { getRecords } from './../records/record.actions';
+import config from '../../config';
 
 export const getAccounts = () => async (dispatch: any) => {
   try {
-    const res = await axios.get(`https://moneymanager.digital/accounts`);
+    const res = await axios.get(`${config.backendUrl}/accounts`);
 
     dispatch({
       type: GET_ACCOUNTS,
@@ -34,7 +35,7 @@ export const getAccounts = () => async (dispatch: any) => {
 
 export const postAccount =
   (type: string, name: string, total: string) => async (dispatch: any) => {
-    const config = {
+    const requestConfig = {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -44,9 +45,9 @@ export const postAccount =
 
     try {
       const res = await axios.post(
-        `https://moneymanager.digital/accounts`,
+        `${config.backendUrl}/accounts`,
         body,
-        config
+        requestConfig
       );
 
       dispatch({
@@ -74,7 +75,7 @@ export const postAccount =
 export const putAccount =
   (id: string, type: string, name: string, total: string) =>
   async (dispatch: any) => {
-    const config = {
+    const requestConfig = {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -84,9 +85,9 @@ export const putAccount =
 
     try {
       const res = await axios.put(
-        `https://moneymanager.digital/accounts/${id}`,
+        `${config.backendUrl}/accounts/${id}`,
         body,
-        config
+        requestConfig
       );
 
       dispatch({
@@ -113,7 +114,7 @@ export const putAccount =
 
 export const deleteAccount = (id: string) => async (dispatch: any) => {
   try {
-    await axios.delete(`https://moneymanager.digital/accounts/${id}`);
+    await axios.delete(`${config.backendUrl}/accounts/${id}`);
 
     dispatch({
       type: DELETE_ACCOUNT,

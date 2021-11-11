@@ -10,54 +10,55 @@ import {
 } from './record.types';
 import { setAlert } from '../alerts/alert.actions';
 import { getAccounts } from './../accounts/account.actions';
+import config from '../../config';
 
-export const getRecords = (y: string = '', m: string = '') => async (
-  dispatch: any
-) => {
-  try {
-    let gte;
-    let lt;
+export const getRecords =
+  (y: string = '', m: string = '') =>
+  async (dispatch: any) => {
+    try {
+      let gte;
+      let lt;
 
-    // build default query if no month specified
-    if (y === '' || m === '') {
-      const date = new Date();
-      const month = date.getMonth();
-      const year = date.getFullYear();
+      // build default query if no month specified
+      if (y === '' || m === '') {
+        const date = new Date();
+        const month = date.getMonth();
+        const year = date.getFullYear();
 
-      gte = new Date(year, month, 1);
-      lt = new Date(year, month + 1, 1);
-    } else {
-      gte = new Date(parseInt(y), parseInt(m), 1);
-      lt = new Date(parseInt(y), parseInt(m) + 1, 1);
+        gte = new Date(year, month, 1);
+        lt = new Date(year, month + 1, 1);
+      } else {
+        gte = new Date(parseInt(y), parseInt(m), 1);
+        lt = new Date(parseInt(y), parseInt(m) + 1, 1);
+      }
+
+      let query = `?date[gte]=${gte}&date[lt]=${lt}`;
+      // query = `?date[gte]=${year}-${thisMonth}-01T00:00:00.000Z&date[lt]=${year}-${nextMonth}-01T00:00:00.000Z`;
+
+      const res = await axios.get(`${config.backendUrl}/records${query}`);
+
+      dispatch({
+        type: GET_RECORDS,
+        payload: res.data,
+      });
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((err: { msg: string }) =>
+          dispatch(setAlert(err.msg, 'danger'))
+        );
+      }
+
+      dispatch({
+        type: RECORDS_ERROR,
+        payload: { msg: err.statusText, status: err.status },
+      });
     }
-
-    let query = `?date[gte]=${gte}&date[lt]=${lt}`;
-    // query = `?date[gte]=${year}-${thisMonth}-01T00:00:00.000Z&date[lt]=${year}-${nextMonth}-01T00:00:00.000Z`;
-
-    const res = await axios.get(`https://moneymanager.digital/records${query}`);
-
-    dispatch({
-      type: GET_RECORDS,
-      payload: res.data,
-    });
-  } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach((err: { msg: string }) =>
-        dispatch(setAlert(err.msg, 'danger'))
-      );
-    }
-
-    dispatch({
-      type: RECORDS_ERROR,
-      payload: { msg: err.statusText, status: err.status },
-    });
-  }
-};
+  };
 
 export const getRecord = (id: string) => async (dispatch: any) => {
   try {
-    const res = await axios.get(`https://moneymanager.digital/records/${id}`);
+    const res = await axios.get(`${config.backendUrl}/records/${id}`);
 
     dispatch({
       type: GET_RECORD,
@@ -78,111 +79,115 @@ export const getRecord = (id: string) => async (dispatch: any) => {
   }
 };
 
-export const postRecord = (
-  type: string,
-  account: string,
-  category: string,
-  date: Date,
-  amount: number,
-  note: string
-) => async (dispatch: any) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+export const postRecord =
+  (
+    type: string,
+    account: string,
+    category: string,
+    date: Date,
+    amount: number,
+    note: string
+  ) =>
+  async (dispatch: any) => {
+    const requestConfig = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  const body = {
-    type: type,
-    accountId: account,
-    categoryId: category,
-    date: date,
-    amount: amount,
-    note: note,
-  };
+    const body = {
+      type: type,
+      accountId: account,
+      categoryId: category,
+      date: date,
+      amount: amount,
+      note: note,
+    };
 
-  try {
-    const res = await axios.post(
-      `https://moneymanager.digital/records`,
-      body,
-      config
-    );
-
-    dispatch({
-      type: POST_RECORD,
-      payload: res.data,
-    });
-
-    dispatch(getRecords());
-    dispatch(getAccounts());
-  } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach((err: { msg: string }) =>
-        dispatch(setAlert(err.msg, 'danger'))
+    try {
+      const res = await axios.post(
+        `${config.backendUrl}/records`,
+        body,
+        requestConfig
       );
+
+      dispatch({
+        type: POST_RECORD,
+        payload: res.data,
+      });
+
+      dispatch(getRecords());
+      dispatch(getAccounts());
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((err: { msg: string }) =>
+          dispatch(setAlert(err.msg, 'danger'))
+        );
+      }
+
+      dispatch({
+        type: RECORDS_ERROR,
+        payload: { msg: err.statusText, status: err.status },
+      });
     }
-
-    dispatch({
-      type: RECORDS_ERROR,
-      payload: { msg: err.statusText, status: err.status },
-    });
-  }
-};
-
-export const putRecord = (
-  id: string,
-  type: string,
-  account: string,
-  category: string,
-  date: Date,
-  amount: number,
-  note: string
-) => async (dispatch: any) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
   };
 
-  const body = {
-    type: type,
-    accountId: account,
-    categoryId: category,
-    date: date,
-    amount: amount,
-    note: note,
-  };
+export const putRecord =
+  (
+    id: string,
+    type: string,
+    account: string,
+    category: string,
+    date: Date,
+    amount: number,
+    note: string
+  ) =>
+  async (dispatch: any) => {
+    const requestConfig = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  try {
-    const res = await axios.put(
-      `https://moneymanager.digital/records/${id}`,
-      body,
-      config
-    );
+    const body = {
+      type: type,
+      accountId: account,
+      categoryId: category,
+      date: date,
+      amount: amount,
+      note: note,
+    };
 
-    return dispatch({
-      type: PUT_RECORD,
-      payload: res.data,
-    });
-  } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach((err: { msg: string }) =>
-        dispatch(setAlert(err.msg, 'danger'))
+    try {
+      const res = await axios.put(
+        `${config.backendUrl}/records/${id}`,
+        body,
+        requestConfig
       );
-    }
 
-    dispatch({
-      type: RECORDS_ERROR,
-      payload: { msg: err.statusText, status: err.status },
-    });
-  }
-};
+      return dispatch({
+        type: PUT_RECORD,
+        payload: res.data,
+      });
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((err: { msg: string }) =>
+          dispatch(setAlert(err.msg, 'danger'))
+        );
+      }
+
+      dispatch({
+        type: RECORDS_ERROR,
+        payload: { msg: err.statusText, status: err.status },
+      });
+    }
+  };
 
 export const deleteRecord = (id: string) => async (dispatch: any) => {
   try {
-    await axios.delete(`https://moneymanager.digital/records/${id}`);
+    await axios.delete(`${config.backendUrl}/records/${id}`);
 
     dispatch({
       type: DELETE_RECORD,

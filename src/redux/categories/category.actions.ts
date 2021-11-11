@@ -7,10 +7,11 @@ import {
   CATEGORIES_ERROR,
 } from './category.types';
 import { setAlert } from '../alerts/alert.actions';
+import config from '../../config';
 
 export const getCategories = () => async (dispatch: any) => {
   try {
-    const res = await axios.get(`https://moneymanager.digital/categories`);
+    const res = await axios.get(`${config.backendUrl}/categories`);
 
     dispatch({
       type: GET_CATEGORIES,
@@ -33,7 +34,7 @@ export const getCategories = () => async (dispatch: any) => {
 
 export const postCategory =
   (type: string, icon: string, name: string) => async (dispatch: any) => {
-    const config = {
+    const requestConfig = {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -43,9 +44,9 @@ export const postCategory =
 
     try {
       const res = await axios.post(
-        `https://moneymanager.digital/categories`,
+        `${config.backendUrl}/categories`,
         body,
-        config
+        requestConfig
       );
 
       dispatch({
@@ -72,7 +73,7 @@ export const postCategory =
 export const putCategory =
   (id: string, type: string, icon: string, name: string) =>
   async (dispatch: any) => {
-    const config = {
+    const requestConfig = {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -82,9 +83,9 @@ export const putCategory =
 
     try {
       const res = await axios.put(
-        `https://moneymanager.digital/categories/${id}`,
+        `${config.backendUrl}/categories/${id}`,
         body,
-        config
+        requestConfig
       );
 
       dispatch({
@@ -110,7 +111,7 @@ export const putCategory =
 
 export const deleteCategory = (id: string) => async (dispatch: any) => {
   try {
-    await axios.delete(`https://moneymanager.digital/categories/${id}`);
+    await axios.delete(`${config.backendUrl}/categories/${id}`);
 
     dispatch({
       type: DELETE_CATEGORY,
