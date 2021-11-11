@@ -122,6 +122,7 @@ const App: React.FC = () => {
             <Route exact path="/about" component={AboutPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/signin" component={SigninPage} />
+
             <Redirect to="/" />
           </IonRouterOutlet>
         </IonReactRouter>
