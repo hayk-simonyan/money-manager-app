@@ -36,7 +36,8 @@ interface Props {
     category: string,
     date: Date,
     amount: number,
-    note: string
+    note: string,
+    prevAccount?: string
   ) => void;
   deleteRecord: (id: string) => void;
   setAlert: (msg: string, alertType: string) => void;
@@ -127,6 +128,8 @@ const EditRecordPage: React.FC<Props> = ({
     const c = categories.find((c: any) => c.name === category);
     const categoryId = c._id;
 
+    const prevAccountId = currentRecord.account?._id || '';
+
     putRecord(
       id,
       type,
@@ -134,7 +137,8 @@ const EditRecordPage: React.FC<Props> = ({
       categoryId,
       new Date(date),
       amount,
-      note!.toString()
+      note!.toString(),
+      prevAccountId
     );
     setAlert('Record Updated', '');
     history.push('/');
@@ -329,8 +333,12 @@ const mapDispatchToProps = (dispatch: any) => ({
     category: string,
     date: Date,
     amount: number,
-    note: string
-  ) => dispatch(putRecord(id, type, account, category, date, amount, note)),
+    note: string,
+    prevAccount?: string
+  ) =>
+    dispatch(
+      putRecord(id, type, account, category, date, amount, note, prevAccount)
+    ),
   deleteRecord: (id: string) => dispatch(deleteRecord(id)),
   setAlert: (msg: string, alertType: string) =>
     dispatch(setAlert(msg, alertType)),
