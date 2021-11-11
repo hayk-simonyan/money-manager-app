@@ -1,6 +1,9 @@
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const config = {
-  // backendUrl: 'https://moneymanager.digital',
-  backendUrl: 'https://localhost:5000',
+  backendUrl: isDevelopment
+    ? 'https://localhost:5000'
+    : 'https://moneymanager.digital',
 };
 
 export default config;
