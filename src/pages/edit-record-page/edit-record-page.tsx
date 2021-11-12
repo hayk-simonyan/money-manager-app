@@ -36,7 +36,8 @@ interface Props {
     category: string,
     date: Date,
     amount: number,
-    note: string
+    note: string,
+    prevAccount?: string
   ) => void;
   deleteRecord: (id: string) => void;
   setAlert: (msg: string, alertType: string) => void;
@@ -109,7 +110,7 @@ const EditRecordPage: React.FC<Props> = ({
   };
 
   const updateRecordHandler = () => {
-    const amount = amountInputRef.current!.value;
+    const amount: number = amountInputRef.current!.value as number;
     const note = noteInputRef.current!.value;
 
     if (!type || !account || !category || !date || !amount) {
@@ -127,14 +128,17 @@ const EditRecordPage: React.FC<Props> = ({
     const c = categories.find((c: any) => c.name === category);
     const categoryId = c._id;
 
+    const prevAccountId = currentRecord.account?._id || '';
+
     putRecord(
       id,
       type,
       accountId,
       categoryId,
       new Date(date),
-      parseInt(amount.toString()),
-      note!.toString()
+      amount,
+      note!.toString(),
+      prevAccountId
     );
     setAlert('Record Updated', '');
     history.push('/');
@@ -154,7 +158,7 @@ const EditRecordPage: React.FC<Props> = ({
   const expenseCategoriesSelectOptions = categories.map((c: any) => {
     if (c.type === 'expences') {
       return (
-        <IonCol size='6'>
+        <IonCol size="6">
           <IonItem key={c._id} button onClick={(e) => setCategoryHandler(e, c)}>
             <IonLabel>
               <IonIcon
@@ -171,7 +175,7 @@ const EditRecordPage: React.FC<Props> = ({
   const incomeCategoriesSelectOptions = categories.map((c: any) => {
     if (c.type === 'incomes') {
       return (
-        <IonCol size='6'>
+        <IonCol size="6">
           <IonItem key={c._id} button onClick={(e) => setCategoryHandler(e, c)}>
             <IonLabel>
               <IonIcon
@@ -190,7 +194,7 @@ const EditRecordPage: React.FC<Props> = ({
     <IonPage>
       <IonAlert
         isOpen={isOpen}
-        message='Are you sure?'
+        message="Are you sure?"
         buttons={[
           { text: 'No', handler: toggleModal },
           { text: 'Yes', handler: deleteRecordHandler },
@@ -201,7 +205,7 @@ const EditRecordPage: React.FC<Props> = ({
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <Header title='Edit Record' menu={false} />
+      <Header title="Edit Record" menu={false} />
       <IonContent>
         <IonGrid>
           <IonRow>
@@ -209,17 +213,17 @@ const EditRecordPage: React.FC<Props> = ({
               <IonDatetime
                 value={date}
                 onIonChange={(e) => setDate(e.detail.value!)}
-                display-timezone='utc'
+                display-timezone="utc"
               ></IonDatetime>
               <IonItem>
                 <IonLabel>Type</IonLabel>
                 <IonSelect
                   value={type}
                   onIonChange={changeRecordTypeHandler}
-                  interface='action-sheet'
+                  interface="action-sheet"
                 >
-                  <IonSelectOption value='expences'>Expences</IonSelectOption>
-                  <IonSelectOption value='incomes'>Incomes</IonSelectOption>
+                  <IonSelectOption value="expences">Expences</IonSelectOption>
+                  <IonSelectOption value="incomes">Incomes</IonSelectOption>
                 </IonSelect>
               </IonItem>
               <IonItem>
@@ -227,7 +231,7 @@ const EditRecordPage: React.FC<Props> = ({
                 <IonSelect
                   value={account || null}
                   onIonChange={(e) => setAccount(e.detail.value)}
-                  interface='action-sheet'
+                  interface="action-sheet"
                 >
                   {accounts &&
                     accounts.map((a: any) => (
@@ -237,12 +241,12 @@ const EditRecordPage: React.FC<Props> = ({
                     ))}
                 </IonSelect>
               </IonItem>
-              <IonItem lines='full' button onClick={() => setShowModal(true)}>
+              <IonItem lines="full" button onClick={() => setShowModal(true)}>
                 <IonLabel>Category</IonLabel>
                 <IonLabel style={{ textAlign: 'right' }}>{category}</IonLabel>
                 {categoryIcon ? (
                   <IonIcon
-                    slot='end'
+                    slot="end"
                     icon={`${require(`../../assets/ionicons/${categoryIcon}.svg`)}`}
                   />
                 ) : (
@@ -252,12 +256,12 @@ const EditRecordPage: React.FC<Props> = ({
                       width: '0.75em',
                       marginRight: '0.1em',
                     }}
-                    size='small'
-                    slot='end'
+                    size="small"
+                    slot="end"
                     icon={caretDownOutline}
                   />
                 )}
-                <IonModal isOpen={showModal} cssClass='my-custom-class'>
+                <IonModal isOpen={showModal} cssClass="my-custom-class">
                   <IonContent>
                     <IonList>
                       <IonGrid>
@@ -281,37 +285,37 @@ const EditRecordPage: React.FC<Props> = ({
                 </IonModal>
               </IonItem>
               <IonItem>
-                <IonLabel position='floating'>Amount</IonLabel>
+                <IonLabel position="floating">Amount</IonLabel>
                 <IonInput
                   ref={amountInputRef}
                   value={amount}
-                  type='number'
-                  autocomplete='off'
-                  autocorrect='off'
+                  type="number"
+                  autocomplete="off"
+                  autocorrect="off"
                   spellcheck={false}
                 ></IonInput>
               </IonItem>
               <IonItem>
-                <IonLabel position='floating'>Note</IonLabel>
+                <IonLabel position="floating">Note</IonLabel>
                 <IonInput
                   ref={noteInputRef}
                   value={note}
-                  autocomplete='off'
-                  autocorrect='off'
+                  autocomplete="off"
+                  autocorrect="off"
                   spellcheck={false}
                 ></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol size='2' offset='2'>
-              <IonButton onClick={toggleModal} color='tertiary'>
-                <IonIcon icon={trashOutline} slot='icon-only' />
+            <IonCol size="2" offset="2">
+              <IonButton onClick={toggleModal} color="tertiary">
+                <IonIcon icon={trashOutline} slot="icon-only" />
               </IonButton>
             </IonCol>
-            <IonCol size='4' offset='4'>
-              <IonButton onClick={updateRecordHandler} color='primary'>
-                <IonIcon icon={checkmarkOutline} slot='icon-only' />
+            <IonCol size="4" offset="4">
+              <IonButton onClick={updateRecordHandler} color="primary">
+                <IonIcon icon={checkmarkOutline} slot="icon-only" />
               </IonButton>
             </IonCol>
           </IonRow>
@@ -329,8 +333,12 @@ const mapDispatchToProps = (dispatch: any) => ({
     category: string,
     date: Date,
     amount: number,
-    note: string
-  ) => dispatch(putRecord(id, type, account, category, date, amount, note)),
+    note: string,
+    prevAccount?: string
+  ) =>
+    dispatch(
+      putRecord(id, type, account, category, date, amount, note, prevAccount)
+    ),
   deleteRecord: (id: string) => dispatch(deleteRecord(id)),
   setAlert: (msg: string, alertType: string) =>
     dispatch(setAlert(msg, alertType)),

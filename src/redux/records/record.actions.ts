@@ -141,7 +141,8 @@ export const putRecord =
     category: string,
     date: Date,
     amount: number,
-    note: string
+    note: string,
+    prevAccount?: string
   ) =>
   async (dispatch: any) => {
     const requestConfig = {
@@ -157,6 +158,7 @@ export const putRecord =
       date: date,
       amount: amount,
       note: note,
+      prevAccountId: prevAccount,
     };
 
     try {
