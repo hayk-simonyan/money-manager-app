@@ -39,12 +39,12 @@ const Menu: React.FC<Props> = ({
   const [showAbout, setShowAbout] = useState(false);
 
   return (
-    <IonMenu contentId='main' side='start' menuId='id'>
+    <IonMenu contentId="main" side="start" menuId="id">
       <IonAlert
         isOpen={showAbout}
         onDidDismiss={() => setShowAbout(false)}
         header={'Money Manager'}
-        subHeader={'Version 1.1.0'}
+        subHeader={'Version 1.2'}
         message={`
           <p>Uncomplicated Money Manager</p>
           <p>Expense and Income Tracker</p>
@@ -57,8 +57,8 @@ const Menu: React.FC<Props> = ({
       />
 
       <IonHeader>
-        <IonToolbar color='primary'>
-          <IonItem routerLink='/' color='primary' lines='none' button>
+        <IonToolbar color="primary">
+          <IonItem routerLink="/" color="primary" lines="none" button>
             <IonTitle>Money Manager</IonTitle>
           </IonItem>
         </IonToolbar>
@@ -66,41 +66,41 @@ const Menu: React.FC<Props> = ({
       <IonContent>
         <IonList>
           <IonMenuToggle>
-            <IonItem lines='full' button routerLink='/' routerDirection='none'>
-              <IonIcon slot='start' icon={walletOutline} />
+            <IonItem lines="full" button routerLink="/" routerDirection="none">
+              <IonIcon slot="start" icon={walletOutline} />
               <IonLabel>Home</IonLabel>
             </IonItem>
           </IonMenuToggle>
           <IonMenuToggle>
             <IonItem
-              lines='full'
+              lines="full"
               button
-              routerLink='/records'
-              routerDirection='none'
+              routerLink="/records"
+              routerDirection="none"
             >
-              <IonIcon slot='start' icon={listOutline} />
+              <IonIcon slot="start" icon={listOutline} />
               <IonLabel>Records</IonLabel>
             </IonItem>
           </IonMenuToggle>
           <IonMenuToggle>
             <IonItem
-              lines='full'
+              lines="full"
               button
-              routerLink='/categories'
-              routerDirection='none'
+              routerLink="/categories"
+              routerDirection="none"
             >
-              <IonIcon slot='start' icon={appsOutline} />
+              <IonIcon slot="start" icon={appsOutline} />
               <IonLabel>Categories</IonLabel>
             </IonItem>
           </IonMenuToggle>
           <IonMenuToggle>
             <IonItem
-              lines='full'
+              lines="full"
               button
-              routerLink='/settings'
-              routerDirection='none'
+              routerLink="/settings"
+              routerDirection="none"
             >
-              <IonIcon slot='start' icon={settingsOutline} />
+              <IonIcon slot="start" icon={settingsOutline} />
               <IonLabel>Settings</IonLabel>
             </IonItem>
           </IonMenuToggle>
@@ -117,13 +117,13 @@ const Menu: React.FC<Props> = ({
           </IonMenuToggle> */}
           <IonMenuToggle>
             <IonItem
-              lines='full'
+              lines="full"
               button
               onClick={(e) => setShowAbout(true)}
               // routerLink='/about'
-              routerDirection='none'
+              routerDirection="none"
             >
-              <IonIcon slot='start' icon={informationCircleOutline} />
+              <IonIcon slot="start" icon={informationCircleOutline} />
               <IonLabel>About</IonLabel>
             </IonItem>
           </IonMenuToggle>
@@ -131,12 +131,12 @@ const Menu: React.FC<Props> = ({
             <IonMenuToggle>
               <IonItem
                 onClick={logout}
-                lines='full'
+                lines="full"
                 button
-                routerLink='/signin'
-                routerDirection='none'
+                routerLink="/signin"
+                routerDirection="none"
               >
-                <IonIcon slot='start' icon={logOutOutline} />
+                <IonIcon slot="start" icon={logOutOutline} />
                 <IonLabel>Logout</IonLabel>
               </IonItem>
             </IonMenuToggle>
