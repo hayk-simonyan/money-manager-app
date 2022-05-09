@@ -136,7 +136,7 @@ const NewRecordPage: React.FC<Props> = ({
   const expenseCategoriesSelectOptions = categories.map((c: any) => {
     if (c.type === 'expences') {
       return (
-        <IonCol key={c._id} size="6">
+        <IonCol key={c._id} size='6'>
           <IonItem button onClick={(e) => setCategoryHandler(e, c)}>
             <IonLabel>
               <IonIcon
@@ -153,7 +153,7 @@ const NewRecordPage: React.FC<Props> = ({
   const incomeCategoriesSelectOptions = categories.map((c: any) => {
     if (c.type === 'incomes') {
       return (
-        <IonCol key={c._id} size="6">
+        <IonCol key={c._id} size='6'>
           <IonItem button onClick={(e) => setCategoryHandler(e, c)}>
             <IonLabel>
               <IonIcon
@@ -180,7 +180,7 @@ const NewRecordPage: React.FC<Props> = ({
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <Header title="New Record" menu={false} />
+      <Header title='New Record' menu={false} />
       <IonContent>
         <IonGrid>
           <IonRow>
@@ -188,17 +188,17 @@ const NewRecordPage: React.FC<Props> = ({
               <IonDatetime
                 value={date}
                 onIonChange={(e) => setDate(e.detail.value!)}
-                display-timezone="utc"
+                display-timezone='utc'
               ></IonDatetime>
               <IonItem>
                 <IonLabel>Type</IonLabel>
                 <IonSelect
                   value={type}
                   onIonChange={changeRecordTypeHandler}
-                  interface="action-sheet"
+                  interface='action-sheet'
                 >
-                  <IonSelectOption value="expences">Expences</IonSelectOption>
-                  <IonSelectOption value="incomes">Income</IonSelectOption>
+                  <IonSelectOption value='expences'>Expences</IonSelectOption>
+                  <IonSelectOption value='incomes'>Income</IonSelectOption>
                 </IonSelect>
               </IonItem>
               <IonItem>
@@ -206,17 +206,17 @@ const NewRecordPage: React.FC<Props> = ({
                 <IonSelect
                   value={account}
                   onIonChange={(e) => setAccount(e.detail.value)}
-                  interface="action-sheet"
+                  interface='action-sheet'
                 >
                   {accounts && accountSelectOptions}
                 </IonSelect>
               </IonItem>
-              <IonItem lines="full" button onClick={() => setShowModal(true)}>
+              <IonItem lines='full' button onClick={() => setShowModal(true)}>
                 <IonLabel>Category</IonLabel>
                 <IonLabel style={{ textAlign: 'right' }}>{category}</IonLabel>
                 {categoryIcon ? (
                   <IonIcon
-                    slot="end"
+                    slot='end'
                     icon={`${require(`../../assets/ionicons/${categoryIcon}.svg`)}`}
                   />
                 ) : (
@@ -226,13 +226,13 @@ const NewRecordPage: React.FC<Props> = ({
                       width: '0.75em',
                       marginRight: '0.1em',
                     }}
-                    size="small"
-                    slot="end"
+                    size='small'
+                    slot='end'
                     icon={caretDownOutline}
                   />
                 )}
 
-                <IonModal isOpen={showModal} cssClass="my-custom-class">
+                <IonModal isOpen={showModal} cssClass='my-custom-class'>
                   <IonContent>
                     <IonList>
                       <IonGrid>
@@ -245,11 +245,11 @@ const NewRecordPage: React.FC<Props> = ({
                     </IonList>
                   </IonContent>
 
-                  <IonRouterLink href="/categories">
+                  <IonRouterLink href='/categories'>
                     <IonButton
                       style={{ marginLeft: '1em', marginRight: '1em' }}
-                      expand="full"
-                      shape="round"
+                      expand='full'
+                      shape='round'
                     >
                       + Create a new category
                     </IonButton>
@@ -260,28 +260,28 @@ const NewRecordPage: React.FC<Props> = ({
                       setShowModal(false);
                     }}
                     style={{ margin: '1em' }}
-                    shape="round"
+                    shape='round'
                   >
                     Close
                   </IonButton>
                 </IonModal>
               </IonItem>
               <IonItem>
-                <IonLabel position="floating">Amount</IonLabel>
+                <IonLabel position='floating'>Amount</IonLabel>
                 <IonInput
                   ref={amountInputRef}
-                  type="number"
-                  autocomplete="off"
-                  autocorrect="off"
+                  type='number'
+                  autocomplete='off'
+                  autocorrect='off'
                   spellcheck={false}
                 ></IonInput>
               </IonItem>
               <IonItem>
-                <IonLabel position="floating">Note</IonLabel>
+                <IonLabel position='floating'>Note</IonLabel>
                 <IonInput
                   ref={noteInputRef}
-                  autocomplete="off"
-                  autocorrect="off"
+                  autocomplete='off'
+                  autocorrect='off'
                   spellcheck={false}
                 ></IonInput>
               </IonItem>

@@ -27,11 +27,11 @@ const RecordItem: React.FC<Props> = ({
   children,
   records: { incomes, expences },
 }) => (
-  <IonCol size="4">
-    <IonItem lines="full" button>
+  <IonCol size='4'>
+    <IonItem lines='full' button>
       <IonGrid>
         <IonRow>
-          <IonLabel color="primary">{children}</IonLabel>
+          <IonLabel color='primary'>{children}</IonLabel>
         </IonRow>
         <IonRow>
           {children === 'Incomes' && <IonLabel>{incomes}</IonLabel>}
