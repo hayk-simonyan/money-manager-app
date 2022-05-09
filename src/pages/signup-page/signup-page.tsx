@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   IonGrid,
   IonRow,
@@ -12,10 +12,9 @@ import {
   IonContent,
 } from '@ionic/react';
 import { connect } from 'react-redux';
-
+import { Redirect } from 'react-router-dom';
 import Header from '../../components/header/header';
 import { signup } from '../../redux/auth/auth.actions';
-import { Redirect } from 'react-router-dom';
 
 import './signup-page.css';
 
@@ -61,7 +60,7 @@ const SignupPage: React.FC<Props> = ({
   };
 
   return isAuthenticated ? (
-    <Redirect to='/' />
+    <Redirect to="/" />
   ) : (
     <IonPage>
       <IonAlert
@@ -69,55 +68,55 @@ const SignupPage: React.FC<Props> = ({
         message={error}
         buttons={[{ text: 'Ok', handler: clearError }]}
       />
-      <Header title='Create Your Account' menu={true} />
+      <Header title="Create Your Account" menu={true} />
       <IonContent>
         <IonGrid>
           <IonRow>
             <IonCol>
               <IonItem>
-                <IonLabel position='floating'>Username</IonLabel>
+                <IonLabel position="floating">Username</IonLabel>
                 <IonInput
                   ref={nameInputRef}
-                  autocomplete='off'
-                  autocorrect='off'
+                  autocomplete="off"
+                  autocorrect="off"
                   spellcheck={false}
                 />
               </IonItem>
               <IonItem>
-                <IonLabel position='floating'>E-mail Address</IonLabel>
+                <IonLabel position="floating">E-mail Address</IonLabel>
                 <IonInput
                   ref={emailInputRef}
-                  type='email'
-                  autocomplete='off'
-                  autocorrect='off'
+                  type="email"
+                  autocomplete="off"
+                  autocorrect="off"
                   spellcheck={false}
                 />
               </IonItem>
               <IonItem>
-                <IonLabel position='floating'>Password</IonLabel>
+                <IonLabel position="floating">Password</IonLabel>
                 <IonInput
                   ref={passwordInputRef}
-                  type='password'
-                  autocomplete='off'
-                  autocorrect='off'
+                  type="password"
+                  autocomplete="off"
+                  autocorrect="off"
                   spellcheck={false}
                 ></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
-          <IonButton onClick={signUpHandler} expand='block' color='tertiary'>
+          <IonButton onClick={signUpHandler} expand="block" color="tertiary">
             Sign Up
           </IonButton>
-          <IonItem lines='none'>
+          <IonItem lines="none">
             <IonGrid>
               <IonRow>
-                <IonCol size='6' className='container'>
-                  <IonLabel className='vertical-center'>
+                <IonCol size="6" className="container">
+                  <IonLabel className="vertical-center">
                     Have an account?
                   </IonLabel>
                 </IonCol>
-                <IonCol size='6'>
-                  <IonButton color='light' routerLink='/signin' expand='block'>
+                <IonCol size="6">
+                  <IonButton color="light" routerLink="/signin" expand="block">
                     Sign In
                   </IonButton>
                 </IonCol>

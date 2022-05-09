@@ -79,8 +79,8 @@ const RecordItem: React.FC<Props> = ({
     <React.Fragment>
       <IonAlert
         isOpen={startedDeleting}
-        header='Delete this record?'
-        message='This can not be undone'
+        header="Delete this record?"
+        message="This can not be undone"
         buttons={[
           {
             text: 'No',
@@ -95,14 +95,14 @@ const RecordItem: React.FC<Props> = ({
       />
       <IonItemSliding ref={slidingOptionsRef}>
         <IonItemOptions>
-          <IonItemOption color='danger' onClick={startDeleteHandler}>
-            <IonIcon slot='icon-only' icon={trash} />
+          <IonItemOption color="danger" onClick={startDeleteHandler}>
+            <IonIcon slot="icon-only" icon={trash} />
           </IonItemOption>
         </IonItemOptions>
-        <IonItem onClick={() => redirectToRecord(_id)} lines='full' button>
+        <IonItem onClick={() => redirectToRecord(_id)} lines="full" button>
           <IonGrid>
             <IonRow>
-              <IonCol size='2' className='ion-no-padding'>
+              <IonCol size="2" className="ion-no-padding">
                 <IonIcon
                   style={{
                     position: 'absolute',
@@ -116,13 +116,13 @@ const RecordItem: React.FC<Props> = ({
                   icon={selectedIcon}
                 />
               </IonCol>
-              <IonCol size='10' className='ion-no-padding'>
+              <IonCol size="10" className="ion-no-padding">
                 <IonGrid>
                   <IonRow>
-                    <IonCol size='7'>
+                    <IonCol size="7">
                       <IonLabel>{category.name}</IonLabel>
                     </IonCol>
-                    <IonCol size='5' className='ion-text-right '>
+                    <IonCol size="5" className="ion-text-right ">
                       <IonLabel>
                         {`${localStorage.getItem('currency') || '$'} `}
                         {type === 'expences' ? `-${amount}` : amount}
@@ -130,10 +130,10 @@ const RecordItem: React.FC<Props> = ({
                     </IonCol>
                   </IonRow>
                   <IonRow>
-                    <IonCol size='7'>
+                    <IonCol size="7">
                       <IonCardSubtitle>{account.name}</IonCardSubtitle>
                     </IonCol>
-                    <IonCol size='5' className='ion-text-right '>
+                    <IonCol size="5" className="ion-text-right ">
                       <IonCardSubtitle>{`${day} ${month}`}</IonCardSubtitle>
                     </IonCol>
                   </IonRow>

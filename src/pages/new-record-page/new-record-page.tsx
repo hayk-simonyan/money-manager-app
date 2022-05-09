@@ -18,6 +18,7 @@ import {
   IonIcon,
   IonButton,
   IonList,
+  IonRouterLink,
 } from '@ionic/react';
 import { caretDownOutline } from 'ionicons/icons';
 
@@ -243,12 +244,23 @@ const NewRecordPage: React.FC<Props> = ({
                       </IonGrid>
                     </IonList>
                   </IonContent>
+
+                  <IonRouterLink href="/categories">
+                    <IonButton
+                      style={{ marginLeft: '1em', marginRight: '1em' }}
+                      expand="full"
+                      shape="round"
+                    >
+                      + Create a new category
+                    </IonButton>
+                  </IonRouterLink>
                   <IonButton
                     onClick={(e) => {
                       e.stopPropagation();
                       setShowModal(false);
                     }}
                     style={{ margin: '1em' }}
+                    shape="round"
                   >
                     Close
                   </IonButton>

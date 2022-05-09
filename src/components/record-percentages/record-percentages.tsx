@@ -35,10 +35,10 @@ const RecordPercentages: React.FC<Props> = ({
     <IonList>
       {filteredRecordsByCategories.map((recordByCategory, index) =>
         recordByCategory.type === recordsType && recordByCategory.percentage ? (
-          <IonItem key={recordByCategory._id} lines='full'>
-            <IonCol size='2'>
+          <IonItem key={recordByCategory._id} lines="full">
+            <IonCol size="2">
               <IonLabel
-                className='ion-text-center'
+                className="ion-text-center"
                 style={{
                   backgroundColor: colors[index],
                   padding: '4px',
@@ -48,11 +48,11 @@ const RecordPercentages: React.FC<Props> = ({
                 {recordByCategory.percentage}%{' '}
               </IonLabel>
             </IonCol>
-            <IonCol size='6'>
+            <IonCol size="6">
               <IonLabel>{recordByCategory.name}</IonLabel>
             </IonCol>
-            <IonCol size='4'>
-              <IonLabel className='ion-text-end'>
+            <IonCol size="4">
+              <IonLabel className="ion-text-end">
                 {`${localStorage.getItem('currency') || '$'} `}
                 {recordByCategory.total}
               </IonLabel>
