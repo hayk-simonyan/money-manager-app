@@ -171,6 +171,7 @@ const EditRecordPage: React.FC<Props> = ({
         </IonCol>
       );
     }
+    return null;
   });
   const incomeCategoriesSelectOptions = categories.map((c: any) => {
     if (c.type === 'incomes') {
@@ -188,6 +189,7 @@ const EditRecordPage: React.FC<Props> = ({
         </IonCol>
       );
     }
+    return null;
   });
 
   return (
