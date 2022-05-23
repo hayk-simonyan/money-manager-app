@@ -49,7 +49,7 @@ const EditCategoryPage: React.FC<Props> = ({ putCategory }) => {
   useEffect(() => {
     setType(currentCategory.type);
     setName(currentCategory.name);
-  }, [location.state, currentCategory.name, currentCategory.type]);
+  }, [location.state]);
 
   const updateRecordHandler = () => {
     const name = nameInputRef.current!.value;
