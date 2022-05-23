@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-
+import { format } from 'date-fns';
 import {
   IonRow,
   IonCol,
@@ -68,10 +68,7 @@ const RecordItem: React.FC<Props> = ({
     setAlert('Record Removed', '');
   };
 
-  let [m, day, y] = new Date(date).toLocaleDateString().split('/');
-  let [month] = new Date(date)
-    .toLocaleDateString('default', { month: 'short' })
-    .split('/');
+  const formattedDate = format(new Date(date), 'MMM dd');
 
   let selectedIcon = require(`../../../assets/ionicons/${category.icon}.svg`);
 
@@ -134,7 +131,7 @@ const RecordItem: React.FC<Props> = ({
                       <IonCardSubtitle>{account.name}</IonCardSubtitle>
                     </IonCol>
                     <IonCol size='5' className='ion-text-right '>
-                      <IonCardSubtitle>{`${day} ${month}`}</IonCardSubtitle>
+                      <IonCardSubtitle>{formattedDate}</IonCardSubtitle>
                     </IonCol>
                   </IonRow>
                 </IonGrid>

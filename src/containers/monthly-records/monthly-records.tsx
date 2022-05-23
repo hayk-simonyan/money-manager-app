@@ -1,19 +1,8 @@
 import React from 'react';
-
-import {
-  IonGrid,
-  IonRow,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-} from '@ionic/react';
+import { IonGrid, IonRow } from '@ionic/react';
 import RecordItem from './record-item/record-item';
 
 const MonthlyRecords: React.FC = () => (
-  // <IonCard>
-  //   <IonCardHeader color='default'>
-  //     <IonCardTitle>Monthly Records</IonCardTitle>
-  //   </IonCardHeader>
   <IonGrid>
     <IonRow>
       <RecordItem children='Incomes' />
@@ -21,7 +10,6 @@ const MonthlyRecords: React.FC = () => (
       <RecordItem children='Balance' />
     </IonRow>
   </IonGrid>
-  // </IonCard>
 );
 
 export default MonthlyRecords;
