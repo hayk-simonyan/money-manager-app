@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { format } from 'date-fns';
 import {
   IonRow,
@@ -149,7 +149,5 @@ const mapDispatchToProps = (dispatch: any) => ({
   setAlert: (msg: string, alertType: string) =>
     dispatch(setAlert(msg, alertType)),
 });
-
-const mapStateToProps = (state: any) => ({});
 
 export default connect(null, mapDispatchToProps)(RecordItem);

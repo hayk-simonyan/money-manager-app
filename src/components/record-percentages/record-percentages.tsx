@@ -23,7 +23,7 @@ const RecordPercentages: React.FC<Props> = ({
 }) => {
   // filter for colors
   const filteredRecordsByCategories: MonthlyRecord[] = [];
-  recordsByCategories.map((recordByCategory) => {
+  recordsByCategories.forEach((recordByCategory) => {
     if (
       recordByCategory.type === recordsType &&
       recordByCategory.percentage !== 0

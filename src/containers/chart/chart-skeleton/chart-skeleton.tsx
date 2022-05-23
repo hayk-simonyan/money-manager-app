@@ -1,10 +1,8 @@
 import React from 'react';
 import {
   IonAvatar,
-  IonCol,
   IonGrid,
   IonItem,
-  IonLabel,
   IonRow,
   IonSkeletonText,
 } from '@ionic/react';
@@ -20,8 +18,6 @@ export default function ChartSkeleton() {
             <IonSkeletonText animated />
           </IonAvatar>
         </IonItem>
-        {/* <IonSkeletonText animated /> */}
-        {/* <IonSkeletonText animated /> */}
       </IonRow>
     </IonGrid>
   );

@@ -158,8 +158,8 @@ const EditRecordPage: React.FC<Props> = ({
   const expenseCategoriesSelectOptions = categories.map((c: any) => {
     if (c.type === 'expences') {
       return (
-        <IonCol size='6'>
-          <IonItem key={c._id} button onClick={(e) => setCategoryHandler(e, c)}>
+        <IonCol key={c._id} size='6'>
+          <IonItem button onClick={(e) => setCategoryHandler(e, c)}>
             <IonLabel>
               <IonIcon
                 icon={`${require(`../../assets/ionicons/${c.icon}.svg`)}`}
@@ -171,12 +171,13 @@ const EditRecordPage: React.FC<Props> = ({
         </IonCol>
       );
     }
+    return null;
   });
   const incomeCategoriesSelectOptions = categories.map((c: any) => {
     if (c.type === 'incomes') {
       return (
-        <IonCol size='6'>
-          <IonItem key={c._id} button onClick={(e) => setCategoryHandler(e, c)}>
+        <IonCol key={c._id} size='6'>
+          <IonItem button onClick={(e) => setCategoryHandler(e, c)}>
             <IonLabel>
               <IonIcon
                 icon={`${require(`../../assets/ionicons/${c.icon}.svg`)}`}
@@ -188,6 +189,7 @@ const EditRecordPage: React.FC<Props> = ({
         </IonCol>
       );
     }
+    return null;
   });
 
   return (

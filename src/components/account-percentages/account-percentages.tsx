@@ -6,7 +6,7 @@ interface Account {
   icon: string;
   name: string;
   total: number;
-  percentage: number;
+  percentage: string;
 }
 
 interface Props {
@@ -17,8 +17,8 @@ interface Props {
 const AccountPercentages: React.FC<Props> = ({ accounts, colors }) => {
   // filter for colors
   const filteredAccounts: Account[] = [];
-  accounts.map((account) => {
-    if (account.percentage != 0) filteredAccounts.push(account);
+  accounts.forEach((account) => {
+    if (parseInt(account.percentage) !== 0) filteredAccounts.push(account);
   });
 
   return (

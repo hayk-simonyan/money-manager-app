@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { IonContent } from '@ionic/react';
 
 import ChartBuilder from './chart-builder/chart-builder';
 import ChartControls from '../../components/chart-controls/homepage-controls';
