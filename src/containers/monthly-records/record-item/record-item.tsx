@@ -1,14 +1,6 @@
 import React from 'react';
 
-import {
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonItem,
-  IonText,
-  IonCard,
-  IonLabel,
-} from '@ionic/react';
+import { IonGrid, IonRow, IonCol, IonItem, IonLabel } from '@ionic/react';
 
 import { connect } from 'react-redux';
 

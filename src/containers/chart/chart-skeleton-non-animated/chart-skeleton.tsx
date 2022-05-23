@@ -1,10 +1,8 @@
 import React from 'react';
 import {
   IonAvatar,
-  IonCol,
   IonGrid,
   IonItem,
-  IonLabel,
   IonRow,
   IonSkeletonText,
   IonText,

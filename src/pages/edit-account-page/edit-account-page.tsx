@@ -57,7 +57,7 @@ const EditAccountPage: React.FC<Props> = ({ putAccount, deleteAccount }) => {
 
     setName(currentAccount.name);
     setTotal(currentAccount.total);
-  }, [location.state]);
+  }, [location.state, currentAccount]);
 
   const updateAccountHandler = () => {
     const name = nameInputRef.current!.value;

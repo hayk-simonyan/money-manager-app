@@ -149,6 +149,7 @@ const NewRecordPage: React.FC<Props> = ({
         </IonCol>
       );
     }
+    return null;
   });
   const incomeCategoriesSelectOptions = categories.map((c: any) => {
     if (c.type === 'incomes') {
@@ -166,6 +167,7 @@ const NewRecordPage: React.FC<Props> = ({
         </IonCol>
       );
     }
+    return null;
   });
   const accountSelectOptions = accounts.map((a: any) => (
     <IonSelectOption key={a._id} value={a.name}>
