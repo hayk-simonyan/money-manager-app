@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import {
   IonGrid,
   IonRow,
@@ -21,55 +21,36 @@ import {
   IonRouterLink,
 } from '@ionic/react';
 import { caretDownOutline } from 'ionicons/icons';
-
-import Header from '../../components/header/header';
-import SubmitButton from '../../components/submit-button/submit-button';
-
-import { connect } from 'react-redux';
 import { postRecord } from '../../redux/records/record.actions';
 import { setAlert } from '../../redux/alerts/alert.actions';
+import Header from '../../components/header/header';
+import SubmitButton from '../../components/submit-button/submit-button';
+import { Record } from '../../types/common';
 
 interface Props {
-  postRecord: (
-    type: string,
-    account: string,
-    category: string,
-    date: Date,
-    amount: number,
-    note: string
-  ) => void;
+  postRecord: (record: Record) => void;
   setAlert: (msg: string, alertType: string) => void;
   accounts: { accounts: any };
-  categories: { categories: any; loading: boolean };
-}
-
-interface Record {
-  _id: string;
-  type: string;
-  account: string;
-  category: string;
-  date: Date;
-  amount: number;
-  note: string;
+  categories: { categories: any };
 }
 
 const NewRecordPage: React.FC<Props> = ({
   postRecord,
   setAlert,
   accounts: { accounts },
-  categories: { categories, loading },
+  categories: { categories },
 }) => {
   const history = useHistory();
   const [error, setError] = useState<string>();
 
-  const myDate: String = new Date().toISOString();
+  const today: String = new Date().toISOString();
 
   const [type, setType] = useState<string>('expences');
   const [account, setAccount] = useState<string>(
     accounts[0] ? accounts[0].name : ''
   );
   const [category, setCategory] = useState<string>('');
-  const [date, setDate] = useState<any>(myDate);
+  const [date, setDate] = useState<any>(today);
   const amountInputRef = useRef<HTMLIonInputElement>(null);
   const noteInputRef = useRef<HTMLIonInputElement>(null);
 
@@ -101,24 +82,25 @@ const NewRecordPage: React.FC<Props> = ({
     const c = categories.find((c: any) => c.name === category);
     const categoryId = c._id;
 
-    postRecord(
+    postRecord({
       type,
-      accountId,
-      categoryId,
-      new Date(date),
+      account: accountId,
+      category: categoryId,
+      date: new Date(date),
       amount,
-      note ? note!.toString() : ''
-    );
-    setAlert('Record Created', '');
-    history.push('/');
+      note: note ? note!.toString() : '',
+    });
 
+    setAlert('Record Created', '');
     setType('expences');
     // setAccount('');
     setCategory('');
     setCategoryIcon('');
-    setDate(myDate);
+    setDate(today);
     amountInputRef.current!.value = null;
     noteInputRef.current!.value = null;
+
+    history.push('/');
   };
 
   const clearError = () => {
@@ -297,14 +279,7 @@ const NewRecordPage: React.FC<Props> = ({
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  postRecord: (
-    type: string,
-    account: string,
-    category: string,
-    date: Date,
-    amount: number,
-    note: string
-  ) => dispatch(postRecord(type, account, category, date, amount, note)),
+  postRecord: (record: Record) => dispatch(postRecord(record)),
   setAlert: (msg: string, alertType: string) =>
     dispatch(setAlert(msg, alertType)),
 });

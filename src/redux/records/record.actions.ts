@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import {
   GET_RECORDS,
   GET_RECORD,
@@ -11,6 +10,7 @@ import {
 import { setAlert } from '../alerts/alert.actions';
 import { getAccounts } from './../accounts/account.actions';
 import config from '../../config';
+import { Record } from '../../types/common';
 
 export const getRecords =
   (y: string = '', m: string = '') =>
@@ -79,59 +79,50 @@ export const getRecord = (id: string) => async (dispatch: any) => {
   }
 };
 
-export const postRecord =
-  (
-    type: string,
-    account: string,
-    category: string,
-    date: Date,
-    amount: number,
-    note: string
-  ) =>
-  async (dispatch: any) => {
-    const requestConfig = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
-    const body = {
-      type: type,
-      accountId: account,
-      categoryId: category,
-      date: date,
-      amount: amount,
-      note: note,
-    };
-
-    try {
-      const res = await axios.post(
-        `${config.backendUrl}/records`,
-        body,
-        requestConfig
-      );
-
-      dispatch({
-        type: POST_RECORD,
-        payload: res.data,
-      });
-
-      dispatch(getRecords());
-      dispatch(getAccounts());
-    } catch (err) {
-      const errors = err.response.data.errors;
-      if (errors) {
-        errors.forEach((err: { msg: string }) =>
-          dispatch(setAlert(err.msg, 'danger'))
-        );
-      }
-
-      dispatch({
-        type: RECORDS_ERROR,
-        payload: { msg: err.statusText, status: err.status },
-      });
-    }
+export const postRecord = (record: Record) => async (dispatch: any) => {
+  const requestConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
   };
+
+  const body = {
+    type: record.type,
+    accountId: record.account,
+    categoryId: record.category,
+    date: record.date,
+    amount: record.amount,
+    note: record.note,
+  };
+
+  try {
+    const res = await axios.post(
+      `${config.backendUrl}/records`,
+      body,
+      requestConfig
+    );
+
+    dispatch({
+      type: POST_RECORD,
+      payload: res.data,
+    });
+
+    dispatch(getRecords());
+    dispatch(getAccounts());
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((err: { msg: string }) =>
+        dispatch(setAlert(err.msg, 'danger'))
+      );
+    }
+
+    dispatch({
+      type: RECORDS_ERROR,
+      payload: { msg: err.statusText, status: err.status },
+    });
+  }
+};
 
 export const putRecord =
   (

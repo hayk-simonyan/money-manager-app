@@ -1,7 +1,7 @@
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 const config = {
-  backendUrl: !isDevelopment
+  backendUrl: isDevelopment
     ? 'http://localhost:5000'
     : 'https://moneymanager.bond',
 };
