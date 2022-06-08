@@ -216,7 +216,7 @@ const NewRecordPage: React.FC<Props> = ({
                   />
                 )}
 
-                <IonModal isOpen={showModal} cssClass='my-custom-class'>
+                <IonModal isOpen={showModal}>
                   <IonContent>
                     <IonList>
                       <IonGrid>
