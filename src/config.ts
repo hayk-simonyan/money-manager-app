@@ -1,9 +1,9 @@
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 const config = {
-  backendUrl: isDevelopment
+  backendUrl: !isDevelopment
     ? 'http://localhost:5000'
-    : 'https://moneymanager.bond',
+    : 'https://money-manager-api.cyclic.app',
 };
 
 export default config;
