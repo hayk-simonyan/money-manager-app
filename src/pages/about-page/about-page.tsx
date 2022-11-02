@@ -34,7 +34,7 @@ const AboutPage: React.FC = () => {
                 <IonCardSubtitle>
                   Money Manager makes managing Personal Finances easy
                 </IonCardSubtitle>
-                <IonCardSubtitle>Version 1.1.0</IonCardSubtitle>
+                <IonCardSubtitle>Version 2.1</IonCardSubtitle>
               </IonCardHeader>
 
               <IonCardContent>
