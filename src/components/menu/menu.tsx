@@ -44,7 +44,7 @@ const Menu: React.FC<Props> = ({
         isOpen={showAbout}
         onDidDismiss={() => setShowAbout(false)}
         header={'Money Manager'}
-        subHeader={'Version 2.1'}
+        subHeader={'Version 2.2'}
         message={`
           <p>Uncomplicated Money Manager</p>
           <p>Expense and Income Tracker</p>
