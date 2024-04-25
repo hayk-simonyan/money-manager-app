@@ -8,7 +8,7 @@
     "@capacitor/ios": "^2.1.0",
     "@ionic/react": "^5.0.7",
     "@ionic/react-router": "^5.0.7",
-    "@reduxjs/toolkit": "^1.4.0",
+    "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^8.0.3",
@@ -61,7 +61,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/uuid": "^8.0.0",
     "@types/webpack-env": "^1.15.2",
-    "react-scripts": "3.4.1"
+    "react-scripts": "5.0.1"
   },
   "description": "An Ionic project",
   "proxy": "https://moneymanager.digital/"
