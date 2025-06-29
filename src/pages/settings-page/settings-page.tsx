@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-
+import axios from 'axios';
 import {
   IonPage,
   IonContent,
@@ -15,6 +15,7 @@ import {
   IonCardTitle,
   IonSelect,
   IonSelectOption,
+  IonAlert,
 } from '@ionic/react';
 
 import { connect } from 'react-redux';
@@ -24,6 +25,7 @@ import Header from '../../components/header/header';
 import { setAlert } from '../../redux/alerts/alert.actions';
 import AddButton from '../../components/add-button/add-button';
 import currencies from './currencies.json';
+import config from '../../config';
 
 interface Props {
   auth: {
@@ -52,6 +54,8 @@ const SettingsPage: React.FC<Props> = ({
   const oldPasswordInputRef = useRef<HTMLIonInputElement>(null);
   const newPasswordInputRef = useRef<HTMLIonInputElement>(null);
   const confirmPasswordInputRef = useRef<HTMLIonInputElement>(null);
+
+  const [showDeleteAlert, setShowDeleteAlert] = useState<boolean>(false);
 
   const updateEmailHandler = (e: any) => {
     const email = emailInputRef.current!.value;
@@ -82,9 +86,14 @@ const SettingsPage: React.FC<Props> = ({
     confirmPasswordInputRef.current!.value = null;
   };
 
+  const deleteAccountHandler = async () => {
+    setShowDeleteAlert(true);
+    await axios.delete(`${config.backendUrl}/users/delete`);
+  };
+
   return (
     <IonPage>
-      <Header title='Settings' menu={true} />
+      <Header title="Settings" menu={true} />
       <IonContent>
         <IonList style={{ paddingBottom: '3.7rem' }}>
           <IonCard>
@@ -96,11 +105,11 @@ const SettingsPage: React.FC<Props> = ({
             <IonCardContent>
               <IonSelect
                 value={currency}
-                interface='action-sheet'
+                interface="action-sheet"
                 onIonChange={(e: any) => {
                   setCurrency(e.detail.value);
                   localStorage.setItem('currency', e.detail.value);
-                  window.location.reload(false);
+                  window.location.reload();
                 }}
               >
                 {currencies.map((currency) => (
@@ -118,25 +127,25 @@ const SettingsPage: React.FC<Props> = ({
               </IonItem>
             </IonCardHeader>
             <IonCardContent>
-              <IonItem lines='none'>
-                <IonText color='medium'>
+              <IonItem lines="none">
+                <IonText color="medium">
                   Current Email Address: {emailFromState}
                 </IonText>
               </IonItem>
               <IonItem>
-                <IonLabel position='floating'>New E-mail Adress</IonLabel>
+                <IonLabel position="floating">New E-mail Adress</IonLabel>
                 <IonInput
                   ref={emailInputRef}
-                  type='email'
-                  autocomplete='off'
-                  autocorrect='off'
+                  type="email"
+                  autocomplete="off"
+                  autocorrect="off"
                   spellcheck={false}
                 />
               </IonItem>
               <IonButton
                 onClick={updateEmailHandler}
-                color='tertiary'
-                expand='full'
+                color="tertiary"
+                expand="full"
               >
                 Update Email
               </IonButton>
@@ -150,48 +159,62 @@ const SettingsPage: React.FC<Props> = ({
             </IonCardHeader>
             <IonCardContent>
               <IonItem>
-                <IonLabel position='floating'>Old Password</IonLabel>
+                <IonLabel position="floating">Old Password</IonLabel>
                 <IonInput
                   ref={oldPasswordInputRef}
-                  type='password'
-                  autocomplete='off'
-                  autocorrect='off'
+                  type="password"
+                  autocomplete="off"
+                  autocorrect="off"
                   spellcheck={false}
                 />
               </IonItem>
               <IonItem>
-                <IonLabel position='floating'>New Password</IonLabel>
+                <IonLabel position="floating">New Password</IonLabel>
                 <IonInput
                   ref={newPasswordInputRef}
-                  type='password'
-                  autocomplete='off'
-                  autocorrect='off'
+                  type="password"
+                  autocomplete="off"
+                  autocorrect="off"
                   spellcheck={false}
                 />
               </IonItem>
               <IonItem>
-                <IonLabel position='floating'>Confirm New Password</IonLabel>
+                <IonLabel position="floating">Confirm New Password</IonLabel>
                 <IonInput
                   ref={confirmPasswordInputRef}
-                  type='password'
-                  autocomplete='off'
-                  autocorrect='off'
+                  type="password"
+                  autocomplete="off"
+                  autocorrect="off"
                   spellcheck={false}
                 />
               </IonItem>
               <IonButton
                 onClick={updatePasswordHandler}
-                color='tertiary'
-                expand='full'
+                color="tertiary"
+                expand="full"
               >
                 Update Password
               </IonButton>
             </IonCardContent>
           </IonCard>
+          <IonButton
+            onClick={deleteAccountHandler}
+            color="danger"
+            expand="full"
+          >
+            Delete Account
+          </IonButton>
         </IonList>
       </IonContent>
 
-      <AddButton url='/records/new' />
+      <AddButton url="/records/new" />
+
+      <IonAlert
+        isOpen={showDeleteAlert}
+        onDidDismiss={() => setShowDeleteAlert(false)}
+        header={'Delete Account'}
+        message={'Account deletion requested'}
+      />
     </IonPage>
   );
 };

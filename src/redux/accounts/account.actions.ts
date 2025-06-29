@@ -13,19 +13,17 @@ import config from '../../config';
 export const getAccounts = () => async (dispatch: any) => {
   try {
     const res = await axios.get(`${config.backendUrl}/accounts`);
-
     dispatch({
       type: GET_ACCOUNTS,
       payload: res.data,
     });
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = (err as any).response.data.errors;
     if (errors) {
       errors.forEach((err: { msg: string }) =>
         dispatch(setAlert(err.msg, 'danger'))
       );
     }
-
     dispatch({
       type: ACCOUNTS_ERROR,
       payload: { msg: err.statusText, status: err.status },
@@ -58,7 +56,7 @@ export const postAccount =
       dispatch(setAlert('Account Created', ''));
       dispatch(getAccounts());
     } catch (err) {
-      const errors = err.response.data.errors;
+      const errors = (err as any).response.data.errors;
       if (errors) {
         errors.forEach((err: { msg: string }) =>
           dispatch(setAlert(err.msg, 'danger'))
@@ -98,7 +96,7 @@ export const putAccount =
       dispatch(setAlert('Account Updated', ''));
       dispatch(getAccounts());
     } catch (err) {
-      const errors = err.response.data.errors;
+      const errors = (err as any).response.data.errors;
       if (errors) {
         errors.forEach((err: { msg: string }) =>
           dispatch(setAlert(err.msg, 'danger'))
@@ -126,7 +124,7 @@ export const deleteAccount = (id: string) => async (dispatch: any) => {
     dispatch(getAccounts());
   } catch (err) {
     console.log(err);
-    const errors = err.response.data.errors;
+    const errors = (err as any).response.data.errors;
     if (errors) {
       errors.forEach((err: { msg: string }) =>
         dispatch(setAlert(err.msg, 'danger'))
